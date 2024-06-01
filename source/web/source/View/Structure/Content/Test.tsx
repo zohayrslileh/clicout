@@ -33,7 +33,7 @@ export default function () {
      */
     stream.useOn("data", function (buffer: ArrayBuffer) {
 
-        console.log(URL.createObjectURL(new Blob([buffer])))
+        console.log(URL.createObjectURL(new Blob([buffer], { type: "video/webm" })))
     })
 
     return <Container>
