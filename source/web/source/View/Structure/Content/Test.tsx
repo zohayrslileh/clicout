@@ -12,7 +12,7 @@ export default function () {
      * Stream
      * 
      */
-    const stream = manager.useNamespace("/stream")
+    const stream = manager.useNamespace("/main")
 
     /**
      * Connected
@@ -21,19 +21,15 @@ export default function () {
     stream.useConnected()
 
     /**
-     * Screenshot
+     * Data
      * 
      */
-    const screenshot = stream.useState<string>("screenshot")
+    const data = stream.useState<string>("data")
 
-    /**
-     * Source
-     * 
-     */
-    const source = screenshot ? `data:image/png;base64,${screenshot}` : undefined
+    console.log(data)
 
     return <Container>
-        {source ? <img src={source} alt="" /> : <p>Waiting...</p>}
+        You have new data
     </Container>
 }
 
