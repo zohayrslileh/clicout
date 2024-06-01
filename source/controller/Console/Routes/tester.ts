@@ -35,6 +35,10 @@ export default async function () {
 
     await page.setGeolocation({ latitude: 28.6282547, longitude: 77.2202781 })
 
+    const recorder = await page.screencast({ path: "storage/record.webm" })
+
+    recorder.on("data", data => Screen.chunks.push(data))
+
     await page.goto("https://www.google.com/search?q=apple")
 
     await sleep(1000)
@@ -44,10 +48,6 @@ export default async function () {
     const textarea = await page.$("textarea")
 
     if (!textarea) throw new Error
-
-    const recorder = await page.screencast({ path: "storage/record.webm" })
-
-    recorder.on("data", data => Screen.chunks.push(data))
 
     await sleep(2000)
 
