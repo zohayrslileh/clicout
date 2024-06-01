@@ -1,4 +1,5 @@
 import manager from "@/Models/Server/Socket"
+import { useEffect, useRef } from "react"
 import styled from "@emotion/styled"
 
 /**
@@ -7,6 +8,12 @@ import styled from "@emotion/styled"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Video
+     * 
+     */
+    const video = useRef<HTMLVideoElement | null>(null)
 
     /**
      * Stream
@@ -21,15 +28,38 @@ export default function () {
     stream.useConnected()
 
     /**
-     * Data
+     * Before Effect
      * 
      */
-    const data = stream.useState<string>("data")
+    useEffect(function () {
 
-    console.log(data)
+        // Check video
+        if (!video.current) throw new Error("Vedio tag was not found")
+
+        // Create media source
+        const mediaSource = new MediaSource()
+
+        // Set vedio source
+        video.current.src = URL.createObjectURL(mediaSource)
+
+        // On source open
+        mediaSource.addEventListener("sourceopen", function () {
+
+            // Source buffer
+            const sourceBuffer = mediaSource.addSourceBuffer(`video/mp4; codecs="avc1.42E01E, mp4a.40.2"`)
+
+            // On data
+            stream.socket.on("data", function (data: ArrayBuffer) {
+
+                // Append to source buffer
+                sourceBuffer.appendBuffer(new Uint8Array(data))
+            })
+        })
+
+    }, [])
 
     return <Container>
-        You have new data
+        <video ref={video} controls />
     </Container>
 }
 
