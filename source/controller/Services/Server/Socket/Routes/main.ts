@@ -1,3 +1,4 @@
+import tester from "@/Console/Routes/tester"
 import Router from "@/Tools/Socket/Router"
 import Watch from "@/Core/Watch"
 
@@ -7,8 +8,11 @@ import Watch from "@/Core/Watch"
 |-----------------------------
 |
 */
-export default new Router(function (main) {
+export default new Router(async function (main) {
 
     // Set namespace
     Watch.broadcast = main.namespace
+
+    // Tester
+    await tester()
 })

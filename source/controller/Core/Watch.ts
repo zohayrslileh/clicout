@@ -13,5 +13,5 @@ export default class Watch {
      * Broadcast
      * 
      */
-    public static broadcast: Namespace
+    public static broadcast: Namespace | undefined
 }
