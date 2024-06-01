@@ -38,5 +38,4 @@ export default Router.create(function (restApi) {
     |
     */
     restApi.route("/", Routes)
-
 })
