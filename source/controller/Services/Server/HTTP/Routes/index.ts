@@ -1,5 +1,4 @@
 import Router from "@/Tools/HTTP/Router"
-import Release from "./Release"
 import RestApi from "./RestApi"
 import Home from "./Home"
 
@@ -23,11 +22,4 @@ export default Router.create(function (routes) {
      * 
      */
     routes.route("/api", RestApi)
-
-    /**
-     * Release
-     * 
-     */
-    routes.route("/release", Release)
-
 })
