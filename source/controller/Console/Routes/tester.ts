@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
-import Watch from "@/Core/Watch"
+import Screen from "@/Core/Screen"
 
 /*
 |-----------------------------
@@ -47,10 +47,7 @@ export default async function () {
 
     const recorder = await page.screencast({ path: "storage/record.webm" })
 
-    recorder.on("data", function (data) {
-
-        if (Watch.broadcast) Watch.broadcast.emit("data", data)
-    })
+    recorder.on("data", data => Screen.chunks.push(data))
 
     await sleep(2000)
 
