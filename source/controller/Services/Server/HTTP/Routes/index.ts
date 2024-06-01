@@ -1,6 +1,6 @@
+import { serveStatic } from "@hono/node-server/serve-static"
 import Router from "@/Tools/HTTP/Router"
 import RestApi from "./RestApi"
-import Home from "./Home"
 
 /*
 |-----------------------------
@@ -12,14 +12,14 @@ import Home from "./Home"
 export default Router.create(function (routes) {
 
     /**
-     * Home
-     * 
-     */
-    routes.get("/", Home)
-
-    /**
      * Rest Api
      * 
      */
     routes.route("/api", RestApi)
+
+    /**
+     * Web
+     * 
+     */
+    routes.use(serveStatic({ root: "dist/web" }), serveStatic({ path: "dist/web/index.html" }))
 })
