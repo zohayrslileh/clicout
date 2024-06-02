@@ -1,5 +1,5 @@
 import manager from "@/Models/Server/Socket"
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import styled from "@emotion/styled"
 
 /**
@@ -74,9 +74,12 @@ export default function () {
 
     }, [])
 
+    useEffect(() => {
+        play(0)
+    }, [])
+
     return <Container>
         <video ref={video} />
-        <button onClick={() => play(0)}>Play</button>
     </Container>
 }
 
