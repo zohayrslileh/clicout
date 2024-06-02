@@ -59,7 +59,7 @@ export default function () {
 
             await new Promise(resolve => setTimeout(resolve, 1000))
 
-            play(startTime)
+            return await play(startTime)
         }
 
         vedioTag.src = URL.createObjectURL(new Blob(buffers.current, { type: "video/mp4" }))
