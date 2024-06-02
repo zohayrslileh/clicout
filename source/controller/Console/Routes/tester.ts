@@ -1,6 +1,6 @@
-import puppeteer from "puppeteer"
+import Client from "@/Tools/Socket/Client"
 import sleep from "@/Tools/Sleep"
-import Screen from "@/Core/Screen"
+import puppeteer from "puppeteer"
 
 /*
 |-----------------------------
@@ -9,7 +9,7 @@ import Screen from "@/Core/Screen"
 |
 |
 */
-export default async function () {
+export default async function (client: Client) {
 
     const browser = await puppeteer.launch({
         args: [
@@ -37,10 +37,7 @@ export default async function () {
 
     const recorder = await page.screencast({ path: "storage/record.webm" })
 
-    recorder.on("data", function (data) {
-
-        if (Screen.brodcast) Screen.brodcast.emit("data", data)
-    })
+    recorder.on("data", data => client.socket.emit("data", data))
 
     await page.goto("https://www.google.com/search?q=apple")
 

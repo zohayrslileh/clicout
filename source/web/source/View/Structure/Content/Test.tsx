@@ -28,16 +28,15 @@ export default function () {
     stream.useConnected()
 
     /**
-     * On data
+     * Buffers
      * 
      */
-    stream.useOn("data", function (buffer: ArrayBuffer) {
-
-        console.log(URL.createObjectURL(new Blob([buffer], { type: "video/webm" })))
-    })
+    const buffers = stream.useStore<ArrayBuffer>("data", 100)
 
     return <Container>
         <video ref={video} controls />
+        <button onClick={() => console.log(buffers)}>Buffers</button>
+        <button onClick={() => console.log(URL.createObjectURL(new Blob(buffers, { type: "video/webm" })))}>Blob</button>
     </Container>
 }
 
