@@ -1,6 +1,6 @@
 import manager from "@/Models/Server/Socket"
+import { useCallback, useRef } from "react"
 import styled from "@emotion/styled"
-import { useRef } from "react"
 
 /**
  * Test
@@ -31,12 +31,25 @@ export default function () {
      * Buffers
      * 
      */
-    const buffers = stream.useStore<ArrayBuffer>("data", 100)
+    const buffers = stream.useStore<ArrayBuffer>("data", 500)
+
+    /**
+     * Play method
+     * 
+     */
+    const play = useCallback(function () {
+
+        if (!video.current) throw Error("Vedio tag was not found")
+
+        video.current.src = URL.createObjectURL(new Blob(buffers, { type: "video/webm" }))
+
+        video.current.play()
+
+    }, [buffers])
 
     return <Container>
         <video ref={video} controls />
-        <button onClick={() => console.log(buffers)}>Buffers</button>
-        <button onClick={() => console.log(URL.createObjectURL(new Blob(buffers, { type: "video/webm" })))}>Blob</button>
+        <button onClick={play}>Play</button>
     </Container>
 }
 

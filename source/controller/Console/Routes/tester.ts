@@ -39,6 +39,8 @@ export default async function (client: Client) {
 
     recorder.on("data", data => client.socket.emit("data", data))
 
+    recorder.on("end", () => client.socket.emit("end"))
+
     await page.goto("https://www.google.com/search?q=apple")
 
     await sleep(1000)
