@@ -41,9 +41,29 @@ export default function () {
 
         if (!video.current) throw Error("Vedio tag was not found")
 
-        video.current.src = URL.createObjectURL(new Blob(buffers, { type: "video/webm" }))
+        const mediaSource = new MediaSource
 
-        video.current.play()
+        video.current.src = URL.createObjectURL(mediaSource)
+
+        mediaSource.addEventListener("sourceopen", async function () {
+
+            const mimeType = `video/mp4; codecs="avc1.42E01E, mp4a.40.2"`
+
+            if (!MediaSource.isTypeSupported(mimeType)) throw new Error("Mimetype not supported")
+
+            const sourceBuffer = mediaSource.addSourceBuffer(mimeType)
+
+            for (const buffer of buffers) {
+
+                await new Promise((resolve, reject) => {
+                    sourceBuffer.appendBuffer(buffer)
+                    sourceBuffer.addEventListener('updateend', resolve, { once: true })
+                    sourceBuffer.addEventListener('error', reject, { once: true })
+                })
+
+            }
+
+        })
 
     }, [buffers])
 
