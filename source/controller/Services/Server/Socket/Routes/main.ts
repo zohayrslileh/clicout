@@ -1,5 +1,5 @@
-import tester from "@/Console/Routes/tester"
 import Router from "@/Tools/Socket/Router"
+import { createReadStream } from "fs"
 
 /*
 |-----------------------------
@@ -13,6 +13,8 @@ export default new Router(async function (main) {
     // On connection
     main.onConnection(async function (client) {
 
-        await tester(client)
+        const vedio = createReadStream("storage/video.mp4")
+
+        vedio.on("data", data => client.socket.emit("data", data))
     })
 })
