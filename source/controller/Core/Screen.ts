@@ -1,3 +1,4 @@
+import { Namespace } from "socket.io"
 
 /*
 |-----------------------------
@@ -9,8 +10,8 @@
 export default class Screen {
 
     /**
-     * Chunks
+     * Brodcast
      * 
      */
-    public static chunks: ArrayBuffer[] = []
+    public static brodcast: Namespace | undefined
 }

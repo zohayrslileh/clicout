@@ -37,7 +37,10 @@ export default async function () {
 
     const recorder = await page.screencast({ path: "storage/record.webm" })
 
-    recorder.on("data", data => Screen.chunks.push(data))
+    recorder.on("data", function (data) {
+
+        if (Screen.brodcast) Screen.brodcast.emit("data", data)
+    })
 
     await page.goto("https://www.google.com/search?q=apple")
 
