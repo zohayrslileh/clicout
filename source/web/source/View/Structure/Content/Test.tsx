@@ -49,11 +49,18 @@ export default function () {
      * Play method
      * 
      */
-    const play = useCallback(function (startTime: number) {
+    const play = useCallback(async function (startTime: number) {
 
         if (!video.current) throw Error("Vedio tag was not found")
 
         const vedioTag = video.current
+
+        if (!buffers.current.length) {
+
+            await new Promise(resolve => setTimeout(resolve, 1000))
+
+            play(startTime)
+        }
 
         vedioTag.src = URL.createObjectURL(new Blob(buffers.current, { type: "video/mp4" }))
 
