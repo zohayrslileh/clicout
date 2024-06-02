@@ -77,7 +77,17 @@ export default function () {
 
         vedioTag.currentTime = startTime
 
-        vedioTag.play()
+        try {
+
+            vedioTag.play()
+            
+        } catch {
+
+            await new Promise(resolve => setTimeout(resolve, 1000))
+
+            if (!end) play(startTime)
+
+        }
 
     }, [])
 
