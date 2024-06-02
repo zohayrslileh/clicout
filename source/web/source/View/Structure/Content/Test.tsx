@@ -16,6 +16,12 @@ export default function () {
     const video = useRef<HTMLVideoElement | null>(null)
 
     /**
+     * Buffers
+     * 
+     */
+    const buffers = useRef<ArrayBuffer[]>([])
+
+    /**
      * Stream
      * 
      */
@@ -28,28 +34,43 @@ export default function () {
     stream.useConnected()
 
     /**
-     * Buffers
+     * on data
      * 
      */
-    const buffers = stream.useStore<ArrayBuffer>("data", 500)
+    stream.useOn("data", (data: ArrayBuffer) => buffers.current.push(data))
 
     /**
      * Play method
      * 
      */
-    const play = useCallback(function () {
+    const play = useCallback(function (startTime: number) {
 
         if (!video.current) throw Error("Vedio tag was not found")
 
-        video.current.src = URL.createObjectURL(new Blob(buffers, { type: "video/mp4" }))
+        const vedioTag = video.current
 
-        video.current.play()
+        vedioTag.src = URL.createObjectURL(new Blob(buffers.current, { type: "video/mp4" }))
 
-    }, [buffers])
+        vedioTag.onended = async function () {
+
+            const startTime = vedioTag.currentTime
+
+            URL.revokeObjectURL(vedioTag.src)
+
+            await new Promise(resolve => setTimeout(resolve, 1000))
+
+            play(startTime)
+        }
+
+        vedioTag.currentTime = startTime
+
+        vedioTag.play()
+
+    }, [])
 
     return <Container>
-        <video ref={video} controls />
-        <button onClick={play}>Play</button>
+        <video ref={video} />
+        <button onClick={() => play(0)}>Play</button>
     </Container>
 }
 
