@@ -34,6 +34,12 @@ export default function () {
     stream.useConnected()
 
     /**
+     * End
+     * 
+     */
+    const end = stream.useState<boolean>("end")
+
+    /**
      * on data
      * 
      */
@@ -59,7 +65,7 @@ export default function () {
 
             await new Promise(resolve => setTimeout(resolve, 1000))
 
-            play(startTime)
+            if (!end) play(startTime)
         }
 
         vedioTag.currentTime = startTime
