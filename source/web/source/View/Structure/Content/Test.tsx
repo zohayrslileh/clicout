@@ -80,7 +80,7 @@ export default function () {
         try {
 
             vedioTag.play()
-            
+
         } catch {
 
             await new Promise(resolve => setTimeout(resolve, 1000))
@@ -96,7 +96,7 @@ export default function () {
     }, [])
 
     return <Container>
-        <video ref={video} />
+        <video ref={video} autoPlay />
     </Container>
 }
 

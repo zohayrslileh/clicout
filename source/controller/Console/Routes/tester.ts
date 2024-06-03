@@ -35,7 +35,9 @@ export default async function (client: Client) {
 
     await page.setGeolocation({ latitude: 28.6282547, longitude: 77.2202781 })
 
-    const recorder = await page.screencast({ path: "storage/record.webm" })
+    await sleep(2000)
+
+    const recorder = await page.screencast()
 
     recorder.on("data", data => client.socket.emit("data", data))
 
