@@ -90,10 +90,7 @@ export default class User {
         // Check username and password
         if (!userEntity || !await userEntity.verifyPassword(password)) throw new UnauthorizedException("Username or password incorrect")
 
-        // Initialize user
-        const user = new this(userEntity)
-
-        return user.createAuthorization()
+        return new this(userEntity)
     }
 
     /**
