@@ -48,10 +48,10 @@ export default class User {
             password: zod.string().min(4).max(16)
         })
 
-        // Create user
+        // Ask primitive user
         const primitiveUser = await request<PrimitiveUser>({
             method: "POST",
-            url: "/access/register",
+            url: "/auth/register",
             data: schema.parse(data)
         })
 
@@ -59,11 +59,11 @@ export default class User {
     }
 
     /**
-     * Find by access info method
+     * Login method
      * 
      * @returns
      */
-    public static async findByAccessInfo(data: unknown) {
+    public static async login(data: unknown) {
 
         // Schema
         const schema = zod.object({
@@ -71,10 +71,10 @@ export default class User {
             password: zod.string().min(4).max(16)
         })
 
-        // Get user
+        // Ask primitive user
         const primitiveUser = await request<PrimitiveUser>({
             method: "POST",
-            url: "/access/login",
+            url: "/auth/login",
             data: schema.parse(data)
         })
 
@@ -86,31 +86,15 @@ export default class User {
      * 
      * @returns
      */
-    public static async findByAuthorization(authorization: unknown) {
+    public static async findByAuthorization() {
 
-        // Payload
-        type Payload = { id: number }
+        // Ask primitive user
+        const primitiveUser = await request<PrimitiveUser>({
+            method: "POST",
+            url: "/auth"
+        })
 
-        // Verify authorization
-        const payload = Signer.verify<Payload>(zod.string().parse(authorization))
-
-        // User entity
-        const userEntity = await UserEntity.findOneBy({ id: payload.id })
-
-        // Check user entity
-        if (!userEntity) throw new UnauthorizedException
-
-        return new this(userEntity)
-    }
-
-    /**
-     * Create authorization method
-     * 
-     * @returns
-     */
-    public createAuthorization(): string {
-
-        return Signer.sign({ id: this.id })
+        return new this(primitiveUser)
     }
 }
 
