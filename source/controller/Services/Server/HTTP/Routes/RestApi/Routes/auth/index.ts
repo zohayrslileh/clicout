@@ -33,10 +33,13 @@ export default Router.create<Environment>(function (auth) {
 
 })
 
-/**
- * Environment
- * 
- */
+/*
+|-----------------------------
+|  Environment
+|-----------------------------
+|
+|
+*/
 interface Environment {
 
     // Variables
