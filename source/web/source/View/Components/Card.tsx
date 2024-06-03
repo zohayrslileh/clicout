@@ -32,7 +32,8 @@ export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivEle
  * 
  */
 const Container = styled.div`
-    border: 1px solid rgb(255 255 255 / 16%);
+    box-shadow: 0 0 80px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.02)};
+    border: 1px solid ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
     backdrop-filter: blur(5px);
     position: relative;
     overflow: hidden;
@@ -55,13 +56,14 @@ const Container = styled.div`
         100% {
             max-height: 100vh;
             opacity: 1;
-            border-color: rgb(255 255 255 / 16%);
+            border-color: ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
         }
 
     `} ease-in 1s;
 
     > .line {
-        background-color: white;
+        background-color: ${Appearance.schema.COLOR_WHITE.rgba()};
+        box-shadow: 0 0 5px white;
         position: absolute;
 
         &.left {

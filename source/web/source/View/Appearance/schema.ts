@@ -14,6 +14,7 @@ const schema = {
     FONT_BOLD: "Montserrat-Bold, NotoKufiArabic-Bold",
 
     COLOR_YELLOW: new Color("#FFB12C"),
+    COLOR_WHITE: new Color("#FFFFFF"),
     COLOR_LIGHT: new Color("#DDE5F4"),
     COLOR_GREEN: new Color("#A1FF00"),
     COLOR_DARK: new Color("#001822"),
