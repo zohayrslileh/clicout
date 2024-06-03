@@ -1,5 +1,5 @@
 import manager from "@/Models/Server/Socket"
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useRef } from "react"
 import styled from "@emotion/styled"
 
 /**
@@ -77,28 +77,13 @@ export default function () {
 
         vedioTag.currentTime = startTime
 
-        try {
+        vedioTag.play()
 
-            vedioTag.play()
-
-        } catch {
-
-            await new Promise(resolve => setTimeout(resolve, 1000))
-
-            if (!end) play(startTime)
-
-        }
-
-    }, [])
-
-    useEffect(() => {
-
-        (window as any).buffers = buffers
-        play(0)
     }, [])
 
     return <Container>
-        <video ref={video} autoPlay />
+        <video ref={video} />
+        <button onClick={() => play(0)}>Watch</button>
     </Container>
 }
 
