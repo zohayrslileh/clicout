@@ -1,4 +1,7 @@
 import request from "@/Models/Server/Request"
+import usePromise from "@/Tools/Promise"
+import { AxiosError } from "axios"
+import { createContext } from "react"
 import zod from "zod"
 
 /*
@@ -9,6 +12,12 @@ import zod from "zod"
 | 
 */
 export default class User {
+
+    /**
+     * Context
+     * 
+     */
+    public static readonly context = createContext<User | undefined>(undefined)
 
     /**
      * Id
@@ -95,6 +104,20 @@ export default class User {
         })
 
         return new this(primitiveUser)
+    }
+
+    /**
+     * Authentication hook
+     * 
+     * @returns
+     */
+    public static useAuthentication() {
+
+        const user = usePromise(async () => await this.authentication(), [])
+
+        const unauthorized = user.exception && user.exception.current instanceof AxiosError && user.exception.current.response?.status === 401
+
+        return Object.assign(user, { unauthorized })
     }
 }
 
