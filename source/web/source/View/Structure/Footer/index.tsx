@@ -1,4 +1,3 @@
-import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 import Language from "./Language"
 import Connect from "./Connect"
@@ -22,7 +21,7 @@ export default function () {
  * Container
  * 
  */
-const Container = styled(Card)`
+const Container = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
