@@ -9,6 +9,6 @@ import config from "@/config"
 |
 |
 */
-const manager = new Manager((import.meta.env.DEV ? config.DEV_SERVER : "/") + "api", { authorization: () => Authorization.value, autoConnect: false })
+const manager = new Manager(import.meta.env.DEV ? config.DEV_SERVER : undefined, { authorization: () => Authorization.value, autoConnect: false })
 
 export default manager
