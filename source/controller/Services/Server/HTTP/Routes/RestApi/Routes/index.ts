@@ -13,6 +13,12 @@ import main from "./main"
 export default Router.create(function (routes) {
 
     /**
+     * Options
+     * 
+     */
+    routes.options("/*", context => context.body("Success"))
+
+    /**
      * Welcome
      * 
      */
