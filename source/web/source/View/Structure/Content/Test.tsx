@@ -92,6 +92,8 @@ export default function () {
     }, [])
 
     useEffect(() => {
+
+        (window as any).buffers = buffers
         play(0)
     }, [])
 
