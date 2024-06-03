@@ -53,7 +53,7 @@ export default class User {
         // Validate data
         const { username, password } = schema.parse(data)
 
-        // Create user entity
+        // Initialize user entity
         const userEntity = new UserEntity
 
         // Set username
@@ -66,7 +66,6 @@ export default class User {
         await userEntity.save()
 
         return new this(userEntity)
-
     }
 
     /**
