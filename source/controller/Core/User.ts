@@ -29,7 +29,7 @@ export default class User extends UserEntity {
         const { username, password } = schema.parse(data)
 
         // Get user
-        const user = await User.findOneBy({ username })
+        const user = await this.findOneBy({ username })
 
         // Check username and password
         if (!user || !await user.verifyPassword(password)) throw new UnauthorizedException("Username or password incorrect")
