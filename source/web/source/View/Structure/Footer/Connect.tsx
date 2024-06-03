@@ -1,7 +1,7 @@
-import { PiPlugsConnected } from "react-icons/pi"
 import Appearance from "@/View/Appearance"
 import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
+import config from "@/config"
 
 /**
  * Connect
@@ -11,8 +11,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
-        <PiPlugsConnected size={17} />
-        <Link to="/connect">Connect (v0.1.1)</Link>
+        <Link to="/connect">{config.APP_NAME} v2.3.1 Pro</Link>
     </Container>
 }
 
@@ -25,6 +24,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     user-select: none;
+    opacity: 0.3;
     gap: 10px;
 
     > a {
