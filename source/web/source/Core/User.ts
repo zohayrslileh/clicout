@@ -1,7 +1,7 @@
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
-import { AxiosError } from "axios"
 import { createContext } from "react"
+import { AxiosError } from "axios"
 import zod from "zod"
 
 /*
@@ -113,8 +113,16 @@ export default class User {
      */
     public static useAuthentication() {
 
+        /**
+         * User promise
+         * 
+         */
         const user = usePromise(async () => await this.authentication(), [])
 
+        /**
+         * Unauthorized
+         * 
+         */
         const unauthorized = user.exception && user.exception.current instanceof AxiosError && user.exception.current.response?.status === 401
 
         return Object.assign(user, { unauthorized })
