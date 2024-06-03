@@ -114,18 +114,18 @@ export default class User {
     public static useAuthentication() {
 
         /**
-         * User promise
+         * Authentication promise
          * 
          */
-        const user = usePromise(async () => await this.authentication(), [])
+        const authentication = usePromise(async () => await this.authentication(), [])
 
         /**
          * Unauthorized
          * 
          */
-        const unauthorized = user.exception && user.exception.current instanceof AxiosError && user.exception.current.response?.status === 401
+        const unauthorized = authentication.exception && authentication.exception.current instanceof AxiosError && authentication.exception.current.response?.status === 401
 
-        return Object.assign(user, { unauthorized })
+        return Object.assign(authentication, { unauthorized })
     }
 }
 

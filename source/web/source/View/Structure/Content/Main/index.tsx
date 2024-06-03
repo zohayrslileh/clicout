@@ -15,24 +15,24 @@ import Navbar from "./Navbar"
 export default function () {
 
     /**
-     * User
+     * Authentication
      * 
      */
-    const user = User.useAuthentication()
+    const authentication = User.useAuthentication()
 
     // Pending status
-    if (user.pending) return <Throw exception={new PendingException} />
+    if (authentication.pending) return <Throw exception={new PendingException} />
 
     // Unauthorized status
-    if (user.unauthorized) return <Navigate to="/auth" />
+    if (authentication.unauthorized) return <Navigate to="/auth" />
 
     // Exception status
-    if (user.exception) return <Throw exception={user.exception.current} />
+    if (authentication.exception) return <Throw exception={authentication.exception.current} />
 
     // Authorized status
     return <Container>
 
-        <User.context.Provider value={user.solve}>
+        <User.context.Provider value={authentication.solve}>
 
             {/** Navbar */}
             <Navbar />
