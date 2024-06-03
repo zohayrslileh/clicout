@@ -106,14 +106,19 @@ export default class User {
         // Payload
         type Payload = { id: number }
 
-        // Verify authorization
-        const payload = Signer.verify<Payload>(zod.string().parse(authorization))
+        try {
 
-        // User entity
-        const userEntity = await UserEntity.findOneBy({ id: payload.id })
+            // Verify authorization
+            const payload = Signer.verify<Payload>(zod.string().parse(authorization))
 
-        // Check user entity
-        if (!userEntity) throw new UnauthorizedException
+            // User entity
+            var userEntity = await UserEntity.findOneByOrFail({ id: payload.id })
+        }
+
+        catch {
+
+            throw new UnauthorizedException
+        }
 
         return new this(userEntity)
     }
