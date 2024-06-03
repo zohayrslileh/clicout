@@ -1,8 +1,7 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import Authentication from "@/Core/Authentication"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
-import { AxiosError } from "axios"
+import User from "@/Core/User"
 import Login from "./Login"
 
 /**
@@ -13,26 +12,20 @@ import Login from "./Login"
 export default function () {
 
     /**
-     * User
+     * Authentication
      * 
      */
-    const user = Authentication.useVerify()
-
-    /**
-     * Unauthorized
-     * 
-     */
-    const unauthorized = user.exception && user.exception.current instanceof AxiosError && user.exception.current.response?.status === 401
+    const authentication = User.useAuthentication()
 
     // Pending status
-    if (user.pending) return <Throw exception={new PendingException} />
-
-    // Unauthorized status
-    if (unauthorized) return <Login />
-
-    // Exception status
-    if (user.exception) return <Throw exception={user.exception.current} />
+    if (authentication.pending) return <Throw exception={new PendingException} />
 
     // Authorized status
-    return <Navigate to="/main" />
+    if (!authentication.unauthorized) return <Navigate to="/main" />
+
+    // Exception status
+    if (authentication.exception) return <Throw exception={authentication.exception.current} />
+
+    // Unauthorized status
+    return <Login />
 }
