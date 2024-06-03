@@ -69,11 +69,11 @@ export default class User {
     }
 
     /**
-     * Find by access info method
+     * Login method
      * 
      * @returns
      */
-    public static async findByAccessInfo(data: unknown) {
+    public static async login(data: unknown) {
 
         // Schema
         const schema = zod.object({
@@ -94,11 +94,11 @@ export default class User {
     }
 
     /**
-     * Find by authorization method
+     * Authentication method
      * 
      * @returns
      */
-    public static async findByAuthorization(authorization: unknown) {
+    public static async authentication(authorization: unknown) {
 
         // Payload
         type Payload = { id: number }
