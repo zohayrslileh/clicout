@@ -15,14 +15,14 @@ export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivEle
      * 
      */
     return <Container {...props}>
-        <div className="line left top horizontal"></div>
-        <div className="line left top vertical"></div>
-        <div className="line left bottom horizontal"></div>
-        <div className="line left bottom vertical"></div>
-        <div className="line right top horizontal"></div>
-        <div className="line right top vertical"></div>
         <div className="line right bottom horizontal"></div>
+        <div className="line left bottom horizontal"></div>
         <div className="line right bottom vertical"></div>
+        <div className="line right top horizontal"></div>
+        <div className="line left bottom vertical"></div>
+        <div className="line left top horizontal"></div>
+        <div className="line right top vertical"></div>
+        <div className="line left top vertical"></div>
         {children}
     </Container>
 }
