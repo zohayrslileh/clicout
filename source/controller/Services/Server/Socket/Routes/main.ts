@@ -1,4 +1,3 @@
-import tester from "@/Console/Routes/tester"
 import Router from "@/Tools/Socket/Router"
 
 /*
@@ -11,8 +10,6 @@ import Router from "@/Tools/Socket/Router"
 export default new Router(async function (main) {
 
     // On connection
-    main.onConnection(async function (client) {
-
-        await tester(client)
+    main.onConnection(async function (_) {
     })
 })
