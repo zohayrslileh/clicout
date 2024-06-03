@@ -1,6 +1,6 @@
 import Router from "@/Tools/HTTP/Router"
 import welcome from "./welcome"
-import access from "./access"
+import access from "./auth"
 import auth from "./auth"
 
 /*

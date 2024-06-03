@@ -3,18 +3,18 @@ import User from "@/Core/User"
 
 /*
 |-----------------------------
-|  Auth
+|  Main
 |-----------------------------
 |
 |
 */
-export default Router.create<Environment>(function (auth) {
+export default Router.create<Environment>(function (main) {
 
     /**
      * Middleware
      * 
      */
-    auth.use(async function (context, next) {
+    main.use(async function (context, next) {
 
         // Get authorization
         const authorization = context.req.header("Authorization")
@@ -29,8 +29,7 @@ export default Router.create<Environment>(function (auth) {
      * Initialize
      * 
      */
-    auth.get("/", async context => context.json(context.var.user))
-
+    main.get("/", async context => context.json(context.var.user))
 })
 
 /*
