@@ -28,7 +28,7 @@ export default Router.create<Environment>(function (main) {
 
         catch {
 
-            throw new HttpException("Unauthorized")
+            throw new HttpException("Unauthorized", 401)
         }
 
         return await next()
