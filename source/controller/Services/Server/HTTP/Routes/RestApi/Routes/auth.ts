@@ -16,10 +16,10 @@ export default Router.create<Environment>(function (auth) {
      */
     auth.post("/login", async function (context) {
 
-        // Get user
-        const user = await User.findByAccessInfo(await context.req.json())
+        // Login
+        const authorization = await User.login(await context.req.json())
 
-        return context.json(user.createAuthorization())
+        return context.json(authorization)
     })
 
     /**
