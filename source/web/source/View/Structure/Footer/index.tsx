@@ -11,7 +11,7 @@ import Theme from "./Theme"
  */
 export default function () {
 
-    return <Container className="animation">
+    return <Container>
         <Theme />
         <Connect />
         <Language />

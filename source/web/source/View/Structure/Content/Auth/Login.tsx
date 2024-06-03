@@ -50,7 +50,7 @@ export default function () {
     // Solve status
     if (login.solve) return <Navigate to="/" />
 
-    return <Container className="animation">
+    return <Container>
 
         <Logo width={200} id="logo" />
 
