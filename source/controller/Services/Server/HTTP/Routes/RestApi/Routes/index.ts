@@ -1,5 +1,6 @@
 import Router from "@/Tools/HTTP/Router"
 import welcome from "./welcome"
+import auth from "./auth"
 
 /*
 |-----------------------------
@@ -15,4 +16,10 @@ export default Router.create(function (routes) {
      * 
      */
     routes.all("/", welcome)
+
+    /**
+     * Auth
+     * 
+     */
+    routes.route("/auth", auth)
 })
