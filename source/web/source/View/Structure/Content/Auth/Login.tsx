@@ -1,7 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
 import ErrorCard from "@/View/Components/ErrorCard"
-import Authentication from "@/Core/Authentication"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
 import Button from "@/View/Components/Button"
@@ -10,7 +9,9 @@ import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
+import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
+import User from "@/Core/User"
 
 /**
  * Login
@@ -35,7 +36,7 @@ export default function () {
      * Login
      * 
      */
-    const login = Authentication.useLogin(value)
+    const login = usePromise(async () => await User.login(value))
 
     /**
      * Error
@@ -65,6 +66,25 @@ export default function () {
 }
 
 /**
+ * Login Form
+ * 
+ */
+class LoginForm {
+
+    /**
+     * Username
+     * 
+     */
+    username: string | undefined
+
+    /**
+     * Password
+     * 
+     */
+    password: string | undefined
+}
+
+/**
  * Container
  * 
  */
@@ -87,22 +107,3 @@ const Container = styled(Card)`
         gap: 10px;
     }
 `
-
-/**
- * Login Form
- * 
- */
-class LoginForm {
-
-    /**
-     * Username
-     * 
-     */
-    username: string | undefined
-
-    /**
-     * Password
-     * 
-     */
-    password: string | undefined
-}
