@@ -25,7 +25,7 @@ export default Router.create(function (routes) {
     routes.route("/auth", auth)
 
     /**
-     * Auth
+     * Access
      * 
      */
     routes.route("/access", access)
