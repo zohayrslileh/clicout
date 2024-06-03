@@ -41,6 +41,6 @@ export default function () {
 const Container = styled.div`
     position: relative;
     overflow: hidden;
-    display: grid;
     flex: 1;
+    display: grid;
 `
