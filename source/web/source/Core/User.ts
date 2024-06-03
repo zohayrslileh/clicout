@@ -100,7 +100,7 @@ export default class User {
         // Ask primitive user
         const primitiveUser = await request<PrimitiveUser>({
             method: "POST",
-            url: "/auth"
+            url: "/main"
         })
 
         return new this(primitiveUser)
