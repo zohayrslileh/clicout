@@ -1,3 +1,4 @@
+import armouryCrateBackground from "@/View/Media/armoury-crate-background.jpg"
 import { BrowserRouter } from "react-router-dom"
 import styled from "@emotion/styled"
 import Content from "./Content"
@@ -40,4 +41,5 @@ const Container = styled.div`
     box-sizing: border-box;
     padding: 10px;
     height: 100%;
+    background-image: url(${armouryCrateBackground});
 `
