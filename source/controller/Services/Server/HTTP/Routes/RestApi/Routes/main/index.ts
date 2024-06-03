@@ -15,7 +15,7 @@ export default Router.create<Environment>(function (main) {
      * 
      */
     main.use(async function (context, next) {
-
+        console.log("New client")
         // Get authorization
         const authorization = context.req.header("Authorization")
 
