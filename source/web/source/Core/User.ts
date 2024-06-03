@@ -82,11 +82,11 @@ export default class User {
     }
 
     /**
-     * Find by authorization method
+     * Authentication method
      * 
      * @returns
      */
-    public static async findByAuthorization() {
+    public static async authentication() {
 
         // Ask primitive user
         const primitiveUser = await request<PrimitiveUser>({
