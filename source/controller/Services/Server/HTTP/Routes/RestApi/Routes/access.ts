@@ -11,25 +11,16 @@ import User from "@/Core/User"
 export default Router.create<Environment>(function (auth) {
 
     /**
-     * Middleware
+     * Login
      * 
      */
-    auth.use(async function (context, next) {
+    auth.post("/login", async function (context) {
 
-        // Get authorization
-        const authorization = context.req.header("Authorization")
+        // Get user
+        const user = await User.findByAccessInfo(await context.req.json())
 
-        // Set user variable
-        context.set("user", await User.findByAuthorization(authorization))
-
-        return await next()
+        return context.json(user.createAuthorization())
     })
-
-    /**
-     * Initialize
-     * 
-     */
-    auth.get("/", async context => context.json(context.var.user))
 
 })
 
@@ -44,6 +35,5 @@ interface Environment {
 
     // Variables
     Variables: {
-        user: User
     }
 }
