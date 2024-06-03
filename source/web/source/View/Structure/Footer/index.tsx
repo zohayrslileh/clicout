@@ -1,7 +1,6 @@
 import styled from "@emotion/styled"
 import Language from "./Language"
 import Connect from "./Connect"
-import Theme from "./Theme"
 
 /**
  * Footer
@@ -11,7 +10,6 @@ import Theme from "./Theme"
 export default function () {
 
     return <Container>
-        <Theme />
         <Connect />
         <Language />
     </Container>
