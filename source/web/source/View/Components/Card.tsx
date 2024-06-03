@@ -32,7 +32,7 @@ export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivEle
  * 
  */
 const Container = styled.div`
-    box-shadow: 0 0 80px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.02)};
+    box-shadow: 0 0 80px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.03)};
     border: 1px solid ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
     backdrop-filter: blur(5px);
     position: relative;
