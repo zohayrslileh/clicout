@@ -20,12 +20,12 @@ export default function () {
     // Pending status
     if (authentication.pending) return <Throw exception={new PendingException} />
 
-    // Authorized status
-    if (!authentication.unauthorized) return <Navigate to="/main" />
+    // Unauthorized status
+    if (authentication.unauthorized) return <Login />
 
     // Exception status
     if (authentication.exception) return <Throw exception={authentication.exception.current} />
 
-    // Unauthorized status
-    return <Login />
+    // Authorized status
+    return <Navigate to="/main" />
 }
