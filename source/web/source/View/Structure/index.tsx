@@ -42,4 +42,8 @@ const Container = styled.div`
     padding: 10px;
     height: 100%;
     background-image: url(${armouryCrateBackground});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 `
