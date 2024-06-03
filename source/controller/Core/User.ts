@@ -38,6 +38,38 @@ export default class User {
     }
 
     /**
+     * Create method
+     * 
+     * @returns
+     */
+    public static async create(data: unknown) {
+
+        // Schema
+        const schema = zod.object({
+            username: zod.string().min(4).max(16),
+            password: zod.string().min(4).max(16)
+        })
+
+        // Validate data
+        const { username, password } = schema.parse(data)
+
+        // Create user entity
+        const userEntity = new UserEntity
+
+        // Set username
+        userEntity.username = username
+
+        // Set password
+        await userEntity.setPassword(password)
+
+        // Save
+        await userEntity.save()
+
+        return new this(userEntity)
+
+    }
+
+    /**
      * Find by access info method
      * 
      * @returns

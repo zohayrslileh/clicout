@@ -21,6 +21,18 @@ export default Router.create<Environment>(function (auth) {
 
         return context.json(user.createAuthorization())
     })
+
+    /**
+     * Register
+     * 
+     */
+    auth.post("/register", async function (context) {
+
+        // create user
+        const user = await User.create(await context.req.json())
+
+        return context.json(user)
+    })
 })
 
 /*
