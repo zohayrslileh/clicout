@@ -42,13 +42,13 @@ export default class User extends UserEntity {
      * 
      * @returns
      */
-    public static async findByAuthorization(authorization: string) {
+    public static async findByAuthorization(authorization: unknown) {
 
         // Payload
         type Payload = { id: number }
 
         // Verify authorization
-        const payload = Signer.verify<Payload>(authorization)
+        const payload = Signer.verify<Payload>(zod.string().parse(authorization))
 
         // User
         const user = await User.findOneBy({ id: payload.id })
