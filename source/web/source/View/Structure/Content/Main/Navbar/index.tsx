@@ -1,7 +1,6 @@
 import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 import Navigator from "./Navigator"
-import User from "./User"
 
 /**
  * Navbar
@@ -13,7 +12,6 @@ export default function () {
 
     return <Container className="animation">
         <Navigator />
-        <User />
     </Container>
 }
 
