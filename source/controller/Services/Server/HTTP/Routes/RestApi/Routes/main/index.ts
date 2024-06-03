@@ -1,5 +1,6 @@
 import Router from "@/Tools/HTTP/Router"
 import User from "@/Core/User"
+import HttpException from "@/Services/Server/HTTP/Exception/Exceptions"
 
 /*
 |-----------------------------
@@ -16,11 +17,19 @@ export default Router.create<Environment>(function (main) {
      */
     main.use(async function (context, next) {
 
-        // Get authorization
-        const authorization = context.req.header("Authorization")
+        try {
 
-        // Set user variable
-        context.set("user", await User.findByAuthorization(authorization))
+            // Get authorization
+            const authorization = context.req.header("Authorization")
+
+            // Set user variable
+            context.set("user", await User.findByAuthorization(authorization))
+        }
+
+        catch {
+
+            throw new HttpException("Unauthorized")
+        }
 
         return await next()
     })
