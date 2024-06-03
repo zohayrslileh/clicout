@@ -1,6 +1,6 @@
 import Authorization from "@/Models/Authorization"
 import axios, { AxiosRequestConfig } from "axios"
-import Server from "."
+import config from "@/config"
 
 /*
 |-----------------------------
@@ -10,7 +10,7 @@ import Server from "."
 |
 */
 export const createInstance = () => axios.create({
-    baseURL: Server.value + "api",
+    baseURL: (import.meta.env.DEV ? config.DEV_SERVER : "/") + "api",
     timeout: 30000,
     headers: {
         "Authorization": Authorization.value

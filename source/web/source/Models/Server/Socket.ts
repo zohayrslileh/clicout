@@ -1,6 +1,6 @@
 import Authorization from "@/Models/Authorization"
 import Manager from "@/Tools/Socket/Manager"
-import Server from "."
+import config from "@/config"
 
 /*
 |-----------------------------
@@ -9,6 +9,6 @@ import Server from "."
 |
 |
 */
-const manager = new Manager(Server.value, { authorization: () => Authorization.value, autoConnect: false })
+const manager = new Manager((import.meta.env.DEV ? config.DEV_SERVER : "/") + "api", { authorization: () => Authorization.value, autoConnect: false })
 
 export default manager
