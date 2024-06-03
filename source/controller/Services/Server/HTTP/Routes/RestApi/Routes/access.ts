@@ -21,7 +21,6 @@ export default Router.create<Environment>(function (auth) {
 
         return context.json(user.createAuthorization())
     })
-
 })
 
 /*
