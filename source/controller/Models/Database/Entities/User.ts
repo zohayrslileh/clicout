@@ -1,6 +1,5 @@
 import { Entity, Column, ManyToOne } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
-import { Signer } from "@/Models/Encryptor"
 import bcrypt from "bcrypt"
 import Role from "./Role"
 
@@ -53,29 +52,6 @@ export default class User extends BaseEntity {
     public async verifyPassword(password: string): Promise<boolean> {
 
         return await bcrypt.compare(password, this.password)
-    }
-
-    /**
-     * Create authorization method
-     * 
-     * @returns
-     */
-    public createAuthorization(): string {
-
-        return Signer.sign({ id: this.id })
-    }
-
-    /**
-     * Find by authorization method
-     * 
-     * @returns
-     */
-    public static async findByAuthorization(authorization: string) {
-
-        // Verify authorization
-        const payload = Signer.verify<{ id: number }>(authorization)
-
-        return await User.findOneBy({ id: payload.id })
     }
 
     /**
