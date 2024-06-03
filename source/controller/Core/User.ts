@@ -10,7 +10,32 @@ import zod from "zod"
 |
 | 
 */
-export default class User extends UserEntity {
+export default class User {
+
+    /**
+     * Id
+     * 
+     */
+    public readonly id: number
+
+    /**
+     * Username
+     * 
+     */
+    public username: string
+
+    /**
+     * Constructor methodd
+     * 
+     */
+    public constructor(primitiveUser: PrimitiveUser) {
+
+        // Set id
+        this.id = primitiveUser.id
+
+        // Set username
+        this.username = primitiveUser.username
+    }
 
     /**
      * Find by access info method
@@ -28,13 +53,13 @@ export default class User extends UserEntity {
         // Validate data
         const { username, password } = schema.parse(data)
 
-        // Get user
-        const user = await this.findOneBy({ username })
+        // User entity
+        const userEntity = await UserEntity.findOneBy({ username })
 
         // Check username and password
-        if (!user || !await user.verifyPassword(password)) throw new UnauthorizedException("Username or password incorrect")
+        if (!userEntity || !await userEntity.verifyPassword(password)) throw new UnauthorizedException("Username or password incorrect")
 
-        return user
+        return new this(userEntity)
     }
 
     /**
@@ -50,13 +75,13 @@ export default class User extends UserEntity {
         // Verify authorization
         const payload = Signer.verify<Payload>(zod.string().parse(authorization))
 
-        // User
-        const user = await User.findOneBy({ id: payload.id })
+        // User entity
+        const userEntity = await UserEntity.findOneBy({ id: payload.id })
 
-        // Check user
-        if (!user) throw new UnauthorizedException
+        // Check user entity
+        if (!userEntity) throw new UnauthorizedException
 
-        return user
+        return new this(userEntity)
     }
 
     /**
@@ -68,4 +93,16 @@ export default class User extends UserEntity {
 
         return Signer.sign({ id: this.id })
     }
+}
+
+/*
+|-----------------------------
+|  Primitive User
+|-----------------------------
+|
+| 
+*/
+export interface PrimitiveUser {
+    id: number
+    username: string
 }
