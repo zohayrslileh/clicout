@@ -14,8 +14,7 @@ export default async function (client: Client) {
     const browser = await puppeteer.launch({
         args: [
             "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--proxy-server=geo.iproyal.com:12321"
+            "--disable-setuid-sandbox"
         ]
     })
 
@@ -26,8 +25,6 @@ export default async function (client: Client) {
     const page = await browser.newPage()
 
     page.setDefaultTimeout(0)
-
-    await page.authenticate({ username: "SakgJrSFBOfk57YM", password: "BlIyd29h7g1HiYZq_country-ca" })
 
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
