@@ -25,12 +25,12 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.B
  * 
  */
 const Container = styled(PromiseButton)`
-    background-color: transparent;
     box-shadow: 0 0 80px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.03)};
     border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
     color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
     font-family: ${() => Appearance.schema.FONT_MEDIUM};
     border-color: 1px solid transparent;
+    background-color: transparent;
     backdrop-filter: blur(5px);
     position: relative;
     overflow: hidden;
@@ -46,6 +46,7 @@ const Container = styled(PromiseButton)`
         width: 70px;
         height: 18px;
         transform: rotate(45deg);
+        z-index: 99;
     }
 
     &:hover, &:active, &:focus {
