@@ -57,7 +57,7 @@ export default class User {
         const schema = zod.object({
             username: zod.string().min(4).max(16),
             password: zod.string().min(4).max(16),
-            email: zod.string().min(4).max(16)
+            email: zod.string().min(4).max(20)
         })
 
         // Validate data
