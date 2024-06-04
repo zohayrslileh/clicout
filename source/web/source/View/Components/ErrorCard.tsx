@@ -20,8 +20,8 @@ export default function ({ message }: Props) {
  * 
  */
 const Container = styled(Card)`
-    box-shadow: 0 0 20px inset rgb(179 0 0 / 30%);
-    padding: 10px 10px;
+    box-shadow: 0 0 20px inset rgb(179 0 0 / 45%);
+    padding: 13px 20px;
     height: fit-content;
     display: grid;
     grid-template-columns: auto 1fr;
