@@ -2,10 +2,7 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import styled from "@emotion/styled"
-import Content from "./Content"
-import Sidebar from "./Sidebar"
 import User from "@/Core/User"
-import Navbar from "./Navbar"
 
 /**
  * Main
@@ -33,15 +30,6 @@ export default function () {
     return <Container>
 
         <User.context.Provider value={authentication.solve}>
-
-            {/** Navbar */}
-            <Navbar />
-
-            {/** Sidebar */}
-            <Sidebar />
-
-            {/** Content */}
-            <Content />
 
         </User.context.Provider>
 
