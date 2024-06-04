@@ -1,5 +1,6 @@
 import BaseEntity from "@/Tools/Database/Entity"
-import { Entity } from "typeorm"
+import { Entity, ManyToOne } from "typeorm"
+import Country from "./Country"
 
 /*
 |-----------------------------
@@ -10,4 +11,11 @@ import { Entity } from "typeorm"
 */
 @Entity()
 export default class City extends BaseEntity {
+
+    /**
+     * Country
+     * 
+     */
+    @ManyToOne(() => Country, country => country.cities, { nullable: false })
+    declare public country: Country
 }
