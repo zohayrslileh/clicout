@@ -6,12 +6,24 @@ import styled from "@emotion/styled"
  * 
  */
 export default styled.select`
-    color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
-    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
+    box-shadow: 0 0 80px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.03)};
+    border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
+    color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
     font-family: ${() => Appearance.schema.FONT_MEDIUM};
-    border-radius: 7px;
-    padding: 10px 10px;
-    border: none;
+    border-color: 1px solid transparent;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
     outline: none;
-    border-inline-end: 10px solid transparent;
+    padding: 5px 10px;
+
+    &:hover, &:active, &:focus {
+        box-shadow: 0 0 30px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+    }
+
+    &:focus {
+        border-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
+    }
 `
