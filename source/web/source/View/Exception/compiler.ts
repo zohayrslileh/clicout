@@ -1,8 +1,10 @@
+import UnprocessableEntity from "./Exceptions/UnprocessableEntity"
 import WsEventException from "./Exceptions/WsEvent"
 import EventError from "@/Tools/Socket/EventError"
 import AxiosException from "./Exceptions/Axios"
 import ViewException from "./Exceptions"
 import { AxiosError } from "axios"
+import { ZodError } from "zod"
 
 /**
  * Compiler method
@@ -28,6 +30,12 @@ export default function (exception: unknown): ViewException {
      * 
      */
     if (exception instanceof EventError) return new WsEventException(exception)
+
+    /**
+     * Zod Error
+     * 
+     */
+    if (exception instanceof ZodError) return new UnprocessableEntity(exception.issues)
 
     /**
      * Error Exception
