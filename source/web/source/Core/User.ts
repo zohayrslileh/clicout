@@ -139,6 +139,17 @@ export default class User {
 
         return Object.assign(authentication, { unauthorized })
     }
+
+    /**
+     * Subscription method
+     * 
+     * @returns
+     */
+    public async subscription() {
+
+        // Ask primitive subscription
+        return await request<PrimitiveSubscription | null>({ url: "/main/subscription" })
+    }
 }
 
 /*
@@ -152,4 +163,29 @@ export interface PrimitiveUser {
     id: number
     username: string
     email: string
+}
+
+/*
+|-----------------------------
+|  Primitive Subscription
+|-----------------------------
+|
+| 
+*/
+export interface PrimitiveSubscription {
+    id: number
+    expireAt: string
+    plan: PrimitivePlan
+}
+
+/*
+|-----------------------------
+|  Primitive Plan
+|-----------------------------
+|
+| 
+*/
+export interface PrimitivePlan {
+    id: number
+    name: string
 }
