@@ -1,5 +1,5 @@
+import { Column, Entity, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
-import { Entity, OneToMany } from "typeorm"
 import Subscription from "./Subscription"
 
 /*
@@ -11,6 +11,20 @@ import Subscription from "./Subscription"
 */
 @Entity()
 export default class Plan extends BaseEntity {
+
+    /**
+     * Name
+     * 
+     */
+    @Column({ type: "varchar", nullable: false, unique: true })
+    declare public name: string
+
+    /**
+     * Price
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public price: number
 
     /**
      * Subscriptions
