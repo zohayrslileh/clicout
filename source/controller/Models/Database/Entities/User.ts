@@ -1,5 +1,6 @@
-import { Entity, Column, ManyToOne } from "typeorm"
+import { Entity, Column, ManyToOne, OneToOne } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
+import Subscription from "./Subscription"
 import bcrypt from "bcrypt"
 import Role from "./Role"
 
@@ -40,6 +41,13 @@ export default class User extends BaseEntity {
      */
     @ManyToOne(() => Role, role => role.users)
     declare public role: Role | undefined
+
+    /**
+     * Subscription
+     * 
+     */
+    @OneToOne(() => Subscription, subscription => subscription.user)
+    declare public subscription: Subscription | undefined
 
     /**
      * Set password method
