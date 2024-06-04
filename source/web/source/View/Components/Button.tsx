@@ -1,4 +1,3 @@
-import PromiseButton from "./PromiseButton"
 import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 import React from "react"
@@ -24,7 +23,7 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.B
  * Container
  * 
  */
-const Container = styled(PromiseButton)`
+const Container = styled.button`
     box-shadow: 0 0 80px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.03)};
     border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
     color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
