@@ -1,6 +1,6 @@
-import Appearance from "@/View/Appearance"
 import { BiError } from "react-icons/bi"
 import styled from "@emotion/styled"
+import Card from "./Card"
 
 /**
  * Error card component
@@ -19,17 +19,20 @@ export default function ({ message }: Props) {
  * Container
  * 
  */
-const Container = styled.div`
-    background-color: #f54747;
-    color: ${() => Appearance.schema.COLOR_LIGHT.rgba()};
+const Container = styled(Card)`
+    box-shadow: 0 0 20px inset rgb(179 0 0 / 30%);
     padding: 10px 10px;
-    border-radius: 7px;
     height: fit-content;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 10px;
-    margin: auto;
+
+    > .line {
+        opacity: 0.3;
+    }
+
+    color: rgb(179 0 0 / 90%);
 `
 
 /**
