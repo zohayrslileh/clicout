@@ -30,6 +30,18 @@ export default Router.create<Environment>(function (main) {
      * 
      */
     main.get("/", async context => context.json(context.var.user))
+
+    /**
+     * Subscription
+     * 
+     */
+    main.get("/subscription", async function (context) {
+
+        // Subscription
+        const subscription = await context.var.user.subscription()
+
+        context.json(subscription)
+    })
 })
 
 /*
