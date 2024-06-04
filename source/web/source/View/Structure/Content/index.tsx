@@ -4,6 +4,7 @@ import { Throw } from "@/Tools/Exception"
 import Exception from "@/View/Exception"
 import { lazy, Suspense } from "react"
 import styled from "@emotion/styled"
+import User from "@/Core/User"
 
 const Auth = lazy(() => import("./Auth"))
 const Main = lazy(() => import("./Main"))
@@ -14,6 +15,18 @@ const Main = lazy(() => import("./Main"))
  * @returns 
  */
 export default function () {
+
+    /**
+     * Authentication
+     * 
+     */
+    const authentication = User.useAuthentication()
+
+    // Pending status
+    if (authentication.pending) return <Throw exception={new PendingException} />
+
+    // Exception status
+    if (!authentication.unauthorized && authentication.exception) return <Throw exception={authentication.exception.current} />
 
     return <Container>
 
