@@ -24,7 +24,7 @@ export default function () {
  */
 const Container = styled.div`
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     display: flex;
     gap: 10px;
 

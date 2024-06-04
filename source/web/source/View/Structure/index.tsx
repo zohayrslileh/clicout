@@ -39,7 +39,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 10px;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 15px;
     height: 100%;
     background-image: url(${armouryCrateBackground});
     background-size: cover;

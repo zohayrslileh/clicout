@@ -1,5 +1,5 @@
+import LinkButton from "@/View/Components/LinkButton"
 import languages from "@/View/Language/Languages"
-import Select from "@/View/Components/Select"
 import Language from "@/View/Language"
 
 /**
@@ -9,7 +9,11 @@ import Language from "@/View/Language"
  */
 export default function () {
 
-    return <Select value={Language.value.key} onChange={event => Language.value = languages.find(language => language.key === event.target.value) || languages[0]}>
-        {languages.map(language => <option key={language.key} value={language.key}>{language.name}</option>)}
-    </Select>
+    /**
+     * Next language
+     * 
+     */
+    const nextLanguage = languages.find(language => language !== Language.value) || languages[0]
+
+    return <LinkButton onClick={() => Language.value = nextLanguage}>{nextLanguage.name}</LinkButton>
 }
