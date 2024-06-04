@@ -28,8 +28,6 @@ export default function () {
 
     // Authorized status
     return <User.context.Provider value={authentication.solve}>
-
         <Routes />
-
     </User.context.Provider>
 }

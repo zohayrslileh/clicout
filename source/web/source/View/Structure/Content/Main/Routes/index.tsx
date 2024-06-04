@@ -2,7 +2,9 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Route, Routes } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
+import Dashboard from "./Dashboard"
 import { useContext } from "react"
+import Upgrade from "./Upgrade"
 import User from "@/Core/User"
 
 /**
@@ -31,7 +33,7 @@ export default function () {
     if (subscription.exception) return <Throw exception={subscription.exception.current} />
 
     return <Routes>
-        <Route index element={<p></p>} />
-        <Route index element={<p></p>} />
+        <Route index element={<Dashboard />} />
+        <Route path="upgrade" element={<Upgrade />} />
     </Routes>
 }
