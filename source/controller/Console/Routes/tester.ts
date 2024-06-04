@@ -9,9 +9,27 @@ import Json from "@/Tools/Json"
 */
 export default async function () {
 
-    const cities = new Json<unknown[]>("assets/database/cities500.json")
+    const cities = new Json<City[]>("assets/database/cities.json")
+    const countries = new Json<Country[]>("assets/database/countries.json")
 
-    console.log(cities.value.length)
+    cities.value = cities.value
+
+    console.log(countries.value.length)
 
     console.log("The test completed successfully 🧪 ")
+}
+
+interface City {
+    id: string
+    name: string
+    country: string
+    admin1: string
+    lat: string
+    lon: string
+    pop: string
+}
+
+interface Country {
+    name: string
+    code: string
 }
