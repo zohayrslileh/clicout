@@ -100,10 +100,7 @@ export default class User {
     public static async authentication() {
 
         // Ask primitive user
-        const primitiveUser = await request<PrimitiveUser>({
-            method: "POST",
-            url: "/main"
-        })
+        const primitiveUser = await request<PrimitiveUser>({ url: "/main" })
 
         return new this(primitiveUser)
     }
