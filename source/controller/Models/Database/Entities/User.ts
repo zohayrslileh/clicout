@@ -70,29 +70,6 @@ export default class User extends BaseEntity {
     }
 
     /**
-     * Get role method
-     * 
-     * @returns
-     */
-    public async getRole() {
-
-        return await Role.findOneBy({ users: [{ id: this.id }] })
-    }
-
-    /**
-     * Has role method
-     * 
-     * @returns
-     */
-    public async hasRole(name: string) {
-
-        // Get role
-        const role = await this.getRole()
-
-        return role && role.name === name
-    }
-
-    /**
      * Has permission method
      * 
      * @returns
@@ -100,7 +77,7 @@ export default class User extends BaseEntity {
     public async hasPermission(name: string) {
 
         // Get role
-        const role = await this.getRole()
+        const role = await Role.findOneBy({ users: [{ id: this.id }] })
 
         return !!role && await role.hasPermission(name)
     }
