@@ -7,10 +7,10 @@ import styled from "@emotion/styled"
  * 
  */
 export default styled(TextInput)`
-    box-shadow: 0 0 80px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.03)};
-    border: 1px solid ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
-    color: ${Appearance.schema.COLOR_WHITE.rgba()};
-    font-family: ${Appearance.schema.FONT_MEDIUM};
+    box-shadow: 0 0 80px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.03)};
+    border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
+    color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
+    font-family: ${() => Appearance.schema.FONT_MEDIUM};
     border-color: 1px solid transparent;
     background-color: transparent;
     backdrop-filter: blur(5px);
@@ -21,10 +21,10 @@ export default styled(TextInput)`
     padding: 15px;
 
     &:hover, &:active, &:focus {
-        box-shadow: 0 0 30px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+        box-shadow: 0 0 30px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
     }
 
     &:focus {
-        border-color: ${Appearance.schema.COLOR_YELLOW.rgba(0.7)};
+        border-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
     }
 `

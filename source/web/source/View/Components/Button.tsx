@@ -26,10 +26,10 @@ export default function ({ children, ...props }: React.HTMLAttributes<HTMLButton
  */
 const Container = styled(PromiseButton)`
     background-color: transparent;
-    box-shadow: 0 0 80px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.03)};
-    border: 1px solid ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
-    color: ${Appearance.schema.COLOR_WHITE.rgba()};
-    font-family: ${Appearance.schema.FONT_MEDIUM};
+    box-shadow: 0 0 80px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.03)};
+    border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
+    color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
+    font-family: ${() => Appearance.schema.FONT_MEDIUM};
     border-color: 1px solid transparent;
     backdrop-filter: blur(5px);
     position: relative;
@@ -39,7 +39,7 @@ const Container = styled(PromiseButton)`
     padding: 15px;
 
     > .ship {
-        background-color: ${Appearance.schema.COLOR_WHITE.rgba()};
+        background-color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
         position: absolute;
         right: -42px;
         top: 0;
@@ -49,15 +49,15 @@ const Container = styled(PromiseButton)`
     }
 
     &:hover, &:active, &:focus {
-        box-shadow: 0 0 30px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.1)};
-        color: ${Appearance.schema.COLOR_YELLOW.rgba(0.7)};
+        box-shadow: 0 0 30px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+        color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
 
         > .ship {
-            background-color: ${Appearance.schema.COLOR_YELLOW.rgba(1)};
+            background-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(1)};
         }
     }
 
     &:focus {
-        border-color: ${Appearance.schema.COLOR_YELLOW.rgba(0.7)};
+        border-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
     }
 `
