@@ -33,6 +33,9 @@ const Container = styled.button`
     background-color: transparent;
     backdrop-filter: blur(5px);
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     overflow: hidden;
     cursor: pointer;
     outline: none;
