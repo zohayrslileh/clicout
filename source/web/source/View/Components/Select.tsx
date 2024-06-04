@@ -17,7 +17,7 @@ export default styled.select`
     overflow: hidden;
     cursor: pointer;
     outline: none;
-    padding: 5px 10px;
+    padding: 15px;
 
     &:hover, &:active, &:focus {
         box-shadow: 0 0 30px inset ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
