@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import config from "@/config"
 
 /**
- * Connect
+ * Version
  * 
  * @returns 
  */

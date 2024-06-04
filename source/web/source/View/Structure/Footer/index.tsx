@@ -2,7 +2,7 @@ import Button from "@/View/Components/Button"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Language from "./Language"
-import Connect from "./Connect"
+import Version from "./Version"
 
 /**
  * Footer
@@ -13,7 +13,7 @@ export default function () {
 
     return <Container>
         <Button><Lang>Buy me a coffee</Lang></Button>
-        <Connect />
+        <Version />
         <Language />
     </Container>
 }
