@@ -17,7 +17,6 @@ export default function () {
  * 
  */
 const Container = styled.p`
-    cursor: pointer;
     display: flex;
     align-items: center;
     user-select: none;
