@@ -35,6 +35,7 @@ const Container = styled.button`
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 7px;
     overflow: hidden;
     cursor: pointer;
