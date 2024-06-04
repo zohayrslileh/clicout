@@ -39,7 +39,7 @@ export default class User extends BaseEntity {
      * 
      */
     @ManyToOne(() => Role, role => role.users)
-    declare public role: Role | null
+    declare public role: Role | undefined
 
     /**
      * Set password method
