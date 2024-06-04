@@ -1,6 +1,6 @@
 import TextInput from "@/Tools/MaterialUI/TextInput"
+import { css, keyframes } from "@emotion/react"
 import Appearance from "@/View/Appearance"
-import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 
 /**
@@ -30,6 +30,20 @@ export default styled(TextInput)`
     }
 
     ${props => props.issue && css`
-        box-shadow: 0 0 20px inset rgb(179 0 0 / 45%);
+        animation: ${keyframes`
+
+            0% {
+                box-shadow: 0 0 20px inset rgb(179 0 0 / 70%);
+            }
+
+            80% {
+                box-shadow: 0 0 20px inset rgb(179 0 0 / 70%);
+            }
+
+            100% {
+                box-shadow: initial;
+            }
+
+        `} ease-in 2s;
     `}
 `
