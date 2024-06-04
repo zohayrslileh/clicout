@@ -18,7 +18,7 @@ export default class User {
      * Context
      * 
      */
-    public static readonly context = createContext<User | undefined>(undefined)
+    public static readonly context = createContext<User>(undefined!)
 
     /**
      * Id
