@@ -33,6 +33,12 @@ export default class User {
     public username: string
 
     /**
+     * Email
+     * 
+     */
+    public email: string
+
+    /**
      * Constructor methodd
      * 
      */
@@ -43,6 +49,9 @@ export default class User {
 
         // Set username
         this.username = primitiveUser.username
+
+        // Set email
+        this.email = primitiveUser.email
     }
 
     /**
@@ -55,7 +64,8 @@ export default class User {
         // Schema
         const schema = zod.object({
             username: zod.string().min(4).max(16),
-            password: zod.string().min(4).max(16)
+            password: zod.string().min(4).max(16),
+            email: zod.string().min(4).max(16)
         })
 
         // Ask primitive user
@@ -141,4 +151,5 @@ export default class User {
 export interface PrimitiveUser {
     id: number
     username: string
+    email: string
 }

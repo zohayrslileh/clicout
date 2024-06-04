@@ -61,6 +61,7 @@ export default function () {
         {error && !issues.length ? error.view() : undefined}
 
         <Form onSubmit={register.execute}>
+            <TextInput placeholder={lang("Email")} issue={issues.has("email")} type="text" value={value.email || ""} onChange={value => update.email(value || undefined)} />
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
             <Button disabled={register.pending}><Lang>Create Account</Lang></Button>
@@ -76,6 +77,12 @@ export default function () {
  * 
  */
 class LoginForm {
+
+    /**
+     * Email
+     * 
+     */
+    email: string | undefined
 
     /**
      * Username

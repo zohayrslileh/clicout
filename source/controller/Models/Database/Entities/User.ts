@@ -21,6 +21,13 @@ export default class User extends BaseEntity {
     declare public username: string
 
     /**
+     * Email
+     * 
+     */
+    @Column({ type: "varchar", nullable: false, unique: true })
+    declare public email: string
+
+    /**
      * Password
      * 
      */
