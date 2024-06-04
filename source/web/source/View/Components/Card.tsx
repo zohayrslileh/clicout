@@ -37,7 +37,7 @@ const Container = styled.div`
     backdrop-filter: blur(5px);
     position: relative;
     overflow: hidden;
-    animation: ${keyframes`
+    animation: ${() => keyframes`
 
         0% {
             max-height: 0;
