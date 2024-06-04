@@ -1,3 +1,4 @@
+import { PrimitiveSubscription } from "./Subscription"
 import Authorization from "@/Models/Authorization"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
@@ -163,29 +164,4 @@ export interface PrimitiveUser {
     id: number
     username: string
     email: string
-}
-
-/*
-|-----------------------------
-|  Primitive Subscription
-|-----------------------------
-|
-| 
-*/
-export interface PrimitiveSubscription {
-    id: number
-    expireAt: string
-    plan: PrimitivePlan
-}
-
-/*
-|-----------------------------
-|  Primitive Plan
-|-----------------------------
-|
-| 
-*/
-export interface PrimitivePlan {
-    id: number
-    name: string
 }
