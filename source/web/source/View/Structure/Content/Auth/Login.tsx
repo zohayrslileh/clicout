@@ -101,7 +101,6 @@ const Container = styled(Card)`
     padding: 20px;
     display: grid;
     gap: 10px;
-    text-align: center;
 
     > #logo {
         margin-inline: auto;
@@ -116,5 +115,6 @@ const Container = styled(Card)`
 
     > a {
         margin-top: 10px;
+        text-align: center;
     }
 `
