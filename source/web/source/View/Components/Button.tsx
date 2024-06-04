@@ -1,3 +1,4 @@
+import { ScaleLoader } from "react-spinners"
 import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 import React from "react"
@@ -15,7 +16,7 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.B
      */
     return <Container {...props}>
         <div className="ship"></div>
-        {children}
+        {props.disabled ? <ScaleLoader color={Appearance.theme.schema.CONTENT_COLOR.rgba()} height={12} width={1.8} /> : children}
     </Container>
 }
 
