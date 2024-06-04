@@ -76,12 +76,6 @@ const Container = styled.div`
             `} ease 300ms;
         }
     }
-
-    .disable {
-        pointer-events: none;
-        user-select: none;
-        opacity: 0.4;
-    }
 `
 
 export default Object.assign(Appearance, { Container, schema })

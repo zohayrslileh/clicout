@@ -26,4 +26,14 @@ export default styled.select`
     &:focus {
         border-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
     }
+
+    > option {
+        background-color: #0a1216;
+        border-radius: 0;
+        border: none;
+
+        &::selection {
+            background-color: #0a1216;
+        }
+    }
 `
