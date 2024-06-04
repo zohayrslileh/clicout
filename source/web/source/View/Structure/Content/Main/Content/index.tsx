@@ -5,6 +5,7 @@ import Card from "@/View/Components/Card"
 import Exception from "@/View/Exception"
 import styled from "@emotion/styled"
 import { Suspense } from "react"
+import Home from "./Home"
 
 /**
  * Content
@@ -13,14 +14,14 @@ import { Suspense } from "react"
  */
 export default function () {
 
-    return <Container className="animation">
+    return <Container>
 
         <Exception>
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
                 <Routes>
-                    <Route index element={<h1>Hello</h1>} />
+                    <Route index element={<Home />} />
                 </Routes>
 
             </Suspense>
