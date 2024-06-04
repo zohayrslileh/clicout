@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Free",
+        "price": 0
+    },
+    {
+        "name": "Basic",
+        "price": 59
+    },
+    {
+        "name": "Pro",
+        "price": 159
+    }
+]
