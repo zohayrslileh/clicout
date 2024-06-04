@@ -4,7 +4,7 @@
  * 
  * @returns
  */
-export default function ({ value, onChange, ...props }: Props) {
+export default function ({ value, onChange, issue, ...props }: Props) {
 
     return <input {...props} value={value} onChange={event => onChange(event.target.value)} />
 }
