@@ -16,6 +16,6 @@ export default class ViewException extends Error {
      */
     public view() {
 
-        return <ErrorCard message={`${this.constructor.name}: ${this.message}`} />
+        return <ErrorCard message={this.message} />
     }
 }
