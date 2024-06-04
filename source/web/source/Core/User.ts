@@ -1,3 +1,4 @@
+import Authorization from "@/Models/Authorization"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
 import { createContext } from "react"
@@ -80,14 +81,15 @@ export default class User {
             password: zod.string().min(4).max(16)
         })
 
-        // Ask primitive user
-        const primitiveUser = await request<PrimitiveUser>({
+        // Ask authorization
+        const authorization = await request<string>({
             method: "POST",
             url: "/auth/login",
             data: schema.parse(data)
         })
 
-        return new this(primitiveUser)
+        // Set authorization
+        Authorization.value = authorization
     }
 
     /**
