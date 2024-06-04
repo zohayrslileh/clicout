@@ -8,6 +8,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
+        <h1>Upgrade</h1>
     </Container>
 }
 
