@@ -57,7 +57,7 @@ export default function () {
 
         <Logo width={200} id="logo" />
 
-        {error && !issues ? error.view() : undefined}
+        {error && !issues.length ? error.view() : undefined}
 
         <Form onSubmit={login.execute}>
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
