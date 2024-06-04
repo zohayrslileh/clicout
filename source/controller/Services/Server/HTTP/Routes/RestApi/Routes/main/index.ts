@@ -40,7 +40,7 @@ export default Router.create<Environment>(function (main) {
         // Subscription
         const subscription = await context.var.user.subscription()
 
-        context.json(subscription)
+        return context.json(subscription)
     })
 })
 
