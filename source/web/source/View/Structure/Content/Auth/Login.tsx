@@ -1,5 +1,4 @@
 import TextInput from "@/View/Components/TextInput"
-import ErrorCard from "@/View/Components/ErrorCard"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
 import Button from "@/View/Components/Button"
@@ -49,7 +48,7 @@ export default function () {
 
         <Logo width={200} id="logo" />
 
-        {error ? <ErrorCard message={error.message} /> : undefined}
+        {error ? error.view() : undefined}
 
         <Form onSubmit={login.execute}>
             <TextInput placeholder={lang("Username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
