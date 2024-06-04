@@ -15,5 +15,5 @@ export default function () {
      */
     const nextLanguage = languages.find(language => language !== Language.value) || languages[0]
 
-    return <LinkButton onClick={() => Language.value = nextLanguage}>{nextLanguage.name}</LinkButton>
+    return <LinkButton to={""} onClick={() => Language.value = nextLanguage}>{nextLanguage.name}</LinkButton>
 }

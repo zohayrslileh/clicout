@@ -1,4 +1,5 @@
 import UnprocessableEntity from "@/View/Exception/Exceptions/UnprocessableEntity"
+import LinkButton from "@/View/Components/LinkButton"
 import TextInput from "@/View/Components/TextInput"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
@@ -64,6 +65,8 @@ export default function () {
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
             <Button disabled={login.pending}><Lang>Login</Lang></Button>
         </Form>
+        
+        <LinkButton to="register"><Lang>Create Account</Lang></LinkButton>
 
     </Container>
 }
@@ -98,6 +101,7 @@ const Container = styled(Card)`
     padding: 20px;
     display: grid;
     gap: 10px;
+    text-align: center;
 
     > #logo {
         margin-inline: auto;
@@ -108,5 +112,9 @@ const Container = styled(Card)`
     > form {
         display: grid;
         gap: 10px;
+    }
+
+    > a {
+        margin-top: 10px;
     }
 `
