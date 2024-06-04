@@ -10,7 +10,7 @@ import Menu from "./Menu"
  */
 export default function () {
 
-    return <Container className="animation">
+    return <Container>
         <Logo width={150} id="logo" />
         <Menu />
     </Container>

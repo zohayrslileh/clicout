@@ -10,7 +10,7 @@ import Navigator from "./Navigator"
 export default function () {
 
 
-    return <Container className="animation">
+    return <Container>
         <Navigator />
     </Container>
 }
