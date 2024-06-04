@@ -8,7 +8,7 @@ import React from "react"
  * 
  * @returns 
  */
-export default function ({ children, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
+export default function ({ children, ...props }: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) {
 
     /**
      * Container
@@ -59,5 +59,11 @@ const Container = styled(PromiseButton)`
 
     &:focus {
         border-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
+    }
+
+    &:disabled {
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.7;
     }
 `

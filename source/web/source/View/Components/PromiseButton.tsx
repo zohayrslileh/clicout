@@ -7,7 +7,7 @@ import Appearance from "@/View/Appearance"
  * 
  * @returns
  */
-export default function ({ onClick, children, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
+export default function ({ onClick, children, ...props }: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) {
 
     /**
      * Loading state
@@ -41,6 +41,6 @@ export default function ({ onClick, children, ...props }: React.HTMLAttributes<H
     }, [onClick, loading])
 
     return <button {...props} onClick={clickHandler} className={`${props.className} ${loading ? "disable" : undefined}`}>
-        {loading ? <ScaleLoader color={Appearance.theme.schema.CONTENT_COLOR.rgba()} height={12} width={1.8} /> : children}
+        {loading || props.disabled ? <ScaleLoader color={Appearance.theme.schema.CONTENT_COLOR.rgba()} height={12} width={1.8} /> : children}
     </button>
 }
