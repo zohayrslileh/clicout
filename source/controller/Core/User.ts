@@ -1,3 +1,4 @@
+import SubscriptionEntity from "@/Models/Database/Entities/Subscription"
 import UnauthorizedException from "./Exception/Unauthorized"
 import UserEntity from "@/Models/Database/Entities/User"
 import { Signer } from "@/Models/Encryptor"
@@ -141,6 +142,19 @@ export default class User {
     public createAuthorization(): string {
 
         return Signer.sign({ id: this.id })
+    }
+
+    /**
+     * Subscription method
+     * 
+     * @returns
+     */
+    public async subscription() {
+
+        return await SubscriptionEntity.findOneOrFail({
+            where: { user: { id: this.id } },
+            relations: { plan: true }
+        })
     }
 }
 
