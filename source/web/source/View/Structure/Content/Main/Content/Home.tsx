@@ -7,8 +7,8 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container className="animation">
-
+    return <Container>
+        <h1>Home</h1>
     </Container>
 }
 
