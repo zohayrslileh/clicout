@@ -1,6 +1,5 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs"
+import { existsSync, readFileSync, writeFileSync } from "fs"
 import updater, { Reference, Updater } from "./Updater"
-import { dirname } from "path"
 import format from "./Format"
 
 /*
@@ -79,30 +78,11 @@ export default class Json<Template extends object> {
     private parse(): any {
 
         // Check file exists 
-        if (!existsSync(this.path)) this.create()
+        if (!existsSync(this.path)) throw new Error("This file was not found")
 
         // Get result from storage
         const result = readFileSync(this.path, { encoding: "utf-8" })
 
         return JSON.parse(result || "{}")
     }
-
-    /**
-     * Create method
-     * 
-     * @returns
-     */
-    private create(): void {
-
-        // Check file if not exist
-        if (!existsSync(this.path)) {
-
-            // Make dir
-            mkdirSync(dirname(this.path), { recursive: true })
-
-            // Make json file
-            writeFileSync(this.path, "{}")
-        }
-    }
-
 }
