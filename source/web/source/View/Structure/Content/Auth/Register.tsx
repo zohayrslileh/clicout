@@ -52,7 +52,7 @@ export default function () {
     const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [register.exception])
 
     // Solve status
-    if (register.solve) return <Navigate to=".." />
+    if (register.solve) return <Navigate to="/main" />
 
     return <Container>
 
@@ -63,7 +63,7 @@ export default function () {
         <Form onSubmit={register.execute}>
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
-            <Button disabled={register.pending}><Lang>Create</Lang></Button>
+            <Button disabled={register.pending}><Lang>Create Account</Lang></Button>
         </Form>
 
         <LinkButton to=".."><Lang>Login</Lang></LinkButton>

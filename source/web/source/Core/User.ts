@@ -59,11 +59,14 @@ export default class User {
         })
 
         // Ask primitive user
-        const primitiveUser = await request<PrimitiveUser>({
+        const [primitiveUser, authorization] = await request<[PrimitiveUser, string]>({
             method: "POST",
             url: "/auth/register",
             data: schema.parse(data)
         })
+
+        // Set authorization
+        Authorization.value = authorization
 
         return new this(primitiveUser)
     }

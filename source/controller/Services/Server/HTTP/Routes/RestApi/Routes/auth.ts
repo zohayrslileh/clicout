@@ -31,7 +31,7 @@ export default Router.create<Environment>(function (auth) {
         // Create user
         const user = await User.create(await context.req.json())
 
-        return context.json(user)
+        return context.json([user, user.createAuthorization()])
     })
 })
 

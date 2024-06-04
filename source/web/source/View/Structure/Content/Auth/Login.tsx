@@ -52,7 +52,7 @@ export default function () {
     const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [login.exception])
 
     // Solve status
-    if (login.solve) return <Navigate to="/" />
+    if (login.solve) return <Navigate to="/main" />
 
     return <Container>
 
