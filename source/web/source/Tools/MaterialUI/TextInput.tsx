@@ -15,5 +15,6 @@ export default function ({ value, onChange, ...props }: Props) {
  */
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"> {
     value: string
+    issue?: boolean
     onChange: (value: string) => unknown
 }

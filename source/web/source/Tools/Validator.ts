@@ -68,6 +68,19 @@ export function createIssues(issues: ZodIssue[], basePath?: string | number): Is
             const fullPath = `${basePath ? (basePath + "/" + paths.join("/")) : paths.join("/")}`
 
             return issues.filter(issue => issue.path.join("/") === fullPath)
+        },
+
+        /**
+         * Has method
+         *  
+         * @returns 
+         */
+        has: (...paths: (string | number)[]) => {
+
+            // Define full path
+            const fullPath = `${basePath ? (basePath + "/" + paths.join("/")) : paths.join("/")}`
+
+            return !!createIssues(issues.filter(issue => issue.path.join("/").startsWith(fullPath)), fullPath).length
         }
 
     })
@@ -80,4 +93,5 @@ export function createIssues(issues: ZodIssue[], basePath?: string | number): Is
 export type Issues = ZodIssue[] & {
     path: (...paths: (string | number)[]) => ZodIssue[] & Issues
     self: (...paths: (string | number)[]) => ZodIssue[]
+    has: (...paths: (string | number)[]) => boolean
 }

@@ -24,7 +24,7 @@ const Container = styled.ul`
     list-style-type: none;
     font-size: 12px;
     font-weight: bold;
-    color: rgb(var(--color-red));
+    color: rgb(179 0 0 / 70%);
     border-radius: 5px;
     padding: 1px;
 `

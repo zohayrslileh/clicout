@@ -1,5 +1,6 @@
 import TextInput from "@/Tools/MaterialUI/TextInput"
 import Appearance from "@/View/Appearance"
+import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 
 /**
@@ -27,4 +28,8 @@ export default styled(TextInput)`
     &:focus {
         border-color: ${() => Appearance.schema.COLOR_YELLOW.rgba(0.7)};
     }
+
+    ${props => props.issue && css`
+        box-shadow: 0 0 20px inset rgb(179 0 0 / 45%);
+    `}
 `
