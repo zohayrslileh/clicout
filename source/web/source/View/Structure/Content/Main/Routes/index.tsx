@@ -24,7 +24,7 @@ export default function () {
      * Subscription promise
      * 
      */
-    const subscription = usePromise(async () => await user.subscription())
+    const subscription = usePromise(async () => await user.subscription(), [])
 
     // Pending status
     if (subscription.pending) return <Throw exception={new PendingException} />
