@@ -34,25 +34,25 @@ export default function () {
     const { value, update } = useForm(() => new LoginForm)
 
     /**
-     * Login
+     * Register
      * 
      */
-    const login = usePromise(async () => await User.login(value))
+    const register = usePromise(async () => await User.create(value))
 
     /**
      * Error
      * 
      */
-    const error = login.exception ? compiler(login.exception.current) : undefined
+    const error = register.exception ? compiler(register.exception.current) : undefined
 
     /**
      * Issues
      * 
      */
-    const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [login.exception])
+    const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [register.exception])
 
     // Solve status
-    if (login.solve) return <Navigate to="/" />
+    if (register.solve) return <Navigate to=".." />
 
     return <Container>
 
@@ -60,12 +60,12 @@ export default function () {
 
         {error && !issues.length ? error.view() : undefined}
 
-        <Form onSubmit={login.execute}>
+        <Form onSubmit={register.execute}>
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
-            <Button disabled={login.pending}><Lang>Login</Lang></Button>
+            <Button disabled={register.pending}><Lang>Create</Lang></Button>
         </Form>
-        
+
         <LinkButton to=".."><Lang>Login</Lang></LinkButton>
 
     </Container>
