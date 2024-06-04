@@ -7,16 +7,24 @@ import styled from "@emotion/styled"
  * 
  */
 export default styled(TextInput)`
-    color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
-    background-color: ${() => Appearance.theme.schema.BACKGROUND_PRIMARY.rgba()};
-    font-family: ${() => Appearance.schema.FONT_MEDIUM};
-    border-radius: 7px;
-    padding: 16px 16px;
-    font-size: 1em;
-    border: none;
+    box-shadow: 0 0 80px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.03)};
+    border: 1px solid ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
+    color: ${Appearance.schema.COLOR_WHITE.rgba()};
+    font-family: ${Appearance.schema.FONT_MEDIUM};
+    border-color: 1px solid transparent;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
     outline: none;
+    padding: 15px;
 
-    &::placeholder {
-        opacity: 0.5;
+    &:hover, &:active, &:focus {
+        box-shadow: 0 0 30px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+    }
+
+    &:focus {
+        border-color: ${Appearance.schema.COLOR_YELLOW.rgba(0.7)};
     }
 `

@@ -30,10 +30,12 @@ const Container = styled(PromiseButton)`
     border: 1px solid ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
     color: ${Appearance.schema.COLOR_WHITE.rgba()};
     font-family: ${Appearance.schema.FONT_MEDIUM};
+    border-color: 1px solid transparent;
     backdrop-filter: blur(5px);
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    outline: none;
     padding: 15px;
 
     > .ship {
@@ -46,11 +48,16 @@ const Container = styled(PromiseButton)`
         transform: rotate(45deg);
     }
 
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
         box-shadow: 0 0 30px inset ${Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+        color: ${Appearance.schema.COLOR_YELLOW.rgba(0.7)};
 
         > .ship {
             background-color: ${Appearance.schema.COLOR_YELLOW.rgba(1)};
         }
+    }
+
+    &:focus {
+        border-color: ${Appearance.schema.COLOR_YELLOW.rgba(0.7)};
     }
 `
