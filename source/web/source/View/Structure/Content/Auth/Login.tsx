@@ -1,13 +1,17 @@
+import UnprocessableEntity from "@/View/Exception/Exceptions/UnprocessableEntity"
 import TextInput from "@/View/Components/TextInput"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
+import { createIssues } from "@/Tools/Validator"
 import Button from "@/View/Components/Button"
 import useForm, { Form } from "@/Tools/Form"
 import { Navigate } from "react-router-dom"
+import Issue from "@/View/Components/Issue"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
+import { useMemo } from "react"
 import User from "@/Core/User"
 
 /**
@@ -41,6 +45,12 @@ export default function () {
      */
     const error = login.exception ? compiler(login.exception.current) : undefined
 
+    /**
+     * Issues
+     * 
+     */
+    const issues = useMemo(() => login.exception && login.exception.current instanceof UnprocessableEntity ? createIssues(login.exception.current.issues) : undefined, [login.exception])
+
     // Solve status
     if (login.solve) return <Navigate to="/" />
 
@@ -48,10 +58,12 @@ export default function () {
 
         <Logo width={200} id="logo" />
 
-        {error ? error.view() : undefined}
+        {error && !issues ? error.view() : undefined}
 
         <Form onSubmit={login.execute}>
+            {issues ? <Issue issues={issues.self("username")} /> : undefined}
             <TextInput placeholder={lang("Username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
+            {issues ? <Issue issues={issues.self("password")} /> : undefined}
             <TextInput placeholder={lang("Password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
             <Button disabled={login.pending}><Lang>Login</Lang></Button>
         </Form>
