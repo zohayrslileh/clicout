@@ -1,5 +1,5 @@
+import { Column, Entity, ManyToOne } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
-import { Entity, ManyToOne } from "typeorm"
 import Country from "./Country"
 
 /*
@@ -11,6 +11,27 @@ import Country from "./Country"
 */
 @Entity()
 export default class City extends BaseEntity {
+
+    /**
+     * Name
+     * 
+     */
+    @Column({ type: "varchar", nullable: false })
+    declare public name: string
+
+    /**
+     * Latitude
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public latitude: number
+
+    /**
+     * Longitude
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public longitude: number
 
     /**
      * Country

@@ -1,5 +1,5 @@
+import { Column, Entity, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
-import { Entity, OneToMany } from "typeorm"
 import City from "./City"
 
 /*
@@ -11,6 +11,20 @@ import City from "./City"
 */
 @Entity()
 export default class Country extends BaseEntity {
+
+    /**
+     * Code
+     * 
+     */
+    @Column({ type: "varchar", nullable: false, unique: true })
+    declare public code: string
+
+    /**
+     * Name
+     * 
+     */
+    @Column({ type: "varchar", nullable: false })
+    declare public name: string
 
     /**
      * Cities
