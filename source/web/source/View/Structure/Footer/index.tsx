@@ -23,12 +23,16 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    justify-content: space-between;
-    align-items: flex-end;
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 170px 1fr 170px;
+    align-items: center;
 
     > button {
         text-transform: uppercase;
+    }
+
+    > *:last-child {
+        display: grid;
+        justify-items: end;
     }
 `

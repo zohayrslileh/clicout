@@ -26,6 +26,7 @@ const Container = styled(Card)`
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
+    margin: auto;
     gap: 10px;
 
     > .line {
