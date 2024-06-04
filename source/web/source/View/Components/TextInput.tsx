@@ -17,7 +17,6 @@ export default styled(TextInput)`
     backdrop-filter: blur(5px);
     position: relative;
     overflow: hidden;
-    cursor: pointer;
     outline: none;
     padding: 15px;
 
