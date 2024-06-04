@@ -29,7 +29,7 @@ const Container = styled(Card)`
     gap: 10px;
 
     > .line {
-        opacity: 0.1;
+        opacity: 0.2;
     }
 
     color: rgb(179 0 0 / 90%);
