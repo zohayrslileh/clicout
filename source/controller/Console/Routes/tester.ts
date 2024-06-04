@@ -1,3 +1,5 @@
+import Subscription from "@/Models/Database/Entities/Subscription"
+import Plan from "@/Models/Database/Entities/Plan"
 import User from "@/Models/Database/Entities/User"
 
 /*
@@ -9,9 +11,13 @@ import User from "@/Models/Database/Entities/User"
 */
 export default async function () {
 
-    const user = User.findOneByOrFail({ id: 1 })
+    const user = await User.findOneByOrFail({ id: 1 })
 
-    console.log(user)
+    const plan = await Plan.findOneByOrFail({ id: 1 })
+
+    const subscription = await Subscription.findOneByOrFail({ id: 1 })
+
+    console.log(user, plan, subscription)
 
     console.log("The test completed successfully 🧪 ")
 }

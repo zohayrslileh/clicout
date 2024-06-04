@@ -33,5 +33,5 @@ export default class Subscription extends BaseEntity {
      * 
      */
     @Column({ type: "date", nullable: false })
-    declare public readonly expireAt: Date
+    declare public expireAt: Date
 }
