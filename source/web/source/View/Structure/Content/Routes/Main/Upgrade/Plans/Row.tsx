@@ -32,8 +32,8 @@ export default function ({ plan }: Props) {
 
     return <Container>
         {plan.name}: {plan.price}$
-        {subscribe.solve && typeof subscribe.solve.current !== "string" ? <JsonView json={subscribe.solve.current} /> : undefined}
         <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
+        {subscribe.solve && typeof subscribe.solve.current === "object" && subscribe.solve.current ? <JsonView json={subscribe.solve.current} /> : undefined}
     </Container>
 }
 
