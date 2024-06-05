@@ -10,7 +10,7 @@ import Row from "./Row"
 export default function ({ plans }: Props) {
 
     return <Container>
-        {plans.map(plan => <Row plan={plan} />)}
+        {plans.map(plan => <Row key={plan.id} plan={plan} />)}
     </Container>
 }
 

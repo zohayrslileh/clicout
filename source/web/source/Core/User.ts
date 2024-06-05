@@ -173,7 +173,13 @@ export default class User {
      */
     public async subscribe(plan: Plan, paymentMethod: string) {
 
-        console.log(this, plan, paymentMethod)
+        // Ask subscription
+        const subscription = await request<PrimitiveSubscription | string>({
+            url: `/main/plan/${plan.id}/subscribe/${paymentMethod}`,
+            method: "POST"
+        })
+
+        return typeof subscription === "string" ? subscription : new Subscription(subscription)
     }
 }
 
