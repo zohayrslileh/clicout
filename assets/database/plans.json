@@ -1,14 +1,26 @@
 [
     {
         "name": "Free",
-        "price": 0
+        "price": 0,
+        "threads": 1,
+        "enableProxies": false,
+        "customizeCities": false,
+        "customizeDevices": false
     },
     {
         "name": "Basic",
-        "price": 59
+        "price": 59,
+        "threads": 2,
+        "enableProxies": false,
+        "customizeCities": true,
+        "customizeDevices": true
     },
     {
         "name": "Pro",
-        "price": 159
+        "price": 159,
+        "threads": 5,
+        "enableProxies": true,
+        "customizeCities": true,
+        "customizeDevices": true
     }
 ]
