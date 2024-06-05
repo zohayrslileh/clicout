@@ -116,10 +116,11 @@ const Container = styled(Card)`
     > #name {
         color: var(--unique-color);
         text-shadow: 0 0 30px var(--unique-color);
-        font-size: 25px;
+        font-size: 35px;
         font-family: ${() => Appearance.schema.FONT_BOLD};
         opacity: 0.5;
         margin: 0;
+        margin-bottom: 10px;
     }
 
     > #price {
