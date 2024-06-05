@@ -36,5 +36,5 @@ export default function ({ onSuccess }: Props) {
  * 
  */
 interface Props {
-    onSuccess: Update<User>
+    onSuccess: Update<User | undefined>
 }

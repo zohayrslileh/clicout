@@ -8,10 +8,10 @@ import Button from "@/View/Components/Button"
 import useForm, { Form } from "@/Tools/Form"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
+import { Fragment, useMemo } from "react"
 import usePromise from "@/Tools/Promise"
 import { Update } from "@/Tools/Updater"
 import styled from "@emotion/styled"
-import { Fragment, useMemo } from "react"
 import User from "@/Core/User"
 
 /**
@@ -37,7 +37,7 @@ export default function ({ onSuccess }: Props) {
      * Login
      * 
      */
-    const login = usePromise(async () => await User.login(value))
+    const login = usePromise(async () => onSuccess(await User.login(value)))
 
     /**
      * Error
@@ -52,7 +52,7 @@ export default function ({ onSuccess }: Props) {
     const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [login.exception])
 
     // Solve status
-    if (login.solve) return onSuccess(login.solve.current) || <Fragment />
+    if (login.solve) return <Fragment />
 
     return <Container>
 
@@ -95,7 +95,7 @@ class LoginForm {
  * 
  */
 interface Props {
-    onSuccess: Update<User>
+    onSuccess: Update<User | undefined>
 }
 
 /**
