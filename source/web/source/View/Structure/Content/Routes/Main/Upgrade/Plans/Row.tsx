@@ -120,7 +120,7 @@ const Container = styled(Card)`
         font-family: ${() => Appearance.schema.FONT_BOLD};
         opacity: 0.5;
         margin: 0;
-        margin-bottom: 10px;
+        margin-block: 10px;
     }
 
     > #price {
