@@ -35,6 +35,30 @@ export default class Plan {
     public price: number
 
     /**
+     * Threads
+     * 
+     */
+    public threads: number
+
+    /**
+     * Enable proxies
+     * 
+     */
+    public enableProxies: boolean
+
+    /**
+     * Customize cities
+     * 
+     */
+    public customizeCities: boolean
+
+    /**
+     * Customize devices
+     * 
+     */
+    public customizeDevices: boolean
+
+    /**
      * Constructor methodd
      * 
      */
@@ -48,6 +72,18 @@ export default class Plan {
 
         // Set price
         this.price = primitivePlan.price
+
+        // Set threads
+        this.threads = primitivePlan.threads
+
+        // Set enable proxies
+        this.enableProxies = primitivePlan.enableProxies
+
+        // Set customize cities
+        this.customizeCities = primitivePlan.customizeCities
+
+        // Set customize devices
+        this.customizeDevices = primitivePlan.customizeDevices
     }
 
     /**
@@ -94,4 +130,8 @@ export interface PrimitivePlan {
     id: number
     name: string
     price: number
+    threads: number
+    enableProxies: boolean
+    customizeCities: boolean
+    customizeDevices: boolean
 }
