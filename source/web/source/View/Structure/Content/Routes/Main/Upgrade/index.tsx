@@ -6,6 +6,7 @@ import Exception from "@/View/Exception"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
+import Payment from "./Payment"
 import User from "@/Core/User"
 import Plans from "./Plans"
 
@@ -50,6 +51,7 @@ export default function () {
             <Exception>
                 <Routes>
                     <Route index element={<Plans />} />
+                    <Route path=":plan" element={<Payment />} />
                 </Routes>
             </Exception>
         </Grid>
