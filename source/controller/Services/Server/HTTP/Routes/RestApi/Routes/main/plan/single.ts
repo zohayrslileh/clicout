@@ -24,6 +24,12 @@ export default Router.create<Environment>(function (plan) {
     })
 
     /**
+     * Find
+     * 
+     */
+    plan.get("/", async context => context.json(context.var.plan))
+
+    /**
      * Subscribe
      * 
      */
