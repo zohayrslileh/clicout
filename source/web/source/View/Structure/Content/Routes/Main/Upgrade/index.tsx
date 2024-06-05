@@ -1,4 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import LinkButton from "@/View/Components/LinkButton"
 import Appearance from "@/View/Appearance"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -37,6 +38,7 @@ export default function () {
         <h1><Lang>Welcome</Lang>, <p>{user.username}</p></h1>
         <p>Please choose the plan that suits you.</p>
         <Plans plans={plans.solve} />
+        <LinkButton to=""><Lang>Logout</Lang></LinkButton>
     </Container>
 }
 

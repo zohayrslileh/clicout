@@ -6,6 +6,7 @@ import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
 import User from "@/Core/User"
+import Appearance from "@/View/Appearance"
 
 /**
  * Row
@@ -27,7 +28,7 @@ export default function ({ plan }: Props) {
      */
     const subscribe = usePromise(async () => await user.subscribe(plan))
 
-    return <Container>
+    return <Container className={`plan-${plan.id}`}>
         {plan.name}: {plan.price}$
         <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
         {subscribe.solve ? <JsonView json={subscribe.solve.current} /> : undefined}
@@ -48,4 +49,24 @@ interface Props {
  */
 const Container = styled(Card)`
     width: 300px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 20px;
+    box-sizing: border-box;
+
+    &.plan-1, &.plan-3 {
+        transform: scale(0.97);
+
+        &:hover {
+            transform: scale(1);
+        }
+    }
+
+    &.plan-2 {
+        box-shadow: 0 0 10px ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+
+        > .line {
+            background-color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
+        }
+    }
 `

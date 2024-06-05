@@ -31,5 +31,5 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
     margin-inline: auto;
-    margin-top: 10px;
+    margin-block: 10px;
 `
