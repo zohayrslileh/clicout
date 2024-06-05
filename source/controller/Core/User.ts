@@ -171,11 +171,17 @@ export default class User {
         // Validate data
         schema.parse(data)
 
+        // Find user entity
+        const userEntity = await UserEntity.findOneOrFail({
+            relations: { subscription: true },
+            where: { id: this.id }
+        })
+
         // Create subscription entity
-        const subscriptionEntity = new SubscriptionEntity
+        const subscriptionEntity = userEntity.subscription || new SubscriptionEntity
 
         // Set user entity
-        subscriptionEntity.user = await UserEntity.findOneByOrFail({ id: this.id })
+        subscriptionEntity.user = userEntity
 
         // Set plan entity
         subscriptionEntity.plan = await PlanEntity.findOneByOrFail({ id: plan.id })
