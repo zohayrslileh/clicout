@@ -181,7 +181,7 @@ export default class User {
         const subscriptionEntity = userEntity.subscription || new SubscriptionEntity
 
         // Set user entity
-        subscriptionEntity.user = userEntity
+        if (!userEntity.subscription) subscriptionEntity.user = userEntity
 
         // Set plan entity
         subscriptionEntity.plan = await PlanEntity.findOneByOrFail({ id: plan.id })
