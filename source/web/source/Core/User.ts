@@ -176,8 +176,8 @@ export default class User {
         // Ask primitive subscription
         const primitiveSubscription = await request<PrimitiveSubscription>({
             url: `/main/plan/${plan.id}/subscribe`,
-            method: "POST",
-            data: {}
+            data: { paymentMethod: "CRYPTO" },
+            method: "POST"
         })
 
         return new Subscription(primitiveSubscription)
