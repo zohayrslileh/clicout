@@ -109,13 +109,32 @@ export default function usePromise<Solve>(executor: Executor<Solve>, dependencie
     }, [executor])
 
     /**
+     * Safe execute method
+     * 
+     * @returns
+     */
+    const safeExecute: Execute<Solve | undefined> = useCallback(async function () {
+
+        try {
+
+            return await execute()
+        }
+
+        catch {
+
+            return undefined
+        }
+
+    }, [execute])
+
+    /**
      * Layout Effect
      * 
      */
     useLayoutEffect(function () {
 
         // Execute
-        if (dependencies) execute().catch(_ => undefined)
+        if (dependencies) safeExecute()
 
     }, dependencies || [])
 
@@ -155,7 +174,7 @@ export default function usePromise<Solve>(executor: Executor<Solve>, dependencie
      */
     const promise = dependencies ? withDependencies : withoutDependencies
 
-    return { ...promise, execute, dispatch }
+    return { ...promise, execute, safeExecute, dispatch }
 }
 
 /**
@@ -181,6 +200,7 @@ export type Reset = () => void
  * 
  */
 export type PromiseWithDependencies<Solve> = (SolveStatus<Solve> | ExceptionStatus | PendingStatus) & {
+    safeExecute: Execute<Solve | undefined>
     execute: Execute<Solve>
     dispatch: Update<Solve>
 }
@@ -221,6 +241,7 @@ export interface PendingStatus {
  */
 export type PromiseWithoutDependencies<Solve> = {
     exception: Reference<unknown> | undefined
+    safeExecute: Execute<Solve | undefined>
     solve: Reference<Solve> | undefined
     execute: Execute<Solve>
     dispatch: Update<Solve>
