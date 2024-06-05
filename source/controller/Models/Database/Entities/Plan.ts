@@ -27,6 +27,13 @@ export default class Plan extends BaseEntity {
     declare public price: number
 
     /**
+     * Threads
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public threads: number
+
+    /**
      * Subscriptions
      * 
      */
