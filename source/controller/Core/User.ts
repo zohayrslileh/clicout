@@ -1,6 +1,7 @@
 import SubscriptionEntity from "@/Models/Database/Entities/Subscription"
 import UnauthorizedException from "./Exception/Unauthorized"
 import UserEntity from "@/Models/Database/Entities/User"
+import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
 import Plan from "./Plan"
 import zod from "zod"
@@ -160,9 +161,32 @@ export default class User {
      * 
      * @returns
      */
-    public async subscribe(plan: Plan, paymentMethod: string) {
+    public async subscribe(plan: Plan, data: unknown) {
 
-        return [plan, paymentMethod]
+        // Schema
+        const schema = zod.object({
+            paymentMethod: zod.enum(["CRYPTO"])
+        })
+
+        // Validate data
+        schema.parse(data)
+
+        // Create subscription entity
+        const subscriptionEntity = new SubscriptionEntity
+
+        // Set user entity
+        subscriptionEntity.user = await UserEntity.findOneByOrFail({ id: this.id })
+
+        // Set plan entity
+        subscriptionEntity.plan = await PlanEntity.findOneByOrFail({ id: plan.id })
+
+        // Set expire at
+        subscriptionEntity.expireAt = new Date
+
+        // Save
+        await subscriptionEntity.save()
+
+        return subscriptionEntity
     }
 }
 

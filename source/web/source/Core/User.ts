@@ -171,15 +171,16 @@ export default class User {
      * 
      * @returns
      */
-    public async subscribe(plan: Plan, paymentMethod: string) {
+    public async subscribe(plan: Plan) {
 
-        // Ask subscription
-        const subscription = await request<unknown>({
-            url: `/main/plan/${plan.id}/subscribe/${paymentMethod}`,
-            method: "POST"
+        // Ask primitive subscription
+        const primitiveSubscription = await request<PrimitiveSubscription>({
+            url: `/main/plan/${plan.id}/subscribe`,
+            method: "POST",
+            data: {}
         })
 
-        return subscription
+        return new Subscription(primitiveSubscription)
     }
 }
 

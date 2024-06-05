@@ -27,12 +27,9 @@ export default Router.create<Environment>(function (plan) {
      * Subscribe
      * 
      */
-    plan.post("/subscribe/:paymentMethod", async function (context) {
+    plan.post("/subscribe", async function (context) {
 
-        // Payment method
-        const paymentMethod = context.req.param("paymentMethod")
-
-        return context.json(await context.var.user.subscribe(context.var.plan, paymentMethod))
+        return context.json(await context.var.user.subscribe(context.var.plan, await context.req.json()))
     })
 })
 

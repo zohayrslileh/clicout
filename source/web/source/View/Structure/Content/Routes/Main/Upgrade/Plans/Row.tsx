@@ -25,15 +25,12 @@ export default function ({ plan }: Props) {
      * 
      * @returns
      */
-    const subscribe = usePromise(async function () {
-
-        return await user.subscribe(plan, "WITHOUT")
-    })
+    const subscribe = usePromise(async () => await user.subscribe(plan))
 
     return <Container>
         {plan.name}: {plan.price}$
         <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
-        {subscribe.solve && typeof subscribe.solve.current === "object" && subscribe.solve.current ? <JsonView json={subscribe.solve.current} /> : undefined}
+        {subscribe.solve ? <JsonView json={subscribe.solve.current} /> : undefined}
     </Container>
 }
 
