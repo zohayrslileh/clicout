@@ -78,10 +78,6 @@ const Container = styled(Card)`
         --unique-color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
         box-shadow: 0 0 10px ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
 
-        > .line {
-            background-color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
-        }
-
         > #name {
             opacity: 1;
             color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
@@ -90,6 +86,10 @@ const Container = styled(Card)`
 
     &.plan-3 {
         --unique-color: #7355ff;
+    }
+
+    > .line {
+        background-color: var(--unique-color);
     }
 
     > #name {
