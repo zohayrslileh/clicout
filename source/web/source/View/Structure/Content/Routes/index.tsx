@@ -24,7 +24,7 @@ export default function () {
     if (authentication.pending) return <Throw exception={new PendingException} />
 
     // Exception status
-    if (authentication.exception && !authentication.unauthorized) return <Throw exception={authentication.exception.current} />
+    if (authentication.exception) return <Throw exception={authentication.exception.current} />
 
     return <Suspense fallback={<Throw exception={new PendingException} />}>
 

@@ -3,7 +3,6 @@ import Authorization from "@/Models/Authorization"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
-import { AxiosError } from "axios"
 import zod from "zod"
 
 /*
@@ -114,9 +113,9 @@ export default class User {
     public static async authentication() {
 
         // Ask primitive user
-        const primitiveUser = await request<PrimitiveUser>({ url: "/main" })
+        const primitiveUser = await request<PrimitiveUser | undefined>({ url: "/auth" })
 
-        return new this(primitiveUser)
+        return primitiveUser ? new this(primitiveUser) : undefined
     }
 
     /**
@@ -130,15 +129,7 @@ export default class User {
          * Authentication promise
          * 
          */
-        const authentication = usePromise(async () => await this.authentication(), [])
-
-        /**
-         * Unauthorized
-         * 
-         */
-        const unauthorized = authentication.exception && authentication.exception.current instanceof AxiosError && authentication.exception.current.response?.status === 401
-
-        return Object.assign(authentication, { unauthorized })
+        return usePromise(async () => await this.authentication(), [])
     }
 
     /**
