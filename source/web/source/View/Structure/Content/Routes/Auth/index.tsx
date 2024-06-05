@@ -1,4 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
+import { Update } from "@/Tools/Updater"
+import User from "@/Core/User"
 import { lazy } from "react"
 
 const Register = lazy(() => import("./Register"))
@@ -9,7 +11,7 @@ const Login = lazy(() => import("./Login"))
  * 
  * @returns 
  */
-export default function () {
+export default function ({ onSuccess }: Props) {
 
     /**
      * Routes
@@ -21,10 +23,18 @@ export default function () {
         <Route index element={<Navigate to="login" />} />
 
         {/** Login */}
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login onSuccess={onSuccess} />} />
 
         {/** Register */}
         <Route path="register" element={<Register />} />
 
     </Routes>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    onSuccess: Update<User>
 }

@@ -6,12 +6,12 @@ import { Lang, useLang } from "@/Tools/Language"
 import { createIssues } from "@/Tools/Validator"
 import Button from "@/View/Components/Button"
 import useForm, { Form } from "@/Tools/Form"
-import { Navigate } from "react-router-dom"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
+import { Update } from "@/Tools/Updater"
 import styled from "@emotion/styled"
-import { useMemo } from "react"
+import { Fragment, useMemo } from "react"
 import User from "@/Core/User"
 
 /**
@@ -19,7 +19,7 @@ import User from "@/Core/User"
  * 
  * @returns 
  */
-export default function () {
+export default function ({ onSuccess }: Props) {
 
     /**
      * Lang
@@ -52,7 +52,7 @@ export default function () {
     const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [login.exception])
 
     // Solve status
-    if (login.solve) return <Navigate to="/main" />
+    if (login.solve) return onSuccess(login.solve.current) || <Fragment />
 
     return <Container>
 
@@ -88,6 +88,14 @@ class LoginForm {
      * 
      */
     password: string | undefined
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    onSuccess: Update<User>
 }
 
 /**
