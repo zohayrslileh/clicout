@@ -1,3 +1,4 @@
+import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
 
@@ -25,5 +26,6 @@ interface Props {
  * Container
  * 
  */
-const Container = styled.div`
+const Container = styled(Card)`
+    width: 300px;
 `
