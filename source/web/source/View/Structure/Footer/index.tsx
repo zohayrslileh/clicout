@@ -1,9 +1,7 @@
-import Button from "@/View/Components/Button"
-import { CgCoffee } from "react-icons/cg"
-import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Language from "./Language"
 import Version from "./Version"
+import Coffee from "./Coffee"
 
 /**
  * Footer
@@ -13,7 +11,7 @@ import Version from "./Version"
 export default function () {
 
     return <Container>
-        <Button><CgCoffee /><Lang>Buy me a coffee</Lang></Button>
+        <Coffee />
         <Version />
         <Language />
     </Container>
