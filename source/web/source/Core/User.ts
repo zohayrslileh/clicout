@@ -1,8 +1,8 @@
 import { PrimitiveSubscription } from "./Subscription"
 import Authorization from "@/Models/Authorization"
+import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
-import { createContext } from "react"
 import { AxiosError } from "axios"
 import zod from "zod"
 
@@ -139,6 +139,16 @@ export default class User {
         const unauthorized = authentication.exception && authentication.exception.current instanceof AxiosError && authentication.exception.current.response?.status === 401
 
         return Object.assign(authentication, { unauthorized })
+    }
+
+    /**
+     * Context hook
+     * 
+     * @returns
+     */
+    public static useContext() {
+
+        return useContext(this.context)
     }
 
     /**
