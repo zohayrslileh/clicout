@@ -26,12 +26,6 @@ export default Router.create<Environment>(function (main) {
     })
 
     /**
-     * Initialize
-     * 
-     */
-    main.get("/", async context => context.json(context.var.user))
-
-    /**
      * Subscription
      * 
      */

@@ -11,15 +11,36 @@ import User from "@/Core/User"
 export default Router.create<Environment>(function (auth) {
 
     /**
+     * Find
+     * 
+     */
+    auth.get("/", async function (context) {
+
+        try {
+
+            // Get authorization
+            const authorization = context.req.header("Authorization")
+
+            // Authentication
+            return context.json(await User.authentication(authorization))
+        }
+
+        catch {
+
+            return context.json(undefined)
+        }
+    })
+
+    /**
      * Login
      * 
      */
     auth.post("/login", async function (context) {
 
         // Login
-        const authorization = await User.login(await context.req.json())
+        const user = await User.login(await context.req.json())
 
-        return context.json(authorization.createAuthorization())
+        return context.json(user.createAuthorization())
     })
 
     /**
