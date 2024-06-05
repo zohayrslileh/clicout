@@ -31,13 +31,13 @@ export default function () {
         <Routes>
 
             {/** Index */}
-            <Route index element={<Navigate to="/main" />} />
+            <Route index element={<Navigate to="main" />} />
 
             {/** Main */}
-            <Route path="/main/*" element={authentication.solve ? <Main user={authentication.solve} /> : <Navigate to="/auth" />} />
+            <Route path="/main/*" element={authentication.solve ? <Main user={authentication.solve} /> : <Navigate to="auth" />} />
 
             {/** Auth */}
-            <Route path="/auth/*" element={authentication.solve ? <Navigate to="/main" /> : <Auth />} />
+            <Route path="/auth/*" element={authentication.solve ? <Navigate to="main" /> : <Auth />} />
 
         </Routes>
 
