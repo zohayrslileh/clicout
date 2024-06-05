@@ -1,4 +1,6 @@
-import styled from "@emotion/styled"
+import { Navigate, Route, Routes } from "react-router-dom"
+import Dashboard from "./Dashboard"
+import Upgrade from "./Upgrade"
 
 /**
  * Routes
@@ -7,13 +9,8 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
-    </Container>
+    return <Routes>
+        <Route index element={false ? <Dashboard /> : <Navigate to="upgrade" />} />
+        <Route path="upgrade" element={<Upgrade />} />
+    </Routes>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`

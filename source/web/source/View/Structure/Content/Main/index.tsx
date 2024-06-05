@@ -1,7 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Navigate } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
-import styled from "@emotion/styled"
 import User from "@/Core/User"
 import Routes from "./Routes"
 
@@ -28,30 +27,10 @@ export default function () {
     if (authentication.exception) return <Throw exception={authentication.exception.current} />
 
     // Authorized status
-    return <Container>
+    return <User.context.Provider value={authentication.solve}>
 
-        <User.context.Provider value={authentication.solve}>
+        {/** Routes */}
+        <Routes />
 
-            {/** Routes */}
-            <Routes />
-
-        </User.context.Provider>
-
-    </Container>
+    </User.context.Provider>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    display: grid; 
-    grid-template-columns: auto 1fr; 
-    grid-template-rows: auto 1fr; 
-    gap: 10px; 
-    grid-template-areas: 
-        "sidebar navbar"
-        "sidebar content";
-    height: 100%;
-    overflow: hidden;
-`
