@@ -1,10 +1,9 @@
-import JsonView from "@/View/Components/JsonView"
-import styled from "@emotion/styled"
-import { useContext } from "react"
-import User from "@/Core/User"
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import JsonView from "@/View/Components/JsonView"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
+import styled from "@emotion/styled"
+import User from "@/Core/User"
 
 /**
  * Content
@@ -17,7 +16,7 @@ export default function () {
      * User
      * 
      */
-    const user = useContext(User.context)
+    const user = User.useContext()
 
     /**
      * Subscription
