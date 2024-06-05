@@ -67,7 +67,7 @@ export default function () {
             <Button disabled={register.pending}><Lang>Create Account</Lang></Button>
         </Form>
 
-        <LinkButton to=".."><Lang>Login</Lang></LinkButton>
+        <LinkButton to="../login"><Lang>Login</Lang></LinkButton>
 
     </Container>
 }
