@@ -63,7 +63,9 @@ export default function usePromise<Solve>(executor: Executor<Solve>, dependencie
     const dispatch: Update<Solve> = useCallback(function (value) {
 
         // Check solve
-        if (solve) setSolve({ current: update(value, solve.current) })
+        if (!solve) throw new Error("You can't direct update solve before promise resolve")
+
+        setSolve({ current: update(value, solve.current) })
 
     }, [solve])
 
