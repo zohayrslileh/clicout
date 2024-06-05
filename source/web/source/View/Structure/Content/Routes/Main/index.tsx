@@ -36,7 +36,7 @@ export default function ({ user }: Props) {
             <Route index element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
 
             {/** Upgrade */}
-            <Route path="upgrade" element={<Upgrade />} />
+            <Route path="upgrade/*" element={<Upgrade />} />
 
         </Routes>
 

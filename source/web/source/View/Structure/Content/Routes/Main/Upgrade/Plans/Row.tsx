@@ -1,11 +1,10 @@
+import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
-import usePromise from "@/Tools/Promise"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
-import User from "@/Core/User"
 
 /**
  * Row
@@ -15,17 +14,10 @@ import User from "@/Core/User"
 export default function ({ plan }: Props) {
 
     /**
-     * User
+     * Navigate
      * 
      */
-    const user = User.useContext()
-
-    /**
-     * Subscribe promise
-     * 
-     * @returns
-     */
-    const subscribe = usePromise(async () => await user.subscribe(plan))
+    const navigate = useNavigate()
 
     /**
      * True Feature
@@ -55,7 +47,7 @@ export default function ({ plan }: Props) {
             <p className="label"><Lang>Enable proxies</Lang></p>
             <p className="value">{plan.enableProxies ? TrueFeature : FalseFeature}</p>
         </div>
-        <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
+        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
     </Container>
 }
 

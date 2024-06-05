@@ -1,3 +1,6 @@
+import PendingException from "@/View/Exception/Exceptions/Pending"
+import { Throw } from "@/Tools/Exception"
+import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
 import Row from "./Row"
@@ -7,19 +10,23 @@ import Row from "./Row"
  * 
  * @returns 
  */
-export default function ({ plans }: Props) {
+export default function () {
+
+    /**
+     * Plans promise
+     * 
+     */
+    const plans = usePromise(async () => await Plan.find(), [])
+
+    // Pending status
+    if (plans.pending) return <Throw exception={new PendingException} />
+
+    // Exception status
+    if (plans.exception) return <Throw exception={plans.exception.current} />
 
     return <Container>
-        {plans.map(plan => <Row key={plan.id} plan={plan} />)}
+        {plans.solve.map(plan => <Row key={plan.id} plan={plan} />)}
     </Container>
-}
-
-/**
- * Props
- * 
- */
-interface Props {
-    plans: Plan[]
 }
 
 /**
