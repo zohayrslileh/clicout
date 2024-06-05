@@ -1,3 +1,4 @@
+import JsonView from "@/View/Components/JsonView"
 import Button from "@/View/Components/Button"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
@@ -26,13 +27,12 @@ export default function ({ plan }: Props) {
      */
     const subscribe = usePromise(async function () {
 
-        await new Promise(resolve => setTimeout(resolve, 3000))
-
-        await user.subscribe(plan, "WITHOUT")
+        return await user.subscribe(plan, "WITHOUT")
     })
 
     return <Container>
         {plan.name}: {plan.price}$
+        {subscribe.solve && typeof subscribe.solve.current !== "string" ? <JsonView json={subscribe.solve.current} /> : undefined}
         <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
     </Container>
 }
