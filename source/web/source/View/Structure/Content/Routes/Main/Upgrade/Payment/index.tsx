@@ -23,7 +23,7 @@ export default function () {
      * Plan promise
      * 
      */
-    const plan = usePromise(async () => await Plan.findOne(+params.id!), [])
+    const plan = usePromise(async () => await Plan.findOne(+params.plan!), [])
 
     // Pending status
     if (plan.pending) return <Throw exception={new PendingException} />
