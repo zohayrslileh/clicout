@@ -117,6 +117,20 @@ export default class Plan {
         // Initialize plans
         return primitivePlans.map(primitivePlan => new this(primitivePlan))
     }
+
+    /**
+     * Find one method
+     * 
+     * @returns
+     */
+    public static async findOne(id: unknown) {
+
+        // Ask primitive plan
+        const primitivePlan = await request<PrimitivePlan>({ url: `/main/plan/${id}` })
+
+        // Initialize plan
+        return new this(primitivePlan)
+    }
 }
 
 /*
