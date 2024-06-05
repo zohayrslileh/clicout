@@ -29,9 +29,16 @@ export default function () {
     return <Suspense fallback={<Throw exception={new PendingException} />}>
 
         <Routes>
+
+            {/** Index */}
             <Route index element={<Navigate to="/main" />} />
-            <Route path="/main/*" element={authentication.unauthorized ? <Navigate to="/auth" /> : <Main />} />
-            <Route path="/auth/*" element={authentication.unauthorized ? <Auth /> : <Navigate to="/main" />} />
+
+            {/** Main */}
+            <Route path="/main/*" element={authentication.solve ? <Main user={authentication.solve} /> : <Navigate to="/auth" />} />
+
+            {/** Auth */}
+            <Route path="/auth/*" element={authentication.solve ? <Navigate to="/main" /> : <Auth />} />
+
         </Routes>
 
     </Suspense>

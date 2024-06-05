@@ -1,6 +1,3 @@
-import PendingException from "@/View/Exception/Exceptions/Pending"
-import { Navigate } from "react-router-dom"
-import { Throw } from "@/Tools/Exception"
 import User from "@/Core/User"
 import Routes from "./Routes"
 
@@ -9,28 +6,24 @@ import Routes from "./Routes"
  * 
  * @returns 
  */
-export default function () {
+export default function ({ user }: Props) {
 
     /**
-     * Authentication
+     * User provider
      * 
      */
-    const authentication = User.useAuthentication()
-
-    // Pending status
-    if (authentication.pending) return <Throw exception={new PendingException} />
-
-    // Unauthorized status
-    if (authentication.unauthorized) return <Navigate to="/auth" />
-
-    // Exception status
-    if (authentication.exception) return <Throw exception={authentication.exception.current} />
-
-    // Authorized status
-    return <User.context.Provider value={authentication.solve}>
+    return <User.context.Provider value={user}>
 
         {/** Routes */}
         <Routes />
 
     </User.context.Provider>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    user: User
 }
