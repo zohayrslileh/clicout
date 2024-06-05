@@ -27,6 +27,18 @@ export default function ({ plan }: Props) {
      */
     const subscribe = usePromise(async () => await user.subscribe(plan))
 
+    /**
+     * True Feature
+     * 
+     */
+    const TrueFeature = <b style={{ color: "#5fce5f" }}>✓</b>
+
+    /**
+     * False Feature
+     * 
+     */
+    const FalseFeature = <b style={{ color: "#ee3d3d" }}>✗</b>
+
     return <Container className={`plan-${plan.id}`}>
         <p id="name">{plan.name}</p>
         <p id="price">
@@ -36,12 +48,12 @@ export default function ({ plan }: Props) {
         <div id="features">
             <p className="label"><Lang>Threads</Lang></p>
             <p className="value">{plan.threads}</p>
-            <p className="label"><Lang>Enable proxies</Lang></p>
-            <p className="value">{plan.enableProxies ? "✓" : "✗"}</p>
             <p className="label"><Lang>Customize cities</Lang></p>
-            <p className="value">{plan.customizeCities ? "✓" : "✗"}</p>
+            <p className="value">{plan.customizeCities ? TrueFeature : FalseFeature}</p>
             <p className="label"><Lang>Customize devices</Lang></p>
-            <p className="value">{plan.customizeDevices ? "✓" : "✗"}</p>
+            <p className="value">{plan.customizeDevices ? TrueFeature : FalseFeature}</p>
+            <p className="label"><Lang>Enable proxies</Lang></p>
+            <p className="value">{plan.enableProxies ? TrueFeature : FalseFeature}</p>
         </div>
         <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
     </Container>
