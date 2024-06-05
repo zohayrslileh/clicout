@@ -1,4 +1,4 @@
-import { PrimitiveSubscription } from "./Subscription"
+import Subscription, { PrimitiveSubscription } from "./Subscription"
 import Authorization from "@/Models/Authorization"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
@@ -159,7 +159,9 @@ export default class User {
     public async subscription() {
 
         // Ask primitive subscription
-        return await request<PrimitiveSubscription | null>({ url: "/main/subscription" })
+        const primitiveSubscription = await request<PrimitiveSubscription | null>({ url: "/main/subscription" })
+
+        return primitiveSubscription ? new Subscription(primitiveSubscription) : undefined
     }
 }
 
