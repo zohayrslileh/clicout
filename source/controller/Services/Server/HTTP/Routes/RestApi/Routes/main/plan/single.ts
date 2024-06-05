@@ -12,10 +12,22 @@ import Plan from "@/Core/Plan"
 export default Router.create<Environment>(function (plan) {
 
     /**
-     * Find
+     * Middleware
      * 
      */
-    plan.get("/", async context => context.json(await Plan.find()))
+    plan.use(async function (context, next) {
+
+        // Set plan variable
+        context.set("plan", await Plan.findOne(context.req.param("id")))
+
+        return await next()
+    })
+
+    /**
+     * Subscribe
+     * 
+     */
+    plan.post("/subscribe", async context => context.json(await context.var.user.subscribe(context.var.plan)))
 })
 
 /*
@@ -30,5 +42,6 @@ interface Environment {
     // Variables
     Variables: {
         user: User
+        plan: Plan
     }
 }

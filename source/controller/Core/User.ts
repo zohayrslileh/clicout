@@ -2,6 +2,7 @@ import SubscriptionEntity from "@/Models/Database/Entities/Subscription"
 import UnauthorizedException from "./Exception/Unauthorized"
 import UserEntity from "@/Models/Database/Entities/User"
 import { Signer } from "@/Models/Encryptor"
+import Plan from "./Plan"
 import zod from "zod"
 
 /*
@@ -152,6 +153,16 @@ export default class User {
     public async subscription() {
 
         return await SubscriptionEntity.findOneBy({ user: { id: this.id } })
+    }
+
+    /**
+     * Subscribe method
+     * 
+     * @returns
+     */
+    public async subscribe(plan: Plan) {
+
+        return plan
     }
 }
 

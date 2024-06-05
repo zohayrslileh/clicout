@@ -1,4 +1,6 @@
 import PlanEntity from "@/Models/Database/Entities/Plan"
+import CoreException from "./Exception"
+import zod from "zod"
 
 /*
 |-----------------------------
@@ -41,6 +43,23 @@ export default class Plan {
 
         // Set price
         this.price = primitivePlan.price
+    }
+
+    /**
+     * Find one method
+     * 
+     * @returns
+     */
+    public static async findOne(id: unknown) {
+
+        // Plan entity
+        const planEntity = await PlanEntity.findOneBy({ id: zod.number().parse(id) })
+
+        // Check plan entity
+        if (!planEntity) throw new CoreException("This plan was not found")
+
+        // Initialize plan
+        return new this(planEntity)
     }
 
     /**
