@@ -3,6 +3,7 @@ import Authorization from "@/Models/Authorization"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
 import usePromise from "@/Tools/Promise"
+import Plan from "./Plan"
 import zod from "zod"
 
 /*
@@ -163,6 +164,16 @@ export default class User {
         const primitiveSubscription = await request<PrimitiveSubscription | undefined>({ url: "/main/subscription/current" })
 
         return primitiveSubscription ? new Subscription(primitiveSubscription) : undefined
+    }
+
+    /**
+     * Subscribe method
+     * 
+     * @returns
+     */
+    public async subscribe(plan: Plan, paymentMethod: string) {
+
+        console.log(this, plan, paymentMethod)
     }
 }
 
