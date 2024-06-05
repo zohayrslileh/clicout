@@ -34,7 +34,7 @@ export default function () {
 
     return <Container>
         <h1><Lang>Welcome</Lang>, {user.username}</h1>
-        <p>Please choose you plan</p>
+        <p>Please choose the plan that suits you.</p>
         <Plans plans={plans.solve} />
     </Container>
 }
