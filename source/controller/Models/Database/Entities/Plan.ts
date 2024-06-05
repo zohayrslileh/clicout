@@ -34,6 +34,27 @@ export default class Plan extends BaseEntity {
     declare public threads: number
 
     /**
+     * Enable proxies
+     * 
+     */
+    @Column({ type: "boolean", nullable: false })
+    declare public enableProxies: boolean
+
+    /**
+     * Customize cities
+     * 
+     */
+    @Column({ type: "boolean", nullable: false })
+    declare public customizeCities: boolean
+
+    /**
+     * Customize devices
+     * 
+     */
+    @Column({ type: "boolean", nullable: false })
+    declare public customizeDevices: boolean
+
+    /**
      * Subscriptions
      * 
      */
