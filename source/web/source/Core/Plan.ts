@@ -58,6 +58,18 @@ export default class Plan {
 
         return useContext(this.context)
     }
+
+    /**
+     * Find method
+     * 
+     * @returns
+     */
+    public static async find() {
+
+        await new Promise(resolve => setTimeout(resolve, 2000))
+
+        return []
+    }
 }
 
 /*
