@@ -95,7 +95,7 @@ export default class User {
         })
 
         // Ask authorization
-        const authorization = await request<string>({
+        const [primitiveUser, authorization] = await request<[PrimitiveUser, string]>({
             method: "POST",
             url: "/auth/login",
             data: schema.parse(data)
@@ -103,6 +103,8 @@ export default class User {
 
         // Set authorization
         Authorization.value = authorization
+
+        return new this(primitiveUser)
     }
 
     /**
