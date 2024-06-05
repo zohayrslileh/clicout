@@ -1,21 +1,20 @@
 import Router from "@/Tools/HTTP/Router"
 import User from "@/Core/User"
-import Plan from "@/Core/Plan"
 
 /*
 |-----------------------------
-|  Plan
+|  Subscription
 |-----------------------------
 |
 |
 */
-export default Router.create<Environment>(function (plan) {
+export default Router.create<Environment>(function (subscription) {
 
     /**
-     * Find
+     * Current
      * 
      */
-    plan.get("/", async context => context.json(await Plan.find()))
+    subscription.get("/current", async context => context.json(await context.var.user.subscription()))
 })
 
 /*

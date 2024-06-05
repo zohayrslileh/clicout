@@ -1,3 +1,4 @@
+import subscription from "./subscription"
 import Router from "@/Tools/HTTP/Router"
 import User from "@/Core/User"
 import plan from "./plan"
@@ -30,13 +31,7 @@ export default Router.create<Environment>(function (main) {
      * Subscription
      * 
      */
-    main.get("/subscription", async function (context) {
-
-        // Subscription
-        const subscription = await context.var.user.subscription()
-
-        return context.json(subscription)
-    })
+    main.route("/subscription", subscription)
 
     /**
      * Plan

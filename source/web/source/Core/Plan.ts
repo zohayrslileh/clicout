@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react"
+import request from "@/Models/Server/Request"
 
 /*
 |-----------------------------
@@ -74,9 +75,11 @@ export default class Plan {
      */
     public static async find() {
 
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        // Ask primitive plans
+        const primitivePlans = await request<PrimitivePlan[]>({ url: "/main/plan" })
 
-        return []
+        // Initialize plans
+        return primitivePlans.map(primitivePlan => new this(primitivePlan))
     }
 }
 
