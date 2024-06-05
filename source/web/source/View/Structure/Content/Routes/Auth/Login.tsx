@@ -40,16 +40,16 @@ export default function ({ onSuccess }: Props) {
     const login = usePromise(async () => onSuccess(await User.login(value)))
 
     /**
-     * Error
+     * View exception
      * 
      */
-    const error = login.exception ? compiler(login.exception.current) : undefined
+    const viewException = useMemo(() => login.exception ? compiler(login.exception.current) : undefined, [login.exception])
 
     /**
      * Issues
      * 
      */
-    const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [login.exception])
+    const issues = useMemo(() => createIssues(viewException instanceof UnprocessableEntity ? viewException.issues : []), [viewException])
 
     // Solve status
     if (login.solve) return <Fragment />
@@ -58,7 +58,7 @@ export default function ({ onSuccess }: Props) {
 
         <Logo width={200} id="logo" />
 
-        {error && !issues.length ? error.view() : undefined}
+        {viewException && !issues.length ? viewException.view() : undefined}
 
         <Form onSubmit={login.safeExecute}>
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />

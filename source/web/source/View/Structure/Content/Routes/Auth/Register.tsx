@@ -10,6 +10,7 @@ import { Navigate } from "react-router-dom"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
+import { Update } from "@/Tools/Updater"
 import styled from "@emotion/styled"
 import { useMemo } from "react"
 import User from "@/Core/User"
@@ -19,7 +20,7 @@ import User from "@/Core/User"
  * 
  * @returns 
  */
-export default function () {
+export default function ({ onSuccess }: Props) {
 
     /**
      * Lang
@@ -37,19 +38,19 @@ export default function () {
      * Register
      * 
      */
-    const register = usePromise(async () => await User.create(value))
+    const register = usePromise(async () => onSuccess(await User.create(value)))
 
     /**
-     * Error
+     * View exception
      * 
      */
-    const error = register.exception ? compiler(register.exception.current) : undefined
+    const viewException = useMemo(() => register.exception ? compiler(register.exception.current) : undefined, [register.exception])
 
     /**
      * Issues
      * 
      */
-    const issues = useMemo(() => createIssues(error instanceof UnprocessableEntity ? error.issues : []), [register.exception])
+    const issues = useMemo(() => createIssues(viewException instanceof UnprocessableEntity ? viewException.issues : []), [viewException])
 
     // Solve status
     if (register.solve) return <Navigate to="/main" />
@@ -58,7 +59,7 @@ export default function () {
 
         <Logo width={200} id="logo" />
 
-        {error && !issues.length ? error.view() : undefined}
+        {viewException && !issues.length ? viewException.view() : undefined}
 
         <Form onSubmit={register.safeExecute}>
             <TextInput placeholder={lang("Email")} issue={issues.has("email")} type="text" value={value.email || ""} onChange={value => update.email(value || undefined)} />
@@ -95,6 +96,14 @@ class LoginForm {
      * 
      */
     password: string | undefined
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props {
+    onSuccess: Update<User | undefined>
 }
 
 /**

@@ -26,7 +26,7 @@ export default function ({ onSuccess }: Props) {
         <Route path="login" element={<Login onSuccess={onSuccess} />} />
 
         {/** Register */}
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={<Register onSuccess={onSuccess} />} />
 
     </Routes>
 }
