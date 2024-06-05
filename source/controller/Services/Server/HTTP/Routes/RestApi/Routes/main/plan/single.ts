@@ -18,7 +18,7 @@ export default Router.create<Environment>(function (plan) {
     plan.use(async function (context, next) {
 
         // Set plan variable
-        context.set("plan", await Plan.findOne(context.req.param("id")))
+        context.set("plan", await Plan.findOne(+context.req.param("id")!))
 
         return await next()
     })
