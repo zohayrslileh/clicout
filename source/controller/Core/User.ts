@@ -4,6 +4,7 @@ import UserEntity from "@/Models/Database/Entities/User"
 import { Signer } from "@/Models/Encryptor"
 import Plan from "./Plan"
 import zod from "zod"
+import Nowpay from "@/Models/Nowpay"
 
 /*
 |-----------------------------
@@ -162,7 +163,16 @@ export default class User {
      */
     public async subscribe(plan: Plan, paymentMethod: string) {
 
-        return [plan, paymentMethod]
+        const payment = await Nowpay.post("/payment", {
+            "price_amount": 3999.5,
+            "price_currency": "usd",
+            "pay_currency": "btc",
+            "ipn_callback_url": "https://nowpayments.io",
+            "order_id": "RGDBP-21314",
+            "order_description": "Apple Macbook Pro 2019 x 1"
+        })
+
+        return [plan, paymentMethod, payment]
     }
 }
 
