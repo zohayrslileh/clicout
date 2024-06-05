@@ -13,7 +13,7 @@ export default class Plan {
      * Context
      * 
      */
-    public static readonly context = createContext<Plan>(undefined!)
+    public static readonly context = createContext<Plan | undefined>(undefined)
 
     /**
      * Id
@@ -56,7 +56,15 @@ export default class Plan {
      */
     public static useContext() {
 
-        return useContext(this.context)
+        /**
+         * Context
+         */
+        const context = useContext(this.context)
+
+        // Check context
+        if (!context) throw new Error("The context was not provided.")
+
+        return context
     }
 
     /**
