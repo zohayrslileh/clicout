@@ -31,9 +31,18 @@ export default function ({ plan }: Props) {
         <p id="name">{plan.name}</p>
         <p id="price">
             <p id="value">{plan.price}</p>
-            <p id="symbol">$</p>
+            <p id="symbol">$/<Lang>month</Lang></p>
         </p>
-        <div></div>
+        <div id="features">
+            <p className="label"><Lang>Threads</Lang></p>
+            <p className="value">{plan.threads}</p>
+            <p className="label"><Lang>Enable proxies</Lang></p>
+            <p className="value">{plan.enableProxies ? "✓" : "✗"}</p>
+            <p className="label"><Lang>Customize cities</Lang></p>
+            <p className="value">{plan.customizeCities ? "✓" : "✗"}</p>
+            <p className="label"><Lang>Customize devices</Lang></p>
+            <p className="value">{plan.customizeDevices ? "✓" : "✗"}</p>
+        </div>
         <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Subscribe</Lang></Button>
     </Container>
 }
@@ -116,6 +125,27 @@ const Container = styled(Card)`
         > #symbol {
             margin-bottom: 5px;
             color: var(--unique-color);
+        }
+    }
+    
+    > #features {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        text-align: start;
+        align-content: space-evenly;
+        margin-inline: 15px;
+
+        > p {
+            margin: 0;
+
+            &.label {
+                opacity: 0.5;
+            }
+
+            &.value {
+                font-family: ${() => Appearance.schema.FONT_BOLD};
+                color: var(--unique-color);
+            }
         }
     }
 `
