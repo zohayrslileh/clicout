@@ -1,7 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import LinkButton from "@/View/Components/LinkButton"
-import Authorization from "@/Models/Authorization"
-import { useNavigate } from "react-router-dom"
 import Appearance from "@/View/Appearance"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
@@ -20,16 +18,16 @@ import Plans from "./Plans"
 export default function () {
 
     /**
-     * Navigate
-     * 
-     */
-    const navigate = useNavigate()
-
-    /**
      * User
      * 
      */
     const user = User.useContext()
+
+    /**
+     * Controller
+     * 
+     */
+    const controller = User.useController()
 
     /**
      * Plans promise
@@ -44,9 +42,11 @@ export default function () {
      */
     const logout = useCallback(function () {
 
-        Authorization.value = ""
+        // Logout
+        User.logout()
 
-        navigate("/auth")
+        // Dispatch user
+        controller.dispatch(undefined)
 
     }, [])
 

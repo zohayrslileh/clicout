@@ -10,7 +10,6 @@ import { Navigate } from "react-router-dom"
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
-import { Update } from "@/Tools/Updater"
 import styled from "@emotion/styled"
 import { useMemo } from "react"
 import User from "@/Core/User"
@@ -20,13 +19,19 @@ import User from "@/Core/User"
  * 
  * @returns 
  */
-export default function ({ onSuccess }: Props) {
+export default function () {
 
     /**
      * Lang
      * 
      */
     const lang = useLang()
+
+    /**
+     * Controller
+     * 
+     */
+    const controller = User.useController()
 
     /**
      * Form
@@ -38,7 +43,7 @@ export default function ({ onSuccess }: Props) {
      * Register
      * 
      */
-    const register = usePromise(async () => onSuccess(await User.create(value)))
+    const register = usePromise(async () => controller.dispatch(await User.create(value)))
 
     /**
      * View exception
@@ -96,14 +101,6 @@ class LoginForm {
      * 
      */
     password: string | undefined
-}
-
-/**
- * Props
- * 
- */
-interface Props {
-    onSuccess: Update<User | undefined>
 }
 
 /**

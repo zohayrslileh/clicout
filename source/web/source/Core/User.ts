@@ -1,8 +1,8 @@
+import usePromise, { PromiseWithDependencies } from "@/Tools/Promise"
 import Subscription, { PrimitiveSubscription } from "./Subscription"
 import Authorization from "@/Models/Authorization"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
-import usePromise from "@/Tools/Promise"
 import Plan from "./Plan"
 import zod from "zod"
 
@@ -20,6 +20,12 @@ export default class User {
      * 
      */
     public static readonly context = createContext<User | undefined>(undefined)
+
+    /**
+     * Controller
+     * 
+     */
+    public static readonly controller = createContext<PromiseWithDependencies<User | undefined> | undefined>(undefined)
 
     /**
      * Id
@@ -109,6 +115,16 @@ export default class User {
     }
 
     /**
+     * Logout method
+     * 
+     * @returns
+     */
+    public static logout() {
+
+        Authorization.value = ""
+    }
+
+    /**
      * Authentication method
      * 
      * @returns
@@ -144,6 +160,7 @@ export default class User {
 
         /**
          * Context
+         * 
          */
         const context = useContext(this.context)
 
@@ -151,6 +168,25 @@ export default class User {
         if (!context) throw new Error("The context was not provided.")
 
         return context
+    }
+
+    /**
+     * Controller hook
+     * 
+     * @returns
+     */
+    public static useController() {
+
+        /**
+         * Controller
+         * 
+         */
+        const controller = useContext(this.controller)
+
+        // Check controller
+        if (!controller) throw new Error("The controller was not provided.")
+
+        return controller
     }
 
     /**
