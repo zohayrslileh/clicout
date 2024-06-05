@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react"
-import Plan, { PrimitivePlan } from "./Plan"
 
 /*
 |-----------------------------
@@ -29,12 +28,6 @@ export default class Subscription {
     public expireAt: Date
 
     /**
-     * Plan
-     * 
-     */
-    public plan: Plan
-
-    /**
      * Constructor methodd
      * 
      */
@@ -45,9 +38,6 @@ export default class Subscription {
 
         // Set expireAt
         this.expireAt = new Date(primitiveSubscription.expireAt)
-
-        // Set plan
-        this.plan = new Plan(primitiveSubscription.plan)
     }
 
     /**
@@ -79,5 +69,4 @@ export default class Subscription {
 export interface PrimitiveSubscription {
     id: number
     expireAt: string
-    plan: PrimitivePlan
 }

@@ -151,10 +151,7 @@ export default class User {
      */
     public async subscription() {
 
-        return await SubscriptionEntity.findOne({
-            where: { user: { id: this.id } },
-            relations: { plan: true }
-        })
+        return await SubscriptionEntity.findOneBy({ user: { id: this.id } })
     }
 }
 

@@ -160,7 +160,7 @@ export default class User {
     public async subscription() {
 
         // Ask primitive subscription
-        const primitiveSubscription = await request<PrimitiveSubscription | null>({ url: "/main/subscription/current" })
+        const primitiveSubscription = await request<PrimitiveSubscription | undefined>({ url: "/main/subscription/current" })
 
         return primitiveSubscription ? new Subscription(primitiveSubscription) : undefined
     }
