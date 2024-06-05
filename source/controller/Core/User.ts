@@ -160,9 +160,9 @@ export default class User {
      * 
      * @returns
      */
-    public async subscribe(plan: Plan) {
+    public async subscribe(plan: Plan, paymentMethod: string) {
 
-        return plan
+        return [plan, paymentMethod]
     }
 }
 
