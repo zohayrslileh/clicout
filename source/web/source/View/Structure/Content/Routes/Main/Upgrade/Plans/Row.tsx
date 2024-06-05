@@ -46,7 +46,7 @@ export default function ({ plan }: Props) {
             <p id="symbol">$/<Lang>month</Lang></p>
         </p>
         <div id="features">
-            <p className="label"><Lang>Threads</Lang></p>
+            <p className="label"><Lang>Max attacks</Lang></p>
             <p className="value">{plan.threads}</p>
             <p className="label"><Lang>Customize cities</Lang></p>
             <p className="value">{plan.customizeCities ? TrueFeature : FalseFeature}</p>
