@@ -1,5 +1,6 @@
 import Router from "@/Tools/HTTP/Router"
 import User from "@/Core/User"
+import plan from "./plan"
 
 /*
 |-----------------------------
@@ -36,6 +37,12 @@ export default Router.create<Environment>(function (main) {
 
         return context.json(subscription)
     })
+
+    /**
+     * Plan
+     * 
+     */
+    main.route("/plan", plan)
 })
 
 /*
