@@ -60,12 +60,12 @@ export default function () {
 
         {error && !issues.length ? error.view() : undefined}
 
-        <Form onSubmit={login.execute}>
+        <Form onSubmit={login.safeExecute}>
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
             <Button disabled={login.pending}><Lang>Login</Lang></Button>
         </Form>
-        
+
         <LinkButton to="../register"><Lang>Create Account</Lang></LinkButton>
 
     </Container>
