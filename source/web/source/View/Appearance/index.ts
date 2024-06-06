@@ -1,3 +1,4 @@
+import armouryCrateBackground from "@/View/Media/armoury-crate-background.jpg"
 import AppearanceState, { initialAppearance } from "./context"
 import Language from "@/View/Language"
 import styled from "@emotion/styled"
@@ -30,6 +31,11 @@ const Container = styled.div`
     direction: ${() => Language.value.direction};
     font-family: ${() => schema.FONT_REGULAR};
     zoom: ${() => Appearance.zoom}%;
+    background-image: url(${armouryCrateBackground});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     position: absolute;
     line-height: 1;
     overflow: auto;
