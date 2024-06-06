@@ -2,8 +2,8 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import { useParams } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
+import Checkout from "./Checkout"
 import Plan from "@/Core/Plan"
-import Row from "./Row"
 
 /**
  * Payment
@@ -30,5 +30,5 @@ export default function () {
     // Exception status
     if (plan.exception) return <Throw exception={plan.exception.current} />
 
-    return <Row plan={plan.solve} />
+    return <Checkout plan={plan.solve} />
 }

@@ -8,7 +8,7 @@ import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
 
 /**
- * Row
+ * Checkout
  * 
  * @returns 
  */
