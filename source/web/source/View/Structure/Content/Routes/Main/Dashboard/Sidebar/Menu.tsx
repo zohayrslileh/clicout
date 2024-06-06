@@ -1,4 +1,4 @@
-import { LuStar, LuUsers2, LuUsers } from "react-icons/lu"
+import { GiChargedArrow, GiCrossedChains } from "react-icons/gi"
 import { Link, useParams } from "react-router-dom"
 import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
@@ -47,7 +47,6 @@ export default function () {
  */
 const Container = styled.div`
     overflow: hidden;
-    padding: 10px;
     display: grid;
     gap: 10px;
     height: fit-content;
@@ -60,7 +59,7 @@ const Container = styled.div`
         gap: 10px;
         color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
         text-decoration: none;
-        padding-inline-end: 30px;
+        padding-inline-end: 50px;
         padding-inline-start: 15px;
         position: relative;
 
@@ -122,18 +121,13 @@ const Container = styled.div`
  */
 const items = [
     {
-        route: "session",
-        name: "Sessions",
-        Icon: LuStar
+        route: "hub",
+        name: "Attack Hub",
+        Icon: GiChargedArrow
     },
     {
-        route: "judge",
-        name: "Judges",
-        Icon: LuUsers
-    },
-    {
-        route: "participant",
-        name: "Participants",
-        Icon: LuUsers2
+        route: "blacklist",
+        name: "Blacklist",
+        Icon: GiCrossedChains
     }
 ]

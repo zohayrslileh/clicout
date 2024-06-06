@@ -1,10 +1,10 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Navigate, Route, Routes } from "react-router-dom"
+import Subscription from "@/Core/Subscription"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import User from "@/Core/User"
 import { lazy } from "react"
-import Subscription from "@/Core/Subscription"
 
 const Dashboard = lazy(() => import("./Dashboard"))
 const Upgrade = lazy(() => import("./Upgrade"))
