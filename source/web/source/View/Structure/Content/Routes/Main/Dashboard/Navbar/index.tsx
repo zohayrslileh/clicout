@@ -1,6 +1,7 @@
 import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 import Navigator from "./Navigator"
+import User from "./User"
 
 /**
  * Navbar
@@ -12,6 +13,7 @@ export default function () {
 
     return <Container>
         <Navigator />
+        <User />
     </Container>
 }
 
@@ -24,4 +26,5 @@ const Container = styled(Card)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 20px;
 `

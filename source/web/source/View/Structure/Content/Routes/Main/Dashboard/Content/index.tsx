@@ -1,11 +1,12 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import Card from "@/View/Components/Card"
 import Exception from "@/View/Exception"
+import { Suspense, lazy } from "react"
 import styled from "@emotion/styled"
-import { Suspense } from "react"
-import Home from "./Home"
+
+const Hub = lazy(() => import("./Hub"))
 
 /**
  * Content
@@ -21,7 +22,9 @@ export default function () {
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
                 <Routes>
-                    <Route index element={<Home />} />
+                    <Route index element={<Navigate to="hub" />} />
+                    <Route path="hub" element={<Hub />} />
+                    <Route path="profile" element={<h1>Profile</h1>} />
                 </Routes>
 
             </Suspense>
