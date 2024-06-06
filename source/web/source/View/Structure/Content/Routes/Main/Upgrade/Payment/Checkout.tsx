@@ -139,7 +139,7 @@ const Container = styled(Card) <{
         }
 
         > .line {
-            background-color: ${props => props.$color.rgba(0.1)};
+            background-color: ${props => props.$color.rgba()};
         }
 
         > #info {
@@ -147,8 +147,8 @@ const Container = styled(Card) <{
             gap: 40px;
 
             > #name {
-                color: ${props => props.$color.rgba(0.1)};
-                text-shadow: 0 0 30px ${props => props.$color.rgba(0.1)};
+                color: ${props => props.$color.rgba()};
+                text-shadow: 0 0 30px ${props => props.$color.rgba()};
                 font-size: 35px;
                 font-family: ${() => Appearance.schema.FONT_BOLD};
                 margin: 0;
@@ -175,7 +175,7 @@ const Container = styled(Card) <{
 
                     &.value {
                         font-family: ${() => Appearance.schema.FONT_BOLD};
-                        color: ${props => props.$color.rgba(0.1)};
+                        color: ${props => props.$color.rgba()};
                     }
                 }
             }
@@ -200,7 +200,7 @@ const Container = styled(Card) <{
 
                 > #symbol {
                     margin-bottom: 5px;
-                    color: ${props => props.$color.rgba(0.1)};
+                    color: ${props => props.$color.rgba()};
                 }
             }
 
