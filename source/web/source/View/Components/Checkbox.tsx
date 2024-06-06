@@ -1,4 +1,5 @@
 import { css, keyframes } from "@emotion/react"
+import { GiExpander } from "react-icons/gi"
 import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 import React from "react"
@@ -16,7 +17,7 @@ export default function ({ checked, onChange, ...props }: Props) {
      */
     return <Container {...props}>
         <input type="checkbox" checked={checked} onChange={event => onChange(event.target.checked)} />
-        <div />
+        <GiExpander />
     </Container>
 }
 
@@ -44,15 +45,15 @@ const Container = styled.label<{
     position: relative;
     display: block;
 
-    > div {
+    > svg {
         width: 70%;
         height: 70%;
-        background-color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
+        color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
         position: absolute;
-        left: 1px;
+        left: 0;
         right: 0;
         top: 0;
-        bottom: 1px;
+        bottom: 0;
         margin: auto;
         transform: scale(0);
     }
@@ -62,11 +63,11 @@ const Container = styled.label<{
         z-index: -1;
         pointer-events: none;
 
-        &:hover ~ div {
+        &:hover ~ svg {
             transform: scale(0.5);
         }
 
-        &:checked ~ div {
+        &:checked ~ svg {
             transform: scale(1);
         }
     }
