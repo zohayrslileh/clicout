@@ -58,7 +58,13 @@ const Container = styled.label<{
     }
 
     > input {
-        display: none;
+        opacity: 0;
+        z-index: -1;
+        pointer-events: none;
+
+        &:hover ~ div {
+            transform: scale(0.5);
+        }
 
         &:checked ~ div {
             transform: scale(1);
