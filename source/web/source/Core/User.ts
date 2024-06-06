@@ -3,7 +3,7 @@ import Subscription, { PrimitiveSubscription } from "./Subscription"
 import Authorization from "@/Models/Authorization"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
-import Plan from "./Plan"
+import Plan, { PrimitivePlan } from "./Plan"
 import zod from "zod"
 
 /*
@@ -201,6 +201,19 @@ export default class User {
         const primitiveSubscription = await request<PrimitiveSubscription | undefined>({ url: "/main/subscription/current" })
 
         return primitiveSubscription ? new Subscription(primitiveSubscription) : undefined
+    }
+
+    /**
+     * Plan method
+     * 
+     * @returns
+     */
+    public async plan() {
+
+        // Ask primitive plan
+        const primitivePlan = await request<PrimitivePlan>({ url: "/main/plan/current" })
+
+        return new Plan(primitivePlan)
     }
 
     /**

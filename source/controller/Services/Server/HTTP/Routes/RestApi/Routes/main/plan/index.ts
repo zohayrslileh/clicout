@@ -19,6 +19,12 @@ export default Router.create<Environment>(function (plan) {
     plan.get("/", async context => context.json(await Plan.find()))
 
     /**
+     * Current
+     * 
+     */
+    plan.get("/current", async context => context.json(await context.var.user.plan()))
+
+    /**
      * Single
      * 
      */

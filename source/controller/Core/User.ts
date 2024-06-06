@@ -162,6 +162,21 @@ export default class User {
     }
 
     /**
+     * Plan method
+     * 
+     * @returns
+     */
+    public async plan() {
+
+        // Plan entity
+        var planEntity = await PlanEntity.findOneOrFail({
+            where: { subscriptions: [{ user: { id: this.id } }] }
+        })
+
+        return new Plan(planEntity)
+    }
+
+    /**
      * Subscribe method
      * 
      * @returns

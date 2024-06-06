@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import Plan from "@/Core/Plan"
 
 /**
  * Plan
@@ -7,8 +8,14 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
+    /**
+     * Plan
+     * 
+     */
+    const plan = Plan.useContext()
+
     return <Container>
-        Plan
+        Plan: {plan.name}
     </Container>
 }
 
