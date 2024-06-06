@@ -32,6 +32,6 @@ export default class Subscription extends BaseEntity {
      * Expire at
      * 
      */
-    @Column({ type: "date", nullable: false })
-    declare public expireAt: Date
+    @Column({ type: "date" })
+    declare public expireAt: Date | null
 }

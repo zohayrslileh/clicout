@@ -35,7 +35,7 @@ export default Router.create<Environment>(function (plan) {
      */
     plan.post("/subscribe", async function (context) {
 
-        return context.json(await context.var.user.subscribe(context.var.plan, await context.req.json()))
+        return context.json(await context.var.user.subscribe(context.var.plan))
     })
 })
 

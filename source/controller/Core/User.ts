@@ -162,33 +162,34 @@ export default class User {
      * 
      * @returns
      */
-    public async subscribe(plan: Plan, data: unknown) {
+    public async subscribe(plan: Plan) {
 
-        // Schema
-        const schema = zod.object({
-            paymentMethod: zod.enum(["CRYPTO"])
-        })
-
-        // Validate data
-        schema.parse(data)
+        // Find plan entity
+        const planEntity = await PlanEntity.findOneByOrFail({ id: plan.id })
 
         // Find user entity
-        const userEntity = await UserEntity.findOneOrFail({
-            relations: { subscription: true },
-            where: { id: this.id }
-        })
+        const userEntity = await UserEntity.findOneOrFail({ relations: { subscription: true }, where: { id: this.id } })
 
-        // Create subscription entity
-        const subscriptionEntity = userEntity.subscription || new SubscriptionEntity
+        // Delete old subscription
+        if (userEntity.subscription) await userEntity.subscription.remove()
+
+        // Create new subscription
+        const subscriptionEntity = new SubscriptionEntity
 
         // Set user entity
-        if (!userEntity.subscription) subscriptionEntity.user = userEntity
+        subscriptionEntity.user = userEntity
 
         // Set plan entity
-        subscriptionEntity.plan = await PlanEntity.findOneByOrFail({ id: plan.id })
+        subscriptionEntity.plan = planEntity
+
+        // Expire date
+        const expireDate = new Date
+
+        // Set date
+        expireDate.setDate(expireDate.getDate() + 30)
 
         // Set expire at
-        subscriptionEntity.expireAt = new Date
+        subscriptionEntity.expireAt = planEntity.price ? expireDate : null
 
         // Save
         await subscriptionEntity.save()
