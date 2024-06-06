@@ -27,15 +27,15 @@ const Container = styled.div`
     ${fonts}
 
     // Style sheet
-    color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
+    background-image: url(${armouryCrateBackground});
     direction: ${() => Language.value.direction};
+    color: ${() => schema.COLOR_WHITE.rgba()};
     font-family: ${() => schema.FONT_REGULAR};
     zoom: ${() => Appearance.zoom}%;
-    background-image: url(${armouryCrateBackground});
-    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: cover;
     position: absolute;
     line-height: 1;
     overflow: auto;

@@ -6,7 +6,7 @@ import styled from "@emotion/styled"
  * 
  */
 export default styled.button`
-    color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
+    color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
     background-color: transparent;
     font-family: ${() => Appearance.schema.FONT_MEDIUM};
     padding: 5px;

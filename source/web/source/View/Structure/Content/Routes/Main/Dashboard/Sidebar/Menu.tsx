@@ -57,7 +57,7 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         gap: 10px;
-        color: ${() => Appearance.theme.schema.CONTENT_COLOR.rgba()};
+        color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
         text-decoration: none;
         padding-inline-end: 50px;
         padding-inline-start: 15px;

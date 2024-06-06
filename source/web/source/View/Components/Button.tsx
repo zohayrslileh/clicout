@@ -16,7 +16,7 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.B
      */
     return <Container {...props}>
         <div className="ship"></div>
-        {props.disabled ? <ScaleLoader color={Appearance.theme.schema.CONTENT_COLOR.rgba()} height={12} width={1.8} /> : children}
+        {props.disabled ? <ScaleLoader color={Appearance.schema.COLOR_WHITE.rgba()} height={12} width={1.8} /> : children}
     </Container>
 }
 
