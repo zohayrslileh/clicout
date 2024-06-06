@@ -3,6 +3,7 @@ import UnauthorizedException from "./Exception/Unauthorized"
 import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
+import { IsNull } from "typeorm"
 import Invoice from "./Invoice"
 import Plan from "./Plan"
 import zod from "zod"
@@ -156,7 +157,7 @@ export default class User {
     public async subscription() {
 
         // Subscription entity
-        var subscriptionEntity = await SubscriptionEntity.findOneBy({ user: { id: this.id } })
+        var subscriptionEntity = await SubscriptionEntity.findOneBy({ user: { id: this.id }, paymentInvoice: IsNull() })
 
         return subscriptionEntity
     }
@@ -169,9 +170,7 @@ export default class User {
     public async plan() {
 
         // Plan entity
-        var planEntity = await PlanEntity.findOneOrFail({
-            where: { subscriptions: [{ user: { id: this.id } }] }
-        })
+        var planEntity = await PlanEntity.findOneOrFail({ where: { subscriptions: [{ user: { id: this.id }, paymentInvoice: IsNull() }] } })
 
         return new Plan(planEntity)
     }
@@ -186,26 +185,20 @@ export default class User {
         // Find plan entity
         const planEntity = await PlanEntity.findOneByOrFail({ id: plan.id })
 
-        // Check is free
-        if (planEntity.price) {
+        // Invoice
+        var invoice: Invoice | undefined
 
-            // Create invoice
-            const invoice = await Invoice.create({ priceAmount: planEntity.price, payCurrency: "usdttrc20" })
-
-            return invoice.paymentLink
-        }
+        // Create invoice
+        if (planEntity.price) invoice = await Invoice.create({ priceAmount: planEntity.price, payCurrency: "usdttrc20" })
 
         // Find user entity
         const userEntity = await UserEntity.findOneOrFail({ relations: { subscription: true }, where: { id: this.id } })
 
-        // Delete old subscription
-        if (userEntity.subscription) await userEntity.subscription.remove()
-
         // Create new subscription
-        const subscriptionEntity = new SubscriptionEntity
+        const subscriptionEntity = userEntity.subscription || new SubscriptionEntity
 
         // Set user entity
-        subscriptionEntity.user = userEntity
+        if (!userEntity.subscription) subscriptionEntity.user = userEntity
 
         // Set plan entity
         subscriptionEntity.plan = planEntity
@@ -217,12 +210,15 @@ export default class User {
         expireDate.setDate(expireDate.getDate() + 30)
 
         // Set expire at
-        subscriptionEntity.expireAt = planEntity.price ? expireDate : null
+        subscriptionEntity.expireAt = invoice ? null : expireDate
+
+        // Set payment invoice
+        subscriptionEntity.paymentInvoice = invoice ? invoice.id : null
 
         // Save
         await subscriptionEntity.save()
 
-        return subscriptionEntity
+        return invoice ? invoice.paymentLink : subscriptionEntity
     }
 }
 

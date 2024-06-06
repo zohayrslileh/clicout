@@ -34,4 +34,11 @@ export default class Subscription extends BaseEntity {
      */
     @Column({ type: "date", nullable: true })
     declare public expireAt: Date | null
+
+    /**
+     * Payment invoice
+     * 
+     */
+    @Column({ type: "int", nullable: true })
+    declare public paymentInvoice: number | null
 }
