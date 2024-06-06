@@ -54,6 +54,12 @@ export default function ({ plan }: Props) {
                 </p>
                 <div id="methods">
                     <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                    <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                    <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                    <div id="contact">
+                        <p><Lang>Or</Lang></p>
+                        <a href=""><Lang>Contact</Lang></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,7 +121,6 @@ const Container = styled(Card)`
                 font-size: 35px;
                 font-family: ${() => Appearance.schema.FONT_BOLD};
                 margin: 0;
-                margin-bottom: 20px;
             }
 
             > #features {
@@ -144,6 +149,7 @@ const Container = styled(Card)`
         > #payment {
             display: grid;
             grid-template-rows: auto 1fr;
+            gap: 20px;
 
             > #price {
                 display: flex;
@@ -166,6 +172,24 @@ const Container = styled(Card)`
             > #methods {
                 display: grid;
                 align-self: end;
+                gap: 10px;
+
+                > #contact {
+                    display: grid;
+                    gap: 10px;
+
+                    > p {
+                        margin: 0;
+                        font-size: 12px;
+                        opacity: 0.3;
+                    }
+                    
+                    > a {
+                        text-decoration: none;
+                        color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
+                        font-size: 13px;
+                    }
+                }
             }
         }
     }
