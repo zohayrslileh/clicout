@@ -1,4 +1,5 @@
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
+import { useNavigate } from "react-router-dom"
 import Subscription from "@/Core/Subscription"
 import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
@@ -18,6 +19,12 @@ import config from "@/config"
  * @returns 
  */
 export default function ({ plan }: Props) {
+
+    /**
+     * Navigate
+     * 
+     */
+    const navigate = useNavigate()
 
     /**
      * User
@@ -54,7 +61,12 @@ export default function ({ plan }: Props) {
 
         if (typeof subscription === "string") window.open(subscription, "_self")
 
-        else subscriptionController.dispatch(subscription)
+        else {
+
+            subscriptionController.dispatch(subscription)
+
+            navigate("/main")
+        }
     })
 
     return <Container>
