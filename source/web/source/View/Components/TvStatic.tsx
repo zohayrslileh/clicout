@@ -15,7 +15,6 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.H
      * 
      */
     return <Container {...props}>
-        <div className="content" />
         <div className="fuzzy-overlay" />
     </Container>
 }
@@ -29,21 +28,13 @@ const Container = styled.div`
     height: 100%;
     width: 100%;
     overflow: hidden;
-
-    > .content {
-        height: 100%;
-        width: 100%;
-        display: grid;
-        place-items: center;
-        z-index: 5;
-        position: relative;
-    }
+    mix-blend-mode: hard-light;
 
     .fuzzy-overlay {
         position: absolute;
         inset: -200%;
         background-image: url(${noice});
-        opacity: 25%;
+        opacity: 30%;
         z-index: 0;
         animation: ${keyframes`
 
