@@ -48,7 +48,6 @@ const Container = styled.label<{
     > svg {
         width: 70%;
         height: 70%;
-        color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
         position: absolute;
         left: 0;
         right: 0;
