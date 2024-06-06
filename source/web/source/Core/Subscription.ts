@@ -1,3 +1,4 @@
+import { PromiseWithDependencies } from "@/Tools/Promise"
 import { createContext, useContext } from "react"
 
 /*
@@ -14,6 +15,12 @@ export default class Subscription {
      * 
      */
     public static readonly context = createContext<Subscription | undefined>(undefined)
+
+    /**
+     * Controller
+     * 
+     */
+    public static readonly controller = createContext<PromiseWithDependencies<Subscription | undefined> | undefined>(undefined)
 
     /**
      * Id
@@ -56,6 +63,25 @@ export default class Subscription {
         if (!context) throw new Error("The context was not provided.")
 
         return context
+    }
+
+    /**
+     * Controller hook
+     * 
+     * @returns
+     */
+    public static useController() {
+
+        /**
+         * Controller
+         * 
+         */
+        const controller = useContext(this.controller)
+
+        // Check controller
+        if (!controller) throw new Error("The controller was not provided.")
+
+        return controller
     }
 }
 

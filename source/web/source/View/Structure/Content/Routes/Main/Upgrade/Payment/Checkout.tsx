@@ -1,4 +1,5 @@
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
+import Subscription from "@/Core/Subscription"
 import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
 import { SiTether } from "react-icons/si"
@@ -25,6 +26,12 @@ export default function ({ plan }: Props) {
     const user = User.useContext()
 
     /**
+     * Subscription controller
+     * 
+     */
+    const subscriptionController = Subscription.useController()
+
+    /**
      * True Feature
      * 
      */
@@ -46,6 +53,8 @@ export default function ({ plan }: Props) {
         const subscription = await user.subscribe(plan)
 
         if (typeof subscription === "string") window.open(subscription, "_self")
+
+        else subscriptionController.dispatch(subscription)
     })
 
     return <Container>

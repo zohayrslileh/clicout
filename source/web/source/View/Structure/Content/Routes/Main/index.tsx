@@ -4,6 +4,7 @@ import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import User from "@/Core/User"
 import { lazy } from "react"
+import Subscription from "@/Core/Subscription"
 
 const Dashboard = lazy(() => import("./Dashboard"))
 const Upgrade = lazy(() => import("./Upgrade"))
@@ -29,16 +30,20 @@ export default function ({ user }: Props) {
 
     return <User.context.Provider value={user}>
 
-        {/** Routes */}
-        <Routes>
+        <Subscription.controller.Provider value={subscription}>
 
-            {/** Dashboard */}
-            <Route index element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
+            {/** Routes */}
+            <Routes>
 
-            {/** Upgrade */}
-            <Route path="upgrade/*" element={<Upgrade />} />
+                {/** Dashboard */}
+                <Route index element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
 
-        </Routes>
+                {/** Upgrade */}
+                <Route path="upgrade/*" element={<Upgrade />} />
+
+            </Routes>
+
+        </Subscription.controller.Provider>
 
     </User.context.Provider>
 }
