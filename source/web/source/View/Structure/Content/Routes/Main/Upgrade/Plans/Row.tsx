@@ -1,3 +1,4 @@
+import { GiBatteredAxe, GiBirdClaw, GiBladeBite } from "react-icons/gi"
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
@@ -20,20 +21,8 @@ export default function ({ plan }: Props) {
      */
     const navigate = useNavigate()
 
-    /**
-     * True Feature
-     * 
-     */
-    const TrueFeature = <IoCheckmarkSharp style={{ color: "#5fce5f" }} />
-
-    /**
-     * False Feature
-     * 
-     */
-    const FalseFeature = <IoCloseSharp style={{ color: "#ee3d3d" }} />
-
     return <Container className={`plan-${plan.id}`}>
-        <p id="name">{plan.name}</p>
+        <p id="name">{avatars[plan.id - 1]}{plan.name}</p>
         <div id="price">
             <p id="value">{plan.price}</p>
             <p id="symbol">$/<Lang>month</Lang></p>
@@ -51,6 +40,24 @@ export default function ({ plan }: Props) {
         <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
     </Container>
 }
+
+/**
+ * True Feature
+ * 
+ */
+const TrueFeature = <IoCheckmarkSharp style={{ color: "#5fce5f" }} />
+
+/**
+ * False Feature
+ * 
+ */
+const FalseFeature = <IoCloseSharp style={{ color: "#ee3d3d" }} />
+
+/**
+ * Avatars
+ * 
+ */
+const avatars = [<GiBatteredAxe />, <GiBirdClaw />, <GiBladeBite />]
 
 /**
  * Props
@@ -114,6 +121,10 @@ const Container = styled(Card)`
         opacity: 0.5;
         margin: 0;
         margin-block: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
     }
 
     > #price {

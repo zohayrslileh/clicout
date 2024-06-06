@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
@@ -9,8 +10,14 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
+    /**
+     * Navigate
+     * 
+     */
+    const navigate = useNavigate()
+
     return <Container>
-        <Card className="row">
+        <Card className="row" onClick={() => navigate("create")}>
             <p><Lang>Create new attack</Lang></p>
         </Card>
     </Container>
