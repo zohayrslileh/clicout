@@ -64,7 +64,7 @@ export default function ({ plan }: Props) {
                 </div>
                 <div id="methods">
                     {plan.price ? <Fragment>
-                        <Button onClick={subscribe.safeExecute}><SiTether /><Lang>Payment</Lang></Button>
+                        <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><SiTether /><Lang>Payment</Lang></Button>
                         <div id="contact">
                             <p><Lang>Or</Lang></p>
                             <a href={config.TELEGRAM_CONTACT} target="_blank"><Lang>Telegram Contact</Lang></a>
