@@ -1,4 +1,4 @@
-import Loading from "@/View/Components/Loading"
+import TvStatic from "@/View/Components/TvStatic"
 import ViewException from "."
 
 /*
@@ -17,6 +17,6 @@ export default class PendingException extends ViewException {
      */
     public view() {
 
-        return <Loading label={this.message || "Loading"} />
+        return <TvStatic />
     }
 }
