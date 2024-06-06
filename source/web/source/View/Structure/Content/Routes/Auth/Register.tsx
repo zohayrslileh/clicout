@@ -145,6 +145,7 @@ const Container = styled(Card)`
                 opacity: 0.7;
                 margin: 0;
                 user-select: none;
+                font-size: 13px;
             }
         }
     }
