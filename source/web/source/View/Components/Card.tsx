@@ -37,12 +37,21 @@ const Container = styled.div`
     backdrop-filter: blur(7px);
     position: relative;
     overflow: hidden;
+
     animation: ${() => keyframes`
 
         0% {
-            max-height: 0;
             opacity: 0;
             border-color: ${Appearance.schema.COLOR_YELLOW.rgba(0.16)};
+            scale: 0.95;
+        }
+
+        20% {
+            scale: 1.02;
+        }
+
+        30% {
+            scale: 1;
         }
 
         50% {
@@ -54,7 +63,6 @@ const Container = styled.div`
         }
 
         100% {
-            max-height: 100vh;
             opacity: 1;
             border-color: ${Appearance.schema.COLOR_WHITE.rgba(0.16)};
         }
