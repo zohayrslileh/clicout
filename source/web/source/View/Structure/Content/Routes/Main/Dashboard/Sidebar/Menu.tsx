@@ -51,9 +51,10 @@ const Container = styled.div`
     gap: 10px;
     height: fit-content;
     margin-inline: 7px;
+    margin-top: 10px;
 
     > a {
-        font-family: ${() => Appearance.schema.FONT_MEDIUM};
+        font-family: ${() => Appearance.schema.FONT_REGULAR};
         display: flex;
         align-items: center;
         gap: 10px;
