@@ -1,4 +1,4 @@
-import { GiChargedArrow, GiCrossedChains } from "react-icons/gi"
+import { GiChargedArrow, GiCrossedChains, GiClockwork } from "react-icons/gi"
 import { Link, useParams } from "react-router-dom"
 import Appearance from "@/View/Appearance"
 import { Lang } from "@/Tools/Language"
@@ -130,5 +130,10 @@ const items = [
         route: "blacklist",
         name: "Blacklist",
         Icon: GiCrossedChains
+    },
+    {
+        route: "history",
+        name: "History",
+        Icon: GiClockwork
     }
 ]
