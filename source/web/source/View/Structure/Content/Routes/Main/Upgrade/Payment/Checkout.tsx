@@ -5,6 +5,7 @@ import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 
 /**
@@ -53,13 +54,15 @@ export default function ({ plan }: Props) {
                     <p id="symbol">$/<Lang>month</Lang></p>
                 </p>
                 <div id="methods">
-                    <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
-                    <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
-                    <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
-                    <div id="contact">
-                        <p><Lang>Or</Lang></p>
-                        <a href=""><Lang>Contact</Lang></a>
-                    </div>
+                    {plan.price ? <Fragment>
+                        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                        <div id="contact">
+                            <p><Lang>Or</Lang></p>
+                            <a href=""><Lang>Contact</Lang></a>
+                        </div>
+                    </Fragment> : <Button><Lang>Active</Lang></Button>}
                 </div>
             </div>
         </div>
