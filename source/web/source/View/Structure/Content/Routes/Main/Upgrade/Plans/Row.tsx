@@ -73,7 +73,8 @@ const Container = styled(Card) <{
     grid-template-rows: auto auto 1fr auto;
     padding: 20px;
     box-sizing: border-box;
-    gap: 20px;
+    gap: 30px;
+    margin: auto;
 
     &.plan-1, &.plan-3 {
         transform: scale(0.97);
@@ -106,7 +107,7 @@ const Container = styled(Card) <{
         font-family: ${() => Appearance.schema.FONT_BOLD};
         opacity: 0.5;
         margin: 0;
-        margin-block: 10px;
+        margin-top: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
