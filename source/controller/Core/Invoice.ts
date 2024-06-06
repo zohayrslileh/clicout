@@ -32,7 +32,7 @@ export default class Invoice {
         this.id = primitiveInvoice.id
 
         // Set payment link
-        this.paymentLink = primitiveInvoice.paymentLink
+        this.paymentLink = primitiveInvoice.invoice_url
     }
 
     /**
@@ -71,5 +71,5 @@ export default class Invoice {
 */
 export interface PrimitiveInvoice {
     id: number
-    paymentLink: string
+    invoice_url: string
 }

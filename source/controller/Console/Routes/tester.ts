@@ -1,4 +1,4 @@
-import Nowpay from "@/Models/Nowpay"
+import Invoice from "@/Core/Invoice"
 
 /*
 |-----------------------------
@@ -9,13 +9,9 @@ import Nowpay from "@/Models/Nowpay"
 */
 export default async function () {
 
-    const response = await Nowpay.post("/invoice", {
-        "price_amount": 59,
-        "price_currency": "usd",
-        "pay_currency": "usdttrc20"
-    })
+    const invoice = await Invoice.create({ priceAmount: 159, payCurrency: "usdttrc20" })
 
-    console.log(response.data)
+    console.log(invoice)
 
     console.log("The test completed successfully 🧪 ")
 }
