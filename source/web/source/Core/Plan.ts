@@ -2,6 +2,7 @@ import { GiBatteredAxe, GiBirdClaw, GiBladeBite } from "react-icons/gi"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
 import { IconType } from "react-icons/lib"
+import Color from "@/Tools/Color"
 
 /*
 |-----------------------------
@@ -35,6 +36,12 @@ export default class Plan {
      * 
      */
     public avatar: IconType
+
+    /**
+     * Color
+     * 
+     */
+    public color: Color
 
     /**
      * Price
@@ -80,6 +87,9 @@ export default class Plan {
 
         // Set avatar
         this.avatar = avatars[primitivePlan.id - 1]
+
+        // Set color
+        this.color = colors[primitivePlan.id - 1]
 
         // Set price
         this.price = primitivePlan.price
@@ -166,3 +176,9 @@ export interface PrimitivePlan {
  * 
  */
 export const avatars = [GiBatteredAxe, GiBirdClaw, GiBladeBite]
+
+/**
+ * Colors
+ * 
+ */
+export const colors = [new Color("#71834e"), new Color("#ffb12c"), new Color("#7355ff")]

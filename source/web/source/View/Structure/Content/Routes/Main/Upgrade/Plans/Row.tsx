@@ -5,6 +5,7 @@ import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import Color from "@/Tools/Color"
 import Plan from "@/Core/Plan"
 
 /**
@@ -20,7 +21,7 @@ export default function ({ plan }: Props) {
      */
     const navigate = useNavigate()
 
-    return <Container className={`plan-${plan.id}`}>
+    return <Container className={`plan-${plan.id}`} $color={plan.color}>
         <p id="name"><plan.avatar />{plan.name}</p>
         <div id="price">
             <p id="value">{plan.price}</p>
@@ -64,17 +65,15 @@ interface Props {
  * Container
  * 
  */
-const Container = styled(Card)`
+const Container = styled(Card) <{
+    $color: Color
+}>`
     width: 300px;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     padding: 20px;
     box-sizing: border-box;
     gap: 20px;
-
-    &.plan-1 {
-        --unique-color: #71834e;
-    }
 
     &.plan-1, &.plan-3 {
         transform: scale(0.97);
@@ -89,26 +88,20 @@ const Container = styled(Card)`
     }
 
     &.plan-2 {
-        --unique-color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
-        box-shadow: 0 0 10px ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
+        box-shadow: 0 0 10px ${props => props.$color.rgba(0.1)};
 
         > #name {
             opacity: 1;
-            color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
         }
     }
 
-    &.plan-3 {
-        --unique-color: #7355ff;
-    }
-
     > .line {
-        background-color: var(--unique-color);
+        background-color: ${props => props.$color.rgba()};
     }
 
     > #name {
-        color: var(--unique-color);
-        text-shadow: 0 0 30px var(--unique-color);
+        color: ${props => props.$color.rgba()};
+        text-shadow: 0 0 30px ${props => props.$color.rgba()};
         font-size: 35px;
         font-family: ${() => Appearance.schema.FONT_BOLD};
         opacity: 0.5;
@@ -134,7 +127,7 @@ const Container = styled(Card)`
 
         > #symbol {
             margin-bottom: 5px;
-            color: var(--unique-color);
+            color: ${props => props.$color.rgba()};
         }
     }
     
@@ -155,7 +148,7 @@ const Container = styled(Card)`
 
             &.value {
                 font-family: ${() => Appearance.schema.FONT_BOLD};
-                color: var(--unique-color);
+                color: ${props => props.$color.rgba()};
             }
         }
     }
