@@ -35,11 +35,11 @@ export default function ({ user }: Props) {
             {/** Routes */}
             <Routes>
 
-                {/** Dashboard */}
-                <Route index element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
-
                 {/** Upgrade */}
                 <Route path="upgrade/*" element={<Upgrade />} />
+
+                {/** Dashboard */}
+                <Route path="*" element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
 
             </Routes>
 
