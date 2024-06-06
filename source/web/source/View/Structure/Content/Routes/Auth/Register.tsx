@@ -71,7 +71,10 @@ export default function () {
             <TextInput placeholder={lang("Email")} issue={issues.has("email")} type="text" value={value.email || ""} onChange={value => update.email(value || undefined)} />
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
-            <Checkbox checked={value.agreeTerms} onChange={update.agreeTerms} />
+            <label>
+                <Checkbox checked={value.agreeTerms} onChange={update.agreeTerms} issue={issues.has("agreeTerms")} />
+                <p><Lang>Agree terms</Lang></p>
+            </label>
             <Button disabled={register.pending}><Lang>Create Account</Lang></Button>
         </Form>
 
@@ -132,6 +135,18 @@ const Container = styled(Card)`
     > form {
         display: grid;
         gap: 10px;
+
+        > label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            > p {
+                opacity: 0.7;
+                margin: 0;
+                user-select: none;
+            }
+        }
     }
 
     > a {
