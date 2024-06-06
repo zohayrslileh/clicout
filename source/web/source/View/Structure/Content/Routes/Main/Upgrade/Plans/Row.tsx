@@ -1,3 +1,4 @@
+import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
@@ -23,13 +24,13 @@ export default function ({ plan }: Props) {
      * True Feature
      * 
      */
-    const TrueFeature = <b style={{ color: "#5fce5f" }}>✓</b>
+    const TrueFeature = <IoCheckmarkSharp style={{ color: "#5fce5f" }} />
 
     /**
      * False Feature
      * 
      */
-    const FalseFeature = <b style={{ color: "#ee3d3d" }}>✗</b>
+    const FalseFeature = <IoCloseSharp style={{ color: "#ee3d3d" }} />
 
     return <Container className={`plan-${plan.id}`}>
         <p id="name">{plan.name}</p>
