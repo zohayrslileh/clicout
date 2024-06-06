@@ -42,6 +42,7 @@ export default function ({ plan }: Props) {
      */
     const subscribe = usePromise(async function () {
 
+        // Create subscription
         const subscription = await user.subscribe(plan)
 
         if (typeof subscription === "string") window.open(subscription, "_self")
@@ -74,7 +75,7 @@ export default function ({ plan }: Props) {
                             <p><Lang>Or</Lang></p>
                             <a href={config.TELEGRAM_CONTACT} target="_blank"><Lang>Telegram Contact</Lang></a>
                         </div>
-                    </Fragment> : <Button><Lang>Active</Lang></Button>}
+                    </Fragment> : <Button onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Active</Lang></Button>}
                 </div>
             </div>
         </div>
