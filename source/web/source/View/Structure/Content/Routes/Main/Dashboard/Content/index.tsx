@@ -1,7 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
-import Card from "@/View/Components/Card"
 import Exception from "@/View/Exception"
 import { Suspense, lazy } from "react"
 import styled from "@emotion/styled"
@@ -38,7 +37,7 @@ export default function () {
  * Container
  * 
  */
-const Container = styled(Card)`
+const Container = styled.div`
     grid-area: content;
     position: relative;
     padding: 20px;
