@@ -2,11 +2,13 @@ import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
+import { SiTether } from "react-icons/si"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import { Fragment } from "react"
 import Plan from "@/Core/Plan"
+import config from "@/config"
 
 /**
  * Checkout
@@ -55,12 +57,10 @@ export default function ({ plan }: Props) {
                 </p>
                 <div id="methods">
                     {plan.price ? <Fragment>
-                        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
-                        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
-                        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                        <Button onClick={() => navigate(`${plan.id}`)}><SiTether /><Lang>Payment</Lang></Button>
                         <div id="contact">
                             <p><Lang>Or</Lang></p>
-                            <a href=""><Lang>Contact</Lang></a>
+                            <a href={config.TELEGRAM_CONTACT} target="_blank"><Lang>Telegram Contact</Lang></a>
                         </div>
                     </Fragment> : <Button><Lang>Active</Lang></Button>}
                 </div>
@@ -116,7 +116,7 @@ const Container = styled(Card)`
 
         > #info {
             display: grid;
-            gap: 20px;
+            gap: 40px;
 
             > #name {
                 color: var(--unique-color);
@@ -152,7 +152,7 @@ const Container = styled(Card)`
         > #payment {
             display: grid;
             grid-template-rows: auto 1fr;
-            gap: 20px;
+            gap: 40px;
 
             > #price {
                 display: flex;
