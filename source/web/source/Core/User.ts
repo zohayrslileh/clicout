@@ -211,13 +211,12 @@ export default class User {
     public async subscribe(plan: Plan) {
 
         // Ask primitive subscription
-        const primitiveSubscription = await request<PrimitiveSubscription>({
+        const primitiveSubscription = await request<PrimitiveSubscription | "string">({
             url: `/main/plan/${plan.id}/subscribe`,
-            data: { paymentMethod: "CRYPTO" },
             method: "POST"
         })
 
-        return new Subscription(primitiveSubscription)
+        return typeof primitiveSubscription === "string" ? primitiveSubscription : new Subscription(primitiveSubscription)
     }
 }
 

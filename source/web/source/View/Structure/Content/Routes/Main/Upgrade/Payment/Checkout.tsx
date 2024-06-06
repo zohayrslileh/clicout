@@ -1,13 +1,14 @@
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
-import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
 import { SiTether } from "react-icons/si"
 import Card from "@/View/Components/Card"
+import usePromise from "@/Tools/Promise"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import { Fragment } from "react"
 import Plan from "@/Core/Plan"
+import User from "@/Core/User"
 import config from "@/config"
 
 /**
@@ -18,10 +19,10 @@ import config from "@/config"
 export default function ({ plan }: Props) {
 
     /**
-     * Navigate
+     * User
      * 
      */
-    const navigate = useNavigate()
+    const user = User.useContext()
 
     /**
      * True Feature
@@ -34,6 +35,12 @@ export default function ({ plan }: Props) {
      * 
      */
     const FalseFeature = <IoCloseSharp style={{ color: "#ee3d3d" }} />
+
+    /**
+     * Subscribe promise
+     * 
+     */
+    const subscribe = usePromise(async () => await user.subscribe(plan))
 
     return <Container>
         <div id="content" className={`plan-${plan.id}`}>
@@ -57,7 +64,7 @@ export default function ({ plan }: Props) {
                 </div>
                 <div id="methods">
                     {plan.price ? <Fragment>
-                        <Button onClick={() => navigate(`${plan.id}`)}><SiTether /><Lang>Payment</Lang></Button>
+                        <Button onClick={subscribe.safeExecute}><SiTether /><Lang>Payment</Lang></Button>
                         <div id="contact">
                             <p><Lang>Or</Lang></p>
                             <a href={config.TELEGRAM_CONTACT} target="_blank"><Lang>Telegram Contact</Lang></a>
