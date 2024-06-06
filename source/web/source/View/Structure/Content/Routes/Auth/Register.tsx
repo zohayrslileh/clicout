@@ -13,6 +13,7 @@ import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 import { useMemo } from "react"
 import User from "@/Core/User"
+import Checkbox from "@/View/Components/Checkbox"
 
 /**
  * Register
@@ -70,6 +71,7 @@ export default function () {
             <TextInput placeholder={lang("Email")} issue={issues.has("email")} type="text" value={value.email || ""} onChange={value => update.email(value || undefined)} />
             <TextInput placeholder={lang("Username")} issue={issues.has("username")} type="text" value={value.username || ""} onChange={value => update.username(value || undefined)} />
             <TextInput placeholder={lang("Password")} issue={issues.has("password")} type="password" value={value.password || ""} onChange={value => update.password(value || undefined)} />
+            <Checkbox checked={value.agreeTerms} onChange={update.agreeTerms} />
             <Button disabled={register.pending}><Lang>Create Account</Lang></Button>
         </Form>
 
@@ -101,6 +103,12 @@ class LoginForm {
      * 
      */
     password: string | undefined
+
+    /**
+     * Agree terms
+     * 
+     */
+    agreeTerms: boolean = false
 }
 
 /**
