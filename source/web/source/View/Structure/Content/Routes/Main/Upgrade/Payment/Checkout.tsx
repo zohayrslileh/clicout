@@ -8,6 +8,7 @@ import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
+import Color from "@/Tools/Color"
 import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 import User from "@/Core/User"
@@ -57,7 +58,7 @@ export default function ({ plan }: Props) {
         }
     })
 
-    return <Container>
+    return <Container $color={plan.color}>
         <div id="content" className={`plan-${plan.id}`}>
             <div id="info">
                 <p id="name"><plan.avatar />{plan.name}</p>
@@ -115,7 +116,9 @@ interface Props {
  * Container
  * 
  */
-const Container = styled(Card)`
+const Container = styled(Card) <{
+    $color: Color
+}>`
     width: fit-content;
     margin: auto;
 
@@ -126,12 +129,7 @@ const Container = styled(Card)`
         display: grid;
         grid-template-columns: 1fr 1fr;
 
-        &.plan-1 {
-            --unique-color: #71834e;
-        }
-
         &.plan-2 {
-            --unique-color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
             box-shadow: 0 0 10px ${() => Appearance.schema.COLOR_YELLOW.rgba(0.1)};
 
             > #name {
@@ -140,12 +138,8 @@ const Container = styled(Card)`
             }
         }
 
-        &.plan-3 {
-            --unique-color: #7355ff;
-        }
-
         > .line {
-            background-color: var(--unique-color);
+            background-color: ${props => props.$color.rgba(0.1)};
         }
 
         > #info {
@@ -153,8 +147,8 @@ const Container = styled(Card)`
             gap: 40px;
 
             > #name {
-                color: var(--unique-color);
-                text-shadow: 0 0 30px var(--unique-color);
+                color: ${props => props.$color.rgba(0.1)};
+                text-shadow: 0 0 30px ${props => props.$color.rgba(0.1)};
                 font-size: 35px;
                 font-family: ${() => Appearance.schema.FONT_BOLD};
                 margin: 0;
@@ -181,7 +175,7 @@ const Container = styled(Card)`
 
                     &.value {
                         font-family: ${() => Appearance.schema.FONT_BOLD};
-                        color: var(--unique-color);
+                        color: ${props => props.$color.rgba(0.1)};
                     }
                 }
             }
@@ -206,7 +200,7 @@ const Container = styled(Card)`
 
                 > #symbol {
                     margin-bottom: 5px;
-                    color: var(--unique-color);
+                    color: ${props => props.$color.rgba(0.1)};
                 }
             }
 
