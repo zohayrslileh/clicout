@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/react"
 import styled from "@emotion/styled"
+import noice from "@/View/Media/noise.png"
 import React from "react"
 
 /**
@@ -14,12 +15,8 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.H
      * 
      */
     return <Container {...props}>
-        <div className="layer1">
-            <div className="tv-static animation1"></div>
-        </div>
-        <div className="layer2">
-            <div className="tv-static animation2"></div>
-        </div>
+        <div className="content" />
+        <div className="fuzzy-overlay" />
     </Container>
 }
 
@@ -28,54 +25,36 @@ export default function ({ children, ...props }: React.DetailedHTMLProps<React.H
  * 
  */
 const Container = styled.div`
-    display: flex;
     position: absolute;
-    width: 100%;
     height: 100%;
+    width: 100%;
+    overflow: hidden;
 
-    .layer1 {
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .layer2 {
-        width: 100%;
-        margin-left: -100%;
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .tv-static {
-        width: 100%;
+    > .content {
         height: 100%;
-        margin: auto;
-        background-image: repeating-radial-gradient(circle at 17% 32%, white, black 0.00085px);
+        width: 100%;
+        display: grid;
+        place-items: center;
+        z-index: 5;
+        position: relative;
     }
 
-    .animation1 {
+    .fuzzy-overlay {
+        position: absolute;
+        inset: -200%;
+        background-image: url(${noice});
+        opacity: 25%;
+        z-index: 0;
         animation: ${keyframes`
 
-            from {
-                background-size: 100% 100%;
-            } 
-
-            to {
-                background-size: 99% 100%;
+            0% {
+                transform: translateX(10%) translateY(10%);
             }
 
-        `} 1s linear infinite;
-    }
-
-    .animation2 {
-        animation: ${keyframes`
-
-            from {
-                background-size: 48.56% 50%;
+            100% {
+                transform: translateX(-10%) translateY(-10%);
             }
-
-            to {
-                background-size: 43.9% 50.1%;
-            }
-      
-        `} 0.1s linear infinite;
+            
+        `} 0.2s linear infinite both;
     }
 `
