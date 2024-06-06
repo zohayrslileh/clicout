@@ -203,15 +203,6 @@ export default class User {
         // Set plan entity
         subscriptionEntity.plan = planEntity
 
-        // Expire date
-        const expireDate = new Date
-
-        // Set date
-        expireDate.setDate(expireDate.getDate() + 30)
-
-        // Set expire at
-        subscriptionEntity.expireAt = invoice ? null : expireDate
-
         // Set payment invoice
         subscriptionEntity.paymentInvoice = invoice ? invoice.id : null
 
