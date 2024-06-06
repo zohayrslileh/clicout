@@ -139,6 +139,7 @@ const Container = styled(Card)`
         text-align: start;
         align-content: space-evenly;
         margin-inline: 15px;
+        gap: 30px;
 
         > p {
             margin: 0;

@@ -1,10 +1,9 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import JsonView from "@/View/Components/JsonView"
 import { useParams } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
-import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
+import Row from "./Row"
 
 /**
  * Payment
@@ -31,14 +30,5 @@ export default function () {
     // Exception status
     if (plan.exception) return <Throw exception={plan.exception.current} />
 
-    return <Container>
-        <JsonView json={plan.solve} />
-    </Container>
+    return <Row plan={plan.solve} />
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-`
