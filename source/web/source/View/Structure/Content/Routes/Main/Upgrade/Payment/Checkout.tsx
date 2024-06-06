@@ -40,7 +40,12 @@ export default function ({ plan }: Props) {
      * Subscribe promise
      * 
      */
-    const subscribe = usePromise(async () => await user.subscribe(plan))
+    const subscribe = usePromise(async function () {
+
+        const subscription = await user.subscribe(plan)
+
+        if (typeof subscription === "string") window.open(subscription, "_self")
+    })
 
     return <Container>
         <div id="content" className={`plan-${plan.id}`}>

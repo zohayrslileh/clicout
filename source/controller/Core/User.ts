@@ -3,6 +3,7 @@ import UnauthorizedException from "./Exception/Unauthorized"
 import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
+import Invoice from "./Invoice"
 import Plan from "./Plan"
 import zod from "zod"
 
@@ -166,6 +167,15 @@ export default class User {
 
         // Find plan entity
         const planEntity = await PlanEntity.findOneByOrFail({ id: plan.id })
+
+        // Check is free
+        if (planEntity.price) {
+
+            // Create invoice
+            const invoice = await Invoice.create({ priceAmount: planEntity.price, payCurrency: "usdttrc20" })
+
+            return invoice.paymentLink
+        }
 
         // Find user entity
         const userEntity = await UserEntity.findOneOrFail({ relations: { subscription: true }, where: { id: this.id } })
