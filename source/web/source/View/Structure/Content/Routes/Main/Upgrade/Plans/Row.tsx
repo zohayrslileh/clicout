@@ -34,10 +34,10 @@ export default function ({ plan }: Props) {
 
     return <Container className={`plan-${plan.id}`}>
         <p id="name">{plan.name}</p>
-        <p id="price">
+        <div id="price">
             <p id="value">{plan.price}</p>
             <p id="symbol">$/<Lang>month</Lang></p>
-        </p>
+        </div>
         <div id="features">
             <p className="label"><Lang>Max attacks</Lang></p>
             <p className="value">{plan.threads}</p>

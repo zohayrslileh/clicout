@@ -51,10 +51,10 @@ export default function ({ plan }: Props) {
                 </div>
             </div>
             <div id="payment">
-                <p id="price">
+                <div id="price">
                     <p id="value">{plan.price}</p>
                     <p id="symbol">$/<Lang>month</Lang></p>
-                </p>
+                </div>
                 <div id="methods">
                     {plan.price ? <Fragment>
                         <Button onClick={() => navigate(`${plan.id}`)}><SiTether /><Lang>Payment</Lang></Button>
