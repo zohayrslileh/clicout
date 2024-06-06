@@ -1,5 +1,7 @@
+import { GiBatteredAxe, GiBirdClaw, GiBladeBite } from "react-icons/gi"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
+import { IconType } from "react-icons/lib"
 
 /*
 |-----------------------------
@@ -27,6 +29,12 @@ export default class Plan {
      * 
      */
     public name: string
+
+    /**
+     * Avatar
+     * 
+     */
+    public avatar: IconType
 
     /**
      * Price
@@ -69,6 +77,9 @@ export default class Plan {
 
         // Set name
         this.name = primitivePlan.name
+
+        // Set avatar
+        this.avatar = avatars[primitivePlan.id]
 
         // Set price
         this.price = primitivePlan.price
@@ -149,3 +160,9 @@ export interface PrimitivePlan {
     customizeCities: boolean
     customizeDevices: boolean
 }
+
+/**
+ * Avatars
+ * 
+ */
+export const avatars = [GiBatteredAxe, GiBirdClaw, GiBladeBite]

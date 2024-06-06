@@ -1,4 +1,3 @@
-import { GiBatteredAxe, GiBirdClaw, GiBladeBite } from "react-icons/gi"
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Button from "@/View/Components/Button"
@@ -22,7 +21,7 @@ export default function ({ plan }: Props) {
     const navigate = useNavigate()
 
     return <Container className={`plan-${plan.id}`}>
-        <p id="name">{avatars[plan.id - 1]}{plan.name}</p>
+        <p id="name"><plan.avatar />{plan.name}</p>
         <div id="price">
             <p id="value">{plan.price}</p>
             <p id="symbol">$/<Lang>month</Lang></p>
@@ -52,12 +51,6 @@ const TrueFeature = <IoCheckmarkSharp style={{ color: "#5fce5f" }} />
  * 
  */
 const FalseFeature = <IoCloseSharp style={{ color: "#ee3d3d" }} />
-
-/**
- * Avatars
- * 
- */
-const avatars = [<GiBatteredAxe />, <GiBirdClaw />, <GiBladeBite />]
 
 /**
  * Props

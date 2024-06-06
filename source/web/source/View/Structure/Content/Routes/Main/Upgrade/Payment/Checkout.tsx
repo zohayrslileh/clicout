@@ -1,4 +1,3 @@
-import { GiBatteredAxe, GiBirdClaw, GiBladeBite } from "react-icons/gi"
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Subscription from "@/Core/Subscription"
@@ -61,7 +60,7 @@ export default function ({ plan }: Props) {
     return <Container>
         <div id="content" className={`plan-${plan.id}`}>
             <div id="info">
-                <p id="name">{avatars[plan.id - 1]}{plan.name}</p>
+                <p id="name"><plan.avatar />{plan.name}</p>
                 <div id="features">
                     <p className="label"><Lang>Max attacks</Lang></p>
                     <p className="value">{plan.threads}</p>
@@ -103,12 +102,6 @@ const TrueFeature = <IoCheckmarkSharp style={{ color: "#5fce5f" }} />
  * 
  */
 const FalseFeature = <IoCloseSharp style={{ color: "#ee3d3d" }} />
-
-/**
- * Avatars
- * 
- */
-const avatars = [<GiBatteredAxe />, <GiBirdClaw />, <GiBladeBite />]
 
 /**
  * Props
