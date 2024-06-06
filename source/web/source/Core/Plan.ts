@@ -79,7 +79,7 @@ export default class Plan {
         this.name = primitivePlan.name
 
         // Set avatar
-        this.avatar = avatars[primitivePlan.id]
+        this.avatar = avatars[primitivePlan.id - 1]
 
         // Set price
         this.price = primitivePlan.price
