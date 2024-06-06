@@ -155,7 +155,10 @@ export default class User {
      */
     public async subscription() {
 
-        return await SubscriptionEntity.findOneBy({ user: { id: this.id } })
+        // Subscription entity
+        var subscriptionEntity = await SubscriptionEntity.findOneBy({ user: { id: this.id } })
+
+        return subscriptionEntity
     }
 
     /**
