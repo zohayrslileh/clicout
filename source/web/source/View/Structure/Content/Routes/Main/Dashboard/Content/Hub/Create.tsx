@@ -315,6 +315,7 @@ const Container = styled(Card)`
     > #right {
         grid-area: right;
         padding: 2px;
+        overflow: auto;
     }
 
     > #bottom {
