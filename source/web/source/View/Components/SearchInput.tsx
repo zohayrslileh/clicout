@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
+import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 import TextInput from "./TextInput"
 
@@ -7,13 +8,34 @@ import TextInput from "./TextInput"
  * 
  * @returns 
  */
-export default function <Option>({ options, value, onSearch, onChange, onLabel, ...props }: Props<Option>) {
+export default function <Option>({ options, value, onSearch, onChange, ...props }: Props<Option>) {
 
     /**
      * Keyword
      * 
      */
-    const [keyword, setKeyword] = useState("")
+    const [keyword, setKeyword] = useState<string>("")
+
+    /**
+     * Search method
+     * 
+     * @returns
+     */
+    const search: Search<Option> = useCallback(async function (keyword: string) {
+
+        // Custom search resolve
+        if (onSearch) return await onSearch(keyword)
+
+        // Default search resolve
+        return options.filter(([_, label]) => label.startsWith(keyword))
+
+    }, [onSearch])
+
+    /**
+     * Search promise
+     * 
+     */
+    const searchPromise = usePromise(async () => await search(keyword), [keyword])
 
     /**
      * Container
@@ -22,7 +44,7 @@ export default function <Option>({ options, value, onSearch, onChange, onLabel, 
     return <Container {...props}>
         <TextInput value={keyword} onChange={setKeyword} />
         <ul id="items">
-            {onSearch(options, keyword).map((option, index) => <li key={index} onClick={() => onChange(option)}>{onLabel(option)}</li>)}
+            {searchPromise.solve ? searchPromise.solve.map(([option, label], index) => <li key={index} onClick={() => onChange(option)}>{label}</li>) : "Loading..."}
         </ul>
     </Container>
 }
@@ -32,12 +54,17 @@ export default function <Option>({ options, value, onSearch, onChange, onLabel, 
  * 
  */
 interface Props<Option> extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "children" | "onChange"> {
-    options: Option[]
-    onLabel: (option: Option) => React.ReactNode
-    onSearch: (options: Option[], keyword: string) => Option[]
+    options: [Option, string][]
+    onSearch?: Search<Option>
     value: Option
     onChange: (option: Option) => void
 }
+
+/**
+ * Search
+ * 
+ */
+type Search<Option> = (keyword: string) => Promise<[Option, string][]> | [Option, string][]
 
 /**
  * Container
