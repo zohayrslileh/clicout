@@ -1,4 +1,5 @@
 import request from "@/Models/Server/Request"
+import { PrimitiveCity } from "./City"
 
 /*
 |-----------------------------
@@ -50,11 +51,24 @@ export default class Country {
      */
     public static async find() {
 
-        // Ask primitive countrys
-        const primitiveCountrys = await request<PrimitiveCountry[]>({ url: "/main/country" })
+        // Ask primitive countries
+        const primitiveCountries = await request<PrimitiveCountry[]>({ url: "/main/country" })
 
-        // Initialize countrys
-        return primitiveCountrys.map(primitiveCountry => new this(primitiveCountry))
+        // Initialize countries
+        return primitiveCountries.map(primitiveCountry => new this(primitiveCountry))
+    }
+
+    /**
+     * Cities method
+     * 
+     * @returns
+     */
+    public async cities() {
+
+        // Ask primitive cities
+        const primitiveCities = await request<PrimitiveCity[]>({ url: `/main/country/${this.id}/cities` })
+
+        return primitiveCities
     }
 }
 
