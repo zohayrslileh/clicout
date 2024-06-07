@@ -1,3 +1,4 @@
+import TextInput from "@/View/Components/TextInput"
 import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
 import Card from "@/View/Components/Card"
@@ -13,7 +14,12 @@ export default function () {
 
     return <Container>
         <div id="left">
-            LEFT
+            <div>
+                <TextInput placeholder="Add keyword" value="" onChange={x => x} />
+            </div>
+            <div>
+                <TextInput placeholder="Add keyword" value="" onChange={x => x} />
+            </div>
         </div>
         <div id="right">
             RIGHT
