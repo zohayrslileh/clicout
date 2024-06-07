@@ -27,7 +27,7 @@ export default Router.create<Environment>(function (country) {
      * Cities
      * 
      */
-    country.post("/cities", async context => context.json(await context.var.country.cities()))
+    country.get("/cities", async context => context.json(await context.var.country.cities()))
 })
 
 /*
