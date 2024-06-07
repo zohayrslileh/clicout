@@ -1,12 +1,12 @@
 import TextInput from "@/View/Components/TextInput"
 import Checkbox from "@/View/Components/Checkbox"
+import { Lang, useLang } from "@/Tools/Language"
 import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
 import { useCallback, useState } from "react"
 import { IoIosClose } from "react-icons/io"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
-import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 
 /**
@@ -15,6 +15,12 @@ import styled from "@emotion/styled"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Keywords
@@ -53,11 +59,9 @@ export default function () {
      */
     const appendKeyword = useCallback(function () {
 
-        const newKeywords = keyword.split(",").filter(keyword => keyword).map(keyword => keyword.trim())
+        if (!keyword || keywords.length >= 20) return
 
-        if (!newKeywords.length || newKeywords.length + keywords.length >= 20) return
-
-        setKeywords(keywords => [...keywords, ...newKeywords])
+        setKeywords(keywords => [...keywords, keyword])
 
         setKeyword("")
 
@@ -81,11 +85,9 @@ export default function () {
      */
     const appendDomain = useCallback(function () {
 
-        const newDomains = domain.split(",").filter(domain => domain).map(domain => domain.trim())
+        if (!domain || domains.length >= 20) return
 
-        if (!newDomains.length || newDomains.length + domains.length >= 20) return
-
-        setDomains(domains => [...domains, ...newDomains])
+        setDomains(domains => [...domains, domain])
 
         setDomain("")
 
@@ -114,8 +116,8 @@ export default function () {
                 </div>
                 <div id="text-zone">
                     <TextInput
-                        placeholder="Add new keyword"
-                        value={keyword} onChange={setKeyword}
+                        placeholder={lang("Enter new keyword")}
+                        value={keyword} onChange={keyword => setKeyword(keyword.slice(0, 20))}
                         onKeyDown={event => event.key === "Enter" && appendKeyword()}
                         disabled={keywords.length >= 20}
                     />
@@ -142,8 +144,8 @@ export default function () {
                 </div>
                 <div id="text-zone">
                     <TextInput
-                        placeholder="Add new domain"
-                        value={domain} onChange={setDomain}
+                        placeholder={lang("Enter new domain")}
+                        value={domain} onChange={domain => setDomain(domain.slice(0, 20))}
                         onKeyDown={event => event.key === "Enter" && appendDomain()}
                         disabled={domains.length >= 20}
                     />
@@ -152,7 +154,6 @@ export default function () {
             </div>
         </div>
         <div id="right">
-            RIGHT
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
     </Container>
