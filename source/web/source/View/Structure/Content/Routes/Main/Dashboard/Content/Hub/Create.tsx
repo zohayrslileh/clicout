@@ -1,3 +1,4 @@
+import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
 import Checkbox from "@/View/Components/Checkbox"
 import { Lang, useLang } from "@/Tools/Language"
@@ -7,7 +8,11 @@ import { useCallback, useState } from "react"
 import { IoIosClose } from "react-icons/io"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
+import { Throw } from "@/Tools/Exception"
+import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
+import Country from "@/Core/Country"
+import JsonView from "@/View/Components/JsonView"
 
 /**
  * Create
@@ -104,6 +109,18 @@ export default function () {
 
     }, [])
 
+    /**
+     * Countries promise
+     * 
+     */
+    const countries = usePromise(async () => await Country.find(), [])
+
+    // Pending status
+    if (countries.pending) return <Throw exception={new PendingException} />
+
+    // Exception status
+    if (countries.exception) return <Throw exception={countries.exception.current} />
+
     return <Container>
         <div id="left">
             <div className="card">
@@ -154,6 +171,7 @@ export default function () {
             </div>
         </div>
         <div id="right">
+            <JsonView json={countries.solve} />
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
     </Container>
