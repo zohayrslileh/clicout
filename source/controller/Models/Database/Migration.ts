@@ -65,6 +65,9 @@ export default async function () {
         // Left cities
         var leftCities = primitiveCities.value.length
 
+        // Countries
+        const countries = await Country.find()
+
         // Fetch primitive cities
         for (const primitiveCity of primitiveCities.value) {
 
@@ -74,8 +77,14 @@ export default async function () {
             // Set primitive country
             Object.assign(city, primitiveCity)
 
+            // Find country
+            const country = countries.find(country => country.code === String(city.country))
+
+            // Check country
+            if (!country) throw Error
+
             // Set country
-            city.country = await Country.findOneByOrFail({ code: String(city.country) })
+            city.country = country
 
             // Save
             await city.save()
