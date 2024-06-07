@@ -121,6 +121,12 @@ export default function () {
      */
     const countries = usePromise(async () => await Country.find(), [])
 
+    /**
+     * Cities promise
+     * 
+     */
+    const cities = usePromise(async () => country ? await country.cities() : undefined, [country])
+
     // Pending status
     if (countries.pending) return <Throw exception={new PendingException} />
 
@@ -179,6 +185,7 @@ export default function () {
         <div id="right">
             <b>{country ? country.name : "Not found"}</b>
             <SearchInput options={countries.solve.map(country => [country, country.name])} value={country} onChange={country => setCountry(country)} />
+            {cities.solve ? cities.solve[0].name : "Select country"}
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
     </Container>
