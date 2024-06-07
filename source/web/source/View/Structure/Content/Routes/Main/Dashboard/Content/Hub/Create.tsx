@@ -129,11 +129,11 @@ export default function () {
                     <Lang>Domains</Lang>
                     <label>
                         <Checkbox checked={domainsAction === "CLICK"} onChange={() => setDomainsAction("CLICK")} />
-                        <p><Lang>Click all and skip this domains</Lang></p>
+                        <p><Lang>Click this domains</Lang></p>
                     </label>
                     <label>
                         <Checkbox checked={domainsAction === "SKIP"} onChange={() => setDomainsAction("SKIP")} />
-                        <p><Lang>Skip all and click this domains</Lang></p>
+                        <p><Lang>Skip this domains</Lang></p>
                     </label>
                 </div>
                 <div id="body">
