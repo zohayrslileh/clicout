@@ -197,13 +197,13 @@ const Container = styled(Card)`
         grid-template-rows: 1fr 1fr;
         gap: 20px;
         overflow: auto;
-        padding-inline-end: 5px;
 
         > .card {
             display: grid;
             grid-template-rows: auto 1fr auto;
             position: relative;
             overflow: auto;
+            padding: 1px;
 
             > #title {
                 margin: 0;
@@ -316,7 +316,6 @@ const Container = styled(Card)`
         grid-area: right;
         padding: 2px;
         overflow: auto;
-        padding-inline-start: 5px;
     }
 
     > #bottom {
