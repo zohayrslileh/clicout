@@ -1,4 +1,5 @@
 import CountryEntity from "@/Models/Database/Entities/Country"
+import CityEntity from "@/Models/Database/Entities/City"
 
 /*
 |-----------------------------
@@ -55,6 +56,17 @@ export default class Country {
 
         // Initialize countrys
         return countryEntities.map(countryEntity => new Country(countryEntity))
+    }
+
+    /**
+     * Cities method
+     * 
+     * @returns
+     */
+    public async cities(limit: number = 20) {
+
+        // Initialize countrys
+        return await CityEntity.find({ where: { country: { id: this.id } }, take: limit })
     }
 }
 
