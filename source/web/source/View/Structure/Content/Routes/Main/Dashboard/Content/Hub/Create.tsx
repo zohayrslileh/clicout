@@ -1,6 +1,7 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import TextInput from "@/View/Components/TextInput"
 import Checkbox from "@/View/Components/Checkbox"
+import JsonView from "@/View/Components/JsonView"
 import { Lang, useLang } from "@/Tools/Language"
 import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
@@ -12,7 +13,6 @@ import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 import Country from "@/Core/Country"
-import JsonView from "@/View/Components/JsonView"
 
 /**
  * Create
@@ -197,7 +197,7 @@ const Container = styled(Card)`
         grid-template-rows: 1fr 1fr;
         gap: 20px;
         overflow: auto;
-        padding: 2px;
+        padding-inline-end: 5px;
 
         > .card {
             display: grid;
@@ -316,6 +316,7 @@ const Container = styled(Card)`
         grid-area: right;
         padding: 2px;
         overflow: auto;
+        padding-inline-start: 5px;
     }
 
     > #bottom {
