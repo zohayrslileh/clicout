@@ -29,6 +29,18 @@ export default function () {
     const [keyword, setKeyword] = useState<string>("")
 
     /**
+     * Domains
+     * 
+     */
+    const [domains, setDomains] = useState<string[]>([])
+
+    /**
+     * Domain
+     * 
+     */
+    const [domain, setDomain] = useState<string>("")
+
+    /**
      * Domains action state
      * 
      */
@@ -41,9 +53,11 @@ export default function () {
      */
     const appendKeyword = useCallback(function () {
 
-        if (!keyword || keywords.length >= 20) return
+        const newKeywords = keyword.split(",").filter(keyword => keyword).map(keyword => keyword.trim())
 
-        setKeywords(keywords => [...keywords, keyword])
+        if (!newKeywords.length || newKeywords.length + keywords.length >= 20) return
+
+        setKeywords(keywords => [...keywords, ...newKeywords])
 
         setKeyword("")
 
@@ -58,29 +72,58 @@ export default function () {
 
         setKeywords(keywords => keywords.filter(item => item !== keyword))
 
-    }, [keyword])
+    }, [])
+
+    /**
+     * Append domain method
+     * 
+     * @returns
+     */
+    const appendDomain = useCallback(function () {
+
+        const newDomains = domain.split(",").filter(domain => domain).map(domain => domain.trim())
+
+        if (!newDomains.length || newDomains.length + domains.length >= 20) return
+
+        setDomains(domains => [...domains, ...newDomains])
+
+        setDomain("")
+
+    }, [domain])
+
+    /**
+     * Remove domain method
+     * 
+     * @returns
+     */
+    const removeDomain = useCallback(function (domain: string) {
+
+        setDomains(domains => domains.filter(item => item !== domain))
+
+    }, [])
 
     return <Container>
         <div id="left">
             <div className="card">
-                <p><Lang>Keywords</Lang></p>
+                <div id="title"><Lang>Keywords</Lang></div>
                 <div id="body">
                     <div id="items">
                         {keywords.map(keyword => <p className="item" key={keyword}>{keyword}<IoIosClose size={18} onClick={() => removeKeyword(keyword)} /></p>)}
                     </div>
-                    <p id="size">{keywords.length}/20</p>
+                    <p id="size">{keywords.length}/20 <button onClick={() => setKeywords([])}><Lang>Clear all</Lang></button></p>
                 </div>
                 <div id="text-zone">
                     <TextInput
                         placeholder="Add new keyword"
-                        value={keyword} onChange={keyword => setKeyword(keyword.slice(0, 20))}
+                        value={keyword} onChange={setKeyword}
                         onKeyDown={event => event.key === "Enter" && appendKeyword()}
+                        disabled={keywords.length >= 20}
                     />
                     <button onClick={appendKeyword}><Lang>Add</Lang></button>
                 </div>
             </div>
             <div className="card" id="domains">
-                <p>
+                <div id="title">
                     <Lang>Domains</Lang>
                     <label>
                         <Checkbox checked={domainsAction === "CLICK"} onChange={() => setDomainsAction("CLICK")} />
@@ -90,13 +133,21 @@ export default function () {
                         <Checkbox checked={domainsAction === "SKIP"} onChange={() => setDomainsAction("SKIP")} />
                         <p><Lang>Skip all and click this domains</Lang></p>
                     </label>
-                </p>
+                </div>
                 <div id="body">
-                    <p id="size">0/20</p>
+                    <div id="items">
+                        {domains.map(domain => <p className="item" key={domain}>{domain}<IoIosClose size={18} onClick={() => removeDomain(domain)} /></p>)}
+                    </div>
+                    <p id="size">{domains.length}/20 <button onClick={() => setDomains([])}><Lang>Clear all</Lang></button></p>
                 </div>
                 <div id="text-zone">
-                    <TextInput placeholder="Add new domain" value="" onChange={x => x} />
-                    <button><Lang>Add</Lang></button>
+                    <TextInput
+                        placeholder="Add new domain"
+                        value={domain} onChange={setDomain}
+                        onKeyDown={event => event.key === "Enter" && appendDomain()}
+                        disabled={domains.length >= 20}
+                    />
+                    <button onClick={appendDomain}><Lang>Add</Lang></button>
                 </div>
             </div>
         </div>
@@ -127,6 +178,7 @@ const Container = styled(Card)`
         grid-template-rows: 1fr 1fr;
         gap: 20px;
         overflow: auto;
+        padding: 2px;
 
         > .card {
             display: grid;
@@ -134,11 +186,11 @@ const Container = styled(Card)`
             position: relative;
             overflow: auto;
 
-            > p {
+            > #title {
                 margin: 0;
                 margin-bottom: 10px;
                 font-size: 13px;
-                opacity: 0.5;
+                opacity: 0.8;
             }
 
             > #body {
@@ -146,13 +198,15 @@ const Container = styled(Card)`
                 border-bottom: none;
                 position: relative;
                 overflow: auto;
-                padding: 15px;
                 overflow: auto;
                 display: grid;
                 grid-template-rows: 1fr auto;
+                gap: 10px;
 
                 > #items {
                     overflow: auto;
+                    padding: 10px;
+                    padding-bottom: 0;
 
                     ::-webkit-scrollbar {
                         display: none;
@@ -169,6 +223,7 @@ const Container = styled(Card)`
                         font-size: 11px;
                         align-items: center;
                         gap: 5px;
+                        box-shadow: 0 0 10px ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
 
                         > svg {
                             cursor: pointer;
@@ -182,6 +237,21 @@ const Container = styled(Card)`
                     justify-self: end;
                     opacity: 0.5;
                     margin: 0;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 5px;
+                    padding: 10px;
+                    padding-top: 0;
+
+                    > button {
+                        padding: 0;
+                        border: none;
+                        background-color: transparent;
+                        color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
+                        text-transform: uppercase;
+                        cursor: pointer;
+                        outline: none;
+                    }
                 }
             }
 
@@ -206,7 +276,7 @@ const Container = styled(Card)`
 
         > #domains {
 
-            > p {
+            > #title {
                 display: grid;
                 grid-template-columns: 100px 1fr 1fr;
 
@@ -225,6 +295,7 @@ const Container = styled(Card)`
 
     > #right {
         grid-area: right;
+        padding: 2px;
     }
 
     > #bottom {

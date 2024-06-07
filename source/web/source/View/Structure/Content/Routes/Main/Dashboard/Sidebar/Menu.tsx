@@ -63,7 +63,6 @@ const Container = styled.div`
         padding-inline-end: 50px;
         padding-inline-start: 15px;
         position: relative;
-        font-size: 15px;
 
         &.active, &:hover {
             
