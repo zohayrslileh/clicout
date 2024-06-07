@@ -26,10 +26,10 @@ const Container = styled(Card)`
     grid-area: sidebar;
     display: grid;
     grid-template-rows: auto 1fr;
-    padding: 15px;
+    padding: 10px;
 
     > #logo {
         margin-inline: auto;
-        margin-block: 30px;
+        margin-block: 25px;
     }
 `
