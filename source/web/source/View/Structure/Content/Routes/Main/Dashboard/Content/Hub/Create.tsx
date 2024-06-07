@@ -1,7 +1,7 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import SearchInput from "@/View/Components/SearchInput"
 import TextInput from "@/View/Components/TextInput"
 import Checkbox from "@/View/Components/Checkbox"
-import JsonView from "@/View/Components/JsonView"
 import { Lang, useLang } from "@/Tools/Language"
 import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
@@ -56,6 +56,12 @@ export default function () {
      * 
      */
     const [domainsAction, setDomainsAction] = useState<"CLICK" | "SKIP">("CLICK")
+
+    /**
+     * Country
+     * 
+     */
+    const [country, setCountry] = useState<Country | undefined>(undefined)
 
     /**
      * Append keyword method
@@ -171,7 +177,14 @@ export default function () {
             </div>
         </div>
         <div id="right">
-            <JsonView json={countries.solve} />
+            <b>{country ? country.name : "Not found"}</b>
+            <SearchInput
+                options={countries.solve}
+                value={country}
+                onChange={country => setCountry(country)}
+                onLabel={country => country ? country.name : "Not found"}
+                onSearch={(options, keyword) => options.filter(option => option && option.name.startsWith(keyword))}
+            />
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
     </Container>
