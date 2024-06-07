@@ -61,7 +61,7 @@ export default function () {
 
         if (!keyword || keywords.length >= 20) return
 
-        setKeywords(keywords => [...keywords, keyword])
+        setKeywords(keywords => [...keywords, keyword.trim()])
 
         setKeyword("")
 
@@ -85,9 +85,9 @@ export default function () {
      */
     const appendDomain = useCallback(function () {
 
-        if (!domain || domains.length >= 20) return
+        if (!domain || domains.length >= 20 || !/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domain)) return
 
-        setDomains(domains => [...domains, domain])
+        setDomains(domains => [...domains, domain.trim()])
 
         setDomain("")
 
