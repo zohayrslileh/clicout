@@ -1,6 +1,7 @@
 import TextInput from "@/View/Components/TextInput"
 import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
+import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
@@ -14,11 +15,13 @@ export default function () {
 
     return <Container>
         <div id="left">
-            <div>
+            <div className="card">
+                <div id="body"></div>
                 <TextInput placeholder="Add keyword" value="" onChange={x => x} />
             </div>
-            <div>
-                <TextInput placeholder="Add keyword" value="" onChange={x => x} />
+            <div className="card">
+                <div id="body"></div>
+                <TextInput placeholder="Add domain" value="" onChange={x => x} />
             </div>
         </div>
         <div id="right">
@@ -44,12 +47,24 @@ const Container = styled(Card)`
 
     > #left {
         grid-area: left;
-        margin: auto;
+        display: grid;
+        gap: 20px;
+
+        > .card {
+            display: grid;
+            grid-template-rows: 1fr auto;
+
+            > #body {
+                border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.16)};
+                border-bottom: none;
+                overflow: auto;
+                padding: 15px;
+            }
+        }
     }
 
     > #right {
         grid-area: right;
-        margin: auto;
     }
 
     > #bottom {
