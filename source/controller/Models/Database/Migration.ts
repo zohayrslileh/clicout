@@ -19,7 +19,10 @@ export default async function () {
         const primitivePlans = new Json<unknown[]>("assets/database/plans.json")
 
         // Fetch primitive plans
-        for (const primitivePlan of primitivePlans.value) {
+        for (const keyPlan in primitivePlans.value) {
+
+            // Primitive plan
+            const primitivePlan = primitivePlans.value[keyPlan]
 
             // Initialize plan
             const plan = new Plan
@@ -30,7 +33,7 @@ export default async function () {
             // Save
             await plan.save()
 
-            console.log("- Migration plan: ", plan.name)
+            console.log("- Migration plan: ", plan.name, "Left: ", primitivePlans.value.length - +keyPlan)
         }
     }
 
@@ -41,7 +44,10 @@ export default async function () {
         const primitiveCountries = new Json<unknown[]>("assets/database/countries.json")
 
         // Fetch primitive countries
-        for (const primitiveCountry of primitiveCountries.value) {
+        for (const keyCountry in primitiveCountries.value) {
+
+            // Primitive country
+            const primitiveCountry = primitiveCountries.value[keyCountry]
 
             // Initialize country
             const country = new Country
@@ -52,7 +58,7 @@ export default async function () {
             // Save
             await country.save()
 
-            console.log("- Migration country: ", country.name)
+            console.log("- Migration plan: ", country.name, "Left: ", primitiveCountries.value.length - +keyCountry)
         }
     }
 
@@ -63,7 +69,10 @@ export default async function () {
         const primitiveCities = new Json<unknown[]>("assets/database/cities.json")
 
         // Fetch primitive cities
-        for (const primitiveCity of primitiveCities.value) {
+        for (const keyCity in primitiveCities.value) {
+
+            // Primitive city
+            const primitiveCity = primitiveCities.value[keyCity]
 
             // Initialize city
             const city = new City
@@ -77,7 +86,7 @@ export default async function () {
             // Save
             await city.save()
 
-            console.log("- Migration city: ", city.name)
+            console.log("- Migration plan: ", city.name, "Left: ", primitiveCities.value.length - +keyCity)
         }
     }
 }
