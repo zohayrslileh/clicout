@@ -40,6 +40,6 @@ export default function () {
 const Container = styled.div`
     grid-area: content;
     position: relative;
-    overflow: auto;
+    overflow: hidden;
     display: grid;
 `
