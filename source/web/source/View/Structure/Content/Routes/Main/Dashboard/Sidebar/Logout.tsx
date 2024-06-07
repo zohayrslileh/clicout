@@ -1,4 +1,5 @@
 import LinkButton from "@/View/Components/LinkButton"
+import { GiHoodedFigure } from "react-icons/gi"
 import { Lang } from "@/Tools/Language"
 import { useCallback } from "react"
 import User from "@/Core/User"
@@ -31,5 +32,5 @@ export default function () {
 
     }, [])
 
-    return <LinkButton to="" onClick={logout}><Lang>Logout</Lang></LinkButton>
+    return <LinkButton to="" onClick={logout}><GiHoodedFigure /><Lang>Logout</Lang></LinkButton>
 }

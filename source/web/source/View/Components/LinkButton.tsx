@@ -19,4 +19,8 @@ export default styled(Link)`
     outline: none;
     border: none;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
 `
