@@ -51,6 +51,7 @@ const Container = styled.div`
     gap: 10px;
     height: fit-content;
     margin-top: 10px;
+    margin-inline: 5px;
 
     > a {
         font-family: ${() => Appearance.schema.FONT_REGULAR};
