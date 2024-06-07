@@ -18,7 +18,7 @@ const schema = {
     COLOR_LIGHT: new Color("#DDE5F4"),
     COLOR_GREEN: new Color("#A1FF00"),
     COLOR_DARK: new Color("#001822"),
-    COLOR_BLUE: new Color("#3758FF")
+    COLOR_BLUE: new Color("#51A2ED")
 }
 
 export default schema
