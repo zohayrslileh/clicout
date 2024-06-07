@@ -1,6 +1,7 @@
 import Card from "@/View/Components/Card"
 import Logo from "@/View/Components/Logo"
 import styled from "@emotion/styled"
+import Logout from "./Logout"
 import Menu from "./Menu"
 import Plan from "./Plan"
 
@@ -15,6 +16,7 @@ export default function () {
         <Logo width={150} id="logo" />
         <Menu />
         <Plan />
+        <Logout />
     </Container>
 }
 
