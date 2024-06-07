@@ -15,7 +15,7 @@ export default function () {
     const plan = Plan.useContext()
 
     return <Container>
-        Plan: {plan.name}
+        <p id="current-plan"><plan.avatar color={plan.color.hex} /> {plan.name}</p>
     </Container>
 }
 
