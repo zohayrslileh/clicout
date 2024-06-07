@@ -41,7 +41,7 @@ export default function () {
      */
     const appendKeyword = useCallback(function () {
 
-        if (!keyword || keywords.length >= 200) return
+        if (!keyword || keywords.length >= 20) return
 
         setKeywords(keywords => [...keywords, keyword])
 
@@ -65,7 +65,9 @@ export default function () {
             <div className="card">
                 <p><Lang>Keywords</Lang></p>
                 <div id="body">
-                    {keywords.map(keyword => <p className="keyword" key={keyword}>{keyword}<IoIosClose size={15} onClick={() => removeKeyword(keyword)} /></p>)}
+                    <div id="items">
+                        {keywords.map(keyword => <p className="item" key={keyword}>{keyword}<IoIosClose size={18} onClick={() => removeKeyword(keyword)} /></p>)}
+                    </div>
                     <p id="size">{keywords.length}/20</p>
                 </div>
                 <div id="text-zone">
@@ -74,7 +76,7 @@ export default function () {
                         value={keyword} onChange={keyword => setKeyword(keyword.slice(0, 20))}
                         onKeyDown={event => event.key === "Enter" && appendKeyword()}
                     />
-                    {keyword && <button onClick={appendKeyword}><Lang>Add</Lang></button>}
+                    <button onClick={appendKeyword}><Lang>Add</Lang></button>
                 </div>
             </div>
             <div className="card" id="domains">
@@ -146,33 +148,38 @@ const Container = styled(Card)`
                 overflow: auto;
                 padding: 15px;
                 overflow: auto;
+                display: grid;
+                grid-template-rows: 1fr auto;
 
-                ::-webkit-scrollbar {
-                    display: none;
-                }
+                > #items {
+                    overflow: auto;
 
-                > .keyword {
-                    margin: 0;
-                    display: inline-flex;
-                    margin-inline-end: 10px;
-                    margin-block-end: 10px;
-                    background-color: ${() => Appearance.schema.COLOR_BLUE.rgba(0.2)};
-                    padding: 6px 5px;
-                    font-size: 11px;
-                    align-items: center;
-                    gap: 5px;
+                    ::-webkit-scrollbar {
+                        display: none;
+                    }
 
-                    > svg {
-                        cursor: pointer;
+                    > .item {
+                        margin: 0;
+                        display: inline-flex;
+                        margin-inline-end: 10px;
+                        margin-block-end: 10px;
+                        background-color: ${() => Appearance.schema.COLOR_BLUE.rgba(0.2)};
+                        border: 1px solid ${() => Appearance.schema.COLOR_WHITE.rgba(0.2)};
+                        padding: 6px 5px;
+                        font-size: 11px;
+                        align-items: center;
+                        gap: 5px;
+
+                        > svg {
+                            cursor: pointer;
+                        }
                     }
                 }
 
                 > #size {
                     color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
-                    position: absolute;
-                    right: 15px;
-                    bottom: 15px;
                     font-size: 13px;
+                    justify-self: end;
                     opacity: 0.5;
                     margin: 0;
                 }
