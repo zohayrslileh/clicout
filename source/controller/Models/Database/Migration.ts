@@ -81,7 +81,7 @@ export default async function () {
             const country = countries.find(country => country.code === String(city.country))
 
             // Check country
-            if (!country) throw Error
+            if (!country) continue
 
             // Set country
             city.country = country
