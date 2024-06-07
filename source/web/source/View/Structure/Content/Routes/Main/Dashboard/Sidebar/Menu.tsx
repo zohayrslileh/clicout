@@ -50,7 +50,6 @@ const Container = styled.div`
     display: grid;
     gap: 10px;
     height: fit-content;
-    margin-inline: 7px;
     margin-top: 10px;
 
     > a {
@@ -63,6 +62,7 @@ const Container = styled.div`
         padding-inline-end: 50px;
         padding-inline-start: 15px;
         position: relative;
+        font-size: 15px;
 
         &.active, &:hover {
             

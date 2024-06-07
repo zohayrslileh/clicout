@@ -37,8 +37,8 @@ const Container = styled.div`
     background-attachment: fixed;
     background-size: cover;
     position: absolute;
+    overflow: hidden;
     line-height: 1;
-    overflow: auto;
     height: 100%;
     width: 100%;
     left: 0;
