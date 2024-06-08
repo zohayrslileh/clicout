@@ -1,4 +1,5 @@
 import Json from "@/Tools/Json"
+import axios from "axios"
 
 /*
 |-----------------------------
@@ -9,9 +10,22 @@ import Json from "@/Tools/Json"
 */
 export default async function () {
 
-    const suggestions = new Json<Suggestion[]>("storage/suggestions.json")
+    const file = new Json<Suggestion[]>("storage/suggestions.json")
 
-    suggestions.update(suggestions => suggestions.filter(suggestion => suggestion.weight > 5000))
+    const suggestions = file.value
+
+    for (const suggestion of suggestions) {
+
+        const response = await axios<string>("https://www.teepublic.com/t-shirts?query=" + suggestion)
+
+        const domParser = new DOMParser
+
+        const dom = domParser.parseFromString(response.data, "text/html")
+
+        console.log(dom)
+
+        break
+    }
 
     console.log("The test completed successfully 🧪 ")
 }
@@ -22,5 +36,6 @@ export default async function () {
  */
 interface Suggestion {
     suggestion: string
+    pages: number
     weight: number
 }
