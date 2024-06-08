@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 import TextInput from "./TextInput"
@@ -36,6 +36,18 @@ export default function <Option>({ options, value, onSearch, onChange, ...props 
      * 
      */
     const searchPromise = usePromise(async () => await search(keyword), [keyword])
+
+    /**
+     * On value change
+     * 
+     */
+    useEffect(function () {
+
+        const option = options.find(([option]) => option === value)
+
+        if (option) setKeyword(option[1])
+
+    }, [value])
 
     /**
      * Container
