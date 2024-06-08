@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react"
 import usePromise from "@/Tools/Promise"
-import React, { useState } from "react"
 import styled from "@emotion/styled"
 import TextInput from "./TextInput"
 
@@ -21,6 +21,17 @@ export default function <Option>({ options, value, onLabel, onSearch, onChange, 
      * 
      */
     const searchPromise = usePromise(async () => await onSearch(keyword), [keyword])
+
+    /**
+     * On change value
+     * 
+     */
+    useEffect(function () {
+
+        // Set keyword
+        setKeyword(onLabel(value))
+
+    }, [value])
 
     /**
      * Container
