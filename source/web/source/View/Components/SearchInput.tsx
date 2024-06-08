@@ -20,7 +20,7 @@ export default function <Option>({ options, value, onLabel, onSearch, onChange, 
      * Search promise
      * 
      */
-    const searchPromise = usePromise(async () => await onSearch(keyword), [keyword])
+    const search = usePromise(async () => await onSearch(keyword), [keyword])
 
     /**
      * On change value
@@ -38,9 +38,9 @@ export default function <Option>({ options, value, onLabel, onSearch, onChange, 
      * 
      */
     return <Container {...props}>
-        <TextInput value={keyword} onChange={setKeyword} />
+        <TextInput value={keyword} onChange={setKeyword} disabled={search.pending} />
         <ul id="items">
-            {searchPromise.solve ? searchPromise.solve.map((option, index) => <li key={index} onClick={() => onChange(option)}>{onLabel(option)}</li>) : "Loading..."}
+            {search.solve ? search.solve.map((option, index) => <li key={index} onClick={() => onChange(option)}>{onLabel(option)}</li>) : "Loading..."}
         </ul>
     </Container>
 }
