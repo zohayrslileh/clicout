@@ -38,7 +38,7 @@ export default function <Option>({ options, value, onLabel, onSearch, onChange, 
      * 
      */
     return <Container {...props}>
-        <TextInput value={keyword} onChange={setKeyword} disabled={search.pending} />
+        <TextInput value={keyword} onChange={setKeyword} />
         <ul id="items">
             {search.solve ? search.solve.map((option, index) => <li key={index} onClick={() => onChange(option)}>{onLabel(option)}</li>) : "Loading..."}
         </ul>
