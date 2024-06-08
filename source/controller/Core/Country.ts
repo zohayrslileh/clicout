@@ -82,10 +82,10 @@ export default class Country {
      * 
      * @returns
      */
-    public async cities(limit: number = 20) {
+    public async cities() {
 
         // Initialize countries
-        return await CityEntity.find({ where: { country: { id: this.id } }, take: limit })
+        return await CityEntity.find({ where: { country: { id: this.id } } })
     }
 }
 

@@ -7,6 +7,7 @@ import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
 import { useCallback, useState } from "react"
 import { IoIosClose } from "react-icons/io"
+import { PrimitiveCity } from "@/Core/City"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Throw } from "@/Tools/Exception"
@@ -62,6 +63,12 @@ export default function () {
      * 
      */
     const [country, setCountry] = useState<Country | undefined>(undefined)
+
+    /**
+     * City
+     * 
+     */
+    const [city, setCity] = useState<PrimitiveCity | undefined>(undefined)
 
     /**
      * Append keyword method
@@ -133,6 +140,12 @@ export default function () {
     // Exception status
     if (countries.exception) return <Throw exception={countries.exception.current} />
 
+    /**
+     * Cities list
+     * 
+     */
+    const citiesList = cities.solve
+
     return <Container>
         <div id="left">
             <div className="card">
@@ -183,15 +196,22 @@ export default function () {
             </div>
         </div>
         <div id="right">
-            <b>{country ? country.name : "Not found"}</b>
             <SearchInput<Country>
                 options={countries.solve}
                 onLabel={country => country.name}
                 onSearch={keyword => countries.solve.filter(country => country.name.startsWith(keyword))}
                 value={country || countries.solve[0]}
                 onChange={country => setCountry(country)}
+                style={{ width: "300px" }}
             />
-            {cities.solve ? cities.solve[0].name : "Select country"}
+            {citiesList && <SearchInput<PrimitiveCity | undefined>
+                options={citiesList}
+                onLabel={city => city ? city.name : ""}
+                onSearch={keyword => citiesList.filter(city => city.name.startsWith(keyword))}
+                value={city}
+                onChange={city => setCity(city)}
+                style={{ width: "300px" }}
+            />}
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
     </Container>
