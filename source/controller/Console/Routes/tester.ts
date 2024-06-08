@@ -20,7 +20,7 @@ export default async function () {
         do {
 
             try {
-                var response = await axios<string>("https://www.teepublic.com/t-shirts?query=" + suggestion)
+                var response = await axios<string>("https://www.teepublic.com/t-shirts?query=" + suggestion.suggestion)
                 break
             }
             catch {
