@@ -17,7 +17,16 @@ export default async function () {
 
     for (const suggestion of suggestions) {
 
-        const response = await axios<string>("https://www.teepublic.com/t-shirts?query=" + suggestion)
+        do {
+
+            try {
+                var response = await axios<string>("https://www.teepublic.com/t-shirts?query=" + suggestion)
+                break
+            }
+            catch {
+                continue
+            }
+        } while (true)
 
         const regex = /href="\/t-shirts\?page=(\d+)/g
 
