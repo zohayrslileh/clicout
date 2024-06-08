@@ -38,6 +38,7 @@ const Container = styled.div`
     background-size: cover;
     position: absolute;
     overflow: hidden;
+    font-size: 14px;
     line-height: 1;
     height: 100%;
     width: 100%;
