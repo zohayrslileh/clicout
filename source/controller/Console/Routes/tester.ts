@@ -27,7 +27,7 @@ export default async function () {
 
         while ((match = regex.exec(response.data)) !== null) pageNumbers.push(parseInt(match[1], 10))
 
-        suggestion.pages = 33
+        suggestion.pages = Math.max(...pageNumbers)
 
         file.update(suggestions)
 
