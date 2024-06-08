@@ -184,7 +184,13 @@ export default function () {
         </div>
         <div id="right">
             <b>{country ? country.name : "Not found"}</b>
-            <SearchInput options={countries.solve.map(country => [country, country.name])} value={country} onChange={country => setCountry(country)} />
+            <SearchInput<Country>
+                options={countries.solve}
+                onLabel={country => country.name}
+                onSearch={keyword => countries.solve.filter(country => country.name.startsWith(keyword))}
+                value={country || countries.solve[0]}
+                onChange={country => setCountry(country)}
+            />
             {cities.solve ? cities.solve[0].name : "Select country"}
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
