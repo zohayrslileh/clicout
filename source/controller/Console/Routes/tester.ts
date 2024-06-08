@@ -1,5 +1,6 @@
 import Json from "@/Tools/Json"
 import axios from "axios"
+import chalk from "chalk"
 
 /*
 |-----------------------------
@@ -18,13 +19,19 @@ export default async function () {
 
         const response = await axios<string>("https://www.teepublic.com/t-shirts?query=" + suggestion)
 
-        const domParser = new DOMParser
+        const regex = /href="\/t-shirts\?page=(\d+)/g
 
-        const dom = domParser.parseFromString(response.data, "text/html")
+        const pageNumbers = []
 
-        console.log(dom)
+        let match
 
-        break
+        while ((match = regex.exec(response.data)) !== null) pageNumbers.push(parseInt(match[1], 10))
+
+        suggestion.pages = 33
+
+        file.update(suggestions)
+
+        console.log(suggestion.suggestion, suggestion.weight, chalk.bold.blue(suggestion.pages))
     }
 
     console.log("The test completed successfully 🧪 ")
