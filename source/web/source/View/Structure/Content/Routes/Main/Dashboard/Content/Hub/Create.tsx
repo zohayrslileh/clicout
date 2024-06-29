@@ -175,7 +175,7 @@ export default function () {
                     </label>
                     <label>
                         <Checkbox checked={domainsAction === "SKIP"} onChange={() => setDomainsAction("SKIP")} />
-                        <p><Lang>Skip this domains</Lang></p>
+                        <p><Lang>Ignore this domains</Lang></p>
                     </label>
                 </div>
                 <div id="body">
