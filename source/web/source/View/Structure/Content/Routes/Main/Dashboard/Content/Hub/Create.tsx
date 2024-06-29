@@ -212,7 +212,7 @@ export default function () {
                 onChange={city => setCity(city)}
                 style={{ width: "300px" }}
             />}
-            {city && <a href={`https://www.google.com/maps/place/Tahala/@${city.latitude},${city.longitude},12z`} target="_blank">Goole Maps</a>}
+            {city && <a href={`https://www.google.com/maps/@${city.latitude},${city.longitude},12z`} target="_blank">Goole Maps</a>}
         </div>
         <Button id="bottom"><GiFlamingSheet /><Lang>Launch Attack</Lang></Button>
     </Container>
