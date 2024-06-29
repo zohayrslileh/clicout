@@ -10,7 +10,7 @@ import Card from "./Card"
  * 
  * @returns 
  */
-export default function <Option>({ options, value, onLabel, onSearch, onChange, ...props }: Props<Option>) {
+export default function <Option>({ options, value, onLabel, placeholder, onSearch, onChange, ...props }: Props<Option>) {
 
     /**
      * Keyword
@@ -40,7 +40,7 @@ export default function <Option>({ options, value, onLabel, onSearch, onChange, 
      * 
      */
     return <Container {...props}>
-        <TextInput value={keyword} onChange={setKeyword} />
+        <TextInput value={keyword} onChange={setKeyword} placeholder={placeholder} />
         <Card id="items">
             <div id="content">
                 {search.solve ? search.solve.map((option, index) => <div className={`item ${option === value ? "selected" : ""}`} key={index} onClick={() => onChange(option)}>{onLabel(option)}</div>) : "Loading..."}
@@ -56,6 +56,7 @@ export default function <Option>({ options, value, onLabel, onSearch, onChange, 
 interface Props<Option> extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "children" | "onChange"> {
     value: Option
     options: Option[]
+    placeholder: string
     onChange: (option: Option) => void
     onLabel: (option: Option) => string
     onSearch: (keyword: string) => (Promise<Option[]> | Option[])

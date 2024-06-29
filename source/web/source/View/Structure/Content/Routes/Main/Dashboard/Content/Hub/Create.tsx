@@ -202,6 +202,7 @@ export default function () {
                 onSearch={keyword => countries.solve.filter(country => country.name.startsWith(keyword))}
                 value={country || countries.solve[0]}
                 onChange={country => setCountry(country)}
+                placeholder="Select Country"
                 style={{ width: "300px" }}
             />
             {citiesList && <SearchInput<PrimitiveCity | undefined>
@@ -209,6 +210,7 @@ export default function () {
                 onLabel={city => city ? city.name : ""}
                 onSearch={keyword => citiesList.filter(city => city.name.startsWith(keyword))}
                 value={city}
+                placeholder="Select City"
                 onChange={city => setCity(city)}
                 style={{ width: "300px" }}
             />}
