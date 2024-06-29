@@ -26,14 +26,13 @@ const Container = styled(Card)`
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    margin: auto;
     gap: 10px;
 
     > .line {
         opacity: 0.2;
     }
 
-    color: rgb(179 0 0 / 90%);
+    color: rgb(237 130 130 / 90%);
 `
 
 /**
