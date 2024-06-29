@@ -56,7 +56,7 @@ export default function () {
      * Domains action state
      * 
      */
-    const [domainsAction, setDomainsAction] = useState<"CLICK" | "SKIP">("CLICK")
+    const [domainsAction, setDomainsAction] = useState<"CLICK" | "SKIP">("SKIP")
 
     /**
      * Country
@@ -170,12 +170,12 @@ export default function () {
                 <div id="title">
                     <Lang>Domains</Lang>
                     <label>
-                        <Checkbox checked={domainsAction === "CLICK"} onChange={() => setDomainsAction("CLICK")} />
-                        <p><Lang>Click this domains</Lang></p>
-                    </label>
-                    <label>
                         <Checkbox checked={domainsAction === "SKIP"} onChange={() => setDomainsAction("SKIP")} />
                         <p><Lang>Ignore this domains</Lang></p>
+                    </label>
+                    <label>
+                        <Checkbox checked={domainsAction === "CLICK"} onChange={() => setDomainsAction("CLICK")} />
+                        <p><Lang>Click this domains</Lang></p>
                     </label>
                 </div>
                 <div id="body">
