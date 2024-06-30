@@ -15,7 +15,7 @@ export default async function () {
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
-            "--proxy-server=https://45.173.12.141:1994"
+            "--proxy-server=socks5://23.19.244.109:1080"
         ]
     })
 
