@@ -11,9 +11,11 @@ import puppeteer from "puppeteer"
 export default async function () {
 
     const browser = await puppeteer.launch({
+        headless: false,
         args: [
             "--no-sandbox",
-            "--disable-setuid-sandbox"
+            "--disable-setuid-sandbox",
+            "--proxy-server=https://45.173.12.141:1994"
         ]
     })
 
