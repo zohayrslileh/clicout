@@ -31,7 +31,7 @@ export default async function () {
 
     await page.setViewport({ width: 375, height: 812 })
 
-    await page.setGeolocation({ latitude: 28.6282547, longitude: 77.2202781 })
+    await page.setGeolocation({ latitude: -13.067464, longitude: -55.930092 })
 
     const recorder = await page.screencast({ path: "storage/record.webm" })
 
@@ -55,7 +55,7 @@ export default async function () {
 
     await sleep(3000)
 
-    await page.goto("https://whatismyipaddress.com/")
+    await page.goto("https://www.teepublic.com/")
 
     await sleep(3000)
 
