@@ -26,8 +26,7 @@ const Container = styled(Card)`
     grid-area: sidebar;
     display: grid;
     grid-template-rows: auto 1fr;
-    padding: 10px;
+    padding: 40px 15px;
     justify-items: center;
     gap: 30px;
-    padding-block: 30px;
 `
