@@ -1,9 +1,9 @@
-import MPLUS1CodeExtraLight from "./MPLUS1Code-ExtraLight.ttf"
-import MPLUS1CodeSemiBold from "./MPLUS1Code-SemiBold.ttf"
-import MPLUS1CodeRegular from "./MPLUS1Code-Regular.ttf"
-import MPLUS1CodeMedium from "./MPLUS1Code-Medium.ttf"
-import MPLUS1CodeLight from "./MPLUS1Code-Light.ttf"
-import MPLUS1CodeBold from "./MPLUS1Code-Bold.ttf"
+import MontserratExtraLight from "./Montserrat-ExtraLight.ttf"
+import MontserratSemiBold from "./Montserrat-SemiBold.ttf"
+import MontserratRegular from "./Montserrat-Regular.ttf"
+import MontserratMedium from "./Montserrat-Medium.ttf"
+import MontserratLight from "./Montserrat-Light.ttf"
+import MontserratBold from "./Montserrat-Bold.ttf"
 import { css } from "@emotion/react"
 
 /*
@@ -16,33 +16,33 @@ import { css } from "@emotion/react"
 const fonts = css`
 
     @font-face {
-        font-family: MPLUS1Code-ExtraLight;
-        src: url(${MPLUS1CodeExtraLight});
+        font-family: Montserrat-ExtraLight;
+        src: url(${MontserratExtraLight});
     }
 
     @font-face {
-        font-family: MPLUS1Code-SemiBold;
-        src: url(${MPLUS1CodeSemiBold});
+        font-family: Montserrat-SemiBold;
+        src: url(${MontserratSemiBold});
     }
 
     @font-face {
-        font-family: MPLUS1Code-Regular;
-        src: url(${MPLUS1CodeRegular});
+        font-family: Montserrat-Regular;
+        src: url(${MontserratRegular});
     }
 
     @font-face {
-        font-family: MPLUS1Code-Medium;
-        src: url(${MPLUS1CodeMedium});
+        font-family: Montserrat-Medium;
+        src: url(${MontserratMedium});
     }
 
     @font-face {
-        font-family: MPLUS1Code-Light;
-        src: url(${MPLUS1CodeLight});
+        font-family: Montserrat-Light;
+        src: url(${MontserratLight});
     }
 
     @font-face {
-        font-family: MPLUS1Code-Bold;
-        src: url(${MPLUS1CodeBold});
+        font-family: Montserrat-Bold;
+        src: url(${MontserratBold});
     }
 `
 
