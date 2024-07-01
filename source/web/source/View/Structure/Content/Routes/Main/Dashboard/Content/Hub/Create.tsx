@@ -126,7 +126,15 @@ export default function () {
      * Countries promise
      * 
      */
-    const countries = usePromise(async () => await Country.find(), [])
+    const countries = usePromise(async function () {
+
+        const countries = await Country.find()
+
+        setCountry(countries[0])
+
+        return countries
+
+    }, [])
 
     /**
      * Cities promise
@@ -196,15 +204,15 @@ export default function () {
             </div>
         </div>
         <div id="right">
-            <SearchInput<Country>
+            {country && <SearchInput<Country>
                 options={countries.solve}
                 onLabel={country => country.name}
                 onSearch={keyword => countries.solve.filter(country => country.name.startsWith(keyword))}
-                value={country || countries.solve[0]}
+                value={country}
                 onChange={country => setCountry(country)}
                 placeholder="Select Country"
                 style={{ width: "300px" }}
-            />
+            />}
             {citiesList && <SearchInput<PrimitiveCity | undefined>
                 options={citiesList}
                 onLabel={city => city ? city.name : ""}
