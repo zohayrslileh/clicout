@@ -32,9 +32,9 @@ const Container = styled.div`
     color: ${() => schema.COLOR_WHITE.rgba()};
     font-family: ${() => schema.FONT_REGULAR};
     zoom: ${() => Appearance.zoom}%;
-    background-position: center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     position: absolute;
     overflow: hidden;

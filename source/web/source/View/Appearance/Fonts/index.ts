@@ -1,9 +1,9 @@
-import NotoKufiArabicRegular from "./NotoKufiArabic-Regular.ttf"
-import NotoKufiArabicMedium from "./NotoKufiArabic-Medium.ttf"
-import NotoKufiArabicBold from "./NotoKufiArabic-Bold.ttf"
-import MontserratRegular from "./Montserrat-Regular.ttf"
-import MontserratMedium from "./Montserrat-Medium.ttf"
-import MontserratBold from "./Montserrat-Bold.ttf"
+import MPLUS1CodeExtraLight from "./MPLUS1Code-ExtraLight.ttf"
+import MPLUS1CodeSemiBold from "./MPLUS1Code-SemiBold.ttf"
+import MPLUS1CodeRegular from "./MPLUS1Code-Regular.ttf"
+import MPLUS1CodeMedium from "./MPLUS1Code-Medium.ttf"
+import MPLUS1CodeLight from "./MPLUS1Code-Light.ttf"
+import MPLUS1CodeBold from "./MPLUS1Code-Bold.ttf"
 import { css } from "@emotion/react"
 
 /*
@@ -16,33 +16,33 @@ import { css } from "@emotion/react"
 const fonts = css`
 
     @font-face {
-        font-family: NotoKufiArabic-Regular;
-        src: url(${NotoKufiArabicRegular});
+        font-family: MPLUS1Code-ExtraLight;
+        src: url(${MPLUS1CodeExtraLight});
     }
 
     @font-face {
-        font-family: NotoKufiArabic-Medium;
-        src: url(${NotoKufiArabicMedium});
+        font-family: MPLUS1Code-SemiBold;
+        src: url(${MPLUS1CodeSemiBold});
     }
 
     @font-face {
-        font-family: NotoKufiArabic-Bold;
-        src: url(${NotoKufiArabicBold});
+        font-family: MPLUS1Code-Regular;
+        src: url(${MPLUS1CodeRegular});
     }
 
     @font-face {
-        font-family: Montserrat-Regular;
-        src: url(${MontserratRegular});
+        font-family: MPLUS1Code-Medium;
+        src: url(${MPLUS1CodeMedium});
     }
 
     @font-face {
-        font-family: Montserrat-Medium;
-        src: url(${MontserratMedium});
+        font-family: MPLUS1Code-Light;
+        src: url(${MPLUS1CodeLight});
     }
 
     @font-face {
-        font-family: Montserrat-Bold;
-        src: url(${MontserratBold});
+        font-family: MPLUS1Code-Bold;
+        src: url(${MPLUS1CodeBold});
     }
 `
 
