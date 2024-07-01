@@ -9,10 +9,15 @@ import Color from "@/Tools/Color"
 */
 const schema = {
 
-    FONT_REGULAR: "Montserrat-Regular, NotoKufiArabic-Regular",
-    FONT_MEDIUM: "Montserrat-Medium, NotoKufiArabic-Medium",
-    FONT_BOLD: "Montserrat-Bold, NotoKufiArabic-Bold",
+    // Fonts
+    FONT_EXTRA_LIGHT: "MPLUS1Code-ExtraLight",
+    FONT_SEMI_BOLD: "MPLUS1Code-SemiBold",
+    FONT_REGULAR: "MPLUS1Code-Regular",
+    FONT_MEDIUM: "MPLUS1Code-Medium",
+    FONT_LIGHT: "MPLUS1Code-Light",
+    FONT_BOLD: "MPLUS1Code-Bold",
 
+    // Colors
     COLOR_YELLOW: new Color("#FFB12C"),
     COLOR_WHITE: new Color("#7DEAFF"),
     COLOR_LIGHT: new Color("#DDE5F4"),
