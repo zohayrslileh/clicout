@@ -11,7 +11,7 @@ import puppeteer from "puppeteer"
 export default async function () {
 
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
