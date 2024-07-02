@@ -1,5 +1,5 @@
 import request from "@/Models/Server/Request"
-import { PrimitiveCity } from "./City"
+import City, { PrimitiveCity } from "./City"
 
 /*
 |-----------------------------
@@ -68,7 +68,8 @@ export default class Country {
         // Ask primitive cities
         const primitiveCities = await request<PrimitiveCity[]>({ url: `/main/country/${this.id}/cities` })
 
-        return primitiveCities
+        // Initialize cities
+        return primitiveCities.map(primitiveCity => new City(primitiveCity))
     }
 }
 

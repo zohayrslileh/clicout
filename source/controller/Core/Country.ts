@@ -1,6 +1,7 @@
 import CountryEntity from "@/Models/Database/Entities/Country"
 import CityEntity from "@/Models/Database/Entities/City"
 import CoreException from "./Exception"
+import City from "./City"
 import zod from "zod"
 
 /*
@@ -84,8 +85,11 @@ export default class Country {
      */
     public async cities() {
 
-        // Initialize countries
-        return await CityEntity.find({ where: { country: { id: this.id } } })
+        // Primitive cities
+        const primitiveCities = await CityEntity.find({ where: { country: { id: this.id } } })
+
+        // Initialize cities
+        return primitiveCities.map(primitiveCity => new City(primitiveCity))
     }
 }
 

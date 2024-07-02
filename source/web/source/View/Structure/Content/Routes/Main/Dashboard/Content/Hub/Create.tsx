@@ -7,13 +7,13 @@ import { GiFlamingSheet } from "react-icons/gi"
 import Button from "@/View/Components/Button"
 import { useCallback, useState } from "react"
 import { IoIosClose } from "react-icons/io"
-import { PrimitiveCity } from "@/Core/City"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import styled from "@emotion/styled"
 import Country from "@/Core/Country"
+import City from "@/Core/City"
 
 /**
  * Create
@@ -68,7 +68,7 @@ export default function () {
      * City
      * 
      */
-    const [city, setCity] = useState<PrimitiveCity | undefined>(undefined)
+    const [city, setCity] = useState<City | undefined>(undefined)
 
     /**
      * Append keyword method
@@ -205,7 +205,7 @@ export default function () {
                 placeholder="Select Country"
                 style={{ width: "300px" }}
             />
-            {citiesList && <SearchInput<PrimitiveCity | undefined>
+            {citiesList && <SearchInput<City | undefined>
                 options={citiesList}
                 onLabel={city => city ? city.name : ""}
                 onSearch={keyword => citiesList.filter(city => new RegExp(keyword, "i").test(city.name))}
