@@ -1,4 +1,5 @@
 import { NextUIProvider } from "@nextui-org/system"
+import { keyframes } from "@emotion/react"
 import styled from "@emotion/styled"
 import schema from "./schema"
 import Appearance from "."
@@ -21,4 +22,22 @@ export default styled(NextUIProvider)`
     width: 100%;
     left: 0;
     top: 0;
+
+    // Smooth
+    .smooth {
+
+        animation: ${keyframes`
+            
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        `} ease-out 500ms;
+    }
 `
