@@ -28,7 +28,7 @@ export default function () {
         await new Promise(resolve => setTimeout(resolve, 2000))
     })
 
-    return <Card className="m-auto grid grid-cols-[450px_400px] gap-2">
+    return <Card className="m-auto grid grid-cols-[500px_450px] gap-2">
         <Hero />
         <div className="grid p-7 py-[60px] gap-10">
             <Logo className="m-auto" width="200px" />
