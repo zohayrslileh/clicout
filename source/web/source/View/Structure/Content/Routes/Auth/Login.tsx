@@ -35,9 +35,9 @@ export default function () {
         await new Promise(resolve => setTimeout(resolve, 2000))
     })
 
-    return <Card className={`m-auto grid grid-cols-[${screen ? "450px_400px" : "400px"}] gap-2 smooth`}>
+    return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
-        <div className="grid p-7 py-[60px] gap-10">
+        <div className="grid p-7 py-[60px] gap-10 w-[450px]">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={login.safeExecute}>
                 <Input label={lang("Username")} />
