@@ -1,4 +1,4 @@
-import { Button, Card, Input } from "@nextui-org/react"
+import { Button, Card, Checkbox, Input } from "@nextui-org/react"
 import { Lang, useLang } from "@/Tools/Language"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
@@ -7,7 +7,7 @@ import { Form } from "@/Tools/Form"
 import Hero from "./Hero"
 
 /**
- * Login
+ * Register
  * 
  * @returns 
  */
@@ -33,11 +33,13 @@ export default function () {
         <div className="grid p-7 py-[60px] gap-10">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={login.safeExecute}>
+                <Input type="email" label={lang("Email")} />
                 <Input label={lang("Username")} />
                 <Input type="password" label={lang("Password")} />
-                <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Sign in</Lang></Button>
+                <Checkbox>Agree terms? <Link to="../login" className="text-primary">Terms</Link></Checkbox>
+                <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Sign up</Lang></Button>
             </Form>
-            <p className="m-auto">Need an account? <Link to="../register" className="text-primary">Sign up</Link></p>
+            <p className="m-auto">I already have an account? <Link to="../login" className="text-primary">Sign in</Link></p>
         </div>
     </Card>
 }

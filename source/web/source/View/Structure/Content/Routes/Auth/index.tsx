@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { lazy } from "react"
 
 const Login = lazy(() => import("./Login"))
+const Register = lazy(() => import("./Register"))
 
 /**
  * Auth
@@ -23,7 +24,7 @@ export default function () {
         <Route path="login" element={<Login />} />
 
         {/** Register */}
-        <Route path="register" element={<h1>Register</h1>} />
+        <Route path="register" element={<Register />} />
 
     </Routes>
 }
