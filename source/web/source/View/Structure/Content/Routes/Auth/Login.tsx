@@ -28,9 +28,9 @@ export default function () {
         await new Promise(resolve => setTimeout(resolve, 2000))
     })
 
-    return <Card className="m-auto p-7 grid grid-cols-2 gap-2">
+    return <Card className="m-auto grid grid-cols-2 gap-2">
         <Hero />
-        <div className="grid p-7 gap-10">
+        <div className="grid p-7 py-20 gap-10 w-[400px]">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={login.safeExecute}>
                 <Input label={lang("Username")} />
