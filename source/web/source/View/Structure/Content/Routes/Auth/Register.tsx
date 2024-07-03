@@ -42,48 +42,48 @@ export default function () {
      * Form
      * 
      */
-    const { value, update } = useForm(() => new LoginForm)
+    const { value, update } = useForm(() => new RegisterForm)
 
     /**
-     * Login promise
+     * Register promise
      * 
      */
-    const login = usePromise(async () => await User.create(value))
+    const register = usePromise(async () => controller.dispatch(await User.create(value)))
 
     /**
-     * Login Exception
+     * Register Exception
      * 
      */
-    const loginException = useMemo(() => login.exception ? compiler(login.exception.current) : undefined, [login.exception])
+    const registerException = useMemo(() => register.exception ? compiler(register.exception.current) : undefined, [register.exception])
 
     /**
-     * login issues
+     * register issues
      * 
      */
-    const loginIssues = useMemo(() => createIssues(loginException instanceof UnprocessableEntity ? loginException.issues : []), [loginException])
+    const registerIssues = useMemo(() => createIssues(registerException instanceof UnprocessableEntity ? registerException.issues : []), [registerException, value])
 
     return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
         <div className="grid p-7 py-[50px] gap-10 w-[450px]">
             <Logo className="m-auto" width="200px" />
-            <Form className="grid gap-3" onSubmit={login.safeExecute}>
-                {!loginIssues.length && loginException && <ErrorCard message={loginException.message} />}
-                <Input type="email" label={lang("Email")} value={value.email} onValueChange={update.email} />
-                <Input label={lang("Username")} value={value.username} onValueChange={update.username} />
-                <Input type="password" label={lang("Password")} value={value.password} onValueChange={update.password} />
-                <Checkbox isSelected={value.agreeTerms} onValueChange={update.agreeTerms}><p className="text-sm">I agree to the terms and conditions? <Link to="../login" className="text-primary">Terms and conditions</Link></p></Checkbox>
-                <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Sign up</Lang></Button>
+            <Form className="grid gap-3" onSubmit={register.safeExecute}>
+                {!registerIssues.length && registerException && <ErrorCard message={registerException.message} />}
+                <Input type="email" label={lang("Email")} value={value.email} onValueChange={update.email} variant="bordered" isInvalid={registerIssues.has("email")} errorMessage={registerIssues.path("email").message} />
+                <Input label={lang("Username")} value={value.username} onValueChange={update.username} variant="bordered" />
+                <Input type="password" label={lang("Password")} value={value.password} onValueChange={update.password} variant="bordered" />
+                <Checkbox isSelected={value.agreeTerms} onValueChange={update.agreeTerms}><p className="text-sm">I agree to the terms and conditions? <Link to="../register" className="text-primary">Terms and conditions</Link></p></Checkbox>
+                <Button type={register.pending ? "button" : "submit"} size="lg" color="primary" isLoading={register.pending}><Lang>Sign up</Lang></Button>
             </Form>
-            <p className="m-auto">I already have an account? <Link to="../login" className="text-primary">Sign in</Link></p>
+            <p className="m-auto">I already have an account? <Link to="../register" className="text-primary">Sign in</Link></p>
         </div>
     </Card>
 }
 
 /**
- * Login Form
+ * Register Form
  * 
  */
-class LoginForm {
+class RegisterForm {
 
     /**
      * Email

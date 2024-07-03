@@ -81,8 +81,13 @@ export function createIssues(issues: ZodIssue[], basePath?: string | number): Is
             const fullPath = `${basePath ? (basePath + "/" + paths.join("/")) : paths.join("/")}`
 
             return !!createIssues(issues.filter(issue => issue.path.join("/").startsWith(fullPath)), fullPath).length
-        }
+        },
 
+        /**
+         * Message
+         *  
+         */
+        message: issues[0] ? issues[0].message : undefined
     })
 }
 
@@ -94,4 +99,5 @@ export type Issues = ZodIssue[] & {
     path: (...paths: (string | number)[]) => ZodIssue[] & Issues
     self: (...paths: (string | number)[]) => ZodIssue[]
     has: (...paths: (string | number)[]) => boolean
+    message: string | undefined
 }
