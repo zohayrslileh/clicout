@@ -74,10 +74,10 @@ export default function () {
 
     return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
-        <div className="grid p-7 py-[50px] gap-10 w-[450px]">
+        <div className="grid p-7 py-[45px] gap-10 w-[450px]">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={loginPromise.safeExecute}>
-                {!loginIssues.length && loginException && <ErrorCard message={loginException.message} />}
+                {!loginIssues.length && loginException && <ErrorCard message={lang(loginException.message)} />}
                 <Input label={lang("Username")} value={loginForm.value.username || ""} onValueChange={username => loginForm.update.username(username || undefined)} variant="bordered" isInvalid={loginIssues.has("username")} errorMessage={lang(loginIssues.path("username").message || "")} />
                 <Input type="password" label={lang("Password")} value={loginForm.value.password || ""} onValueChange={password => loginForm.update.password(password || undefined)} variant="bordered" isInvalid={loginIssues.has("password")} errorMessage={lang(loginIssues.path("password").message || "")} />
                 <Button onClick={loginPromise.safeExecute} type={loginPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={loginPromise.pending}><Lang>Sign in</Lang></Button>

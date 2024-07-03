@@ -74,10 +74,10 @@ export default function () {
 
     return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
-        <div className="grid p-7 py-[50px] gap-10 w-[450px]">
+        <div className="grid p-7 py-[45px] gap-10 w-[450px]">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={registerPromise.safeExecute}>
-                {!registerIssues.length && registerException && <ErrorCard message={registerException.message} />}
+                {!registerIssues.length && registerException && <ErrorCard message={lang(registerException.message)} />}
                 <Input type="email" label={lang("Email")} value={registerForm.value.email || ""} onValueChange={email => registerForm.update.email(email || undefined)} variant="bordered" isInvalid={registerIssues.has("email")} errorMessage={lang(registerIssues.path("email").message || "")} />
                 <Input label={lang("Username")} value={registerForm.value.username || ""} onValueChange={username => registerForm.update.username(username || undefined)} variant="bordered" isInvalid={registerIssues.has("username")} errorMessage={lang(registerIssues.path("username").message || "")} />
                 <Input type="password" label={lang("Password")} value={registerForm.value.password || ""} onValueChange={password => registerForm.update.password(password || undefined)} variant="bordered" isInvalid={registerIssues.has("password")} errorMessage={lang(registerIssues.path("password").message || "")} />
