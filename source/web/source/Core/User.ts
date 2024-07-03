@@ -98,8 +98,8 @@ export default class User {
 
         // Schema
         const schema = zod.object({
-            username: zod.string().min(4).max(16),
-            password: zod.string().min(4).max(16)
+            username: zod.string({ required_error: "Username field is required" }).min(4).max(16),
+            password: zod.string({ required_error: "Password field is required" }).min(4).max(16)
         })
 
         // Ask authorization
