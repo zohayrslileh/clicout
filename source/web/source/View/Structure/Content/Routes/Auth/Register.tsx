@@ -79,9 +79,9 @@ export default function () {
             <Form className="grid gap-3" onSubmit={registerPromise.safeExecute}>
                 {!registerIssues.length && registerException && <ErrorCard message={registerException.message} />}
                 <Input type="email" label={lang("Email")} value={registerForm.value.email} onValueChange={registerForm.update.email} variant="bordered" isInvalid={registerIssues.has("email")} errorMessage={registerIssues.path("email").message} />
-                <Input label={lang("Username")} value={registerForm.value.username} onValueChange={registerForm.update.username} variant="bordered" />
-                <Input type="password" label={lang("Password")} value={registerForm.value.password} onValueChange={registerForm.update.password} variant="bordered" />
-                <Checkbox isSelected={registerForm.value.agreeTerms} onValueChange={registerForm.update.agreeTerms}><p className="text-sm">I agree to the terms and conditions? <Link to="../register" className="text-primary">Terms and conditions</Link></p></Checkbox>
+                <Input label={lang("Username")} value={registerForm.value.username} onValueChange={registerForm.update.username} variant="bordered" isInvalid={registerIssues.has("username")} errorMessage={registerIssues.path("username").message} />
+                <Input type="password" label={lang("Password")} value={registerForm.value.password} onValueChange={registerForm.update.password} variant="bordered" isInvalid={registerIssues.has("password")} errorMessage={registerIssues.path("password").message} />
+                <Checkbox isSelected={registerForm.value.agreeTerms} onValueChange={registerForm.update.agreeTerms} isInvalid={registerIssues.has("agreeTerms")}><p className="text-sm">I agree to the terms and conditions? <Link to="../register" className="text-primary">Terms and conditions</Link></p></Checkbox>
                 <Button onClick={registerPromise.safeExecute} type={registerPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={registerPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
             <p className="m-auto">I already have an account? <Link to="../register" className="text-primary">Sign in</Link></p>

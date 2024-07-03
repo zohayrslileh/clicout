@@ -70,9 +70,10 @@ export default class User {
 
         // Schema
         const schema = zod.object({
-            username: zod.string().regex(new RegExp("^[a-z0-9_-]{5,15}$")),
-            password: zod.string().min(4).max(16),
-            email: zod.string({ required_error: "Email field is required" }).email()
+            username: zod.string({ required_error: "Username field is required" }).regex(new RegExp("^[a-z0-9_-]{5,15}$")),
+            password: zod.string({ required_error: "Password field is required" }).min(4).max(16),
+            email: zod.string({ required_error: "Email field is required" }).email(),
+            agreeTerms: zod.boolean({ required_error: "Agree terms is required" }).refine(agreeTerms => agreeTerms)
         })
 
         // Ask primitive user
