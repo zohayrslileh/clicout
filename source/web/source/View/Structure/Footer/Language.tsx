@@ -32,7 +32,7 @@ export default function () {
 
     }, [])
 
-    return <Select startContent={<ReactCountryFlag countryCode={language.country} svg />} defaultSelectedKeys={[language.key]} onChange={event => handleChange(event.target.value)}>
+    return <Select startContent={<ReactCountryFlag countryCode={language.country} svg />} selectedKeys={[language.key]} onSelectionChange={([key]) => handleChange(key.toString())}>
         {languages.map(language => <SelectItem key={language.key} startContent={<ReactCountryFlag countryCode={language.country} svg />}>{language.name}</SelectItem>)}
     </Select>
 }
