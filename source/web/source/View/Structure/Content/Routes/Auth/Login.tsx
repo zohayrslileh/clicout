@@ -75,7 +75,7 @@ export default function () {
     return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
         <div className="grid p-7 py-[45px] gap-10 w-[450px]">
-            <Logo className="m-auto" width="250px" />
+            <Logo className="m-auto" width="220px" />
             <Form className="grid gap-3" onSubmit={loginPromise.safeExecute}>
                 {!loginIssues.length && loginException && <ErrorCard message={lang(loginException.message)} />}
                 <Input label={lang("Username")} value={loginForm.value.username || ""} onValueChange={username => loginForm.update.username(username || undefined)} variant="bordered" isInvalid={loginIssues.has("username")} errorMessage={lang(loginIssues.path("username").message || "")} />
