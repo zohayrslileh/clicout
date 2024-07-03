@@ -5,6 +5,7 @@ import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
 import User from "@/Core/User"
+import Plans from "./Plans"
 
 /**
  * Upgrade
@@ -46,7 +47,7 @@ export default function () {
         <div>
             <Exception>
                 <Routes>
-                    <Route index element={<p>Plans</p>} />
+                    <Route index element={<Plans />} />
                     <Route path=":plan" element={<p>Payment</p>} />
                 </Routes>
             </Exception>
