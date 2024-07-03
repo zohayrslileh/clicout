@@ -71,7 +71,7 @@ export default function () {
                 <Input type="email" label={lang("Email")} value={value.email} onValueChange={update.email} />
                 <Input label={lang("Username")} value={value.username} onValueChange={update.username} />
                 <Input type="password" label={lang("Password")} value={value.password} onValueChange={update.password} />
-                <Checkbox checked={value.agreeTerms} onChange={event => update.agreeTerms(event.target.checked)} ><p className="text-sm">I agree to the terms and conditions? <Link to="../login" className="text-primary">Terms and conditions</Link></p></Checkbox>
+                <Checkbox isSelected={value.agreeTerms} onValueChange={update.agreeTerms}><p className="text-sm">I agree to the terms and conditions? <Link to="../login" className="text-primary">Terms and conditions</Link></p></Checkbox>
                 <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Sign up</Lang></Button>
             </Form>
             <p className="m-auto">I already have an account? <Link to="../login" className="text-primary">Sign in</Link></p>
