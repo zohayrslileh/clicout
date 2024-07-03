@@ -41,26 +41,31 @@
 
 
 
-import { useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Stage, OrbitControls } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { easing } from 'maath'
 import s2wt_kamdo_industrial_divinities from "@/View/Media/s2wt_kamdo_industrial_divinities-transformed.glb?url"
+import TvStatic from '@/View/Components/TvStatic'
 
 export default function App() {
   return (
-    <Canvas flat shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
-      <fog attach="fog" args={['black', 15, 22.5]} />
-      <Stage intensity={0.5} environment="city" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
-        <Kamdo rotation={[0, Math.PI, 0]} />
-      </Stage>
-      <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
-      <EffectComposer disableNormalPass>
-        <Bloom luminanceThreshold={2} mipmapBlur />
-        <ToneMapping />
-      </EffectComposer>
-    </Canvas>
+    <div className="relative">
+      <Suspense fallback={<TvStatic />}>
+        <Canvas flat shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
+          <fog attach="fog" args={['black', 15, 22.5]} />
+          <Stage intensity={0.5} environment="city" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
+            <Kamdo rotation={[0, Math.PI, 0]} />
+          </Stage>
+          <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+          <EffectComposer disableNormalPass>
+            <Bloom luminanceThreshold={2} mipmapBlur />
+            <ToneMapping />
+          </EffectComposer>
+        </Canvas>
+      </Suspense>
+    </div>
   )
 }
 
