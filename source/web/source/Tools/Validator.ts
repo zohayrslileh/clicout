@@ -6,7 +6,7 @@ import zod, { ZodIssue, ZodType, infer as Infer } from "zod"
  * 
  * @returns
  */
-export default function useValidator<Schema extends ZodType>(schema: (z: typeof zod) => Schema, data: unknown, timeout: number = 1000) {
+export default function useValidator<Schema extends ZodType>(schema: (z: typeof zod) => Schema, data: unknown, timeout?: number) {
 
     /**
      * Timer
@@ -46,7 +46,7 @@ export default function useValidator<Schema extends ZodType>(schema: (z: typeof 
         else setPrimitiveIssues([])
 
         // Create timer
-        timer.current = setTimeout(() => setPrimitiveIssues([]), timeout)
+        if (timeout) timer.current = setTimeout(() => setPrimitiveIssues([]), timeout)
 
         return validate.success ? validate.data : undefined
 
