@@ -1,4 +1,5 @@
-import ErrorCard from "@/View/Components/ErrorCard"
+import { BiError } from "react-icons/bi"
+import { Chip } from "@nextui-org/react"
 
 /*
 |-----------------------------
@@ -16,6 +17,13 @@ export default class ViewException extends Error {
      */
     public view() {
 
-        return <ErrorCard message={this.message} />
+        return <Chip
+            className="m-auto rounded-lg p-4"
+            variant="flat"
+            color="danger"
+            startContent={<BiError />}
+        >
+            {this.message}
+        </Chip>
     }
 }

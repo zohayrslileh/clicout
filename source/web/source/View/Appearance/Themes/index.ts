@@ -1,3 +1,4 @@
+import light from "./light"
 import dark from "./dark"
 
 /*
@@ -8,6 +9,11 @@ import dark from "./dark"
 |
 */
 const themes = [
+    {
+        name: "Light",
+        key: "light",
+        schema: light
+    },
     {
         name: "Dark",
         key: "dark",

@@ -1,8 +1,8 @@
-import LinkButton from "@/View/Components/LinkButton"
+import { Select, SelectItem } from "@nextui-org/react"
+import ReactCountryFlag from "react-country-flag"
 import languages from "@/View/Language/Languages"
-import { IoLanguage } from "react-icons/io5"
 import Language from "@/View/Language"
-import styled from "@emotion/styled"
+import { useCallback } from "react"
 
 /**
  * Language
@@ -12,25 +12,27 @@ import styled from "@emotion/styled"
 export default function () {
 
     /**
-     * Next language
+     * Language
      * 
      */
-    const nextLanguage = languages.find(language => language !== Language.value) || languages[0]
+    const language = Language.value
 
-    return <Container>
-        <LinkButton to={""} onClick={() => Language.value = nextLanguage}><IoLanguage />{nextLanguage.name}</LinkButton>
-    </Container>
+    /**
+     * Handle change
+     * 
+     * @returns
+     */
+    const handleChange = useCallback(function (key: string) {
+
+        // Language
+        const language = languages.find(language => language.key === key)
+
+        // Change language
+        Language.value = language || languages[0]
+
+    }, [])
+
+    return <Select startContent={<ReactCountryFlag countryCode={language.country} svg />} defaultSelectedKeys={[language.key]} onChange={event => handleChange(event.target.value)}>
+        {languages.map(language => <SelectItem key={language.key} startContent={<ReactCountryFlag countryCode={language.country} svg />}>{language.name}</SelectItem>)}
+    </Select>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    
-    > a {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-`

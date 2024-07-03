@@ -1,5 +1,4 @@
-import Appearance from "@/View/Appearance"
-import styled from "@emotion/styled"
+import { useMemo } from "react"
 import config from "@/config"
 
 /**
@@ -9,19 +8,11 @@ import config from "@/config"
  */
 export default function () {
 
-    return <Container>{config.APP_NAME} v2.3.1 <b>Pro</b></Container>
+    /**
+     * Current Date
+     * 
+     */
+    const currentDate = useMemo(() => new Date, [])
+
+    return <p className="justify-self-center select-none opacity-30">© {currentDate.getFullYear()} {config.APP_NAME} Inc. All rights reserved.</p>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.p`
-    user-select: none;
-    opacity: 0.3;
-    margin: auto;
-
-    > b {
-        color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
-    }
-`

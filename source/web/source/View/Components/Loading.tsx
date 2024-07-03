@@ -21,6 +21,14 @@ export default function ({ label = "Loading", ...props }: Props) {
 }
 
 /**
+ * Props
+ * 
+ */
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+    label?: string
+}
+
+/**
  * Container
  * 
  */
@@ -67,11 +75,3 @@ const Container = styled.div`
         }
     }
 `
-
-/**
- * Props
- * 
- */
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    label?: string
-}

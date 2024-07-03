@@ -34,10 +34,7 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    box-sizing: border-box;
-    padding: 15px;
-    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
 `

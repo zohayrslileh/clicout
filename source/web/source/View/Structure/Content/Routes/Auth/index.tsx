@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { lazy } from "react"
 
-const Register = lazy(() => import("./Register"))
 const Login = lazy(() => import("./Login"))
 
 /**
@@ -24,7 +23,7 @@ export default function () {
         <Route path="login" element={<Login />} />
 
         {/** Register */}
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={<h1>Register</h1>} />
 
     </Routes>
 }

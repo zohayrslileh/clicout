@@ -1,13 +1,8 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
-import { Navigate, Route, Routes } from "react-router-dom"
 import Subscription from "@/Core/Subscription"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import User from "@/Core/User"
-import { lazy } from "react"
-
-const Dashboard = lazy(() => import("./Dashboard"))
-const Upgrade = lazy(() => import("./Upgrade"))
 
 /**
  * Main
@@ -32,16 +27,7 @@ export default function ({ user }: Props) {
 
         <Subscription.controller.Provider value={subscription}>
 
-            {/** Routes */}
-            <Routes>
-
-                {/** Upgrade */}
-                <Route path="upgrade/*" element={<Upgrade />} />
-
-                {/** Dashboard */}
-                <Route path="*" element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
-
-            </Routes>
+            <h1>MAIN</h1>
 
         </Subscription.controller.Provider>
 

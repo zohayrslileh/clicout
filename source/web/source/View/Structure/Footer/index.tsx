@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import Language from "./Language"
 import Version from "./Version"
-import Coffee from "./Coffee"
+import Theme from "./Theme"
 
 /**
  * Footer
@@ -11,9 +11,16 @@ import Coffee from "./Coffee"
 export default function () {
 
     return <Container>
-        <Coffee />
-        <Version />
+
+        {/** Language */}
         <Language />
+
+        {/** Version */}
+        <Version />
+
+        {/** Theme */}
+        <Theme />
+
     </Container>
 }
 
@@ -23,15 +30,7 @@ export default function () {
  */
 const Container = styled.div`
     display: grid;
-    grid-template-columns: 190px 1fr 190px;
+    grid-template-columns: 150px 1fr 150px;
     align-items: center;
-
-    > button {
-        text-transform: uppercase;
-    }
-
-    > *:last-child {
-        display: grid;
-        justify-items: end;
-    }
+    padding: 13px 10px;
 `
