@@ -36,7 +36,7 @@ export default function () {
                 <Input type="email" label={lang("Email")} />
                 <Input label={lang("Username")} />
                 <Input type="password" label={lang("Password")} />
-                <Checkbox>Agree terms? <Link to="../login" className="text-primary">Terms</Link></Checkbox>
+                <Checkbox><p className="text-sm">I agree to the terms and conditions? <Link to="../login" className="text-primary">Terms and conditions</Link></p></Checkbox>
                 <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Sign up</Lang></Button>
             </Form>
             <p className="m-auto">I already have an account? <Link to="../login" className="text-primary">Sign in</Link></p>
