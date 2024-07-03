@@ -30,7 +30,7 @@ export default function () {
 
     return <Card className="m-auto grid grid-cols-2 gap-2">
         <Hero />
-        <div className="grid p-7 py-20 gap-10 w-[400px]">
+        <div className="grid p-7 py-[60px] gap-10 w-[400px]">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={login.safeExecute}>
                 <Input label={lang("Username")} />
