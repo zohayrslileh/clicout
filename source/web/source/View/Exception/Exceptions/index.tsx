@@ -17,12 +17,7 @@ export default class ViewException extends Error {
      */
     public view() {
 
-        return <Chip
-            className="m-auto rounded-lg p-4"
-            variant="flat"
-            color="danger"
-            startContent={<BiError />}
-        >
+        return <Chip className="rounded-lg p-4 m-auto" variant="flat" color="danger" startContent={<BiError />}>
             {this.message}
         </Chip>
     }
