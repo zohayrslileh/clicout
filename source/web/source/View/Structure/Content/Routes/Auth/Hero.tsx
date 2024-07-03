@@ -59,7 +59,7 @@ export default function App() {
           <Canvas flat shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
             <fog attach="fog" args={['black', 15, 22.5]} />
             <Stage intensity={0.5} environment="city" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
-              <Kamdo rotation={[0, Math.PI, 0]} />
+              <Kamdo rotation={[0, Math.PI * 1.5, 0]} />
             </Stage>
             <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
             <EffectComposer disableNormalPass>
