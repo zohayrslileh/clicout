@@ -78,13 +78,13 @@ export default function () {
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={registerPromise.safeExecute}>
                 {!registerIssues.length && registerException && <ErrorCard message={registerException.message} />}
-                <Input type="email" label={lang("Email")} value={registerForm.value.email || ""} onValueChange={email => registerForm.update.email(email || undefined)} variant="bordered" isInvalid={registerIssues.has("email")} errorMessage={registerIssues.path("email").message} />
-                <Input label={lang("Username")} value={registerForm.value.username || ""} onValueChange={username => registerForm.update.username(username || undefined)} variant="bordered" isInvalid={registerIssues.has("username")} errorMessage={registerIssues.path("username").message} />
-                <Input type="password" label={lang("Password")} value={registerForm.value.password || ""} onValueChange={password => registerForm.update.password(password || undefined)} variant="bordered" isInvalid={registerIssues.has("password")} errorMessage={registerIssues.path("password").message} />
-                <Checkbox isSelected={registerForm.value.agreeTerms} onValueChange={registerForm.update.agreeTerms} isInvalid={registerIssues.has("agreeTerms")}><p className="text-sm">I agree to the terms and conditions? <Link to="../register" className="text-primary">Terms and conditions</Link></p></Checkbox>
+                <Input type="email" label={lang("Email")} value={registerForm.value.email || ""} onValueChange={email => registerForm.update.email(email || undefined)} variant="bordered" isInvalid={registerIssues.has("email")} errorMessage={lang(registerIssues.path("email").message || "")} />
+                <Input label={lang("Username")} value={registerForm.value.username || ""} onValueChange={username => registerForm.update.username(username || undefined)} variant="bordered" isInvalid={registerIssues.has("username")} errorMessage={lang(registerIssues.path("username").message || "")} />
+                <Input type="password" label={lang("Password")} value={registerForm.value.password || ""} onValueChange={password => registerForm.update.password(password || undefined)} variant="bordered" isInvalid={registerIssues.has("password")} errorMessage={lang(registerIssues.path("password").message || "")} />
+                <Checkbox isSelected={registerForm.value.agreeTerms} onValueChange={registerForm.update.agreeTerms} isInvalid={registerIssues.has("agreeTerms")}><p className="text-sm"><Lang>I agree to the terms and conditions</Lang>? <Link to="../register" className="text-primary"><Lang>Terms and conditions</Lang></Link></p></Checkbox>
                 <Button onClick={registerPromise.safeExecute} type={registerPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={registerPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
-            <p className="m-auto">I already have an account? <Link to="../login" className="text-primary">Sign in</Link></p>
+            <p className="m-auto"><Lang>I already have an account</Lang>? <Link to="../login" className="text-primary"><Lang>Sign in</Lang></Link></p>
         </div>
     </Card>
 }
