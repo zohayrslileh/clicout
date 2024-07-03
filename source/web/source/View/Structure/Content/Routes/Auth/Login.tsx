@@ -25,7 +25,6 @@ export default function () {
     const login = usePromise(async function () {
 
         await new Promise(resolve => setTimeout(resolve, 2000))
-
     })
 
     return <Card className="m-auto p-7 grid grid-cols-2 gap-2">
@@ -35,7 +34,7 @@ export default function () {
             <Form className="grid gap-3" onSubmit={login.safeExecute}>
                 <Input label={lang("Username")} />
                 <Input type="password" label={lang("Password")} />
-                <Button size="lg" color="primary" isLoading={login.pending}><Lang>Login</Lang></Button>
+                <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Login</Lang></Button>
             </Form>
             <p className="m-auto">Need an account? <Link to="../register" className="text-primary">Sign up</Link></p>
         </div>
