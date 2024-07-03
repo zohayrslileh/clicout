@@ -28,6 +28,6 @@ export default function () {
 const Container = styled.div`
     position: relative;
     overflow: auto;
-    display: grid;
+    display: flex;
     padding: 20px;
 `
