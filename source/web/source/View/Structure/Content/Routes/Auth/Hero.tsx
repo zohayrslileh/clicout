@@ -33,6 +33,14 @@
 
 
 
+
+
+
+
+
+
+
+
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Stage, OrbitControls } from '@react-three/drei'
@@ -89,5 +97,3 @@ function Kamdo(props) {
     </group>
   )
 }
-
-useGLTF.preload(s2wt_kamdo_industrial_divinities)
