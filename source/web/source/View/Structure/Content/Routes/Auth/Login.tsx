@@ -1,5 +1,6 @@
 import { Button, Card, Input } from "@nextui-org/react"
 import { Lang, useLang } from "@/Tools/Language"
+import { useScreen } from "@/Tools/Screen"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
@@ -12,6 +13,12 @@ import Hero from "./Hero"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Screen
+     * 
+     */
+    const screen = useScreen(1000)
 
     /**
      * Lang
@@ -28,8 +35,8 @@ export default function () {
         await new Promise(resolve => setTimeout(resolve, 2000))
     })
 
-    return <Card className="m-auto grid grid-cols-[450px_400px] gap-2 smooth">
-        <Hero />
+    return <Card className={`m-auto grid grid-cols-[${screen ? "450px_400px" : "400px"}] gap-2 smooth`}>
+        {screen && <Hero />}
         <div className="grid p-7 py-[60px] gap-10">
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={login.safeExecute}>

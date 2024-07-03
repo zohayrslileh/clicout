@@ -29,4 +29,5 @@ const Container = styled.div`
     position: relative;
     overflow: auto;
     display: grid;
+    padding: 20px;
 `
