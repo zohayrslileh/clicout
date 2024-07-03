@@ -11,5 +11,6 @@ export default {
     "Password field is required": "密码字段为必填项",
     "I agree to the terms and conditions": "我同意这条款和条件",
     "Terms and conditions": "条款和条件",
-    "Need an account": "需要一个帐户"
+    "Need an account": "需要一个帐户",
+    "All rights reserved": "版权所有"
 }

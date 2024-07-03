@@ -11,5 +11,6 @@ export default {
     "Password field is required": "Поле пароля обязательно",
     "I agree to the terms and conditions": "Я принимаю условия пользовательского соглашения",
     "Terms and conditions": "Условия и положения",
-    "Need an account": "Нужен аккаунт"
+    "Need an account": "Нужен аккаунт",
+    "All rights reserved": "Все права защищены"
 }

@@ -1,7 +1,7 @@
 import { useScreen } from "@/Tools/Screen"
 import styled from "@emotion/styled"
+import Copyright from "./Copyright"
 import Language from "./Language"
-import Version from "./Version"
 import Theme from "./Theme"
 
 /**
@@ -22,8 +22,8 @@ export default function () {
         {/** Language */}
         <Language />
 
-        {/** Version */}
-        {screen ? <Version /> : <div />}
+        {/** Copyright */}
+        {screen ? <Copyright /> : <div />}
 
         {/** Theme */}
         <Theme />

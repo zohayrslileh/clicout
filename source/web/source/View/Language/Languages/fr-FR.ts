@@ -11,5 +11,6 @@ export default {
     "Password field is required": "Le champ Mot de passe est obligatoire",
     "I agree to the terms and conditions": "J'accepte les termes et conditions",
     "Terms and conditions": "Termes et conditions",
-    "Need an account": "Besoin d'un compte"
+    "Need an account": "Besoin d'un compte",
+    "All rights reserved": "Tous droits réservés"
 }

@@ -1,8 +1,9 @@
+import { Lang } from "@/Tools/Language"
 import { useMemo } from "react"
 import config from "@/config"
 
 /**
- * Version
+ * Copyright
  * 
  * @returns 
  */
@@ -14,5 +15,5 @@ export default function () {
      */
     const currentDate = useMemo(() => new Date, [])
 
-    return <p className="justify-self-center select-none opacity-30">© {currentDate.getFullYear()} {config.APP_NAME} Inc. All rights reserved.</p>
+    return <p className="justify-self-center select-none opacity-30">© {currentDate.getFullYear()} {config.APP_NAME} Inc. <Lang>All rights reserved</Lang>.</p>
 }
