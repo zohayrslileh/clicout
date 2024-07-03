@@ -1,14 +1,10 @@
-import LinkButton from "@/View/Components/LinkButton"
-import { Route, Routes } from "react-router-dom"
+import { Link, Route, Routes } from "react-router-dom"
 import Appearance from "@/View/Appearance"
-import Grid from "@/View/Components/Grid"
 import Exception from "@/View/Exception"
 import { Lang } from "@/Tools/Language"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
-import Payment from "./Payment"
 import User from "@/Core/User"
-import Plans from "./Plans"
 
 /**
  * Upgrade
@@ -45,17 +41,17 @@ export default function () {
     }, [])
 
     return <Container>
-        <h1><Lang>Welcome</Lang>, <p>{user.username}</p></h1>
+        <h1 className="text-3xl"><Lang>Welcome</Lang>, <p>{user.username}</p></h1>
         <p>Please choose the plan that suits you.</p>
-        <Grid>
+        <div>
             <Exception>
                 <Routes>
-                    <Route index element={<Plans />} />
-                    <Route path=":plan" element={<Payment />} />
+                    <Route index element={<p>Plans</p>} />
+                    <Route path=":plan" element={<p>Payment</p>} />
                 </Routes>
             </Exception>
-        </Grid>
-        <LinkButton to="" onClick={logout}><Lang>Logout</Lang></LinkButton>
+        </div>
+        <Link className="text-primary" to="" onClick={logout}><Lang>Logout</Lang></Link>
     </Container>
 }
 
@@ -67,8 +63,8 @@ const Container = styled.div`
     text-align: center;
     display: grid;
     grid-template-rows: auto auto 1fr;
-    gap: 20px;
-    padding-block: 30px;
+    gap: 10px;
+    padding-block: 30px 5px;
 
     > h1 {
         display: flex;
@@ -76,6 +72,7 @@ const Container = styled.div`
         width: fit-content;
         gap: 10px;
         margin-block: 0;
+        font-family: ${() => Appearance.schema.FONT_BOLD};
         
         > p {
             color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
@@ -85,7 +82,6 @@ const Container = styled.div`
 
     > p {
         user-select: none;
-        margin-block: 0;
         opacity: 0.3;
     }
 `
