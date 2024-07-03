@@ -5,11 +5,11 @@ import compiler from "@/View/Exception/compiler"
 import { createIssues } from "@/Tools/Validator"
 import { Lang, useLang } from "@/Tools/Language"
 import useForm, { Form } from "@/Tools/Form"
+import { useEffect, useMemo } from "react"
 import { useScreen } from "@/Tools/Screen"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
-import { useMemo } from "react"
 import User from "@/Core/User"
 import Hero from "./Hero"
 
@@ -62,6 +62,16 @@ export default function () {
      */
     const registerIssues = useMemo(() => createIssues(registerException instanceof UnprocessableEntity ? registerException.issues : []), [registerException])
 
+    /**
+     * On register form change
+     * 
+     */
+    useEffect(function () {
+
+        if (registerPromise.exception) registerPromise.reset()
+
+    }, [registerForm.value])
+
     return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
         <div className="grid p-7 py-[50px] gap-10 w-[450px]">
@@ -72,7 +82,7 @@ export default function () {
                 <Input label={lang("Username")} value={registerForm.value.username} onValueChange={registerForm.update.username} variant="bordered" />
                 <Input type="password" label={lang("Password")} value={registerForm.value.password} onValueChange={registerForm.update.password} variant="bordered" />
                 <Checkbox isSelected={registerForm.value.agreeTerms} onValueChange={registerForm.update.agreeTerms}><p className="text-sm">I agree to the terms and conditions? <Link to="../register" className="text-primary">Terms and conditions</Link></p></Checkbox>
-                <Button type={registerPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={registerPromise.pending}><Lang>Sign up</Lang></Button>
+                <Button onClick={registerPromise.safeExecute} type={registerPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={registerPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
             <p className="m-auto">I already have an account? <Link to="../register" className="text-primary">Sign in</Link></p>
         </div>
