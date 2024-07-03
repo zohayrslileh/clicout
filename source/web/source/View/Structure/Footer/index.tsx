@@ -1,3 +1,4 @@
+import { useScreen } from "@/Tools/Screen"
 import styled from "@emotion/styled"
 import Language from "./Language"
 import Version from "./Version"
@@ -10,13 +11,19 @@ import Theme from "./Theme"
  */
 export default function () {
 
+    /**
+     * Screen
+     * 
+     */
+    const screen = useScreen(700)
+
     return <Container>
 
         {/** Language */}
         <Language />
 
         {/** Version */}
-        <Version />
+        {screen ? <Version /> : <div />}
 
         {/** Theme */}
         <Theme />
