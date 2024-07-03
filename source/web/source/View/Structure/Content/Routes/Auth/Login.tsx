@@ -78,8 +78,8 @@ export default function () {
             <Logo className="m-auto" width="200px" />
             <Form className="grid gap-3" onSubmit={loginPromise.safeExecute}>
                 {!loginIssues.length && loginException && <ErrorCard message={loginException.message} />}
-                <Input label={lang("Username")} value={loginForm.value.username} onValueChange={loginForm.update.username} variant="bordered" isInvalid={loginIssues.has("username")} errorMessage={loginIssues.path("username").message} />
-                <Input type="password" label={lang("Password")} value={loginForm.value.password} onValueChange={loginForm.update.password} variant="bordered" isInvalid={loginIssues.has("password")} errorMessage={loginIssues.path("password").message} />
+                <Input label={lang("Username")} value={loginForm.value.username || ""} onValueChange={username => loginForm.update.username(username || undefined)} variant="bordered" isInvalid={loginIssues.has("username")} errorMessage={loginIssues.path("username").message} />
+                <Input type="password" label={lang("Password")} value={loginForm.value.password || ""} onValueChange={password => loginForm.update.password(password || undefined)} variant="bordered" isInvalid={loginIssues.has("password")} errorMessage={loginIssues.path("password").message} />
                 <Button onClick={loginPromise.safeExecute} type={loginPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={loginPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
             <p className="m-auto">Need an account? <Link to="../login" className="text-primary">Sign up</Link></p>
@@ -97,11 +97,11 @@ class LoginForm {
      * Username
      * 
      */
-    username: string = ""
+    username: string | undefined
 
     /**
      * Password
      * 
      */
-    password: string = ""
+    password: string | undefined
 }
