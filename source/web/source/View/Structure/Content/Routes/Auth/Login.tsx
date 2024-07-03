@@ -82,7 +82,7 @@ export default function () {
                 <Input type="password" label={lang("Password")} value={loginForm.value.password || ""} onValueChange={password => loginForm.update.password(password || undefined)} variant="bordered" isInvalid={loginIssues.has("password")} errorMessage={loginIssues.path("password").message} />
                 <Button onClick={loginPromise.safeExecute} type={loginPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={loginPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
-            <p className="m-auto">Need an account? <Link to="../register" className="text-primary">Sign up</Link></p>
+            <p className="m-auto">Need an account? <Link to="../register" className="text-primary">Sign in</Link></p>
         </div>
     </Card>
 }
