@@ -68,19 +68,11 @@ export default class User {
      */
     public static async create(data: unknown) {
 
-        // Schema
-        const schema = zod.object({
-            username: zod.string().regex(new RegExp("^[a-z0-9_-]{5,15}$")),
-            password: zod.string().min(4).max(16),
-            email: zod.string({ required_error: "Email is required" }).email(),
-            agreeTerms: zod.boolean().refine(agreeTerms => agreeTerms)
-        })
-
         // Ask primitive user
         const [primitiveUser, authorization] = await request<[PrimitiveUser, string]>({
             method: "POST",
             url: "/auth/register",
-            data: schema.parse(data)
+            data
         })
 
         // Set authorization

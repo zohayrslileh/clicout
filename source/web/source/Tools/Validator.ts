@@ -1,18 +1,56 @@
-import { useEffect, useMemo, useState } from "react"
-import { ZodIssue, ZodType } from "zod"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import zod, { ZodIssue, ZodType, infer as Infer } from "zod"
 
 /**
  * Validator hook
  * 
  * @returns
  */
-export default function useValidator(schema: ZodType, data: unknown): Issues {
+export default function useValidator<Schema extends ZodType>(schema: (z: typeof zod) => Schema, data: unknown, timeout: number = 1000) {
 
     /**
-     * Issues state
+     * Timer
      * 
      */
-    const [issues, setIssues] = useState<ZodIssue[]>([])
+    const timer = useRef<number | undefined>(undefined)
+
+    /**
+     * Primitive Issues
+     * 
+     */
+    const [primitiveIssues, setPrimitiveIssues] = useState<ZodIssue[]>([])
+
+    /**
+     * Issues
+     * 
+     */
+    const issues = useMemo(() => createIssues(primitiveIssues), [primitiveIssues])
+
+    /**
+     * Validate
+     * 
+     * @returns
+     */
+    const validate: () => (undefined | Infer<Schema>) = useCallback(function () {
+
+        // Clear timer
+        if (timer.current) clearTimeout(timer.current)
+
+        // Validate
+        const validate = schema(zod).safeParse(data)
+
+        // Set Issues
+        if (!validate.success) setPrimitiveIssues(validate.error.issues)
+
+        // Set empty Issues
+        else setPrimitiveIssues([])
+
+        // Create timer
+        timer.current = setTimeout(() => setPrimitiveIssues([]), timeout)
+
+        return validate.success ? validate.data : undefined
+
+    }, [data])
 
     /**
      * On change data
@@ -20,18 +58,12 @@ export default function useValidator(schema: ZodType, data: unknown): Issues {
      */
     useEffect(() => {
 
-        // Validate
-        const validate = schema.safeParse(data)
-
-        // Set Issues
-        if (!validate.success) setIssues(validate.error.issues)
-
         // Set empty Issues
-        else setIssues([])
+        setPrimitiveIssues([])
 
     }, [data])
 
-    return useMemo(() => createIssues(issues), [issues])
+    return { issues, validate }
 }
 
 /**
