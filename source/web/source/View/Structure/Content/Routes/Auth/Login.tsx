@@ -1,10 +1,16 @@
+import UnprocessableEntity from "@/View/Exception/Exceptions/UnprocessableEntity"
 import { Button, Card, Input } from "@nextui-org/react"
+import ErrorCard from "@/View/Components/ErrorCard"
+import compiler from "@/View/Exception/compiler"
+import { createIssues } from "@/Tools/Validator"
 import { Lang, useLang } from "@/Tools/Language"
+import useForm, { Form } from "@/Tools/Form"
+import { useEffect, useMemo } from "react"
 import { useScreen } from "@/Tools/Screen"
 import Logo from "@/View/Components/Logo"
 import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
-import { Form } from "@/Tools/Form"
+import User from "@/Core/User"
 import Hero from "./Hero"
 
 /**
@@ -15,36 +21,87 @@ import Hero from "./Hero"
 export default function () {
 
     /**
-     * Screen
-     * 
-     */
-    const screen = useScreen(1000)
-
-    /**
      * Lang
      * 
      */
     const lang = useLang()
 
     /**
+     * Screen
+     * 
+     */
+    const screen = useScreen(1000)
+
+    /**
+     * User controller
+     * 
+     */
+    const userController = User.useController()
+
+    /**
+     * Login form
+     * 
+     */
+    const loginForm = useForm(() => new LoginForm)
+
+    /**
      * Login promise
      * 
      */
-    const login = usePromise(async function () {
+    const loginPromise = usePromise(async () => userController.dispatch(await User.login(loginForm.value)))
 
-        await new Promise(resolve => setTimeout(resolve, 2000))
-    })
+    /**
+     * Login exception
+     * 
+     */
+    const loginException = useMemo(() => loginPromise.exception ? compiler(loginPromise.exception.current) : undefined, [loginPromise.exception])
+
+    /**
+     * Login issues
+     * 
+     */
+    const loginIssues = useMemo(() => createIssues(loginException instanceof UnprocessableEntity ? loginException.issues : []), [loginException])
+
+    /**
+     * On login form change
+     * 
+     */
+    useEffect(function () {
+
+        if (loginPromise.exception) loginPromise.reset()
+
+    }, [loginForm.value])
 
     return <Card className="m-auto grid gap-2 smooth" style={{ gridTemplateColumns: screen ? "500px auto" : "auto" }}>
         {screen && <Hero />}
         <div className="grid p-7 py-[50px] gap-10 w-[450px]">
             <Logo className="m-auto" width="200px" />
-            <Form className="grid gap-3" onSubmit={login.safeExecute}>
-                <Input label={lang("Username")} />
-                <Input type="password" label={lang("Password")} />
-                <Button type={login.pending ? "button" : "submit"} size="lg" color="primary" isLoading={login.pending}><Lang>Sign in</Lang></Button>
+            <Form className="grid gap-3" onSubmit={loginPromise.safeExecute}>
+                {!loginIssues.length && loginException && <ErrorCard message={loginException.message} />}
+                <Input label={lang("Username")} value={loginForm.value.username} onValueChange={loginForm.update.username} variant="bordered" isInvalid={loginIssues.has("username")} errorMessage={loginIssues.path("username").message} />
+                <Input type="password" label={lang("Password")} value={loginForm.value.password} onValueChange={loginForm.update.password} variant="bordered" isInvalid={loginIssues.has("password")} errorMessage={loginIssues.path("password").message} />
+                <Button onClick={loginPromise.safeExecute} type={loginPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={loginPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
-            <p className="m-auto">Need an account? <Link to="../register" className="text-primary">Sign up</Link></p>
+            <p className="m-auto">Need an account? <Link to="../login" className="text-primary">Sign up</Link></p>
         </div>
     </Card>
+}
+
+/**
+ * Login Form
+ * 
+ */
+class LoginForm {
+
+    /**
+     * Username
+     * 
+     */
+    username: string = ""
+
+    /**
+     * Password
+     * 
+     */
+    password: string = ""
 }

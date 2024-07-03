@@ -84,7 +84,7 @@ export default function () {
                 <Checkbox isSelected={registerForm.value.agreeTerms} onValueChange={registerForm.update.agreeTerms} isInvalid={registerIssues.has("agreeTerms")}><p className="text-sm">I agree to the terms and conditions? <Link to="../register" className="text-primary">Terms and conditions</Link></p></Checkbox>
                 <Button onClick={registerPromise.safeExecute} type={registerPromise.pending ? "button" : "submit"} size="lg" color="primary" isLoading={registerPromise.pending}><Lang>Sign up</Lang></Button>
             </Form>
-            <p className="m-auto">I already have an account? <Link to="../register" className="text-primary">Sign in</Link></p>
+            <p className="m-auto">I already have an account? <Link to="../login" className="text-primary">Sign in</Link></p>
         </div>
     </Card>
 }
@@ -99,19 +99,19 @@ class RegisterForm {
      * Email
      * 
      */
-    email: string | undefined
+    email: string = ""
 
     /**
      * Username
      * 
      */
-    username: string | undefined
+    username: string = ""
 
     /**
      * Password
      * 
      */
-    password: string | undefined
+    password: string = ""
 
     /**
      * Agree terms
