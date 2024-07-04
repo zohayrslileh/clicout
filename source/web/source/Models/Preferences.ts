@@ -7,7 +7,8 @@ import Storage from "@/Tools/Storage"
 |
 |
 */
-const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+// const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+const theme = "dark"
 
 /*
 |-----------------------------
