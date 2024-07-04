@@ -39,7 +39,11 @@ export default function ({ plan }: Props) {
                 <Future isAvailable={plan.customizeDevices} color={plan.color.hex}><Lang>Customize devices</Lang></Future>
                 <Future isAvailable={plan.enableProxies} color={plan.color.hex}><Lang>Enable proxies</Lang></Future>
             </ul>
-            <Button size="lg" color="primary" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+            {
+                plan.recommended
+                    ? <Button size="lg" color="primary" className="text-background" style={{ backgroundColor: plan.color.hex }} onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+                    : <Button size="lg" color="primary" variant="bordered" style={{ color: plan.color.hex, borderColor: plan.color.hex }} onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+            }
         </Card>
     </div>
 }
