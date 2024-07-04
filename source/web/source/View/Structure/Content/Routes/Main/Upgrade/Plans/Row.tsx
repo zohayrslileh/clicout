@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "@nextui-org/react"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
+import { Lang } from "@/Tools/Language"
 import Plan from "@/Core/Plan"
 
 /**
@@ -131,7 +132,7 @@ export default function ({ plan }: Props) {
                     </span>
                 </li>
             </ul>
-            <Button size="lg" color="primary" onClick={() => navigate(`${plan.id}`)}>Choose {plan.name}</Button>
+            <Button size="lg" color="primary" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
         </Card>
     </div>
 }
