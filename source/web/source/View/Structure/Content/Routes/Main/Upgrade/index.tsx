@@ -13,9 +13,9 @@ import Plans from "./Plans"
 export default function () {
 
     return (
-        <div className="container grid gap-10 p-5 m-auto justify-items-center">
+        <div className="container grid grid-rows-[auto_1fr_auto] gap-10 p-5 m-auto min-h-[100%] justify-items-center">
             <Header />
-            <div className="grid justify-items-center relative w-full min-h-[200px]">
+            <div className="grid justify-items-center relative w-full">
                 <Exception>
                     <Routes>
                         <Route index element={<Plans />} />

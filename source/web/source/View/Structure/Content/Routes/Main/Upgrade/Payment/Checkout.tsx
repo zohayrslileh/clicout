@@ -56,7 +56,7 @@ export default function ({ plan }: Props) {
         }
     })
 
-    return <div className="w-auto px-3 smooth" style={{ scale: plan.recommended ? "1" : "0.98" }}>
+    return <div className="w-auto m-auto px-3 smooth" style={{ scale: plan.recommended ? "1" : "0.98" }}>
         <Card className="grid grid-cols-2 py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 gap-20">
             <div className="grid">
                 <span className="text-primary font-semibold text-lg block mb-4" style={{ color: plan.color.hex }}>
