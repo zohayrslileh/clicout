@@ -55,7 +55,7 @@ export default async function () {
 
     await sleep(3000)
 
-    await page.goto("https://www.teepublic.com/")
+    await page.goto("https://whatismyipaddress.com/ip-lookup")
 
     await sleep(3000)
 
