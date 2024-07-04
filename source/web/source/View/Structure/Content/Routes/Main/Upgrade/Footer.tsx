@@ -32,7 +32,7 @@ export default function () {
     }, [])
 
     return <div className="grid gap-5 justify-items-center">
-        <div className="flex items-center justify-between w-[100px] opacity-30 select-none">
+        <div className="flex items-center justify-between w-[100px] opacity-70 dark:opacity-30 select-none">
             <div className="w-full h-[1px] bg-gray-300" />
             <span className="text-sm uppercase mx-6 text-gray-400">Or</span>
             <div className="w-full h-[1px] bg-gray-300" />
