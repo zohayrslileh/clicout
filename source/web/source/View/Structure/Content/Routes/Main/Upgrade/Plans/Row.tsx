@@ -4,6 +4,7 @@ import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import Plan from "@/Core/Plan"
+import Future from "./Future"
 
 /**
  * Row
@@ -33,35 +34,10 @@ export default function ({ plan }: Props) {
                 Perfect for personal usage.
             </p>
             <ul className="my-7 space-y-5" role="list">
-                <li className="flex items-center">
-                    <svg
-                        aria-hidden="true"
-                        className="flex-shrink-0 h-4 w-4"
-                        style={{ color: plan.color.hex }}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <span className="font-normal leading-tight ms-3 text-base text-gray-500 dark:text-gray-400">
-                        2 team members
-                    </span>
-                </li>
-                <li className="flex decoration-gray-500 line-through">
-                    <svg
-                        aria-hidden="true"
-                        className="flex-shrink-0 h-4 w-4 dark:text-gray-500 text-gray-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <span className="font-normal leading-tight ms-3 text-base text-gray-500">
-                        Sketch Files
-                    </span>
-                </li>
+                <Future isAvailable={!!plan.threads} color={plan.color.hex}>{plan.threads} <Lang>Attack(s) same time</Lang></Future>
+                <Future isAvailable={plan.customizeCities} color={plan.color.hex}><Lang>Customize location</Lang></Future>
+                <Future isAvailable={plan.customizeDevices} color={plan.color.hex}><Lang>Customize devices</Lang></Future>
+                <Future isAvailable={plan.enableProxies} color={plan.color.hex}><Lang>Enable proxies</Lang></Future>
             </ul>
             <Button size="lg" color="primary" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
         </Card>
