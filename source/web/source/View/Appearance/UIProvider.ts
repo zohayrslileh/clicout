@@ -29,12 +29,12 @@ export default styled(NextUIProvider)`
         animation: ${keyframes`
             
             from {
-                opacity: 0;
+                filter: opacity(0);
                 transform: translateX(-20px);
             }
 
             to {
-                opacity: 1;
+                filter: opacity(1);
                 transform: translateX(0);
             }
 

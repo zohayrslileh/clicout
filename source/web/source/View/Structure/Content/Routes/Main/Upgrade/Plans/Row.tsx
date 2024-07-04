@@ -36,8 +36,8 @@ export default function ({ plan }: Props) {
             <p className="label"><Lang>Enable proxies</Lang></p>
             <p className="value">{plan.enableProxies ? TrueFeature : FalseFeature}</p>
         </div>
-        <Button variant="bordered" size="lg" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
-    </Container>
+        <Button variant={plan.id === 2 ? undefined : "bordered"} size="lg" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+    </Container >
 }
 
 /**
@@ -76,16 +76,24 @@ const Container = styled(Card) <{
     margin: auto;
 
     &.plan-1, &.plan-3 {
-        transform: scale(0.97);
+        scale: 0.97;
 
-        &:hover {
-            transform: scale(1);
+        > button {
+            color: ${props => props.$color.rgba()};
+            border-color: ${props => props.$color.rgba()};
+        }
+    }
+
+    &.plan-2 {
+
+        > button {
+            background-color: ${props => props.$color.rgba()};
         }
     }
 
     > #name {
         color: ${props => props.$color.rgba()};
-        text-shadow: 0 0 30px ${props => props.$color.rgba()};
+        // text-shadow: 0 0 30px ${props => props.$color.rgba()};
         font-size: 35px;
         font-family: ${() => Appearance.schema.FONT_BOLD};
         margin: 0;
@@ -99,7 +107,7 @@ const Container = styled(Card) <{
     > #price {
         display: flex;
         align-items: end;
-        gap: 5px;
+        gap: 10px;
         margin: auto;
 
         > #value {
@@ -109,8 +117,11 @@ const Container = styled(Card) <{
         }
 
         > #symbol {
-            margin-bottom: 5px;
+            margin-bottom: 12px;
             color: ${props => props.$color.rgba()};
+            font-family: ${() => Appearance.schema.FONT_LIGHT};
+            user-select: none;
+            opacity: 0.5;
         }
     }
     
@@ -134,10 +145,5 @@ const Container = styled(Card) <{
                 color: ${props => props.$color.rgba()};
             }
         }
-    }
-
-    > button {
-        color: ${props => props.$color.rgba()};
-        border-color: ${props => props.$color.rgba()};
     }
 `
