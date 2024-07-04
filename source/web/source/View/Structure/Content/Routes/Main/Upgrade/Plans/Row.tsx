@@ -34,7 +34,7 @@ export default function ({ plan }: Props) {
                 <Lang>{plan.description}</Lang>.
             </p>
             <ul className="my-7 space-y-5" role="list">
-                <Future isAvailable={!!plan.threads} color={plan.color.hex}>{plan.threads} <Lang>Attack(s) same time</Lang></Future>
+                <Future isAvailable={!!plan.threads} color={plan.color.hex}><Lang>Launch</Lang> {plan.threads} <Lang>Attack(s) same time</Lang></Future>
                 <Future isAvailable={plan.customizeLocation} color={plan.color.hex}><Lang>Customize location</Lang></Future>
                 <Future isAvailable={plan.customizeDevices} color={plan.color.hex}><Lang>Customize devices</Lang></Future>
                 <Future isAvailable={plan.enableProxies} color={plan.color.hex}><Lang>Enable proxies</Lang></Future>
