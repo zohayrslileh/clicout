@@ -43,7 +43,7 @@ export default function () {
 
     return <Container>
         <h1 className="text-3xl"><Lang>Welcome</Lang>, <p>{user.username}</p></h1>
-        <p>Please choose the plan that suits you.</p>
+        <p className="opacity-30">Please choose the plan that suits you.</p>
         <div className="relative grid">
             <Exception>
                 <Routes>
@@ -65,7 +65,6 @@ const Container = styled.div`
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     gap: 10px;
-    margin: auto;
 
     > h1 {
         display: flex;
@@ -78,10 +77,5 @@ const Container = styled.div`
             color: ${() => Appearance.schema.COLOR_YELLOW.rgba()};
             margin: 0;
         }
-    }
-
-    > p {
-        user-select: none;
-        opacity: 0.3;
     }
 `
