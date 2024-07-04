@@ -2,6 +2,7 @@ import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Subscription from "@/Core/Subscription"
 import Appearance from "@/View/Appearance"
+import { Button } from "@nextui-org/react"
 import { SiTether } from "react-icons/si"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
@@ -12,7 +13,6 @@ import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 import User from "@/Core/User"
 import config from "@/config"
-import { Button } from "@nextui-org/react"
 
 /**
  * Checkout
