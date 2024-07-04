@@ -1,7 +1,6 @@
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import Subscription from "@/Core/Subscription"
-import Button from "@/View/Components/Button"
 import Appearance from "@/View/Appearance"
 import { SiTether } from "react-icons/si"
 import Card from "@/View/Components/Card"
@@ -13,6 +12,7 @@ import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 import User from "@/Core/User"
 import config from "@/config"
+import { Button } from "@nextui-org/react"
 
 /**
  * Checkout
@@ -221,7 +221,6 @@ const Container = styled(Card) <{
                     
                     > a {
                         text-decoration: none;
-                        color: ${() => Appearance.schema.COLOR_WHITE.rgba()};
                         font-size: 13px;
                     }
                 }
