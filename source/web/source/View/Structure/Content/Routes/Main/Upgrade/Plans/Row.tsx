@@ -130,7 +130,7 @@ const Container = styled(Card) <{
         text-align: start;
         align-content: space-evenly;
         margin-inline: 15px;
-        gap: 30px;
+        gap: 20px;
 
         > p {
             margin: 0;
