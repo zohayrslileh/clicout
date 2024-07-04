@@ -1,20 +1,8 @@
 
-
 export default function () {
 
     return (
-        <section
-            className="
-   bg-white
-   pt-20
-   lg:pt-[120px]
-   pb-12
-   lg:pb-[90px]
-   relative
-   z-20
-   overflow-hidden
-   "
-        >
+        <section className="bg-white pt-20 lg:pt-[120px] pb-12 lg:pb-[90px] relative z-20 overflow-hidden">
             <div className="container">
                 <div className="flex flex-wrap -mx-4">
                     <div className="w-full px-4">
@@ -22,16 +10,7 @@ export default function () {
                             <span className="font-semibold text-lg text-primary mb-2 block">
                                 Pricing Table
                             </span>
-                            <h2
-                                className="
-            font-bold
-            text-3xl
-            sm:text-4xl
-            md:text-[40px]
-            text-dark
-            mb-4
-            "
-                            >
+                            <h2 className="font-bold text-3xl sm:text-4xl md:text-[40px] text-dark mb-4">
                                 Our Pricing Plan
                             </h2>
                             <p className="text-base text-body-color">
@@ -43,23 +22,7 @@ export default function () {
                 </div>
                 <div className="flex flex-wrap justify-center -mx-4">
                     <div className="w-full md:w-1/2 lg:w-1/3 px-4">
-                        <div
-                            className="
-         bg-white
-         rounded-xl
-         relative
-         z-10
-         overflow-hidden
-         border border-primary border-opacity-20
-         shadow-pricing
-         py-10
-         px-8
-         sm:p-12
-         lg:py-10 lg:px-6
-         xl:p-12
-         mb-10
-         "
-                        >
+                        <div className="bg-white rounded-xl relative z-10 overflow-hidden border border-primary border-opacity-20 shadow-pricing py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 mb-10">
                             <span className="text-primary font-semibold text-lg block mb-4">
                                 Personal
                             </span>
@@ -69,14 +32,7 @@ export default function () {
                                     / year
                                 </span>
                             </h2>
-                            <p
-                                className="
-            text-base text-body-color
-            pb-8
-            mb-8
-            border-b border-[#F2F2F2]
-            "
-                            >
+                            <p className="text-base text-body-color pb-8 mb-8 border-b border-[#F2F2F2]">
                                 Perfect for using in a personal website or a client project.
                             </p>
                             <div className="mb-7">
@@ -101,20 +57,7 @@ export default function () {
                             </div>
                             <a
                                 href="javascript:void(0)"
-                                className="
-            w-full
-            block
-            text-base
-            font-semibold
-            text-primary
-            bg-transparent
-            border border-[#D4DEFF]
-            rounded-md
-            text-center
-            p-4
-            hover:text-white hover:bg-primary hover:border-primary
-            transition
-            "
+                                className="w-full block text-base font-semibold text-primary bg-transparent border border-[#D4DEFF] rounded-md text-center p-4 hover:text-white hover:bg-primary hover:border-primary transition"
                             >
                                 Choose Personal
                             </a>
@@ -381,23 +324,7 @@ export default function () {
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 lg:w-1/3 px-4">
-                        <div
-                            className="
-         bg-white
-         rounded-xl
-         relative
-         z-10
-         overflow-hidden
-         border border-primary border-opacity-20
-         shadow-pricing
-         py-10
-         px-8
-         sm:p-12
-         lg:py-10 lg:px-6
-         xl:p-12
-         mb-10
-         "
-                        >
+                        <div className="bg-white rounded-xl relative z-10 overflow-hidden border border-primary border-opacity-20 shadow-pricing py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 mb-10">
                             <span className="text-primary font-semibold text-lg block mb-4">
                                 Business
                             </span>
@@ -407,14 +334,7 @@ export default function () {
                                     / year
                                 </span>
                             </h2>
-                            <p
-                                className="
-            text-base text-body-color
-            pb-8
-            mb-8
-            border-b border-[#F2F2F2]
-            "
-                            >
+                            <p className="text-base text-body-color pb-8 mb-8 border-b border-[#F2F2F2]">
                                 Perfect for using in a Business website or a client project.
                             </p>
                             <div className="mb-7">
@@ -439,20 +359,7 @@ export default function () {
                             </div>
                             <a
                                 href="javascript:void(0)"
-                                className="
-            w-full
-            block
-            text-base
-            font-semibold
-            text-white
-            bg-primary
-            border border-primary
-            rounded-md
-            text-center
-            p-4
-            hover:bg-opacity-90
-            transition
-            "
+                                className="w-full block text-base font-semibold text-white bg-primary border border-primary rounded-md text-center p-4 hover:bg-opacity-90 transition"
                             >
                                 Choose Business
                             </a>
@@ -719,23 +626,7 @@ export default function () {
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 lg:w-1/3 px-4">
-                        <div
-                            className="
-         bg-white
-         rounded-xl
-         relative
-         z-10
-         overflow-hidden
-         border border-primary border-opacity-20
-         shadow-pricing
-         py-10
-         px-8
-         sm:p-12
-         lg:py-10 lg:px-6
-         xl:p-12
-         mb-10
-         "
-                        >
+                        <div className="bg-white rounded-xl relative z-10 overflow-hidden border border-primary border-opacity-20 shadow-pricing py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 mb-10">
                             <span className="text-primary font-semibold text-lg block mb-4">
                                 Professional
                             </span>
@@ -745,14 +636,7 @@ export default function () {
                                     / year
                                 </span>
                             </h2>
-                            <p
-                                className="
-            text-base text-body-color
-            pb-8
-            mb-8
-            border-b border-[#F2F2F2]
-            "
-                            >
+                            <p className="text-base text-body-color pb-8 mb-8 border-b border-[#F2F2F2]">
                                 Perfect for using in a Professional website or a client project.
                             </p>
                             <div className="mb-7">
@@ -777,20 +661,7 @@ export default function () {
                             </div>
                             <a
                                 href="javascript:void(0)"
-                                className="
-            w-full
-            block
-            text-base
-            font-semibold
-            text-primary
-            bg-transparent
-            border border-[#D4DEFF]
-            rounded-md
-            text-center
-            p-4
-            hover:text-white hover:bg-primary hover:border-primary
-            transition
-            "
+                                className="w-full block text-base font-semibold text-primary bg-transparent border border-[#D4DEFF] rounded-md text-center p-4 hover:text-white hover:bg-primary hover:border-primary transition"
                             >
                                 Choose Professional
                             </a>
