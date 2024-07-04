@@ -9,8 +9,10 @@ export default {
     "Email field is required": "Поле электронной почты обязательно",
     "Username field is required": "Поле имени пользователя обязательно",
     "Password field is required": "Поле пароля обязательно",
-    "I agree to the terms and conditions": "Я принимаю условия пользовательского соглашения",
-    "Terms and conditions": "Условия и положения",
     "Need an account": "Нужен аккаунт",
-    "All rights reserved": "Все права защищены"
+    "All rights reserved": "Все права защищены",
+    "I accept to the": "Я принимаю",
+    "terms": "условия",
+    "privacy policy": "политика конфиденциальности",
+    "and": "и"
 }

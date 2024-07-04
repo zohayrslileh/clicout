@@ -9,8 +9,10 @@ export default {
     "Email field is required": "电子邮件字段为必填项",
     "Username field is required": "用户名字段为必填项",
     "Password field is required": "密码字段为必填项",
-    "I agree to the terms and conditions": "我同意这条款和条件",
-    "Terms and conditions": "条款和条件",
     "Need an account": "需要一个帐户",
-    "All rights reserved": "版权所有"
+    "All rights reserved": "版权所有",
+    "I accept to the": "我接受",
+    "terms": "条款",
+    "privacy policy": "隐私政策",
+    "and": "和"
 }
