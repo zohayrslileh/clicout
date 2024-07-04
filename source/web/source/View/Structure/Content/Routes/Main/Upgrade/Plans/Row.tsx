@@ -20,7 +20,7 @@ export default function ({ plan }: Props) {
      */
     const navigate = useNavigate()
 
-    return <Container className={`plan-${plan.id}`} $color={plan.color}>
+    return <Container className={`plan-${plan.id} rounded-md`} $color={plan.color}>
         <p id="name"><plan.avatar />{plan.name}</p>
         <div id="price">
             <p id="value">{plan.price}</p>
@@ -36,7 +36,7 @@ export default function ({ plan }: Props) {
             <p className="label"><Lang>Enable proxies</Lang></p>
             <p className="value">{plan.enableProxies ? TrueFeature : FalseFeature}</p>
         </div>
-        <Button onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+        <Button size="lg" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
     </Container>
 }
 
@@ -67,7 +67,7 @@ interface Props {
 const Container = styled(Card) <{
     $color: Color
 }>`
-    width: 300px;
+    min-width: 300px;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     padding: 20px;
@@ -80,23 +80,7 @@ const Container = styled(Card) <{
 
         &:hover {
             transform: scale(1);
-
-            > #name {
-                opacity: 1;
-            }
         }
-    }
-
-    &.plan-2 {
-        box-shadow: 0 0 10px ${props => props.$color.rgba(0.1)};
-
-        > #name {
-            opacity: 1;
-        }
-    }
-
-    > .line {
-        background-color: ${props => props.$color.rgba()};
     }
 
     > #name {
@@ -104,7 +88,6 @@ const Container = styled(Card) <{
         text-shadow: 0 0 30px ${props => props.$color.rgba()};
         font-size: 35px;
         font-family: ${() => Appearance.schema.FONT_BOLD};
-        opacity: 0.5;
         margin: 0;
         margin-top: 15px;
         display: flex;
@@ -151,5 +134,9 @@ const Container = styled(Card) <{
                 color: ${props => props.$color.rgba()};
             }
         }
+    }
+
+    > button {
+        background-color: ${props => props.$color.rgba()};
     }
 `

@@ -23,7 +23,7 @@ export default function () {
     // Exception status
     if (plans.exception) return <Throw exception={plans.exception.current} />
 
-    return <div className="grid grid-cols-3 gap-10 mx-auto my-0">
+    return <div className="grid grid-cols-3 gap-5 mx-auto my-2">
         {plans.solve.map(plan => <Row key={plan.id} plan={plan} />)}
     </div>
 }
