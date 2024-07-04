@@ -1,3 +1,6 @@
+import Authorization from "@/Models/Authorization"
+import { Button } from "@nextui-org/react"
+import { useCallback } from "react"
 import User from "@/Core/User"
 
 /**
@@ -13,8 +16,29 @@ export default function () {
      */
     const user = User.useContext()
 
+    /**
+     * Controller
+     * 
+     */
+    const controller = User.useController()
+
+    /**
+     * Logout method
+     * 
+     * @returns
+     */
+    const logout = useCallback(function () {
+
+        // Clear Authorization
+        Authorization.update("")
+
+        // Dispatch user
+        controller.dispatch(undefined)
+
+    }, [])
+
     return (
-        <div className="container m-auto">
+        <div className="container grid m-auto">
             <div className="flex flex-wrap -mx-4">
                 <div className="w-full px-4">
                     <div className="text-center mx-auto mb-10 mt-5 max-w-[510px]">
@@ -1175,6 +1199,7 @@ export default function () {
                     </div>
                 </div>
             </div>
+            <Button className="m-auto text-medium" variant="light" onClick={logout}>Logout</Button>
         </div>
     )
 }

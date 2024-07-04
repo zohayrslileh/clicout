@@ -116,16 +116,6 @@ export default class User {
     }
 
     /**
-     * Logout method
-     * 
-     * @returns
-     */
-    public static logout() {
-
-        Authorization.value = ""
-    }
-
-    /**
      * Authentication method
      * 
      * @returns
