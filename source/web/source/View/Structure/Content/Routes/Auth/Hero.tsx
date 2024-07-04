@@ -61,7 +61,7 @@ export default function App() {
             <Stage intensity={0.5} environment="city" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
               <Kamdo rotation={[0, Math.PI * 1.5, 0]} />
             </Stage>
-            <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+            <OrbitControls autoRotate autoRotateSpeed={0.5} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
             <EffectComposer disableNormalPass>
               <Bloom luminanceThreshold={2} mipmapBlur />
               <ToneMapping />
