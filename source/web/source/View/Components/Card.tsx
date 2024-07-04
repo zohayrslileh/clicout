@@ -7,7 +7,7 @@ import React from "react"
  */
 export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
 
-    return <div {...props} className={`rounded-xl relative z-10 overflow-hidden border border-primary border-opacity-20 shadow-pricing ${props.className}`}>
+    return <div {...props} className={`rounded-xl relative z-10 border border-primary border-opacity-20 shadow-pricing ${props.className}`}>
         {children}
         <span className="absolute right-0 top-7 z-[-1]">
             <svg
