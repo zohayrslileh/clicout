@@ -8,11 +8,11 @@ import useForm, { Form } from "@/Tools/Form"
 import { useEffect, useMemo } from "react"
 import { useScreen } from "@/Tools/Screen"
 import Logo from "@/View/Components/Logo"
+import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
 import User from "@/Core/User"
 import Hero from "./Hero"
-import Card from "@/View/Components/Card"
 
 /**
  * Register
