@@ -1,3 +1,5 @@
+import { Route, Routes } from "react-router-dom"
+import Payment from "./Payment"
 import Header from "./Header"
 import Footer from "./Footer"
 import Plans from "./Plans"
@@ -12,7 +14,10 @@ export default function () {
     return (
         <div className="container grid gap-10 p-5 m-auto justify-items-center">
             <Header />
-            <Plans />
+            <Routes>
+                <Route index element={<Plans />} />
+                <Route path=":plan" element={<Payment />} />
+            </Routes>
             <Footer />
         </div>
     )
