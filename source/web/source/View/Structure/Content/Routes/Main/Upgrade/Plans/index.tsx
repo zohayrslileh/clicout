@@ -23,7 +23,7 @@ export default function () {
     // Exception status
     if (plans.exception) return <Throw exception={plans.exception.current} />
 
-    return <div className="flex flex-wrap justify-center -mx-4 smooth xl:max-w-[90%] m-auto">
+    return <div className="flex flex-wrap justify-center -mx-4 smooth xl:max-w-[90%] xl:w-[90%] m-auto">
         {plans.solve.map(plan => <Row key={plan.id} plan={plan} />)}
     </div>
 }
