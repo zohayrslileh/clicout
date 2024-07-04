@@ -32,6 +32,18 @@ export default class Plan {
     public name: string
 
     /**
+     * Description
+     * 
+     */
+    public description: string
+
+    /**
+     * Recommended
+     * 
+     */
+    public recommended: boolean
+
+    /**
      * Avatar
      * 
      */
@@ -84,6 +96,12 @@ export default class Plan {
 
         // Set name
         this.name = primitivePlan.name
+
+        // Set description
+        this.description = primitivePlan.description
+
+        // Set recommended
+        this.recommended = primitivePlan.recommended
 
         // Set avatar
         this.avatar = avatars[primitivePlan.id - 1]
@@ -166,9 +184,11 @@ export interface PrimitivePlan {
     name: string
     price: number
     threads: number
+    description: string
+    recommended: boolean
     enableProxies: boolean
-    customizeLocation: boolean
     customizeDevices: boolean
+    customizeLocation: boolean
 }
 
 /**

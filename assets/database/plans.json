@@ -1,6 +1,8 @@
 [
     {
-        "name": "Free",
+        "name": "Personal",
+        "description": "Perfect for personal usage",
+        "recommended": false,
         "price": 0,
         "threads": 1,
         "enableProxies": false,
@@ -8,7 +10,9 @@
         "customizeDevices": false
     },
     {
-        "name": "Basic",
+        "name": "Business",
+        "description": "Perfect for business usage",
+        "recommended": true,
         "price": 59,
         "threads": 2,
         "enableProxies": false,
@@ -16,7 +20,9 @@
         "customizeDevices": true
     },
     {
-        "name": "Pro",
+        "name": "Professional",
+        "description": "Perfect for professional usage",
+        "recommended": false,
         "price": 159,
         "threads": 5,
         "enableProxies": true,
