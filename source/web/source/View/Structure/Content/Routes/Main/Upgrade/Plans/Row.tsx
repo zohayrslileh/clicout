@@ -31,7 +31,7 @@ export default function ({ plan }: Props) {
                 </span>
             </h2>
             <p className="text-base text-body-color pb-8 border-b border-foreground border-opacity-20" style={{ fontFamily: Appearance.schema.FONT_LIGHT }}>
-                Perfect for personal usage.
+                <Lang>{plan.description}</Lang>.
             </p>
             <ul className="my-7 space-y-5" role="list">
                 <Future isAvailable={!!plan.threads} color={plan.color.hex}>{plan.threads} <Lang>Attack(s) same time</Lang></Future>
