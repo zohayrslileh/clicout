@@ -42,19 +42,10 @@ export default function () {
 
     }, [])
 
-    return <Container>
-        <h1 className="text-3xl"><Lang>Welcome</Lang>, <p>{user.username}</p></h1>
-        <p className="opacity-30 m-auto">Please choose the plan that suits you.</p>
-        <div className="relative grid">
-            <Exception>
-                <Routes>
-                    <Route index element={<Test />} />
-                    <Route path=":plan" element={<p>Payment</p>} />
-                </Routes>
-            </Exception>
-        </div>
-        <Link className="text-primary m-auto" to="" onClick={logout}><Lang>Logout</Lang></Link>
-    </Container>
+    return <Routes>
+        <Route index element={<Test />} />
+        <Route path=":plan" element={<p>Payment</p>} />
+    </Routes>
 }
 
 /**
