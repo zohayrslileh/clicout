@@ -63,9 +63,9 @@ export default function () {
 const Container = styled.div`
     text-align: center;
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     gap: 10px;
-    padding-block: 30px 5px;
+    margin: auto;
 
     > h1 {
         display: flex;
