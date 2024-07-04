@@ -20,7 +20,7 @@ export default function ({ plan }: Props) {
      */
     const navigate = useNavigate()
 
-    return <Container className={`plan-${plan.id} rounded-md`} $color={plan.color}>
+    return <Container className={`plan-${plan.id} smooth rounded-md`} $color={plan.color}>
         <p id="name"><plan.avatar />{plan.name}</p>
         <div id="price">
             <p id="value">{plan.price}</p>
@@ -36,7 +36,7 @@ export default function ({ plan }: Props) {
             <p className="label"><Lang>Enable proxies</Lang></p>
             <p className="value">{plan.enableProxies ? TrueFeature : FalseFeature}</p>
         </div>
-        <Button size="lg" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
+        <Button variant="bordered" size="lg" onClick={() => navigate(`${plan.id}`)}><Lang>Subscribe</Lang></Button>
     </Container>
 }
 
@@ -137,6 +137,7 @@ const Container = styled(Card) <{
     }
 
     > button {
-        background-color: ${props => props.$color.rgba()};
+        color: ${props => props.$color.rgba()};
+        border-color: ${props => props.$color.rgba()};
     }
 `
