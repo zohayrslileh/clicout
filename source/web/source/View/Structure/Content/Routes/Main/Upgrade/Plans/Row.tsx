@@ -11,7 +11,7 @@ export default function () {
 
     return (
         <div className="w-full md:w-1/2 lg:w-1/3 px-4">
-            <Card className="grid py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 mb-10">
+            <Card className="grid py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12">
                 <span className="text-primary font-semibold text-lg block mb-4">
                     Personal
                 </span>

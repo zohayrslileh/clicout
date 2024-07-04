@@ -16,7 +16,7 @@ export default function () {
     return (
         <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
-                <div className="text-center mx-auto mb-10 mt-5 max-w-[510px]">
+                <div className="text-center mx-auto max-w-[510px]">
                     <h2 className="font-bold text-3xl sm:text-4xl md:text-[40px] text-dark mb-4">
                         Our Pricing Plan
                     </h2>

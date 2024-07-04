@@ -10,7 +10,7 @@ import Plans from "./Plans"
 export default function () {
 
     return (
-        <div className="container grid m-auto justify-items-center">
+        <div className="container grid gap-10 p-5 m-auto justify-items-center">
             <Header />
             <Plans />
             <Footer />
