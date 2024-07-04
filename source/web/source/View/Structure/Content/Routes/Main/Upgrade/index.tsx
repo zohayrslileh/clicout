@@ -51,7 +51,7 @@ export default function () {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-wrap justify-center -mx-4">
+            <div className="flex flex-wrap justify-center -mx-4 smooth">
                 <div className="w-full md:w-1/2 lg:w-1/3 px-4">
                     <div className="rounded-xl relative z-10 overflow-hidden border border-primary border-opacity-20 shadow-pricing py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 mb-10">
                         <span className="text-primary font-semibold text-lg block mb-4">
