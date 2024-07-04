@@ -82,8 +82,8 @@ export default function ({ plan }: Props) {
                 <div className="grid">
                     {
                         plan.price
-                            ? <Button size="lg" color="success" onClick={subscribe.safeExecute} disabled={subscribe.pending}><SiTether /><Lang>Payment</Lang></Button>
-                            : <Button size="lg" color="success" onClick={subscribe.safeExecute} disabled={subscribe.pending}><Lang>Active</Lang></Button>
+                            ? <Button size="lg" color="success" onClick={subscribe.safeExecute} isLoading={subscribe.pending}><SiTether /><Lang>Payment</Lang></Button>
+                            : <Button size="lg" color="success" onClick={subscribe.safeExecute} isLoading={subscribe.pending}><Lang>Active</Lang></Button>
                     }
                     <div className="flex items-center justify-between m-auto w-[100px] opacity-70 dark:opacity-30 select-none">
                         <div className="w-full h-[1px] bg-gray-300" />
