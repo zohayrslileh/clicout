@@ -20,7 +20,7 @@ export default function ({ plan }: Props) {
      */
     const navigate = useNavigate()
 
-    return <Container className={`plan-${plan.id} smooth rounded-md`} $color={plan.color}>
+    return <Container className={`plan-${plan.id} smooth`} $color={plan.color}>
         <p id="name"><plan.avatar />{plan.name}</p>
         <div id="price">
             <p id="value">{plan.price}</p>
@@ -93,7 +93,6 @@ const Container = styled(Card) <{
 
     > #name {
         color: ${props => props.$color.rgba()};
-        // text-shadow: 0 0 30px ${props => props.$color.rgba()};
         font-size: 35px;
         font-family: ${() => Appearance.schema.FONT_BOLD};
         margin: 0;
@@ -137,7 +136,7 @@ const Container = styled(Card) <{
             margin: 0;
 
             &.label {
-                opacity: 0.5;
+                opacity: 0.8;
             }
 
             &.value {
