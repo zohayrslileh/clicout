@@ -7,6 +7,7 @@ import User from "@/Core/User"
 import { lazy } from "react"
 
 const Upgrade = lazy(() => import("./Upgrade"))
+const Dashboard = lazy(() => import("./Dashboard"))
 
 /**
  * Main
@@ -38,7 +39,7 @@ export default function ({ user }: Props) {
                 <Route path="upgrade/*" element={<Upgrade />} />
 
                 {/** Dashboard */}
-                <Route path="*" element={subscription.solve ? <p>Dashboard</p> : <Navigate to="upgrade" />} />
+                <Route path="*" element={subscription.solve ? <Dashboard /> : <Navigate to="upgrade" />} />
 
             </Routes>
 
