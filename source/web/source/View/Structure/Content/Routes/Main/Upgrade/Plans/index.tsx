@@ -1,7 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
-import styled from "@emotion/styled"
 import Plan from "@/Core/Plan"
 import Row from "./Row"
 
@@ -24,19 +23,7 @@ export default function () {
     // Exception status
     if (plans.exception) return <Throw exception={plans.exception.current} />
 
-    return <Container>
+    return <div className="grid grid-cols-3 gap-10 mx-auto my-0">
         {plans.solve.map(plan => <Row key={plan.id} plan={plan} />)}
-    </Container>
+    </div>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    margin-inline: auto;
-    margin-block: 10px;
-`
