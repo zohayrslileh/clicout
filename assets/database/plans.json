@@ -4,7 +4,7 @@
         "price": 0,
         "threads": 1,
         "enableProxies": false,
-        "customizeCities": false,
+        "customizeLocation": false,
         "customizeDevices": false
     },
     {
@@ -12,7 +12,7 @@
         "price": 59,
         "threads": 2,
         "enableProxies": false,
-        "customizeCities": true,
+        "customizeLocation": true,
         "customizeDevices": true
     },
     {
@@ -20,7 +20,7 @@
         "price": 159,
         "threads": 5,
         "enableProxies": true,
-        "customizeCities": true,
+        "customizeLocation": true,
         "customizeDevices": true
     }
 ]

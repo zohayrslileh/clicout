@@ -62,10 +62,10 @@ export default class Plan {
     public enableProxies: boolean
 
     /**
-     * Customize cities
+     * Customize location
      * 
      */
-    public customizeCities: boolean
+    public customizeLocation: boolean
 
     /**
      * Customize devices
@@ -100,8 +100,8 @@ export default class Plan {
         // Set enable proxies
         this.enableProxies = primitivePlan.enableProxies
 
-        // Set customize cities
-        this.customizeCities = primitivePlan.customizeCities
+        // Set customize location
+        this.customizeLocation = primitivePlan.customizeLocation
 
         // Set customize devices
         this.customizeDevices = primitivePlan.customizeDevices
@@ -167,7 +167,7 @@ export interface PrimitivePlan {
     price: number
     threads: number
     enableProxies: boolean
-    customizeCities: boolean
+    customizeLocation: boolean
     customizeDevices: boolean
 }
 

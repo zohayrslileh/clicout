@@ -65,8 +65,8 @@ export default function ({ plan }: Props) {
                 <div id="features">
                     <p className="label"><Lang>Max attacks</Lang></p>
                     <p className="value">{plan.threads}</p>
-                    <p className="label"><Lang>Customize cities</Lang></p>
-                    <p className="value">{plan.customizeCities ? TrueFeature : FalseFeature}</p>
+                    <p className="label"><Lang>Customize location</Lang></p>
+                    <p className="value">{plan.customizeLocation ? TrueFeature : FalseFeature}</p>
                     <p className="label"><Lang>Customize devices</Lang></p>
                     <p className="value">{plan.customizeDevices ? TrueFeature : FalseFeature}</p>
                     <p className="label"><Lang>Enable proxies</Lang></p>

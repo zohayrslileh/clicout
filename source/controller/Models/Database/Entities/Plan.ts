@@ -20,6 +20,20 @@ export default class Plan extends BaseEntity {
     declare public name: string
 
     /**
+     * Description
+     * 
+     */
+    @Column({ type: "text", nullable: false })
+    declare public description: string
+
+    /**
+     * Recommended
+     * 
+     */
+    @Column({ type: "boolean", nullable: false, default: false })
+    declare public recommended: boolean
+
+    /**
      * Price
      * 
      */
@@ -41,11 +55,11 @@ export default class Plan extends BaseEntity {
     declare public enableProxies: boolean
 
     /**
-     * Customize cities
+     * Customize location
      * 
      */
     @Column({ type: "boolean", nullable: false })
-    declare public customizeCities: boolean
+    declare public customizeLocation: boolean
 
     /**
      * Customize devices
