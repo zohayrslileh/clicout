@@ -44,7 +44,7 @@ export default function () {
     return <Container>
         <h1 className="text-3xl"><Lang>Welcome</Lang>, <p>{user.username}</p></h1>
         <p>Please choose the plan that suits you.</p>
-        <div>
+        <div className="relative grid">
             <Exception>
                 <Routes>
                     <Route index element={<Plans />} />
@@ -72,7 +72,6 @@ const Container = styled.div`
         margin: auto;
         width: fit-content;
         gap: 10px;
-        margin-block: 0;
         font-family: ${() => Appearance.schema.FONT_BOLD};
         
         > p {

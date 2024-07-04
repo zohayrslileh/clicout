@@ -27,7 +27,8 @@ export default function () {
  */
 const Container = styled.div`
     position: relative;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: grid;
     padding: 20px;
 `
