@@ -1,3 +1,4 @@
+import User from "@/Core/User"
 
 /**
  * Upgrade
@@ -6,20 +7,22 @@
  */
 export default function () {
 
+    /**
+     * User
+     * 
+     */
+    const user = User.useContext()
+
     return (
         <div className="container m-auto">
             <div className="flex flex-wrap -mx-4">
                 <div className="w-full px-4">
-                    <div className="text-center mx-auto mb-[60px] lg:mb-20 max-w-[510px]">
-                        <span className="font-semibold text-lg text-primary mb-2 block">
-                            Pricing Table
-                        </span>
+                    <div className="text-center mx-auto mb-10 mt-5 max-w-[510px]">
                         <h2 className="font-bold text-3xl sm:text-4xl md:text-[40px] text-dark mb-4">
                             Our Pricing Plan
                         </h2>
                         <p className="text-base text-body-color">
-                            There are many variations of passages of Lorem Ipsum available but
-                            the majority have suffered alteration in some form.
+                            Hi, <b className="text-success">{user.username}</b> 👋. Please choose the plan that suits you.
                         </p>
                     </div>
                 </div>
