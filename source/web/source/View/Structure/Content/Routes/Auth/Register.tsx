@@ -1,5 +1,5 @@
 import UnprocessableEntity from "@/View/Exception/Exceptions/UnprocessableEntity"
-import { Button, Card, Checkbox, Input } from "@nextui-org/react"
+import { Button, Checkbox, Input } from "@nextui-org/react"
 import ErrorCard from "@/View/Components/ErrorCard"
 import compiler from "@/View/Exception/compiler"
 import { createIssues } from "@/Tools/Validator"
@@ -12,6 +12,7 @@ import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
 import User from "@/Core/User"
 import Hero from "./Hero"
+import Card from "@/View/Components/Card"
 
 /**
  * Register
