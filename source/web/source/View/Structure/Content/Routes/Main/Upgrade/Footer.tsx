@@ -31,5 +31,5 @@ export default function () {
 
     }, [])
 
-    return <Button className="m-auto text-medium" variant="light" onClick={logout}>Logout</Button>
+    return <Button className="m-auto text-medium text-orange-400" variant="light" onClick={logout}>Logout</Button>
 }
