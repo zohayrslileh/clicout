@@ -61,7 +61,7 @@ export default function ({ plan }: Props) {
         <Card className="grid grid-cols-2 py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 gap-20">
             <div className="grid">
                 <span className="text-primary font-semibold text-lg block mb-4" style={{ color: plan.color.hex }}>
-                    {plan.name}
+                    <Lang>{plan.name}</Lang>
                 </span>
                 <p className="text-base text-body-color pb-8 border-b border-foreground border-opacity-20" style={{ fontFamily: Appearance.schema.FONT_LIGHT }}>
                     <Lang>{plan.description}</Lang>.
