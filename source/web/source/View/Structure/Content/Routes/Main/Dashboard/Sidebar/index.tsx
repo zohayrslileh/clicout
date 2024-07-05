@@ -1,4 +1,3 @@
-import styled from "@emotion/styled"
 
 /**
  * Sidebar
@@ -7,15 +6,39 @@ import styled from "@emotion/styled"
  */
 export default function () {
 
-    return <Container>
-        <h1>Sidebar</h1>
-    </Container>
-}
+    return <div className="relative overflow-x-hidden overflow-y-auto bg-red-600">
 
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    background-color: red;
-`
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+        <h1>Sidebar</h1>
+
+    </div>
+}
