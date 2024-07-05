@@ -6,7 +6,6 @@ import Content from "./Content"
 import Sidebar from "./Sidebar"
 import User from "@/Core/User"
 import Plan from "@/Core/Plan"
-import Navbar from "./Navbar"
 
 /**
  * Dashboard
@@ -37,9 +36,6 @@ export default function () {
 
         <Plan.context.Provider value={plan.solve}>
 
-            {/** Navbar */}
-            <Navbar />
-
             {/** Sidebar */}
             <Sidebar />
 
@@ -56,13 +52,9 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    display: grid; 
-    grid-template-columns: auto 1fr; 
-    grid-template-rows: auto 1fr; 
-    gap: 10px; 
-    grid-template-areas: 
-        "sidebar navbar"
-        "sidebar content";
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
     height: 100%;
     overflow: hidden;
 `

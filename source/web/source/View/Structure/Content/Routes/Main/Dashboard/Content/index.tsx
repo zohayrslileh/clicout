@@ -31,7 +31,6 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    grid-area: content;
     position: relative;
     overflow: auto;
     background-color: blue;

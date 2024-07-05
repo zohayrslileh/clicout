@@ -17,6 +17,5 @@ export default function () {
  * 
  */
 const Container = styled.div`
-    grid-area: sidebar;
     background-color: red;
 `
