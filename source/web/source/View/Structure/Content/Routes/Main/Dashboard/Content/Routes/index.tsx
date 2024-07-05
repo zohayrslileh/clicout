@@ -1,6 +1,5 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Throw } from "@/Tools/Exception"
-import Exception from "@/View/Exception"
 import { Suspense } from "react"
 
 /**
@@ -10,19 +9,15 @@ import { Suspense } from "react"
  */
 export default function () {
 
-    return <div className="relative p-3 grid">
+    return <div className="relative grid p-3">
 
-        <Exception>
+        <Suspense fallback={<Throw exception={new PendingException} />}>
 
-            <Suspense fallback={<Throw exception={new PendingException} />}>
+            <Throw exception={new PendingException} />
 
-                <Throw exception={new PendingException} />
+            <p className="uppercase m-auto text-xl opacity-30">no signal</p>
 
-                <p className="uppercase m-auto text-xl opacity-30">no signal</p>
-
-            </Suspense>
-
-        </Exception>
+        </Suspense>
 
     </div>
 }

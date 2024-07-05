@@ -44,7 +44,7 @@ export default function () {
 
     }, [])
 
-    return <div className="grid grid-cols-[1fr_auto] gap-3 px-5 py-3 items-center sticky z-10 top-0 backdrop-blur-md p-3 border-b border-primary border-opacity-20">
+    return <div className="grid grid-cols-[1fr_auto] gap-3 px-5 py-3 items-center sticky z-10 top-0 backdrop-blur-md p-3 border rounded-lg border-primary border-opacity-20">
 
         <p></p>
         <Dropdown>

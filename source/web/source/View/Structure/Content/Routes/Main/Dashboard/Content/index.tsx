@@ -1,3 +1,4 @@
+import Exception from "@/View/Exception"
 import Navbar from "./Navbar"
 import Routes from "./Routes"
 
@@ -10,11 +11,15 @@ export default function () {
 
     return <div className="relative grid grid-rows-[auto_1fr] overflow-x-hidden overflow-y-auto">
 
-        {/** Navbar */}
-        <Navbar />
+        <Exception>
 
-        {/** Routes */}
-        <Routes />
+            {/** Navbar */}
+            <Navbar />
+
+            {/** Routes */}
+            <Routes />
+
+        </Exception>
 
     </div>
 }
