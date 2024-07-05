@@ -12,7 +12,7 @@ export default function () {
     return <nav className="-mx-3 space-y-6 ">
         <Space title="analytics">
             <Link path="/">
-                <FcEditImage />
+                <FcEditImage className="text-lg" />
                 <span className="mx-2 text-sm font-medium">Dashboard</span>
             </Link>
         </Space>
