@@ -9,7 +9,7 @@ import { Suspense } from "react"
  */
 export default function () {
 
-    return <div className="relative grid p-3">
+    return <div className="relative grid">
 
         <Suspense fallback={<Throw exception={new PendingException} />}>
 
