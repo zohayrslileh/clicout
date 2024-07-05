@@ -1,7 +1,5 @@
-import PendingException from "@/View/Exception/Exceptions/Pending"
-import { Throw } from "@/Tools/Exception"
-import Exception from "@/View/Exception"
-import { Suspense } from "react"
+import Navbar from "./Navbar"
+import Routes from "./Routes"
 
 /**
  * Content
@@ -12,62 +10,11 @@ export default function () {
 
     return <div className="relative overflow-x-hidden overflow-y-auto bg-blue-700">
 
-        <Exception>
+        {/** Navbar */}
+        <Navbar />
 
-            <Suspense fallback={<Throw exception={new PendingException} />}>
-
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-                <h1>Content</h1>
-
-            </Suspense>
-
-        </Exception>
+        {/** Routes */}
+        <Routes />
 
     </div>
 }
