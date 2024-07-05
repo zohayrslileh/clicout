@@ -1,5 +1,4 @@
 import { BrowserRouter } from "react-router-dom"
-import styled from "@emotion/styled"
 import Content from "./Content"
 import Footer from "./Footer"
 
@@ -16,7 +15,7 @@ export default function () {
      */
     return <BrowserRouter>
 
-        <Container>
+        <div className="grid grid-cols-[1fr_auto]">
 
             {/** Content */}
             <Content />
@@ -24,17 +23,7 @@ export default function () {
             {/** Footer */}
             <Footer />
 
-        </Container>
+        </div>
 
     </BrowserRouter>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    display: grid;
-    grid-template-rows: 1fr auto;
-    overflow: hidden;
-`

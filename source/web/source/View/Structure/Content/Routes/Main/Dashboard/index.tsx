@@ -1,7 +1,6 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
-import styled from "@emotion/styled"
 import Content from "./Content"
 import Sidebar from "./Sidebar"
 import User from "@/Core/User"
@@ -32,9 +31,9 @@ export default function () {
     // Exception status
     if (plan.exception) return <Throw exception={plan.exception.current} />
 
-    return <Container>
+    return <Plan.context.Provider value={plan.solve}>
 
-        <Plan.context.Provider value={plan.solve}>
+        <div className="grid grid-cols-[auto_1fr] h-full overflow-hidden">
 
             {/** Sidebar */}
             <Sidebar />
@@ -42,18 +41,7 @@ export default function () {
             {/** Content */}
             <Content />
 
-        </Plan.context.Provider>
+        </div>
 
-    </Container>
+    </Plan.context.Provider>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    display: grid;
-    grid-template-columns: auto 1fr;
-    height: 100%;
-    overflow: hidden;
-`
