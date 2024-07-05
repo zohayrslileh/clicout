@@ -6,6 +6,7 @@ import { SiTether } from "react-icons/si"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import { Lang } from "@/Tools/Language"
+import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 import User from "@/Core/User"
 import Future from "./Future"
@@ -74,10 +75,12 @@ export default function ({ plan }: Props) {
             </div>
             <div className="grid">
                 <h2 className="font-bold text-dark mb-5 text-[42px]">
-                    ${plan.price}
-                    <span className="text-base text-body-color font-medium">
-                        / month
-                    </span>
+                    {plan.price ? <Fragment>
+                        ${plan.price}
+                        <span className="text-base text-body-color font-medium">
+                            / <Lang>month</Lang>
+                        </span>
+                    </Fragment> : <Lang>Free</Lang>}
                 </h2>
                 <div className="grid">
                     {

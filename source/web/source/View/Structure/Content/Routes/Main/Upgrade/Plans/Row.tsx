@@ -3,6 +3,7 @@ import { Button } from "@nextui-org/react"
 import Appearance from "@/View/Appearance"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
+import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 import Future from "./Future"
 
@@ -22,13 +23,15 @@ export default function ({ plan }: Props) {
     return <div className="w-full md:w-1/2 lg:w-1/3 px-3" style={{ scale: plan.recommended ? "1" : "0.98" }}>
         <Card className="grid py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12">
             <span className="text-primary font-semibold text-lg block mb-4" style={{ color: plan.color.hex }}>
-                {plan.name}
+                <Lang>{plan.name}</Lang>
             </span>
             <h2 className="font-bold text-dark mb-5 text-[42px]">
-                ${plan.price}
-                <span className="text-base text-body-color font-medium">
-                    / month
-                </span>
+                {plan.price ? <Fragment>
+                    ${plan.price}
+                    <span className="text-base text-body-color font-medium">
+                        / <Lang>month</Lang>
+                    </span>
+                </Fragment> : <Lang>Free</Lang>}
             </h2>
             <p className="text-base text-body-color pb-8 border-b border-foreground border-opacity-20" style={{ fontFamily: Appearance.schema.FONT_LIGHT }}>
                 <Lang>{plan.description}</Lang>.
