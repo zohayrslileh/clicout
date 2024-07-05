@@ -58,7 +58,7 @@ export default function ({ plan }: Props) {
     })
 
     return <div className="w-auto m-auto px-3 smooth" style={{ scale: plan.recommended ? "1" : "0.98" }}>
-        <Card className="grid grid-cols-2 py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 gap-20">
+        <Card className="grid grid-cols-2 min-w-[700px] py-10 px-8 sm:p-12 lg:py-10 lg:px-6 xl:p-12 gap-20">
             <div className="grid">
                 <span className="text-primary font-semibold text-lg block mb-4" style={{ color: plan.color.hex }}>
                     <Lang>{plan.name}</Lang>
@@ -90,7 +90,7 @@ export default function ({ plan }: Props) {
                     }
                     <div className="flex items-center justify-between m-auto w-[100px] opacity-70 dark:opacity-30 select-none">
                         <div className="w-full h-[1px] bg-gray-300" />
-                        <span className="text-sm uppercase mx-6 text-gray-400">Or</span>
+                        <span className="text-sm uppercase mx-6 text-gray-400"><Lang>Or</Lang></span>
                         <div className="w-full h-[1px] bg-gray-300" />
                     </div>
                     <a href={config.TELEGRAM_CONTACT} className="m-auto text-medium text-primary"><Lang>Telegram Contact</Lang></a>
