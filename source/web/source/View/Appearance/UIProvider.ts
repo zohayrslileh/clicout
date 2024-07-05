@@ -23,6 +23,8 @@ export default styled(NextUIProvider)`
     left: 0;
     top: 0;
 
+    // 
+
     // Smooth
     .smooth {
 
