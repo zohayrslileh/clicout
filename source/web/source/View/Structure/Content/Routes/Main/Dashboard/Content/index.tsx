@@ -8,7 +8,7 @@ import Routes from "./Routes"
  */
 export default function () {
 
-    return <div className="relative overflow-x-hidden overflow-y-auto bg-blue-700">
+    return <div className="relative overflow-x-hidden overflow-y-auto">
 
         {/** Navbar */}
         <Navbar />
