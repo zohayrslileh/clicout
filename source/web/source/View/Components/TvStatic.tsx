@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/react"
 import noice from "@/View/Media/noise.png"
+import Appearance from "@/View/Appearance"
 import styled from "@emotion/styled"
 import React from "react"
 
@@ -34,7 +35,7 @@ const Container = styled.div`
         position: absolute;
         inset: -200%;
         background-image: url(${noice});
-        opacity: 30%;
+        opacity: ${() => Appearance.theme.key === "dark" ? "50%" : "30%"};
         z-index: 0;
         animation: ${keyframes`
 
