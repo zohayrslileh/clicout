@@ -15,7 +15,7 @@ export default function () {
      */
     return <BrowserRouter>
 
-        <div className="grid grid-cols-[1fr_auto] overflow-hidden">
+        <div className="grid grid-rows-[1fr_auto] overflow-hidden">
 
             {/** Content */}
             <Content />
