@@ -11,12 +11,5 @@ export default function () {
 
         <Logo width={150} />
 
-        <h1>Sidebar</h1>
-        <h1>Sidebar</h1>
-        <h1>Sidebar</h1>
-        <h1>Sidebar</h1>
-        <h1>Sidebar</h1>
-        <h1>Sidebar</h1>
-
     </div>
 }
