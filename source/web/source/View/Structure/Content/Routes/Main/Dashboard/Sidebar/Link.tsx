@@ -1,3 +1,4 @@
+import { Button } from "@nextui-org/react"
 import { Link } from "react-router-dom"
 import { ReactNode } from "react"
 
@@ -8,9 +9,9 @@ import { ReactNode } from "react"
  */
 export default function ({ path, children }: Props) {
 
-    return <Link to={path} className="flex items-center p-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+    return <Button to={path} variant="light" as={Link} className="flex text-[#919eab] gap-1 items-center justify-start px-6 py-[22px] transition-colors duration-300 transform rounded-md hover:">
         {children}
-    </Link>
+    </Button>
 }
 
 /**
