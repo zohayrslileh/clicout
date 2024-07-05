@@ -10,11 +10,15 @@ import { Suspense } from "react"
  */
 export default function () {
 
-    return <div className="relative p-3">
+    return <div className="relative p-3 grid">
 
         <Exception>
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
+
+                <Throw exception={new PendingException} />
+
+                <p className="uppercase m-auto text-xl opacity-30">no signal</p>
 
             </Suspense>
 
