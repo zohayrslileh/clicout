@@ -9,6 +9,7 @@ import styled from "@emotion/styled"
 export default function () {
 
     return <Container>
+        <h1>Sidebar</h1>
     </Container>
 }
 
