@@ -6,7 +6,7 @@ import { Suspense } from "react"
 /**
  * Content
  * 
- * @returns 
+ * @returns
  */
 export default function () {
 
