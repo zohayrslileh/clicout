@@ -1,4 +1,4 @@
-import { CiCalendar, CiCompass1, CiLogout, CiStar, CiUser } from "react-icons/ci"
+import { CiCalendar, CiCompass1, CiLogout, CiUser } from "react-icons/ci"
 import { useParams } from "react-router-dom"
 import Space from "./Space"
 import Link from "./Link"
@@ -35,7 +35,6 @@ export default function () {
 
             <Space title="settings">
                 <Link path="profile" icon={CiUser} title="Profile" active={currentRoute === "profile"} />
-                <Link path="upgrade" icon={CiStar} title="Upgrade" active={currentRoute === "upgrade"} />
                 <Link path="logout" icon={CiLogout} title="Logout" active={currentRoute === "logout"} />
             </Space>
 
