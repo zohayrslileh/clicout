@@ -1,16 +1,23 @@
 import { Button } from "@nextui-org/react"
+import { IconType } from "react-icons/lib"
 import { Link } from "react-router-dom"
-import { ReactNode } from "react"
 
 /**
  * Link
  * 
  * @returns 
  */
-export default function ({ path, children }: Props) {
+export default function ({ path, icon, title, active }: Props) {
 
-    return <Button to={path} variant="light" as={Link} className="flex text-[#919eab] gap-1 items-center justify-start px-6 py-[22px] transition-colors duration-300 transform rounded-md hover:">
-        {children}
+    /**
+     * Icon
+     * 
+     */
+    const Icon = icon
+
+    return <Button to={path} variant="light" as={Link} className={`flex group text-[#b0d7ff] ${active ? "bg-[#5be49b] bg-opacity-5 text-[#5be49b]" : ""} gap-1 items-center justify-start px-[10px] py-[22px] transition-colors duration-300 transform rounded-md`}>
+        <Icon className="text-2xl" />
+        <span className="mx-2 text-sm font-medium">{title}</span>
     </Button>
 }
 
@@ -20,5 +27,7 @@ export default function ({ path, children }: Props) {
  */
 interface Props {
     path: string
-    children: ReactNode
+    title: string
+    icon: IconType
+    active?: boolean
 }
