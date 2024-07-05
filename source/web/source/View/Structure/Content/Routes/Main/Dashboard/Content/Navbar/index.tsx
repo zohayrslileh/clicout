@@ -3,6 +3,7 @@ import Authorization from "@/Models/Authorization"
 import { useNavigate } from "react-router-dom"
 import { useCallback } from "react"
 import User from "@/Core/User"
+import Breadcrumbs from "./Breadcrumbs"
 
 /**
  * Navbar
@@ -44,9 +45,10 @@ export default function () {
 
     }, [])
 
-    return <div className="grid grid-cols-[1fr_auto] gap-3 px-5 py-3 items-center sticky z-10 top-0 smooth backdrop-blur-md p-3 border rounded-lg border-primary border-opacity-20">
+    return <div className="grid grid-cols-[1fr_auto] gap-3 px-5 py-3 items-center sticky z-10 top-0 smooth backdrop-blur-sm p-3 border rounded-lg border-primary border-opacity-20">
 
-        <p></p>
+        <Breadcrumbs />
+
         <Dropdown>
             <DropdownTrigger>
                 <UserUI
@@ -66,5 +68,6 @@ export default function () {
                 </DropdownItem>
             </DropdownMenu>
         </Dropdown>
+
     </div>
 }
