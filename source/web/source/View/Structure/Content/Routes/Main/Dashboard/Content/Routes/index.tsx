@@ -16,12 +16,6 @@ export default function () {
 
             <Suspense fallback={<Throw exception={new PendingException} />}>
 
-            <p className="font-medium">Text Font</p>
-            <p className="font-bold">Text Font</p>
-            <p className="font-light">Text Font</p>
-            <p className="font-extralight">Text Font</p>
-            <p className="font-semibold">Text Font</p>
-
             </Suspense>
 
         </Exception>
