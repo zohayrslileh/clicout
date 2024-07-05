@@ -1,5 +1,4 @@
 import Exception from "@/View/Exception"
-import styled from "@emotion/styled"
 import Routes from "./Routes"
 
 /**
@@ -9,7 +8,7 @@ import Routes from "./Routes"
  */
 export default function () {
 
-    return <Container>
+    return <div className="relative grid overflow-x-hidden overflow-y-auto">
 
         <Exception>
 
@@ -18,16 +17,5 @@ export default function () {
 
         </Exception>
 
-    </Container>
+    </div>
 }
-
-/**
- * Container
- * 
- */
-const Container = styled.div`
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: grid;
-`
