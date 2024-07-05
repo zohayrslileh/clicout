@@ -23,7 +23,30 @@ export default styled(NextUIProvider)`
     left: 0;
     top: 0;
 
-    // 
+    // Font Medium
+    .font-medium {
+        font-family: ${() => schema.FONT_MEDIUM};
+    }
+
+    // Font Bold
+    .font-bold {
+        font-family: ${() => schema.FONT_BOLD};
+    }
+
+    // Font Light
+    .font-light {
+        font-family: ${() => schema.FONT_LIGHT};
+    }
+
+    // Font Extra Light
+    .font-extralight {
+        font-family: ${() => schema.FONT_EXTRA_LIGHT};
+    }
+
+    // Font Semi Bold
+    .font-semibold {
+        font-family: ${() => schema.FONT_SEMI_BOLD};
+    }
 
     // Smooth
     .smooth {
