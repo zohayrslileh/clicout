@@ -10,7 +10,7 @@ import { Suspense } from "react"
  */
 export default function () {
 
-    return <div>
+    return <div className="relative p-3">
 
         <Exception>
 
