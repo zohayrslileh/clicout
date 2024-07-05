@@ -15,6 +15,28 @@ export default function () {
                 <FcEditImage className="text-lg" />
                 <span className="mx-2 text-sm font-medium">Dashboard</span>
             </Link>
+            <Link path="/">
+                <FcEditImage className="text-lg" />
+                <span className="mx-2 text-sm font-medium">Dashboard</span>
+            </Link>
+            <Link path="/">
+                <FcEditImage className="text-lg" />
+                <span className="mx-2 text-sm font-medium">Dashboard</span>
+            </Link>
+        </Space>
+        <Space title="analytics">
+            <Link path="/">
+                <FcEditImage className="text-lg" />
+                <span className="mx-2 text-sm font-medium">Dashboard</span>
+            </Link>
+            <Link path="/">
+                <FcEditImage className="text-lg" />
+                <span className="mx-2 text-sm font-medium">Dashboard</span>
+            </Link>
+            <Link path="/">
+                <FcEditImage className="text-lg" />
+                <span className="mx-2 text-sm font-medium">Dashboard</span>
+            </Link>
         </Space>
     </nav>
 }
