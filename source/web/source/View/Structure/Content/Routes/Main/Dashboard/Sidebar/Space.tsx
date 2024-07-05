@@ -9,7 +9,7 @@ export default function ({ title, children }: Props) {
 
     return <div className="space-y-2">
         <label className="text-xs text-gray-500 uppercase font-medium dark:text-gray-400">{title}</label>
-        <div className="ms-2">
+        <div className="ms-0">
             {children}
         </div>
     </div>
