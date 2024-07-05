@@ -1,4 +1,3 @@
-import Card from "@/View/Components/Card"
 import styled from "@emotion/styled"
 
 /**
@@ -17,6 +16,7 @@ export default function () {
  * Container
  * 
  */
-const Container = styled(Card)`
+const Container = styled.div`
     grid-area: navbar;
+    background-color: green;
 `
