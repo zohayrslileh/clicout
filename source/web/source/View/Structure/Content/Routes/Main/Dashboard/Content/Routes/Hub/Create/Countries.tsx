@@ -1,8 +1,6 @@
-import PendingException from "@/View/Exception/Exceptions/Pending"
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react"
 import ReactCountryFlag from "react-country-flag"
 import { useEffect, useState } from "react"
-import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
 import Country from "@/Core/Country"
 
@@ -20,10 +18,16 @@ export default function ({ value, onChange }: Props) {
     const [countryCode, setCountryCode] = useState<string | undefined>(value ? value.code : undefined)
 
     /**
+     * Keyword
+     * 
+     */
+    const [keyword, setKeyword] = useState("")
+
+    /**
      * Countries
      * 
      */
-    const countries = usePromise(async () => await Country.find(), [])
+    const countries = usePromise(async () => await Country.find(keyword), [keyword])
 
     /**
      * On country code change
@@ -45,16 +49,19 @@ export default function ({ value, onChange }: Props) {
 
     }, [countryCode])
 
-    // Pending status
-    if (countries.pending) return <Throw exception={new PendingException} />
-
-    // Exception status
-    if (countries.exception) return <Throw exception={countries.exception.current} />
-
-    return <Autocomplete variant="bordered" startContent={countryCode ? <ReactCountryFlag countryCode={countryCode} svg /> : undefined} label="Select country" selectedKey={countryCode || ""} onSelectionChange={key => setCountryCode(key ? key.toString() : "")}>
-        {countries.solve.slice(0, 20).map(country => <AutocompleteItem key={country.code} value={country.code} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
+    return <Autocomplete
+        variant="bordered"
+        startContent={countryCode ? <ReactCountryFlag countryCode={countryCode} svg /> : undefined}
+        label="Select country" selectedKey={countryCode || ""}
+        onSelectionChange={key => setCountryCode(key ? key.toString() : "")}
+        items={countries.solve || []}
+        isLoading={countries.pending}
+        onInputChange={setKeyword}
+        inputValue={keyword}
+    >
+        {country => <AutocompleteItem key={country.code} value={country.code} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
             {country.name}
-        </AutocompleteItem>)}
+        </AutocompleteItem>}
     </Autocomplete>
 }
 
