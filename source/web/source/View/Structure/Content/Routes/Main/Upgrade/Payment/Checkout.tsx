@@ -93,7 +93,7 @@ export default function ({ plan }: Props) {
                         <span className="text-sm uppercase mx-6 text-gray-400"><Lang>Or</Lang></span>
                         <div className="w-full h-[1px] bg-gray-300" />
                     </div>
-                    <a href={config.TELEGRAM_CONTACT} className="m-auto text-medium text-primary"><Lang>Telegram Contact</Lang></a>
+                    <a href={config.TELEGRAM_CONTACT} target="_blank" className="m-auto text-medium text-primary"><Lang>Telegram Contact</Lang></a>
                 </div>
             </div>
         </Card>
