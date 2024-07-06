@@ -1,7 +1,8 @@
 import { CiFlag1, CiLocationOn, CiSearch } from "react-icons/ci"
 import { HiOutlineExternalLink } from "react-icons/hi"
+import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
-import { Checkbox, Code } from "@nextui-org/react"
+import { IoRocketOutline } from "react-icons/io5"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
 import Card from "@/View/Components/Card"
@@ -60,7 +61,7 @@ export default function () {
      * Searches
      * 
      */
-    const [searches, setSearches] = useState<number>(0)
+    const [searches, setSearches] = useState<number>(1)
 
     /**
      * Keyword validation method
@@ -121,7 +122,6 @@ export default function () {
             <Searches value={searches} onChange={setSearches} />
         </div>
 
-        <Code><pre>{JSON.stringify({ keywords, domains, domainsAction, country, city, device, searches }, undefined, 4)}</pre></Code>
-
+        <Button startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
     </Card>
 }
