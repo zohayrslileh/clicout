@@ -31,12 +31,10 @@ export default function () {
                 </div>
             )}
         >
-            <BreadcrumbItem href="#home">Home</BreadcrumbItem>
-            <BreadcrumbItem href="#music">Music</BreadcrumbItem>
-            <BreadcrumbItem href="#artist">Artist</BreadcrumbItem>
-            <BreadcrumbItem href="#album">Album</BreadcrumbItem>
-            <BreadcrumbItem href="#featured">Featured</BreadcrumbItem>
-            <BreadcrumbItem href="#song">Song</BreadcrumbItem>
+            <BreadcrumbItem href="#home">Dashboard</BreadcrumbItem>
+            <BreadcrumbItem href="#music">Hub</BreadcrumbItem>
+            <BreadcrumbItem href="#artist">Attacks</BreadcrumbItem>
+            <BreadcrumbItem href="#album">Create</BreadcrumbItem>
         </Breadcrumbs>
     );
 }
