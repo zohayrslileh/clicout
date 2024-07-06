@@ -43,16 +43,15 @@ export default class Country {
         // Set name
         this.name = primitiveCountry.name
     }
-
     /**
      * Find method
      * 
      * @returns
      */
-    public static async find() {
+    public static async find(keyword: unknown) {
 
         // Ask primitive countries
-        const primitiveCountries = await request<PrimitiveCountry[]>({ url: "/main/country" })
+        const primitiveCountries = await request<PrimitiveCountry[]>({ url: "/main/country", params: { keyword } })
 
         // Initialize countries
         return primitiveCountries.map(primitiveCountry => new this(primitiveCountry))
