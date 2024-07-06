@@ -9,7 +9,7 @@ import Routes from "./Routes"
  */
 export default function () {
 
-    return <div className="relative grid grid-rows-[auto_1fr] p-3 overflow-x-hidden overflow-y-auto">
+    return <div className="relative grid gap-5 grid-rows-[auto_1fr] p-5 overflow-x-hidden overflow-y-auto">
 
         <Exception>
 
