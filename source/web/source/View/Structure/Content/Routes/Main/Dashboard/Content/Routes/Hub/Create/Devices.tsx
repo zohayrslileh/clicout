@@ -25,13 +25,13 @@ export default function ({ value, onChange }: Props) {
         startContent={icons[value]}
     >
         <SelectItem key="ALL" startContent={<PiDevicesThin />}>
-            {lang("Desktop")}
+            {lang("All")}
         </SelectItem>
         <SelectItem key="DESKTOP" startContent={<CiLaptop />}>
             {lang("Desktop")}
         </SelectItem>
         <SelectItem key="MOBILE" startContent={<CiMobile3 />}>
-            {lang("All")}
+            {lang("Mobile")}
         </SelectItem>
     </Select>
 }
