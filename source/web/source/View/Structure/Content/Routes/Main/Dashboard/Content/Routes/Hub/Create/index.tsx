@@ -3,7 +3,7 @@ import { HiOutlineExternalLink } from "react-icons/hi"
 import TagsInput from "@/View/Components/TagsInput"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
-import { Checkbox } from "@nextui-org/react"
+import { Checkbox, Code } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
@@ -83,7 +83,7 @@ export default function () {
 
     }, [])
 
-    return <Card className="grid smooth gap-6 p-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-content1">
+    return <Card className="grid smooth gap-6 p-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
 
@@ -108,6 +108,8 @@ export default function () {
             <p className="text-foreground-500 flex items-center gap-1"><PiDevicesThin /><Lang>Devices</Lang></p>
             <Devices value={device} onChange={setDevice} />
         </div>
+
+        <Code><pre>{JSON.stringify({ keywords, domains, domainsAction, country, city, device }, undefined, 4)}</pre></Code>
 
     </Card>
 }
