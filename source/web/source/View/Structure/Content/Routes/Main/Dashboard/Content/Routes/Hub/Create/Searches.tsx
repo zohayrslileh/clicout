@@ -32,7 +32,7 @@ export default function ({ value, onChange }: Props) {
         setTap(tap)
 
         // On change callback
-        if (tap === "infinity") onChange(0)
+        onChange(tap === "infinity" ? 0 : 1)
 
     }, [])
 
