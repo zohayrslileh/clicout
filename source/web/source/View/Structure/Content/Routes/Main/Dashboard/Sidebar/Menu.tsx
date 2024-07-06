@@ -1,4 +1,4 @@
-import { CiCalendar, CiCompass1, CiFileOff, CiStar, CiUser } from "react-icons/ci"
+import { CiCalendar, CiCoinInsert, CiCompass1, CiFileOff, CiStar, CiUser } from "react-icons/ci"
 import { useParams } from "react-router-dom"
 import Space from "./Space"
 import Link from "./Link"
@@ -32,6 +32,7 @@ export default function () {
 
             <Space title="analytics">
                 <Link path="history" icon={CiCalendar} title="History" active={currentRoute === "history"} />
+                <Link path="history" icon={CiCoinInsert} title="Payment" active={currentRoute === "payment"} />
             </Space>
 
             <Space title="settings">
