@@ -35,5 +35,6 @@ export default function () {
         <TagsInput value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
         <TagsInput value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
         <Countries value={country} onChange={setCountry} />
+        <Countries value={country} onChange={setCountry} />
     </Card>
 }

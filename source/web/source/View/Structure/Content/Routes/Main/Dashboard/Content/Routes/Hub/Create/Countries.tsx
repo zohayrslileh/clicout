@@ -18,6 +18,12 @@ export default function ({ value, onChange }: Props) {
     const [countryCode, setCountryCode] = useState<string | undefined>(value ? value.code : undefined)
 
     /**
+     * Items
+     * 
+     */
+    const [items, setItems] = useState<Country[]>([])
+
+    /**
      * Keyword
      * 
      */
@@ -27,7 +33,15 @@ export default function ({ value, onChange }: Props) {
      * Countries
      * 
      */
-    const countries = usePromise(async () => await Country.find(keyword), [keyword])
+    const countries = usePromise(async function () {
+
+        // Countries
+        const countries = await Country.find(keyword)
+
+        // Set items
+        setItems(countries)
+
+    }, [keyword])
 
     /**
      * On country code change
@@ -35,14 +49,11 @@ export default function ({ value, onChange }: Props) {
      */
     useEffect(function () {
 
-        // Check countries solve
-        if (!countries.solve) return
+        // Country
+        const country = items.find(country => country.code === countryCode)
 
-        /**
-         * Country
-         * 
-         */
-        const country = countries.solve.find(country => country.code === countryCode)
+        // Set keyword
+        if (country) setKeyword(country.name)
 
         // On change callback
         onChange(country)
@@ -54,7 +65,7 @@ export default function ({ value, onChange }: Props) {
         startContent={countryCode ? <ReactCountryFlag countryCode={countryCode} svg /> : undefined}
         label="Select country" selectedKey={countryCode || ""}
         onSelectionChange={key => setCountryCode(key ? key.toString() : "")}
-        items={countries.solve || []}
+        items={items}
         isLoading={countries.pending}
         onInputChange={setKeyword}
         inputValue={keyword}
