@@ -31,7 +31,7 @@ export default function ({ value, onChange }: Props) {
             {lang("Desktop")}
         </SelectItem>
         <SelectItem key="MOBILE" startContent={<CiMobile3 />}>
-            {lang("Mobile")}
+            {lang("All")}
         </SelectItem>
     </Select>
 }
