@@ -12,7 +12,7 @@ import config from "@/config"
 export default function () {
 
     return <Button
-        className="m-10 mt-0 bg-[#0088cc] text-white"
+        className="m-10 mt-0 bg-[#0088cc] text-white smooth"
         color="success"
         as={Link}
         to={config.TELEGRAM_CONTACT}

@@ -22,7 +22,7 @@ export default function () {
      */
     const currentRoute = params['*']?.split('/')[0]
 
-    return <nav className="overflow-auto px-6">
+    return <nav className="overflow-auto px-6 smooth">
         <div className="grid gap-5">
 
             <Space title="hub panel">
