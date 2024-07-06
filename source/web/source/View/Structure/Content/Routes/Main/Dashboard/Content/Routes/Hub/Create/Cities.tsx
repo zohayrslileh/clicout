@@ -1,4 +1,5 @@
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react"
+import ReactCountryFlag from "react-country-flag"
 import { useCallback, useState } from "react"
 import usePromise from "@/Tools/Promise"
 import Country from "@/Core/Country"
@@ -41,7 +42,7 @@ export default function ({ country, value, onChange }: Props) {
         // Set items
         setItems(cities)
 
-    }, [keyword])
+    }, [keyword, country])
 
     /**
      * Handle change
@@ -62,14 +63,15 @@ export default function ({ country, value, onChange }: Props) {
 
     return <Autocomplete
         variant="bordered"
-        label="Select city" selectedKey={cityId}
+        startContent={value ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}
+        label="Select city"
+        selectedKey={cityId.toString()}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
         items={items}
         isLoading={cities.pending}
         onInputChange={setKeyword}
-        inputValue={keyword}
     >
-        {city => <AutocompleteItem key={city.id} value={city.id}>
+        {city => <AutocompleteItem key={city.id} value={city.id} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
             {city.name}
         </AutocompleteItem>}
     </Autocomplete>
