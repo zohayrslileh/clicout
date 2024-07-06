@@ -51,8 +51,8 @@ export default function ({ value, onChange }: Props) {
     // Exception status
     if (countries.exception) return <Throw exception={countries.exception.current} />
 
-    return <Autocomplete startContent={countryCode ? <ReactCountryFlag countryCode={countryCode} svg /> : undefined} label="Select country" selectedKey={countryCode || ""} onSelectionChange={key => setCountryCode(key ? key.toString() : "")}>
-        {countries.solve.map(country => <AutocompleteItem key={country.code} value={country.code} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
+    return <Autocomplete variant="bordered" startContent={countryCode ? <ReactCountryFlag countryCode={countryCode} svg /> : undefined} label="Select country" selectedKey={countryCode || ""} onSelectionChange={key => setCountryCode(key ? key.toString() : "")}>
+        {countries.solve.slice(0, 20).map(country => <AutocompleteItem key={country.code} value={country.code} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
             {country.name}
         </AutocompleteItem>)}
     </Autocomplete>
