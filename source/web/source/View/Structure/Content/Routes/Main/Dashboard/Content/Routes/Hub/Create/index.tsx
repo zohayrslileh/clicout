@@ -121,7 +121,7 @@ export default function () {
             <Searches value={searches} onChange={setSearches} />
         </div>
 
-        <Code><pre>{JSON.stringify({ keywords, domains, domainsAction, country, city, device }, undefined, 4)}</pre></Code>
+        <Code><pre>{JSON.stringify({ keywords, domains, domainsAction, country, city, device, searches }, undefined, 4)}</pre></Code>
 
     </Card>
 }
