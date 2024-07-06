@@ -62,10 +62,10 @@ export default class Country {
      * 
      * @returns
      */
-    public async cities() {
+    public async cities(keyword: unknown) {
 
         // Ask primitive cities
-        const primitiveCities = await request<PrimitiveCity[]>({ url: `/main/country/${this.id}/cities` })
+        const primitiveCities = await request<PrimitiveCity[]>({ url: `/main/country/${this.id}/cities`, params: { keyword } })
 
         // Initialize cities
         return primitiveCities.map(primitiveCity => new City(primitiveCity))
