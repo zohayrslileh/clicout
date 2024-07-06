@@ -60,7 +60,7 @@ export default function () {
      * Searches
      * 
      */
-    const [searches, setSearches] = useState<number>(1)
+    const [searches, setSearches] = useState<number>(0)
 
     /**
      * Keyword validation method
