@@ -1,11 +1,12 @@
 import { CiFlag1, CiLocationOn } from "react-icons/ci"
+import { HiOutlineExternalLink } from "react-icons/hi"
 import TagsInput from "@/View/Components/TagsInput"
+import { useCallback, useState } from "react"
 import { Checkbox } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
-import { useCallback, useState } from "react"
 import City from "@/Core/City"
 import Cities from "./Cities"
 
@@ -92,6 +93,7 @@ export default function () {
             <p className="text-foreground-500 flex items-center gap-1"><CiLocationOn /><Lang>Location</Lang></p>
             <Countries value={country} onChange={setCountry} />
             {country && <Cities country={country} value={city} onChange={setCity} />}
+            {country && city && <p className="justify-self-end">{city.name}, {country.name} check it in <a href={`https://www.google.com/maps/@${city.latitude},${city.longitude},11.43z`} target="_blank" className="text-primary inline-flex gap-1 items-center">Google Maps <HiOutlineExternalLink /></a></p>}
         </div>
 
     </Card>
