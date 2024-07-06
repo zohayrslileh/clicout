@@ -5,11 +5,11 @@ import React from "react"
  * 
  * @returns 
  */
-export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export default function ({ children, curveStyle, circleStyle, ...props }: Props) {
 
     return <div {...props} className={`rounded-xl relative z-10 border border-primary border-opacity-20 shadow-pricing ${props.className}`}>
         {children}
-        <span className="absolute right-0 top-7 z-[-1]">
+        {curveStyle !== false && <span className="absolute right-0 top-7 z-[-1]">
             <svg
                 width={77}
                 height={172}
@@ -32,8 +32,8 @@ export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivEle
                     </linearGradient>
                 </defs>
             </svg>
-        </span>
-        <span className="absolute right-4 top-4 z-[-1]">
+        </span>}
+        {circleStyle !== false && <span className="absolute right-4 top-4 z-[-1]">
             <svg
                 width={41}
                 height={89}
@@ -266,6 +266,15 @@ export default function ({ children, ...props }: React.HTMLAttributes<HTMLDivEle
                     fill="#3056D3"
                 />
             </svg>
-        </span>
+        </span>}
     </div>
+}
+
+/**
+ * Props
+ * 
+ */
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+    curveStyle?: boolean
+    circleStyle?: boolean
 }
