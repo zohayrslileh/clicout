@@ -18,7 +18,7 @@ export default function () {
         to={config.TELEGRAM_CONTACT}
         target="_blank"
         startContent={<FaTelegramPlane />}
-        endContent={<p className="text-small text-success-600 font-medium">(<Lang>Online</Lang>)</p>}>
-        <Lang>Contact</Lang>
+    >
+        <Lang>Contact on Telegram</Lang>
     </Button>
 }

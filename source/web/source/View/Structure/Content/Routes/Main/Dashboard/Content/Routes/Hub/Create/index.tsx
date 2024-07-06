@@ -1,13 +1,14 @@
-import { CiFlag1, CiLocationOn } from "react-icons/ci"
+import { CiFlag1, CiLocationOn, CiSearch } from "react-icons/ci"
 import { HiOutlineExternalLink } from "react-icons/hi"
 import TagsInput from "@/View/Components/TagsInput"
+import { Checkbox, Code } from "@nextui-org/react"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
-import { Checkbox, Code } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
+import Searches from "./Searches"
 import Devices from "./Devices"
 import City from "@/Core/City"
 import Cities from "./Cities"
@@ -54,6 +55,12 @@ export default function () {
      * 
      */
     const [device, setDevice] = useState<string>("ALL")
+
+    /**
+     * Searches
+     * 
+     */
+    const [searches, setSearches] = useState<number>(1)
 
     /**
      * Keyword validation method
@@ -107,6 +114,11 @@ export default function () {
         <div className="grid gap-3">
             <p className="text-foreground-500 flex items-center gap-1"><PiDevicesThin /><Lang>Devices</Lang></p>
             <Devices value={device} onChange={setDevice} />
+        </div>
+
+        <div className="grid gap-3">
+            <p className="text-foreground-500 flex items-center gap-1"><CiSearch /><Lang>Searches</Lang></p>
+            <Searches value={searches} onChange={setSearches} />
         </div>
 
         <Code><pre>{JSON.stringify({ keywords, domains, domainsAction, country, city, device }, undefined, 4)}</pre></Code>
