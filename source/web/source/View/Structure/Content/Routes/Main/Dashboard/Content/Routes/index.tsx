@@ -12,7 +12,7 @@ const Hub = lazy(() => import("./Hub"))
  */
 export default function () {
 
-    return <div className="relative grid pt-5">
+    return <div className="relative grid">
 
         <Suspense fallback={<Throw exception={new PendingException} />}>
 

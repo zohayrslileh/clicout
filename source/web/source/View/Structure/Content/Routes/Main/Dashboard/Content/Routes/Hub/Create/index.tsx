@@ -91,7 +91,7 @@ export default function () {
 
     }, [])
 
-    return <Card className="grid smooth gap-6 p-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
+    return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
 
