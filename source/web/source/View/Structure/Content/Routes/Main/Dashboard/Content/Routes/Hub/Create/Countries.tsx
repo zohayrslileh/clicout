@@ -1,8 +1,8 @@
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react"
 import ReactCountryFlag from "react-country-flag"
-import { useCallback, useState } from "react"
 import usePromise from "@/Tools/Promise"
 import Country from "@/Core/Country"
+import { useCallback } from "react"
 
 /**
  * Countries
@@ -18,61 +18,40 @@ export default function ({ value, onChange }: Props) {
     const countryId = value ? value.id : 0
 
     /**
-     * Items
-     * 
-     */
-    const [items, setItems] = useState<Country[]>([])
-
-    /**
-     * Keyword
-     * 
-     */
-    const [keyword, setKeyword] = useState("")
-
-    /**
      * Countries
      * 
      */
-    const countries = usePromise(async function () {
-
-        // Countries
-        const countries = await Country.find(keyword)
-
-        // Set items
-        setItems(countries)
-
-    }, [keyword])
+    const countries = usePromise(async () => await Country.find(""), [])
 
     /**
-     * Handle change
+     * Handle change method
      * 
+     * @returns
      */
     const handleChange = useCallback(function (id: number) {
 
-        // Country
-        const country = items.find(country => country.id === id)
+        // Check countries
+        if (!countries.solve) return
 
-        // Set keyword
-        if (country) setKeyword(country.name)
+        // Country
+        const country = countries.solve.find(country => country.id === id)
 
         // On change callback
         onChange(country)
 
-    }, [items])
+    }, [countries.solve])
 
     return <Autocomplete
         variant="bordered"
         startContent={value ? <ReactCountryFlag countryCode={value.code} svg /> : undefined}
-        label="Select country" selectedKey={countryId}
+        label="Select country"
+        selectedKey={countryId.toString()}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
-        items={items}
         isLoading={countries.pending}
-        onInputChange={setKeyword}
-        inputValue={keyword}
     >
-        {country => <AutocompleteItem key={country.id} value={country.id} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
+        {(countries.solve || []).map(country => <AutocompleteItem key={country.id} value={country.id} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
             {country.name}
-        </AutocompleteItem>}
+        </AutocompleteItem>)}
     </Autocomplete>
 }
 
