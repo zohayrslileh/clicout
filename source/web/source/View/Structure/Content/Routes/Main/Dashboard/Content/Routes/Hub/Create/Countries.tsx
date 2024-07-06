@@ -12,10 +12,10 @@ import Country from "@/Core/Country"
 export default function ({ value, onChange }: Props) {
 
     /**
-     * Country code
+     * Country id
      * 
      */
-    const countryCode = value ? value.code : undefined
+    const countryId = value ? value.id : 0
 
     /**
      * Items
@@ -47,10 +47,10 @@ export default function ({ value, onChange }: Props) {
      * Handle change
      * 
      */
-    const handleChange = useCallback(function (key: string) {
+    const handleChange = useCallback(function (id: number) {
 
         // Country
-        const country = items.find(country => country.code === key)
+        const country = items.find(country => country.id === id)
 
         // Set keyword
         if (country) setKeyword(country.name)
@@ -62,15 +62,15 @@ export default function ({ value, onChange }: Props) {
 
     return <Autocomplete
         variant="bordered"
-        startContent={countryCode ? <ReactCountryFlag countryCode={countryCode} svg /> : undefined}
-        label="Select country" selectedKey={countryCode || ""}
-        onSelectionChange={key => handleChange(key ? key.toString() : "")}
+        startContent={value ? <ReactCountryFlag countryCode={value.code} svg /> : undefined}
+        label="Select country" selectedKey={countryId}
+        onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
         items={items}
         isLoading={countries.pending}
         onInputChange={setKeyword}
         inputValue={keyword}
     >
-        {country => <AutocompleteItem key={country.code} value={country.code} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
+        {country => <AutocompleteItem key={country.id} value={country.id} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
             {country.name}
         </AutocompleteItem>}
     </Autocomplete>
