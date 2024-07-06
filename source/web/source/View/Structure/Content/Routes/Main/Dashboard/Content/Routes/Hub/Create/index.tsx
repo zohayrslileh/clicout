@@ -1,3 +1,4 @@
+import { CiFlag1, CiLocationOn } from "react-icons/ci"
 import TagsInput from "@/View/Components/TagsInput"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
@@ -38,11 +39,21 @@ export default function () {
      */
     const [city, setCity] = useState<City | undefined>(undefined)
 
-    return <Card className="grid smooth gap-3 p-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-content1">
+    return <Card className="grid smooth gap-5 p-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-content1">
+
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
-        <TagsInput value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
-        <TagsInput value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
-        <Countries value={country} onChange={setCountry} />
-        {country && <Cities country={country} value={city} onChange={setCity} />}
+
+        <div className="grid gap-3">
+            <p className="text-foreground-500 flex items-center gap-1"><CiFlag1 /><Lang>Target</Lang></p>
+            <TagsInput value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
+            <TagsInput value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
+        </div>
+
+        <div className="grid gap-3">
+            <p className="text-foreground-500 flex items-center gap-1"><CiLocationOn /><Lang>Location</Lang></p>
+            <Countries value={country} onChange={setCountry} />
+            {country && <Cities country={country} value={city} onChange={setCity} />}
+        </div>
+
     </Card>
 }
