@@ -58,7 +58,7 @@ export default function () {
             />
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-            <DropdownItem onClick={() => navigate("profile")} key="edit">Edit Profile</DropdownItem>
+            <DropdownItem onClick={() => navigate("profile")} key="edit"><Lang>Edit profile</Lang></DropdownItem>
             <DropdownItem key="delete" onClick={logout} className="text-danger" color="danger">
                 <Lang>Logout</Lang>
             </DropdownItem>

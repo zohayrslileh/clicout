@@ -36,5 +36,18 @@ export default {
     "Please choose the plan that suits you": "Пожалуйста, выберите план, который вам подходит",
     "Telegram Contact": "Контакт в Telegram",
     "Payment": "Оплата",
-    "Active": "Активировать"
+    "Active": "Активировать",
+    "hub panel": "панель концентратора",
+    "Hub Panel": "Панель концентратора",
+    "analytics": "аналитика",
+    "History": "История",
+    "Payments": "Платежи",
+    "settings": "настройки",
+    "Profile": "Профиль",
+    "Upgrade": "Обновление",
+    "Contact on Telegram": "Контакт в Telegram",
+    "Edit profile": "Редактировать профиль",
+    "Create New Attack": "Создать новую атаку",
+    "Attack(s)": "Атака(и)",
+    "Black List": "Чёрный список"
 }

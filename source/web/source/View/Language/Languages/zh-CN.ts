@@ -36,5 +36,18 @@ export default {
     "Please choose the plan that suits you": "请选择适合您的计划",
     "Telegram Contact": "Telegram 联系方式",
     "Payment": "支付",
-    "Active": "激活"
+    "Active": "激活",
+    "hub panel": "集线器面板",
+    "Hub Panel": "集线器面板",
+    "analytics": "分析",
+    "History": "历史",
+    "Payments": "支付",
+    "settings": "设置",
+    "Profile": "个人资料",
+    "Upgrade": "升级",
+    "Contact on Telegram": "在 Telegram 上联系",
+    "Edit profile": "编辑个人资料",
+    "Create New Attack": "创建新攻击",
+    "Attack(s)": "攻击",
+    "Black List": "黑名单"
 }

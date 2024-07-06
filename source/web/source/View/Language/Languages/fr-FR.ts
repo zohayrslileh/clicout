@@ -37,5 +37,18 @@ export default {
     "Please choose the plan that suits you": "Veuillez choisir le plan qui vous convient",
     "Telegram Contact": "Contact Telegram",
     "Payment": "Paiement",
-    "Active": "Activer"
+    "Active": "Activer",
+    "hub panel": "panneau de moyeu",
+    "Hub Panel": "Panneau du moyeu",
+    "analytics": "analytique",
+    "History": "Historique",
+    "Payments": "Paiements",
+    "settings": "paramètres",
+    "Profile": "Profil",
+    "Upgrade": "Mise à niveau",
+    "Contact on Telegram": "Contact sur Telegram",
+    "Edit profile": "Editer le profil",
+    "Create New Attack": "Créer nouvelle attaque",
+    "Attack(s)": "Attaque(s)",
+    "Black List": "Liste noire"
 }

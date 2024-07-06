@@ -1,5 +1,6 @@
 import { CiCalendar, CiCoinInsert, CiCompass1, CiFileOff, CiStar, CiUser } from "react-icons/ci"
 import { useParams } from "react-router-dom"
+import { useLang } from "@/Tools/Language"
 import Space from "./Space"
 import Link from "./Link"
 
@@ -9,6 +10,12 @@ import Link from "./Link"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Params
@@ -25,19 +32,19 @@ export default function () {
     return <nav className="overflow-auto px-6 smooth">
         <div className="grid gap-5">
 
-            <Space title="hub panel">
-                <Link path="hub" icon={CiCompass1} title="Hub Panel" active={currentRoute === "hub"} news={3} />
-                <Link path="blacklist" icon={CiFileOff} title="Black List" active={currentRoute === "blacklist"} />
+            <Space title={lang("hub panel")}>
+                <Link path="hub" icon={CiCompass1} title={lang("Hub Panel")} active={currentRoute === "hub"} news={3} />
+                <Link path="blacklist" icon={CiFileOff} title={lang("Black List")} active={currentRoute === "blacklist"} />
             </Space>
 
-            <Space title="analytics">
-                <Link path="history" icon={CiCalendar} title="History" active={currentRoute === "history"} />
-                <Link path="payment" icon={CiCoinInsert} title="Payments" active={currentRoute === "payment"} />
+            <Space title={lang("analytics")}>
+                <Link path="history" icon={CiCalendar} title={lang("History")} active={currentRoute === "history"} />
+                <Link path="payment" icon={CiCoinInsert} title={lang("Payments")} active={currentRoute === "payment"} />
             </Space>
 
-            <Space title="settings">
-                <Link path="profile" icon={CiUser} title="Profile" active={currentRoute === "profile"} />
-                <Link path="upgrade" icon={CiStar} title="Upgrade" active={currentRoute === "upgrade"} />
+            <Space title={lang("settings")}>
+                <Link path="profile" icon={CiUser} title={lang("Profile")} active={currentRoute === "profile"} />
+                <Link path="upgrade" icon={CiStar} title={lang("Upgrade")} active={currentRoute === "upgrade"} />
             </Space>
 
         </div>
