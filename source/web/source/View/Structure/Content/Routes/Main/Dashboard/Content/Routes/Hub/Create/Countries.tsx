@@ -10,7 +10,7 @@ import Country from "@/Core/Country"
  * 
  * @returns 
  */
-export default function ({ value = wholeWorld, onChange }: Props) {
+export default function ({ value, onChange }: Props) {
 
     /**
      * Items
@@ -57,11 +57,12 @@ export default function ({ value = wholeWorld, onChange }: Props) {
 
     return <Autocomplete
         variant="bordered"
-        startContent={value.code === "WW" ? <TfiWorld /> : <ReactCountryFlag countryCode={value.code} svg />}
+        startContent={value ? <ReactCountryFlag countryCode={value.code} svg /> : <TfiWorld />}
         label="Select country"
-        selectedKey={value.id.toString()}
+        selectedKey={value?.id.toString() || ""}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
-        items={[wholeWorld, ...items]}
+        items={items}
+        placeholder="Whole world"
         isLoading={countries.pending}
         onInputChange={setKeyword}
     >
@@ -79,9 +80,3 @@ interface Props {
     value: Country | undefined
     onChange: (value: Country | undefined) => void
 }
-
-/**
- * Whole world
- * 
- */
-const wholeWorld = new Country({ id: 0, code: "WW", name: "Whole world" })

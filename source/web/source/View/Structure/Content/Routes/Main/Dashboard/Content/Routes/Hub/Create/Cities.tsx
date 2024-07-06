@@ -10,7 +10,7 @@ import City from "@/Core/City"
  * 
  * @returns 
  */
-export default function ({ country, value = allCities, onChange }: Props) {
+export default function ({ country, value, onChange }: Props) {
 
     /**
      * Items
@@ -59,9 +59,10 @@ export default function ({ country, value = allCities, onChange }: Props) {
         variant="bordered"
         startContent={value ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}
         label="Select city"
-        selectedKey={value.id.toString()}
+        selectedKey={value?.id.toString() || ""}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
-        items={[allCities, ...items]}
+        items={items}
+        placeholder="All cities"
         isLoading={cities.pending}
         onInputChange={setKeyword}
     >
@@ -80,9 +81,3 @@ interface Props {
     value: City | undefined
     onChange: (value: City | undefined) => void
 }
-
-/**
- * All cities
- * 
- */
-const allCities = new City({ id: 0, name: "All cities", latitude: 0, longitude: 0 })

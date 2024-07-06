@@ -1,10 +1,11 @@
 import { CiFlag1, CiLocationOn } from "react-icons/ci"
 import TagsInput from "@/View/Components/TagsInput"
+import { Checkbox } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import City from "@/Core/City"
 import Cities from "./Cities"
 
@@ -28,6 +29,12 @@ export default function () {
     const [domains, setDomains] = useState<string[]>([])
 
     /**
+     * Domains Action
+     * 
+     */
+    const [domainsAction, setDomainsAction] = useState<"IGNORE" | "CLICK">("IGNORE")
+
+    /**
      * Country
      * 
      */
@@ -39,14 +46,46 @@ export default function () {
      */
     const [city, setCity] = useState<City | undefined>(undefined)
 
+    /**
+     * Keyword validation method
+     * 
+     * @returns 
+     */
+    const keywordValidation = useCallback(function (_: string, keywords: string[]) {
+
+        if (keywords.length >= 20) return false
+
+        return true
+
+    }, [])
+
+    /**
+     * Domain validation method
+     * 
+     * @returns 
+     */
+    const domainValidation = useCallback(function (domain: string, domains: string[]) {
+
+        if (domains.length >= 20) return false
+
+        if (!/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domain)) return false
+
+        return true
+
+    }, [])
+
     return <Card className="grid smooth gap-5 p-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-content1">
 
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
 
         <div className="grid gap-3">
             <p className="text-foreground-500 flex items-center gap-1"><CiFlag1 /><Lang>Target</Lang></p>
-            <TagsInput value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
-            <TagsInput value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
+            <TagsInput label={`${keywords.length} / 20`} beforeAddValidate={keywordValidation} value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
+            <TagsInput label={`${domains.length} / 20`} beforeAddValidate={domainValidation} value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
+            <div className="grid grid-cols-2 gap-5">
+                <Checkbox size="sm" isSelected={domainsAction === "IGNORE"} onValueChange={isSelected => isSelected && setDomainsAction("IGNORE")} value="ignore"><Lang>Ignore this domains</Lang></Checkbox>
+                <Checkbox size="sm" isSelected={domainsAction === "CLICK"} onValueChange={isSelected => isSelected && setDomainsAction("CLICK")} value="click"><Lang>Click this domains</Lang></Checkbox>
+            </div>
         </div>
 
         <div className="grid gap-3">
