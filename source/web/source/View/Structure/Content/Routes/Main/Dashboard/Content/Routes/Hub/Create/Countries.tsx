@@ -52,6 +52,9 @@ export default function ({ value, onChange }: Props) {
         // Country
         const country = items.find(country => country.code === key)
 
+        // Set keyword
+        if (country) setKeyword(country.name)
+
         // On change callback
         onChange(country)
 
