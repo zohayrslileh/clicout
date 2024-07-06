@@ -1,6 +1,9 @@
 import PendingException from "@/View/Exception/Exceptions/Pending"
+import { Navigate, Route, Routes } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
-import { Suspense } from "react"
+import { lazy, Suspense } from "react"
+
+const Hub = lazy(() => import("./Hub"))
 
 /**
  * Routes
@@ -9,13 +12,14 @@ import { Suspense } from "react"
  */
 export default function () {
 
-    return <div className="relative grid">
+    return <div className="relative grid pt-3">
 
         <Suspense fallback={<Throw exception={new PendingException} />}>
 
-            <Throw exception={new PendingException} />
-
-            <p className="uppercase m-auto text-xl opacity-30">no signal</p>
+            <Routes>
+                <Route index element={<Navigate to="hub" />} />
+                <Route path="hub" element={<Hub />} />
+            </Routes>
 
         </Suspense>
 
