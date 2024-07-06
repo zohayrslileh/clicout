@@ -1,9 +1,10 @@
 import TagsInput from "@/View/Components/TagsInput"
+import Card from "@/View/Components/Card"
 import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
 import { useState } from "react"
-import Card from "@/View/Components/Card"
+import Test from "./Test"
 
 /**
  * Create
@@ -35,5 +36,6 @@ export default function () {
         <TagsInput value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
         <TagsInput value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
         <Countries value={country} onChange={setCountry} />
+        <Test />
     </Card>
 }
