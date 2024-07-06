@@ -8,10 +8,7 @@ import schema from "./schema"
 |
 |
 */
-export default css`
-
-    // Font Regular
-    font-family: ${schema.FONT_REGULAR};
+export default css`    
 
     // Font Medium
     .font-medium {
