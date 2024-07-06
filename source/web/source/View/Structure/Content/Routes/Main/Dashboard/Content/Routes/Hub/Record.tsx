@@ -18,7 +18,7 @@ export default function () {
     const plan = Plan.useContext()
 
     return <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <Link to="create">
+        <Link to="create" className="contents">
             <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid place-content-center place-items-center gap-5">
                 <CiFlag1 className="text-3xl text-foreground-500" />
                 <p className="uppercase text-sm font-medium text-foreground-500"><Lang>Create New Attack</Lang></p>
