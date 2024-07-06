@@ -8,7 +8,7 @@ import styled from "@emotion/styled"
  */
 export default function ({ label, ...props }: Props) {
 
-    return <Container className="h-fit min-h-[140px] relative w-full cursor-text tap-highlight-transparent shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 group-data-[focus=true]:border-default-foreground rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 motion-reduce:transition-none py-2">
+    return <Container className="h-fit min-h-[140px] relative w-full tap-highlight-transparent shadow-sm px-3 border-medium border-default-200 data-[hover=true]:border-default-400 group-data-[focus=true]:border-default-foreground rounded-medium flex-col items-start justify-center gap-0 transition-background !duration-150 motion-reduce:transition-none py-2">
         <TagsInput {...props} />
         {label && <p className="absolute bottom-2 right-3 text-sm">{label}</p>}
     </Container>
