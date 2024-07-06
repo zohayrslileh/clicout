@@ -27,7 +27,13 @@ export default Router.create<Environment>(function (country) {
      * Cities
      * 
      */
-    country.get("/cities", async context => context.json(await context.var.country.cities()))
+    country.get("/cities", async function (context) {
+
+        // Query
+        const query = context.req.query()
+
+        return context.json(await context.var.country.cities(query.keyword))
+    })
 })
 
 /*

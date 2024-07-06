@@ -1,9 +1,9 @@
 import CountryEntity from "@/Models/Database/Entities/Country"
 import CityEntity from "@/Models/Database/Entities/City"
 import CoreException from "./Exception"
+import { Like } from "typeorm"
 import City from "./City"
 import zod from "zod"
-import { Like } from "typeorm"
 
 /*
 |-----------------------------
@@ -87,10 +87,13 @@ export default class Country {
      * 
      * @returns
      */
-    public async cities() {
+    public async cities(keyword: unknown) {
+
+        // Safe keyword
+        const safeKeyword = zod.string().parse(keyword)
 
         // Primitive cities
-        const primitiveCities = await CityEntity.find({ where: { country: { id: this.id } } })
+        const primitiveCities = await CityEntity.find({ where: { country: { id: this.id }, name: Like(`%${safeKeyword}%`) }, take: 20 })
 
         // Initialize cities
         return primitiveCities.map(primitiveCity => new City(primitiveCity))
