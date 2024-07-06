@@ -16,7 +16,13 @@ export default Router.create<Environment>(function (country) {
      * Find
      * 
      */
-    country.get("/", async context => context.json(await Country.find()))
+    country.get("/", async function (context) {
+
+        // Query
+        const query = context.req.query()
+
+        context.json(await Country.find(query.keyword))
+    })
 
     /**
      * Single
