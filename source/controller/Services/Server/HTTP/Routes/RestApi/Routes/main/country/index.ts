@@ -21,7 +21,7 @@ export default Router.create<Environment>(function (country) {
         // Query
         const query = context.req.query()
 
-        context.json(await Country.find(query.keyword))
+        return context.json(await Country.find(query.keyword))
     })
 
     /**
