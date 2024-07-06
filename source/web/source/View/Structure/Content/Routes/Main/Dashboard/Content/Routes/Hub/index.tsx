@@ -1,4 +1,4 @@
-import { Card } from "@nextui-org/react";
+import { Button, Card } from "@nextui-org/react";
 
 /**
  * Hub
@@ -8,7 +8,7 @@ import { Card } from "@nextui-org/react";
 export default function () {
 
     return <div className="grid grid-cols-3 gap-3">
-        <Card className="h-[300px] smooth">
+        <Card as={Button} className="h-[300px] smooth">
         </Card>
     </div>
 }
