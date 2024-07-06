@@ -1,6 +1,7 @@
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react"
 import ReactCountryFlag from "react-country-flag"
 import { useCallback, useState } from "react"
+import { TfiWorld } from "react-icons/tfi"
 import usePromise from "@/Tools/Promise"
 import Country from "@/Core/Country"
 
@@ -9,13 +10,7 @@ import Country from "@/Core/Country"
  * 
  * @returns 
  */
-export default function ({ value, onChange }: Props) {
-
-    /**
-     * Country id
-     * 
-     */
-    const countryId = value ? value.id : 0
+export default function ({ value = wholeWorld, onChange }: Props) {
 
     /**
      * Items
@@ -62,15 +57,15 @@ export default function ({ value, onChange }: Props) {
 
     return <Autocomplete
         variant="bordered"
-        startContent={value ? <ReactCountryFlag countryCode={value.code} svg /> : undefined}
+        startContent={value.code === "WW" ? <TfiWorld /> : <ReactCountryFlag countryCode={value.code} svg />}
         label="Select country"
-        selectedKey={countryId.toString()}
+        selectedKey={value.id.toString()}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
-        items={items}
+        items={[wholeWorld, ...items]}
         isLoading={countries.pending}
         onInputChange={setKeyword}
     >
-        {country => <AutocompleteItem key={country.id} value={country.id} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
+        {country => <AutocompleteItem key={country.id} value={country.id} startContent={country.code === "WW" ? <TfiWorld /> : <ReactCountryFlag countryCode={country.code} svg />}>
             {country.name}
         </AutocompleteItem>}
     </Autocomplete>
@@ -84,3 +79,9 @@ interface Props {
     value: Country | undefined
     onChange: (value: Country | undefined) => void
 }
+
+/**
+ * Whole world
+ * 
+ */
+const wholeWorld = new Country({ id: 0, code: "WW", name: "Whole world" })
