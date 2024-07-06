@@ -18,7 +18,7 @@ export default function () {
 
             <Routes>
                 <Route index element={<Navigate to="hub" />} />
-                <Route path="hub" element={<Hub />} />
+                <Route path="hub/*" element={<Hub />} />
             </Routes>
 
         </Suspense>
