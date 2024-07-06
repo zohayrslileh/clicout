@@ -32,7 +32,7 @@ export default function () {
 
             <Space title="analytics">
                 <Link path="history" icon={CiCalendar} title="History" active={currentRoute === "history"} />
-                <Link path="history" icon={CiCoinInsert} title="Payment" active={currentRoute === "payment"} />
+                <Link path="payment" icon={CiCoinInsert} title="Payments" active={currentRoute === "payment"} />
             </Space>
 
             <Space title="settings">
