@@ -170,7 +170,7 @@ export default function () {
             {country && city && <p className="justify-self-end">{city.name}, {country.name} check it in <a href={`https://www.google.com/maps/@${city.latitude},${city.longitude},15z`} target="_blank" className="text-primary inline-flex gap-1 items-center">Google Maps <HiOutlineExternalLink /></a></p>}
         </div>
 
-        <div className="grid gap-3">
+        <div className="gap-3 hidden">
             <div className="text-foreground-500 flex justify-between">
                 <p className="flex items-center gap-1"><CiWifiOn /><Lang>Network</Lang></p>
                 {!plan.enableProxies && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>to enable proxies</Lang></p>}
