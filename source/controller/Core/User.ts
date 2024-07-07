@@ -1,5 +1,8 @@
 import SubscriptionEntity from "@/Models/Database/Entities/Subscription"
+import CountryEntity from "@/Models/Database/Entities/Country"
 import UnauthorizedException from "./Exception/Unauthorized"
+import AttackEntity from "@/Models/Database/Entities/Attack"
+import CityEntity from "@/Models/Database/Entities/City"
 import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
@@ -219,6 +222,9 @@ export default class User {
      */
     public async createAttack(data: unknown) {
 
+        // Plan
+        const plan = await this.plan()
+
         // Schema
         const schema = zod.object({
             keywords: zod.array(zod.string().max(50)).min(1).max(20),
@@ -227,11 +233,43 @@ export default class User {
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),
             device: zod.enum(["DESKTOP", "MOBILE"]).optional(),
-            searches: zod.number().min(0)
+            searches: plan.searches ? zod.number().min(1).max(plan.searches) : zod.number().min(0)
         })
 
         // Validate data
         const { keywords, domains, domainAction, countryId, cityId, device, searches } = schema.parse(data)
+
+        // Initialize attack entity
+        const attackEntity = new AttackEntity
+
+        // Set keywords
+        attackEntity.keywords = keywords
+
+        // Set domains
+        attackEntity.domains = domains
+
+        // Set domain action
+        attackEntity.domainAction = domainAction
+
+        // Set country
+        attackEntity.country = await CountryEntity.findOneBy({ id: countryId })
+
+        // Set city
+        attackEntity.city = await CityEntity.findOneBy({ id: cityId })
+
+        // Set device
+        attackEntity.device = device || null
+
+        // Set searches
+        attackEntity.searches = searches
+
+        // Set user
+        attackEntity.user = await UserEntity.findOneByOrFail({ id: this.id })
+
+        // Save
+        await attackEntity.save()
+
+        return attackEntity
     }
 }
 

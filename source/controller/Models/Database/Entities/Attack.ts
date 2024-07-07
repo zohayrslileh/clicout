@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Country from "./Country"
 import City from "./City"
+import User from "./User"
 
 /*
 |-----------------------------
@@ -61,4 +62,11 @@ export default class Attack extends BaseEntity {
      */
     @Column({ type: "int", nullable: false })
     declare public searches: number
+
+    /**
+     * User
+     * 
+     */
+    @ManyToOne(() => User, user => user.attacks, { nullable: false })
+    declare public user: User
 }
