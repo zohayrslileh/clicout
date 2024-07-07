@@ -1,12 +1,13 @@
 import { CiAlarmOn, CiFlag1, CiLocationOn } from "react-icons/ci"
-import { HiOutlineExternalLink } from "react-icons/hi"
 import { Button, Checkbox, Code } from "@nextui-org/react"
+import { HiOutlineExternalLink } from "react-icons/hi"
 import TagsInput from "@/View/Components/TagsInput"
 import { IoRocketOutline } from "react-icons/io5"
 import { Lang, useLang } from "@/Tools/Language"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
 import Card from "@/View/Components/Card"
+import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
@@ -134,6 +135,17 @@ export default function () {
         searches
     }
 
+    /**
+     * Attack promise
+     * 
+     */
+    const attackPromise = usePromise(async function () {
+
+        await new Promise(resolve => setTimeout(resolve, 3000))
+
+        console.log(primitiveAttack)
+    })
+
     return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
@@ -179,7 +191,7 @@ export default function () {
 
         <Code><pre>{JSON.stringify(primitiveAttack, undefined, 4)}</pre></Code>
 
-        <Button startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
+        <Button onClick={attackPromise.safeExecute} isLoading={attackPromise.pending} startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
 
     </Card>
 }
