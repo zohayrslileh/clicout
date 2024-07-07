@@ -49,5 +49,7 @@ export default {
     "Edit profile": "Редактировать профиль",
     "Create New Attack": "Создать новую атаку",
     "Attack(s)": "Атака(и)",
-    "Black List": "Чёрный список"
+    "Black List": "Чёрный список",
+    "searches per attack": "поисков за атаку",
+    "Unlimited searches": "Неограниченные поиски"
 }

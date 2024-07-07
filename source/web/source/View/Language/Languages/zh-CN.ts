@@ -49,5 +49,7 @@ export default {
     "Edit profile": "编辑个人资料",
     "Create New Attack": "创建新攻击",
     "Attack(s)": "攻击",
-    "Black List": "黑名单"
+    "Black List": "黑名单",
+    "searches per attack": "每次攻击的搜索次数",
+    "Unlimited searches": "无限搜索"
 }

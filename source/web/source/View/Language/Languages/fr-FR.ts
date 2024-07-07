@@ -15,7 +15,6 @@ export default {
     "terms": "conditions",
     "privacy policy": "politique de confidentialité",
     "and": "et",
-
     "Free": "Gratuit",
     "Personal": "Personnel",
     "Business": "Entreprise",
@@ -50,5 +49,7 @@ export default {
     "Edit profile": "Editer le profil",
     "Create New Attack": "Créer nouvelle attaque",
     "Attack(s)": "Attaque(s)",
-    "Black List": "Liste noire"
+    "Black List": "Liste noire",
+    "searches per attack": "recherches par attaque",
+    "Unlimited searches": "Recherches illimitées"
 }
