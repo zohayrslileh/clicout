@@ -50,6 +50,13 @@ export default class Attack extends BaseEntity {
     declare public city: City | null
 
     /**
+     * With Proxies
+     * 
+     */
+    @Column({ type: "boolean", nullable: false, default: false })
+    declare public withProxies: boolean
+
+    /**
      * Device
      * 
      */
