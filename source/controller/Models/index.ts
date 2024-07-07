@@ -35,4 +35,7 @@ export async function synchronize() {
 
     // Database migration
     await database.migration()
+
+    // Done
+    console.log("Done.")
 }
