@@ -1,6 +1,7 @@
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react"
 import ReactCountryFlag from "react-country-flag"
 import { useCallback, useState } from "react"
+import { useLang } from "@/Tools/Language"
 import usePromise from "@/Tools/Promise"
 import Country from "@/Core/Country"
 import City from "@/Core/City"
@@ -11,6 +12,12 @@ import City from "@/Core/City"
  * @returns 
  */
 export default function ({ country, value, onChange, isDisabled }: Props) {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Items
@@ -62,11 +69,11 @@ export default function ({ country, value, onChange, isDisabled }: Props) {
         variant="bordered"
         isDisabled={isDisabled}
         startContent={country ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}
-        label="Select city"
+        label={lang("Select city")}
         selectedKey={value?.id.toString() || ""}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
         items={items}
-        placeholder="All cities"
+        placeholder={lang("All cities")}
         isLoading={cities.pending}
         onInputChange={setKeyword}
     >
