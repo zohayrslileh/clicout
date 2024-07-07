@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
+import Attack from "./Attack"
 import City from "./City"
 
 /*
@@ -32,4 +33,11 @@ export default class Country extends BaseEntity {
      */
     @OneToMany(() => City, city => city.country)
     declare public cities: City[]
+
+    /**
+     * Attacks
+     * 
+     */
+    @OneToMany(() => Attack, attack => attack.country)
+    declare public attacks: Attack[]
 }

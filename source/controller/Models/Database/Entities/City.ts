@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from "typeorm"
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Country from "./Country"
+import Attack from "./Attack"
 
 /*
 |-----------------------------
@@ -39,4 +40,11 @@ export default class City extends BaseEntity {
      */
     @ManyToOne(() => Country, country => country.cities, { nullable: false })
     declare public country: Country
+
+    /**
+     * Attacks
+     * 
+     */
+    @OneToMany(() => Attack, attack => attack.city)
+    declare public attacks: Attack[]
 }
