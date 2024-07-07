@@ -5,6 +5,7 @@
         "recommended": false,
         "price": 0,
         "threads": 1,
+        "searches": 5,
         "enableProxies": false,
         "customizeLocation": false,
         "customizeDevices": false
@@ -15,6 +16,7 @@
         "recommended": true,
         "price": 59,
         "threads": 2,
+        "searches": 0,
         "enableProxies": false,
         "customizeLocation": true,
         "customizeDevices": true
@@ -25,6 +27,7 @@
         "recommended": false,
         "price": 159,
         "threads": 5,
+        "searches": 0,
         "enableProxies": true,
         "customizeLocation": true,
         "customizeDevices": true

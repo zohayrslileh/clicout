@@ -48,6 +48,13 @@ export default class Plan extends BaseEntity {
     declare public threads: number
 
     /**
+     * Searches
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public searches: number
+
+    /**
      * Enable proxies
      * 
      */
