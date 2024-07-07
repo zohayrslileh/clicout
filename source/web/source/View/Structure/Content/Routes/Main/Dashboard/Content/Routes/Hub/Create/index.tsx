@@ -3,12 +3,12 @@ import { HiOutlineExternalLink } from "react-icons/hi"
 import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
 import { IoRocketOutline } from "react-icons/io5"
+import { Link, Navigate } from "react-router-dom"
 import { Lang, useLang } from "@/Tools/Language"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
-import { Link } from "react-router-dom"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
 import Attack from "@/Core/Attack"
@@ -135,6 +135,9 @@ export default function () {
         device,
         searches
     }))
+
+    // Solve status
+    if (attackPromise.solve) return <Navigate to=".." />
 
     return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
