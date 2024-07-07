@@ -133,6 +133,11 @@ export default function () {
 
         <div className="grid gap-3">
             <p className="text-foreground-500 flex items-center gap-1"><CiAlarmOn /><Lang>Duration</Lang></p>
+
+            <div className="text-foreground-500 flex justify-between">
+                <p className="flex items-center gap-1"><CiAlarmOn /><Lang>Duration</Lang></p>
+                {plan.searches && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>for unlimited searches</Lang></p>}
+            </div>
             <Searches value={searches} onChange={setSearches} />
         </div>
 
