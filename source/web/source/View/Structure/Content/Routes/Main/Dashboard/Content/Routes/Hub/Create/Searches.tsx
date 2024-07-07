@@ -1,6 +1,5 @@
-import { Slider, Tab, Tabs } from "@nextui-org/react"
-import { useCallback, useState } from "react"
-import { useLang } from "@/Tools/Language"
+import { Checkbox, Input } from "@nextui-org/react"
+import { Lang, useLang } from "@/Tools/Language"
 
 /**
  * Searches
@@ -16,40 +15,15 @@ export default function ({ value, onChange }: Props) {
     const lang = useLang()
 
     /**
-     * Tap
+     * Infinity
      * 
      */
-    const [tap, setTap] = useState<string>(value ? "specific" : "infinity")
+    const infinity = value === 0
 
-    /**
-     * Handle change
-     * 
-     * @returns
-     */
-    const handleChange = useCallback(function (tap: string) {
-
-        // Set tap
-        setTap(tap)
-
-        // On change callback
-        onChange(tap === "infinity" ? 0 : 1)
-
-    }, [])
-
-    return <Tabs aria-label="Taps" variant="bordered" className="w-full block" selectedKey={tap} onSelectionChange={key => handleChange(key.toString())}>
-        <Tab key="specific" title={lang("Specific")}>
-            <Slider
-                label={lang("Number of searches")}
-                size="sm"
-                minValue={1}
-                maxValue={60}
-                value={value}
-                onChange={value => typeof value === "number" && onChange(tap === "infinity" ? 0 : value)}
-                getValue={searches => `${searches} ${lang("of")} 60 Searches`}
-            />
-        </Tab>
-        <Tab key="infinity" isDisabled={false} title={lang("Infinity")} />
-    </Tabs>
+    return <div className="relative">
+        <Input isDisabled={infinity} value={value.toString()} onValueChange={value => onChange(+value)} variant="bordered" label={lang("Number of searches")} type="number" />
+        <Checkbox isSelected={infinity} onValueChange={infinity => onChange(infinity ? 0 : 1)} className="absolute right-5 top-0 bottom-0" size="sm"><Lang>Infinity</Lang></Checkbox>
+    </div>
 }
 
 /**

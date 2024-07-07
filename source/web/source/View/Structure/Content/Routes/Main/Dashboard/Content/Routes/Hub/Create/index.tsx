@@ -1,4 +1,4 @@
-import { CiFlag1, CiLocationOn, CiSearch } from "react-icons/ci"
+import { CiAlarmOn, CiFlag1, CiLocationOn } from "react-icons/ci"
 import { HiOutlineExternalLink } from "react-icons/hi"
 import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
@@ -118,7 +118,7 @@ export default function () {
         </div>
 
         <div className="grid gap-3">
-            <p className="text-foreground-500 flex items-center gap-1"><CiSearch /><Lang>Searches</Lang></p>
+            <p className="text-foreground-500 flex items-center gap-1"><CiAlarmOn /><Lang>Duration</Lang></p>
             <Searches value={searches} onChange={setSearches} />
         </div>
 
