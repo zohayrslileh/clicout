@@ -2,6 +2,7 @@ import subscription from "./subscription"
 import Router from "@/Tools/HTTP/Router"
 import country from "./country"
 import User from "@/Core/User"
+import attack from "./attack"
 import plan from "./plan"
 
 /*
@@ -45,6 +46,12 @@ export default Router.create<Environment>(function (main) {
      * 
      */
     main.route("/country", country)
+
+    /**
+     * Attack
+     * 
+     */
+    main.route("/attack", attack)
 })
 
 /*
