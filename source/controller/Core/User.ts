@@ -263,10 +263,10 @@ export default class User {
         attackEntity.domainsAction = domainsAction
 
         // Set city
-        attackEntity.city = await CityEntity.findOneBy({ id: cityId })
+        attackEntity.city = cityId ? await CityEntity.findOneBy({ id: cityId }) : null
 
         // Set country
-        attackEntity.country = !attackEntity.city ? await CountryEntity.findOneBy({ id: countryId }) : null
+        attackEntity.country = !attackEntity.city && countryId ? await CountryEntity.findOneBy({ id: countryId }) : null
 
         // Set device
         attackEntity.device = device || null
