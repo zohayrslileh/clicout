@@ -48,6 +48,12 @@ export default class Plan {
     public threads: number
 
     /**
+     * Searches
+     * 
+     */
+    public searches: number
+
+    /**
      * Enable proxies
      * 
      */
@@ -88,6 +94,9 @@ export default class Plan {
 
         // Set threads
         this.threads = primitivePlan.threads
+
+        // Set searches
+        this.searches = primitivePlan.searches
 
         // Set enable proxies
         this.enableProxies = primitivePlan.enableProxies
@@ -143,6 +152,7 @@ export interface PrimitivePlan {
     name: string
     price: number
     threads: number
+    searches: number
     description: string
     recommended: boolean
     enableProxies: boolean
