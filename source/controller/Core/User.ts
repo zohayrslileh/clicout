@@ -245,6 +245,9 @@ export default class User {
         // Check customize location
         if (!plan.customizeLocation && (countryId || cityId)) throw new CoreException("Upgrade to customize location")
 
+        // Check enable proxies
+        if (!plan.enableProxies && withProxies) throw new CoreException("Upgrade to enable proxies")
+
         // Check customize devices
         if (!plan.customizeDevices && device) throw new CoreException("Upgrade to customize devices")
 
