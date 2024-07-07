@@ -7,7 +7,7 @@ import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
 import CoreException from "./Exception"
-import { IsNull } from "typeorm"
+import { In, IsNull } from "typeorm"
 import Invoice from "./Invoice"
 import Attack from "./Attack"
 import Plan from "./Plan"
@@ -242,6 +242,12 @@ export default class User {
         // Plan
         const plan = await this.plan()
 
+        // Active attacks
+        const activeAttacks = await this.activeAttacks()
+
+        // Check threads
+        if (plan.threads <= activeAttacks.length) throw new CoreException("Upgrade to launch more attacks")
+
         // Check customize location
         if (!plan.customizeLocation && (countryId || cityId)) throw new CoreException("Upgrade to customize location")
 
@@ -291,6 +297,20 @@ export default class User {
         await attackEntity.save()
 
         return new Attack(attackEntity)
+    }
+
+    /**
+     * Active attacks
+     * 
+     * @returns
+     */
+    public async activeAttacks() {
+
+        // Attack entities
+        const attackEntities = await AttackEntity.findBy({ user: { id: this.id }, status: In(["CREATED", "RUNNING"]) })
+
+        // Initialize attacks
+        return attackEntities.map(attackEntity => new Attack(attackEntity))
     }
 }
 
