@@ -30,6 +30,9 @@ export default function ({ country, value, onChange, isDisabled }: Props) {
      */
     const cities = usePromise(async function () {
 
+        // Check country
+        if (!country) return
+
         // Cities
         const cities = await country.cities(keyword)
 
@@ -58,7 +61,7 @@ export default function ({ country, value, onChange, isDisabled }: Props) {
     return <Autocomplete
         variant="bordered"
         isDisabled={isDisabled}
-        startContent={value ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}
+        startContent={country ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}
         label="Select city"
         selectedKey={value?.id.toString() || ""}
         onSelectionChange={key => handleChange(key ? +key.toString() : 0)}
@@ -67,7 +70,7 @@ export default function ({ country, value, onChange, isDisabled }: Props) {
         isLoading={cities.pending}
         onInputChange={setKeyword}
     >
-        {city => <AutocompleteItem key={city.id} value={city.id} startContent={<ReactCountryFlag countryCode={country.code} svg />}>
+        {city => <AutocompleteItem key={city.id} value={city.id} startContent={country ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}>
             {city.name}
         </AutocompleteItem>}
     </Autocomplete>
@@ -78,7 +81,7 @@ export default function ({ country, value, onChange, isDisabled }: Props) {
  * 
  */
 interface Props {
-    country: Country
+    country?: Country
     isDisabled?: boolean
     value: City | undefined
     onChange: (value: City | undefined) => void

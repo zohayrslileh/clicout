@@ -3,11 +3,11 @@ import { HiOutlineExternalLink } from "react-icons/hi"
 import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
 import { IoRocketOutline } from "react-icons/io5"
+import { Lang, useLang } from "@/Tools/Language"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
 import Card from "@/View/Components/Card"
 import { Link } from "react-router-dom"
-import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
 import Searches from "./Searches"
@@ -22,6 +22,12 @@ import Cities from "./Cities"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Plan
@@ -99,6 +105,21 @@ export default function () {
 
     }, [])
 
+    /**
+     * Searches handle method
+     * 
+     * @returns 
+     */
+    const searchesHandle = useCallback(function (searches: number) {
+
+        if (plan.searches && (searches < 1 || searches > plan.searches)) return
+
+        if (!plan.searches && searches < 0) return
+
+        setSearches(searches)
+
+    }, [plan])
+
     return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
@@ -119,7 +140,7 @@ export default function () {
                 {!plan.customizeLocation && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>for customize location</Lang></p>}
             </div>
             <Countries isDisabled={!plan.customizeLocation} value={country} onChange={setCountry} />
-            {country && <Cities isDisabled={!plan.customizeLocation} country={country} value={city} onChange={setCity} />}
+            <Cities isDisabled={!plan.customizeLocation} country={country} value={city} onChange={setCity} />
             {country && city && <p className="justify-self-end">{city.name}, {country.name} check it in <a href={`https://www.google.com/maps/@${city.latitude},${city.longitude},15z`} target="_blank" className="text-primary inline-flex gap-1 items-center">Google Maps <HiOutlineExternalLink /></a></p>}
         </div>
 
@@ -132,15 +153,17 @@ export default function () {
         </div>
 
         <div className="grid gap-3">
-            <p className="text-foreground-500 flex items-center gap-1"><CiAlarmOn /><Lang>Duration</Lang></p>
-
             <div className="text-foreground-500 flex justify-between">
                 <p className="flex items-center gap-1"><CiAlarmOn /><Lang>Duration</Lang></p>
                 {plan.searches && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>for unlimited searches</Lang></p>}
             </div>
-            <Searches value={searches} onChange={setSearches} />
+            <div>
+                <Searches value={searches} onChange={searchesHandle} />
+                <p className="text-[12px] italic text-foreground-500">{plan.searches ? `${lang("Maximum")}: ${plan.searches}` : undefined}</p>
+            </div>
         </div>
 
         <Button startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
+
     </Card>
 }
