@@ -3,25 +3,25 @@ import { Column, Entity } from "typeorm"
 
 /*
 |-----------------------------
-|  Device model
+|  UserAgent model
 |-----------------------------
 |
 | 
 */
 @Entity()
-export default class Device extends BaseEntity {
+export default class UserAgent extends BaseEntity {
 
     /**
-     * User agent
+     * Value
      * 
      */
     @Column({ type: "text", nullable: false, unique: true })
-    declare public userAgent: string
+    declare public value: string
 
     /**
-     * Type
+     * Device
      * 
      */
     @Column({ type: "varchar", nullable: false })
-    declare public type: string
+    declare public device: string
 }
