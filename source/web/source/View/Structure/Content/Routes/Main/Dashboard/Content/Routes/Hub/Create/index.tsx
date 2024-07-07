@@ -128,7 +128,7 @@ export default function () {
             <p className="text-foreground-500 flex items-center gap-1"><CiFlag1 /><Lang>Target</Lang></p>
             <TagsInput label={`${keywords.length} / 20`} beforeAddValidate={keywordValidation} value={keywords} onChange={setKeywords} placeHolder="Search Keywords..." />
             <TagsInput label={`${domains.length} / 20`} beforeAddValidate={domainValidation} value={domains} onChange={setDomains} placeHolder="Domains... (Optional)" />
-            <div className="grid grid-cols-2 gap-5">
+            <div className="flex gap-5">
                 <Checkbox size="sm" isSelected={domainsAction === "IGNORE"} onValueChange={isSelected => isSelected && setDomainsAction("IGNORE")} value="ignore"><Lang>Ignore this domains</Lang></Checkbox>
                 <Checkbox size="sm" isSelected={domainsAction === "CLICK"} onValueChange={isSelected => isSelected && setDomainsAction("CLICK")} value="click"><Lang>Click this domains</Lang></Checkbox>
             </div>
