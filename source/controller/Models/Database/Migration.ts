@@ -1,4 +1,6 @@
+import UserAgent from "./Entities/Device"
 import Country from "./Entities/Country"
+import UAParser from "ua-parser-js"
 import Plan from "./Entities/Plan"
 import City from "./Entities/City"
 import Json from "@/Tools/Json"
@@ -92,6 +94,37 @@ export default async function () {
             leftCities--
 
             console.log("- Migration city: ", city.name, "Left: " + leftCities)
+        }
+    }
+
+    // Migration user agents
+    if (!await UserAgent.count()) {
+
+        // Primitive user agents
+        const primitiveUserAgents = new Json<string[]>("assets/database/user_agents.json")
+
+        // Fetch primitive user agents
+        for (const primitiveUserAgent of primitiveUserAgents.value) {
+
+            // User agent parser
+            const userAgentParser = new UAParser(primitiveUserAgent)
+
+            // Device
+            const device = userAgentParser.getDevice()
+
+            // Initialize user agent
+            const userAgent = new UserAgent
+
+            // Set value
+            userAgent.value = primitiveUserAgent
+
+            // Set device
+            userAgent.device = device.type ? device.type.toUpperCase() : "DESKTOP"
+
+            // Save
+            await userAgent.save()
+
+            console.log("- Migration country: ", primitiveUserAgent)
         }
     }
 }
