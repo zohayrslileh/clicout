@@ -1,4 +1,4 @@
-import { CiAlarmOn, CiFlag1, CiLocationOn } from "react-icons/ci"
+import { CiAlarmOn, CiFlag1, CiLocationOn, CiWifiOn } from "react-icons/ci"
 import { HiOutlineExternalLink } from "react-icons/hi"
 import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
@@ -68,6 +68,12 @@ export default function () {
     const [city, setCity] = useState<City | undefined>(undefined)
 
     /**
+     * With proxies
+     * 
+     */
+    const [withProxies, setWithProxies] = useState<boolean>(false)
+
+    /**
      * Device
      * 
      */
@@ -132,6 +138,7 @@ export default function () {
         domainsAction,
         countryId: country ? country.id : undefined,
         cityId: city ? city.id : undefined,
+        withProxies,
         device,
         searches
     }))
@@ -161,6 +168,14 @@ export default function () {
             <Countries isDisabled={!plan.customizeLocation} value={country} onChange={setCountry} />
             <Cities isDisabled={!plan.customizeLocation} country={country} value={city} onChange={setCity} />
             {country && city && <p className="justify-self-end">{city.name}, {country.name} check it in <a href={`https://www.google.com/maps/@${city.latitude},${city.longitude},15z`} target="_blank" className="text-primary inline-flex gap-1 items-center">Google Maps <HiOutlineExternalLink /></a></p>}
+        </div>
+
+        <div className="grid gap-3">
+            <div className="text-foreground-500 flex justify-between">
+                <p className="flex items-center gap-1"><CiWifiOn /><Lang>Network</Lang></p>
+                {!plan.enableProxies && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>to enable proxies</Lang></p>}
+            </div>
+            <Checkbox isDisabled={!plan.enableProxies} isSelected={withProxies} onValueChange={setWithProxies}><Lang>Use proxies</Lang></Checkbox>
         </div>
 
         <div className="grid gap-3">

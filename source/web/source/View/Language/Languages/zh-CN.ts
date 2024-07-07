@@ -76,5 +76,7 @@ export default {
     "Infinity": "无限",
     "Number of searches": "搜索次数",
     "Maximum": "最大",
-    "Launch Attack": "发起攻击"
+    "Launch Attack": "发起攻击",
+    "Use proxies": "使用代理",
+    "to enable proxies": "启用代理"
 }

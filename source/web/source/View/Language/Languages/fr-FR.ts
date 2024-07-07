@@ -76,5 +76,7 @@ export default {
     "Infinity": "Infini",
     "Number of searches": "Nombre de recherches",
     "Maximum": "Maximum",
-    "Launch Attack": "Lancer la attaque"
+    "Launch Attack": "Lancer la attaque",
+    "Use proxies": "Utiliser des proxies",
+    "to enable proxies": "pour activer les proxies"
 }
