@@ -36,7 +36,7 @@ export default class Attack {
         // Schema
         const schema = zod.object({
             keywords: zod.array(zod.string().max(50)).min(1).max(20),
-            domains: zod.array(zod.string().max(50)).min(1).max(20),
+            domains: zod.array(zod.string().max(50)).max(20),
             domainsAction: zod.enum(["CLICK", "IGNORE"]),
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),

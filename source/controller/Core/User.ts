@@ -6,6 +6,7 @@ import CityEntity from "@/Models/Database/Entities/City"
 import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
+import CoreException from "./Exception"
 import { IsNull } from "typeorm"
 import Invoice from "./Invoice"
 import Attack from "./Attack"
@@ -226,7 +227,7 @@ export default class User {
         // Schema
         const schema = zod.object({
             keywords: zod.array(zod.string().max(50)).min(1).max(20),
-            domains: zod.array(zod.string().max(50)).min(1).max(20),
+            domains: zod.array(zod.string().max(50)).max(20),
             domainsAction: zod.enum(["CLICK", "IGNORE"]),
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),
@@ -236,6 +237,18 @@ export default class User {
 
         // Validate data
         const { keywords, domains, domainsAction, countryId, cityId, device, searches } = schema.parse(data)
+
+        // Plan
+        const plan = await this.plan()
+
+        // Check customize location
+        if (!plan.customizeLocation && (countryId || cityId)) throw new CoreException("Upgrade to customize location")
+
+        // Check customize devices
+        if (!plan.customizeDevices && device) throw new CoreException("Upgrade to customize devices")
+
+        // Check searches
+        if (plan.searches && !searches) throw new CoreException("Upgrade to unlimited searchs")
 
         // Initialize attack entity
         const attackEntity = new AttackEntity
