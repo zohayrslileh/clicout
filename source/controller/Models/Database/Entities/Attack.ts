@@ -29,11 +29,11 @@ export default class Attack extends BaseEntity {
     declare public domains: string[]
 
     /**
-     * Domain action
+     * Domains action
      * 
      */
     @Column({ type: "varchar", nullable: false })
-    declare public domainAction: "CLICK" | "IGNORE"
+    declare public domainsAction: "CLICK" | "IGNORE"
 
     /**
      * Country

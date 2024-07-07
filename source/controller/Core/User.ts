@@ -229,7 +229,7 @@ export default class User {
         const schema = zod.object({
             keywords: zod.array(zod.string().max(50)).min(1).max(20),
             domains: zod.array(zod.string().max(50)).min(1).max(20),
-            domainAction: zod.enum(["CLICK", "IGNORE"]),
+            domainsAction: zod.enum(["CLICK", "IGNORE"]),
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),
             device: zod.enum(["DESKTOP", "MOBILE"]).optional(),
@@ -237,7 +237,7 @@ export default class User {
         })
 
         // Validate data
-        const { keywords, domains, domainAction, countryId, cityId, device, searches } = schema.parse(data)
+        const { keywords, domains, domainsAction, countryId, cityId, device, searches } = schema.parse(data)
 
         // Initialize attack entity
         const attackEntity = new AttackEntity
@@ -248,8 +248,8 @@ export default class User {
         // Set domains
         attackEntity.domains = domains
 
-        // Set domain action
-        attackEntity.domainAction = domainAction
+        // Set domains action
+        attackEntity.domainsAction = domainsAction
 
         // Set country
         attackEntity.country = await CountryEntity.findOneBy({ id: countryId })
