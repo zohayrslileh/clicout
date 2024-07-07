@@ -47,7 +47,7 @@ export default class Attack {
         // Ask primitive attack
         const primitiveAttack = await request<PrimitiveAttack>({
             method: "POST",
-            url: "/attack/create",
+            url: "/main/attack",
             data: schema.parse(data)
         })
 
