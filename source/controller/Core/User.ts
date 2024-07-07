@@ -211,6 +211,28 @@ export default class User {
 
         return invoice ? invoice.paymentLink : subscriptionEntity
     }
+
+    /**
+     * Create attack method
+     * 
+     * @returns
+     */
+    public async createAttack(data: unknown) {
+
+        // Schema
+        const schema = zod.object({
+            keywords: zod.array(zod.string().max(50)).min(1).max(20),
+            domains: zod.array(zod.string().max(50)).min(1).max(20),
+            domainAction: zod.enum(["CLICK", "IGNORE"]),
+            countryId: zod.number().min(1).optional(),
+            cityId: zod.number().min(1).optional(),
+            device: zod.enum(["DESKTOP", "MOBILE"]).optional(),
+            searches: zod.number().min(0)
+        })
+
+        // Validate data
+        const { keywords, domains, domainAction, countryId, cityId, device, searches } = schema.parse(data)
+    }
 }
 
 /*
