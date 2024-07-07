@@ -10,7 +10,7 @@ import Country from "@/Core/Country"
  * 
  * @returns 
  */
-export default function ({ value, onChange }: Props) {
+export default function ({ value, onChange, isDisabled }: Props) {
 
     /**
      * Items
@@ -57,6 +57,7 @@ export default function ({ value, onChange }: Props) {
 
     return <Autocomplete
         variant="bordered"
+        isDisabled={isDisabled}
         startContent={value ? <ReactCountryFlag countryCode={value.code} svg /> : <TfiWorld />}
         label="Select country"
         selectedKey={value?.id.toString() || ""}
@@ -77,6 +78,7 @@ export default function ({ value, onChange }: Props) {
  * 
  */
 interface Props {
+    isDisabled?: boolean
     value: Country | undefined
     onChange: (value: Country | undefined) => void
 }

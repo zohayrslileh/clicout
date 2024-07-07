@@ -8,7 +8,7 @@ import { useLang } from "@/Tools/Language"
  * 
  * @returns 
  */
-export default function ({ value, onChange }: Props) {
+export default function ({ value, onChange, isDisabled }: Props) {
 
     /**
      * Lang
@@ -19,6 +19,7 @@ export default function ({ value, onChange }: Props) {
     return <Select
         label={lang("Select device")}
         variant="bordered"
+        isDisabled={isDisabled}
         placeholder={lang("All devices")}
         selectedKeys={[value]}
         onSelectionChange={([key]) => onChange(key.toString())}
@@ -42,6 +43,7 @@ export default function ({ value, onChange }: Props) {
  */
 interface Props {
     value: string
+    isDisabled?: boolean
     onChange: (value: string) => void
 }
 

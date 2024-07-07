@@ -6,11 +6,13 @@ import { IoRocketOutline } from "react-icons/io5"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
 import Card from "@/View/Components/Card"
+import { Link } from "react-router-dom"
 import { Lang } from "@/Tools/Language"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
 import Searches from "./Searches"
 import Devices from "./Devices"
+import Plan from "@/Core/Plan"
 import City from "@/Core/City"
 import Cities from "./Cities"
 
@@ -20,6 +22,12 @@ import Cities from "./Cities"
  * @returns 
  */
 export default function () {
+
+    /**
+     * Plan
+     * 
+     */
+    const plan = Plan.useContext()
 
     /**
      * Keywords
@@ -106,15 +114,21 @@ export default function () {
         </div>
 
         <div className="grid gap-3">
-            <p className="text-foreground-500 flex items-center gap-1"><CiLocationOn /><Lang>Location</Lang></p>
-            <Countries value={country} onChange={setCountry} />
-            {country && <Cities country={country} value={city} onChange={setCity} />}
+            <div className="text-foreground-500 flex justify-between">
+                <p className="flex items-center gap-1"><CiLocationOn /><Lang>Location</Lang></p>
+                {!plan.customizeLocation && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>for customize location</Lang></p>}
+            </div>
+            <Countries isDisabled={!plan.customizeLocation} value={country} onChange={setCountry} />
+            {country && <Cities isDisabled={!plan.customizeLocation} country={country} value={city} onChange={setCity} />}
             {country && city && <p className="justify-self-end">{city.name}, {country.name} check it in <a href={`https://www.google.com/maps/@${city.latitude},${city.longitude},15z`} target="_blank" className="text-primary inline-flex gap-1 items-center">Google Maps <HiOutlineExternalLink /></a></p>}
         </div>
 
         <div className="grid gap-3">
-            <p className="text-foreground-500 flex items-center gap-1"><PiDevicesThin /><Lang>Devices</Lang></p>
-            <Devices value={device} onChange={setDevice} />
+            <div className="text-foreground-500 flex justify-between">
+                <p className="flex items-center gap-1"><PiDevicesThin /><Lang>Devices</Lang></p>
+                {!plan.customizeDevices && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>for customize devices</Lang></p>}
+            </div>
+            <Devices isDisabled={!plan.customizeDevices} value={device} onChange={setDevice} />
         </div>
 
         <div className="grid gap-3">

@@ -10,7 +10,7 @@ import City from "@/Core/City"
  * 
  * @returns 
  */
-export default function ({ country, value, onChange }: Props) {
+export default function ({ country, value, onChange, isDisabled }: Props) {
 
     /**
      * Items
@@ -57,6 +57,7 @@ export default function ({ country, value, onChange }: Props) {
 
     return <Autocomplete
         variant="bordered"
+        isDisabled={isDisabled}
         startContent={value ? <ReactCountryFlag countryCode={country.code} svg /> : undefined}
         label="Select city"
         selectedKey={value?.id.toString() || ""}
@@ -78,6 +79,7 @@ export default function ({ country, value, onChange }: Props) {
  */
 interface Props {
     country: Country
+    isDisabled?: boolean
     value: City | undefined
     onChange: (value: City | undefined) => void
 }
