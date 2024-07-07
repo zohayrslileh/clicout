@@ -64,6 +64,13 @@ export default class Attack extends BaseEntity {
     declare public searches: number
 
     /**
+     * Status
+     * 
+     */
+    @Column({ type: "varchar", nullable: false })
+    declare public status: "CREATED" | "RUNNING" | "STOPPED"
+
+    /**
      * User
      * 
      */

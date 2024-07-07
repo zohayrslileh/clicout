@@ -1,6 +1,6 @@
 import { CiAlarmOn, CiFlag1, CiLocationOn } from "react-icons/ci"
-import { Button, Checkbox, Code } from "@nextui-org/react"
 import { HiOutlineExternalLink } from "react-icons/hi"
+import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
 import { IoRocketOutline } from "react-icons/io5"
 import { Lang, useLang } from "@/Tools/Language"
@@ -11,6 +11,7 @@ import usePromise from "@/Tools/Promise"
 import { Link } from "react-router-dom"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
+import Attack from "@/Core/Attack"
 import Searches from "./Searches"
 import Devices from "./Devices"
 import Plan from "@/Core/Plan"
@@ -122,10 +123,10 @@ export default function () {
     }, [plan])
 
     /**
-     * Primitive attack
+     * Attack promise
      * 
      */
-    const primitiveAttack = {
+    const attackPromise = usePromise(async () => await Attack.create({
         keywords,
         domains,
         domainsAction,
@@ -133,18 +134,7 @@ export default function () {
         cityId: city ? city.id : undefined,
         device,
         searches
-    }
-
-    /**
-     * Attack promise
-     * 
-     */
-    const attackPromise = usePromise(async function () {
-
-        await new Promise(resolve => setTimeout(resolve, 3000))
-
-        console.log(primitiveAttack)
-    })
+    }))
 
     return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
@@ -188,8 +178,6 @@ export default function () {
                 <p className="text-[12px] italic text-foreground-500">{plan.searches ? `${lang("Maximum")}: ${plan.searches}` : undefined}</p>
             </div>
         </div>
-
-        <Code><pre>{JSON.stringify(primitiveAttack, undefined, 4)}</pre></Code>
 
         <Button onClick={attackPromise.safeExecute} isLoading={attackPromise.pending} startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
 

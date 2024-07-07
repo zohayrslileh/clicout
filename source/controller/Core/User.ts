@@ -263,6 +263,9 @@ export default class User {
         // Set searches
         attackEntity.searches = searches
 
+        // Set status
+        attackEntity.status = "CREATED"
+
         // Set user
         attackEntity.user = await UserEntity.findOneByOrFail({ id: this.id })
 
