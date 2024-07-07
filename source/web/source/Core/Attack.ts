@@ -40,6 +40,7 @@ export default class Attack {
             domainsAction: zod.enum(["CLICK", "IGNORE"]),
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),
+            withProxies: zod.boolean(),
             device: zod.enum(["DESKTOP", "MOBILE"]).optional(),
             searches: zod.number().min(0)
         })

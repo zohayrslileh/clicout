@@ -231,12 +231,13 @@ export default class User {
             domainsAction: zod.enum(["CLICK", "IGNORE"]),
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),
+            withProxies: zod.boolean(),
             device: zod.enum(["DESKTOP", "MOBILE"]).optional(),
             searches: zod.number().min(0)
         })
 
         // Validate data
-        const { keywords, domains, domainsAction, countryId, cityId, device, searches } = schema.parse(data)
+        const { keywords, domains, domainsAction, countryId, cityId, withProxies, device, searches } = schema.parse(data)
 
         // Plan
         const plan = await this.plan()
@@ -267,6 +268,9 @@ export default class User {
 
         // Set country
         attackEntity.country = !attackEntity.city && countryId ? await CountryEntity.findOneBy({ id: countryId }) : null
+
+        // Set with proxies
+        attackEntity.withProxies = withProxies
 
         // Set device
         attackEntity.device = device || null
