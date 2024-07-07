@@ -8,6 +8,7 @@ import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
 import { IsNull } from "typeorm"
 import Invoice from "./Invoice"
+import Attack from "./Attack"
 import Plan from "./Plan"
 import zod from "zod"
 
@@ -222,9 +223,6 @@ export default class User {
      */
     public async createAttack(data: unknown) {
 
-        // Plan
-        const plan = await this.plan()
-
         // Schema
         const schema = zod.object({
             keywords: zod.array(zod.string().max(50)).min(1).max(20),
@@ -233,7 +231,7 @@ export default class User {
             countryId: zod.number().min(1).optional(),
             cityId: zod.number().min(1).optional(),
             device: zod.enum(["DESKTOP", "MOBILE"]).optional(),
-            searches: plan.searches ? zod.number().min(1).max(plan.searches) : zod.number().min(0)
+            searches: zod.number().min(0)
         })
 
         // Validate data
@@ -251,11 +249,11 @@ export default class User {
         // Set domains action
         attackEntity.domainsAction = domainsAction
 
-        // Set country
-        attackEntity.country = await CountryEntity.findOneBy({ id: countryId })
-
         // Set city
         attackEntity.city = await CityEntity.findOneBy({ id: cityId })
+
+        // Set country
+        attackEntity.country = !attackEntity.city ? await CountryEntity.findOneBy({ id: countryId }) : null
 
         // Set device
         attackEntity.device = device || null
@@ -272,7 +270,7 @@ export default class User {
         // Save
         await attackEntity.save()
 
-        return attackEntity
+        return new Attack(attackEntity)
     }
 }
 
