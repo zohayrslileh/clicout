@@ -21,11 +21,11 @@ export default function ({ value, onChange, isDisabled }: Props) {
         variant="bordered"
         isDisabled={isDisabled}
         placeholder={lang("All devices")}
-        selectedKeys={[value]}
-        onSelectionChange={([key]) => onChange(key.toString())}
-        startContent={icons[value]}
+        selectedKeys={[value || ""]}
+        onSelectionChange={([key]) => onChange(key.toString() || undefined)}
+        startContent={icons[value || ""]}
     >
-        <SelectItem key="ALL" startContent={<PiDevicesThin />}>
+        <SelectItem key="" startContent={<PiDevicesThin />}>
             {lang("All")}
         </SelectItem>
         <SelectItem key="DESKTOP" startContent={<CiLaptop />}>
@@ -42,9 +42,9 @@ export default function ({ value, onChange, isDisabled }: Props) {
  * 
  */
 interface Props {
-    value: string
     isDisabled?: boolean
-    onChange: (value: string) => void
+    value: string | undefined
+    onChange: (value: string | undefined) => void
 }
 
 /**

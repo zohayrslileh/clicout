@@ -1,6 +1,6 @@
 import { CiAlarmOn, CiFlag1, CiLocationOn } from "react-icons/ci"
 import { HiOutlineExternalLink } from "react-icons/hi"
-import { Button, Checkbox } from "@nextui-org/react"
+import { Button, Checkbox, Code } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
 import { IoRocketOutline } from "react-icons/io5"
 import { Lang, useLang } from "@/Tools/Language"
@@ -69,7 +69,7 @@ export default function () {
      * Device
      * 
      */
-    const [device, setDevice] = useState<string>("ALL")
+    const [device, setDevice] = useState<string | undefined>(undefined)
 
     /**
      * Searches
@@ -120,6 +120,20 @@ export default function () {
 
     }, [plan])
 
+    /**
+     * Primitive attack
+     * 
+     */
+    const primitiveAttack = {
+        keywords,
+        domains,
+        domainsAction,
+        countryId: country ? country.id : undefined,
+        cityId: city ? city.id : undefined,
+        device,
+        searches
+    }
+
     return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
         <h1 className="text-xl font-medium text-foreground-500 uppercase"><Lang>Create New Attack</Lang></h1>
@@ -162,6 +176,8 @@ export default function () {
                 <p className="text-[12px] italic text-foreground-500">{plan.searches ? `${lang("Maximum")}: ${plan.searches}` : undefined}</p>
             </div>
         </div>
+
+        <Code><pre>{JSON.stringify(primitiveAttack, undefined, 4)}</pre></Code>
 
         <Button startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
 
