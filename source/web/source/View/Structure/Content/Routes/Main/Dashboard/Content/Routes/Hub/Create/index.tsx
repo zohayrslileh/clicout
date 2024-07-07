@@ -181,7 +181,7 @@ export default function () {
         <div className="grid gap-3">
             <div className="text-foreground-500 flex justify-between">
                 <p className="flex items-center gap-1"><CiAlarmOn /><Lang>Duration</Lang></p>
-                {plan.searches && <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>to unlimited searches</Lang></p>}
+                {plan.searches ? <p><Link to="/main/upgrade" className="text-primary underline"><Lang>Upgrade</Lang></Link> <Lang>to unlimited searches</Lang></p> : undefined}
             </div>
             <div>
                 <Searches value={searches} onChange={searchesHandle} />
