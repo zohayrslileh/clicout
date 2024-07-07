@@ -1,4 +1,4 @@
-import UserAgent from "./Entities/Device"
+import UserAgent from "./Entities/UserAgent"
 import Country from "./Entities/Country"
 import UAParser from "ua-parser-js"
 import Plan from "./Entities/Plan"
