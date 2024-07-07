@@ -1,3 +1,4 @@
+import { Lang, useLang } from "@/Tools/Language"
 import { useNavigate } from "react-router-dom"
 import Subscription from "@/Core/Subscription"
 import { Button } from "@nextui-org/react"
@@ -5,7 +6,6 @@ import Appearance from "@/View/Appearance"
 import { SiTether } from "react-icons/si"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
-import { Lang } from "@/Tools/Language"
 import { Fragment } from "react"
 import Plan from "@/Core/Plan"
 import User from "@/Core/User"
@@ -19,6 +19,11 @@ import config from "@/config"
  */
 export default function ({ plan }: Props) {
 
+    /**
+     * Lang
+     * 
+     */
+    const lang = useLang()
 
     /**
      * Navigate
@@ -68,6 +73,7 @@ export default function ({ plan }: Props) {
                 </p>
                 <ul className="my-7 space-y-5" role="list">
                     <Future isAvailable={!!plan.threads} color={plan.color.hex}><Lang>Launch</Lang> {plan.threads} <Lang>Attack(s) same time</Lang></Future>
+                    <Future isAvailable={true} color={plan.color.hex}>{plan.searches ? `${plan.searches} ${lang("time(s) per attack")}` : <Lang>Unlimited searches</Lang>}</Future>
                     <Future isAvailable={plan.customizeLocation} color={plan.color.hex}><Lang>Customize location</Lang></Future>
                     <Future isAvailable={plan.customizeDevices} color={plan.color.hex}><Lang>Customize devices</Lang></Future>
                     <Future isAvailable={plan.enableProxies} color={plan.color.hex}><Lang>Enable proxies</Lang></Future>
