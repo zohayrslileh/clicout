@@ -1,3 +1,6 @@
+import Country, { PrimitiveCountry } from "./Country"
+import City, { PrimitiveCity } from "./City"
+import puppeteer from "puppeteer"
 
 /*
 |-----------------------------
@@ -21,6 +24,18 @@ export default class Attack {
     public readonly keywords: string[]
 
     /**
+     * Country
+     * 
+     */
+    public readonly country: Country | undefined
+
+    /**
+     * City
+     * 
+     */
+    public readonly city: City | undefined
+
+    /**
      * Constructor methodd
      * 
      */
@@ -31,6 +46,12 @@ export default class Attack {
 
         // Set keywords
         this.keywords = primitiveAttack.keywords
+
+        // Set country
+        this.country = new Country(primitiveAttack.country)
+
+        // Set city
+        this.city = new City(primitiveAttack.city)
     }
 
     /**
@@ -39,6 +60,12 @@ export default class Attack {
      * @returns
      */
     public async start() {
+
+        // Create browser
+        const browser = await puppeteer.launch()
+
+        // Create context
+        const context = browser.defaultBrowserContext()
 
         console.log(`Attack No ${this.id} has ben started`)
     }
@@ -63,4 +90,6 @@ export default class Attack {
 export interface PrimitiveAttack {
     id: number
     keywords: string[]
+    country: PrimitiveCountry
+    city: PrimitiveCity
 }
