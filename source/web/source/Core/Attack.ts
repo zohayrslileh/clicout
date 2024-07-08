@@ -95,6 +95,17 @@ export default class Attack {
 
         return runningController
     }
+
+    /**
+     * Stop method
+     * 
+     * @returns
+     */
+    public async stop() {
+
+        // Stop
+        await request<void>({ method: "POST", url: `/main/attack/${this.id}/stop` })
+    }
 }
 
 /*

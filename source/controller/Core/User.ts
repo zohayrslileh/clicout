@@ -318,6 +318,20 @@ export default class User {
         // Initialize attacks
         return attackEntities.map(attackEntity => new Attack(attackEntity))
     }
+
+    /**
+     * Find attack
+     * 
+     * @returns
+     */
+    public async findAttack(id: unknown) {
+
+        // Attack entity
+        const attackEntity = await AttackEntity.findOneByOrFail({ user: { id: this.id }, id: zod.number().parse(id) })
+
+        // Initialize attack
+        return new Attack(attackEntity)
+    }
 }
 
 /*

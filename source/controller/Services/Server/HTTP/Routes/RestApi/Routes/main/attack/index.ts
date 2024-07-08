@@ -1,5 +1,6 @@
 import Router from "@/Tools/HTTP/Router"
 import User from "@/Core/User"
+import single from "./single"
 
 /*
 |-----------------------------
@@ -30,6 +31,12 @@ export default Router.create<Environment>(function (attack) {
 
         return context.json(await context.var.user.runningAttacks())
     })
+
+    /**
+     * Single
+     * 
+     */
+    attack.route("/:id", single)
 })
 
 /*

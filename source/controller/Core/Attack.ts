@@ -1,3 +1,4 @@
+import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
@@ -134,6 +135,23 @@ export default class Attack {
     public safeStart() {
 
         this.start().catch(_ => undefined)
+    }
+
+    /**
+     * Stop method
+     * 
+     * @returns
+     */
+    public async stop() {
+
+        // Ettack entity
+        const attackEntity = await AttackEntity.findOneByOrFail({ id: this.id })
+
+        // Set status
+        attackEntity.status = "STOPPED"
+
+        // Save
+        await attackEntity.save()
     }
 }
 
