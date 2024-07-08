@@ -1,6 +1,6 @@
 import { PromiseWithDependencies } from "@/Tools/Promise"
+import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
-import { createContext } from "react"
 import zod from "zod"
 
 /*
@@ -75,6 +75,25 @@ export default class Attack {
 
         // Initialize attacks
         return primitiveAttacks.map(primitiveAttack => new this(primitiveAttack))
+    }
+
+    /**
+     * Running controller hook
+     * 
+     * @returns
+     */
+    public static useRunningController() {
+
+        /**
+         * Running controller
+         * 
+         */
+        const runningController = useContext(this.runningController)
+
+        // Check running controller
+        if (!runningController) throw new Error("The running controller was not provided.")
+
+        return runningController
     }
 }
 
