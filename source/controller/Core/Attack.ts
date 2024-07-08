@@ -1,6 +1,7 @@
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
+import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
 
 /*
@@ -119,6 +120,8 @@ export default class Attack {
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
         await page.goto("https://www.google.com/search?q=apple")
+
+        await sleep(500)
 
         await page.goto("https://www.google.com/")
     }
