@@ -129,6 +129,7 @@ export default class Attack {
     /**
      * Safe start method
      * 
+     * @returns
      */
     public safeStart() {
 

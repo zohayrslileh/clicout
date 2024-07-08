@@ -107,7 +107,7 @@ export default class Country {
     public async randomCity() {
 
         // City query builder
-        const cityQueryBuilder = CityEntity.createQueryBuilder()
+        const cityQueryBuilder = CityEntity.createQueryBuilder().where({ country: { id: this.id } })
 
         // City entity
         const cityEntity = await cityQueryBuilder.select().orderBy("RAND()").getOneOrFail()
