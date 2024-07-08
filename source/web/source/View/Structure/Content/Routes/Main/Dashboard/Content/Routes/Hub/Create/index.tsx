@@ -88,6 +88,12 @@ export default function () {
     const [searches, setSearches] = useState<number>(1)
 
     /**
+     * Running attacks promise
+     * 
+     */
+    const runningAttacks = Attack.useRunningController()
+
+    /**
      * Keyword validation method
      * 
      * @returns 
@@ -161,6 +167,9 @@ export default function () {
 
             // Toast success
             toast.success(lang("Attack has been created successfully"))
+
+            // Running attacks refetch
+            runningAttacks.safeExecute()
         }
 
         catch (exception) {
