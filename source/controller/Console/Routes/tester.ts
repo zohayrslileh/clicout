@@ -1,4 +1,4 @@
-import sleep from "@/Tools/Sleep"
+import City from "@/Models/Database/Entities/City"
 import puppeteer from "puppeteer"
 
 /*
@@ -10,14 +10,13 @@ import puppeteer from "puppeteer"
 */
 export default async function () {
 
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            // "--proxy-server=socks5://23.19.244.109:1080"
-        ]
-    })
+    const cityQueryBuilder = City.createQueryBuilder("city").leftJoinAndSelect("city.country", "country")
+
+    const city = await cityQueryBuilder.select().orderBy("RAND()").getOneOrFail()
+
+    console.log(city.name, city.country.name)
+
+    const browser = await puppeteer.launch({ headless: false })
 
     const context = browser.defaultBrowserContext()
 
@@ -29,39 +28,13 @@ export default async function () {
 
     await page.setUserAgent("com.google.GoogleMobile/111.0 iPhone/13.5.1 hw/iPhone10_3")
 
-    await page.setViewport({ width: 375, height: 812 })
+    await page.setViewport({ width: 375, height: 700 })
 
-    await page.setGeolocation({ latitude: -13.067464, longitude: -55.930092 })
-
-    const recorder = await page.screencast({ path: "storage/record.webm" })
+    await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
     await page.goto("https://www.google.com/search?q=apple")
 
-    await sleep(1000)
-
     await page.goto("https://www.google.com/")
-
-    const textarea = await page.$("textarea")
-
-    if (!textarea) throw new Error
-
-    await sleep(2000)
-
-    await textarea.focus()
-
-    await textarea.type("Free vps")
-
-    await textarea.press("Enter")
-
-    await sleep(3000)
-
-    await page.goto("https://whatismyipaddress.com/ip-lookup")
-
-    await sleep(3000)
-
-    await recorder.stop()
-
-    await browser.close()
 
     console.log("The test completed successfully 🧪 ")
 }
