@@ -11,6 +11,7 @@ import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import Country from "@/Core/Country"
 import Countries from "./Countries"
+import toast from "react-hot-toast"
 import Attack from "@/Core/Attack"
 import Searches from "./Searches"
 import Devices from "./Devices"
@@ -199,5 +200,6 @@ export default function () {
 
         <Button onClick={attackPromise.safeExecute} isLoading={attackPromise.pending} startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
 
+        <Button onClick={() => toast("Here is your toast.")}>Toast</Button>
     </Card>
 }

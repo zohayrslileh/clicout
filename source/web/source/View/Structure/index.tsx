@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom"
+import { Toaster } from "react-hot-toast"
 import Content from "./Content"
 import Footer from "./Footer"
 
@@ -22,6 +23,9 @@ export default function () {
 
             {/** Footer */}
             <Footer />
+
+            {/** Toaster */}
+            <Toaster />
 
         </div>
 
