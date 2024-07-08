@@ -7,7 +7,7 @@ import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
 import CoreException from "./Exception"
-import { In, IsNull } from "typeorm"
+import { IsNull } from "typeorm"
 import Invoice from "./Invoice"
 import Attack from "./Attack"
 import Plan from "./Plan"
@@ -242,11 +242,11 @@ export default class User {
         // Plan
         const plan = await this.plan()
 
-        // Active attacks
-        const activeAttacks = await this.activeAttacks()
+        // Running attacks
+        const runningAttacks = await this.runningAttacks()
 
         // Check threads
-        if (plan.threads <= activeAttacks.length) throw new CoreException("Upgrade to launch more attacks")
+        if (plan.threads <= runningAttacks.length) throw new CoreException("Upgrade to launch more attacks")
 
         // Check customize location
         if (!plan.customizeLocation && (countryId || cityId)) throw new CoreException("Upgrade to customize location")
@@ -288,7 +288,7 @@ export default class User {
         attackEntity.searches = searches
 
         // Set status
-        attackEntity.status = "CREATED"
+        attackEntity.status = "RUNNING"
 
         // Set user
         attackEntity.user = await UserEntity.findOneByOrFail({ id: this.id })
@@ -300,14 +300,14 @@ export default class User {
     }
 
     /**
-     * Active attacks
+     * Running attacks
      * 
      * @returns
      */
-    public async activeAttacks() {
+    public async runningAttacks() {
 
         // Attack entities
-        const attackEntities = await AttackEntity.findBy({ user: { id: this.id }, status: In(["CREATED", "RUNNING"]) })
+        const attackEntities = await AttackEntity.findBy({ user: { id: this.id }, status: "RUNNING" })
 
         // Initialize attacks
         return attackEntities.map(attackEntity => new Attack(attackEntity))

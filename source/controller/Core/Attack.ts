@@ -15,6 +15,12 @@ export default class Attack {
     public readonly id: number
 
     /**
+     * Keywords
+     * 
+     */
+    public readonly keywords: string[]
+
+    /**
      * Constructor methodd
      * 
      */
@@ -22,6 +28,9 @@ export default class Attack {
 
         // Set id
         this.id = primitiveAttack.id
+
+        // Set keywords
+        this.keywords = primitiveAttack.keywords
     }
 }
 
@@ -34,4 +43,5 @@ export default class Attack {
 */
 export interface PrimitiveAttack {
     id: number
+    keywords: string[]
 }

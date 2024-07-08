@@ -75,7 +75,7 @@ export default class Attack extends BaseEntity {
      * 
      */
     @Column({ type: "varchar", nullable: false })
-    declare public status: "CREATED" | "RUNNING" | "STOPPED"
+    declare public status: "RUNNING" | "STOPPED"
 
     /**
      * User
