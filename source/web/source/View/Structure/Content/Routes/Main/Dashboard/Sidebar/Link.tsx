@@ -20,7 +20,7 @@ export default function ({ path, icon, title, active, news }: Props) {
         <div className="grid grid-cols-[auto_1fr_auto] items-center w-full">
             <Icon className="text-2xl" />
             <span className="mx-2 text-sm font-medium">{title}</span>
-            {typeof news === "number" ? <span className="bg-success-300 text-foreground text-[11px] font-medium bg-opacity-70 rounded-full px-[10px] py-[1px]">{news}</span> : news}
+            {typeof news === "number" ? <span className="bg-success-300 text-foreground text-[11px] font-medium bg-opacity-70 rounded-full w-[21px] h-[21px] grid place-content-center place-items-center">{news}</span> : news}
         </div>
     </Button>
 }
