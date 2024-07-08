@@ -74,7 +74,7 @@ export default class Attack extends BaseEntity {
      * Status
      * 
      */
-    @Column({ type: "varchar", nullable: false })
+    @Column({ type: "enum", enum: ["RUNNING", "STOPPED"], nullable: false })
     declare public status: "RUNNING" | "STOPPED"
 
     /**
