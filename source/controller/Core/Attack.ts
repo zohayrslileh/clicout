@@ -32,6 +32,25 @@ export default class Attack {
         // Set keywords
         this.keywords = primitiveAttack.keywords
     }
+
+    /**
+     * Start method
+     * 
+     * @returns
+     */
+    public async start() {
+
+        console.log(`Attack No ${this.id} has ben started`)
+    }
+
+    /**
+     * Safe start method
+     * 
+     */
+    public safeStart() {
+
+        this.start().catch(_ => undefined)
+    }
 }
 
 /*

@@ -296,7 +296,13 @@ export default class User {
         // Save
         await attackEntity.save()
 
-        return new Attack(attackEntity)
+        // Attck
+        const attack = new Attack(attackEntity)
+
+        // Start
+        attack.safeStart()
+
+        return attack
     }
 
     /**
