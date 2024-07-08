@@ -55,17 +55,39 @@ export default class Attack {
     }
 
     /**
+     * Generate location method
+     * 
+     * @returns
+     */
+    private async generateLocation() {
+
+        return this.city || (this.country ? await this.country.randomCity() : await (await Country.random()).randomCity())
+    }
+
+    /**
      * Start method
      * 
      * @returns
      */
-    public async start() {
+    private async start() {
+
+        // Generate location
+        const city = await this.generateLocation()
 
         // Create browser
         const browser = await puppeteer.launch()
 
         // Create context
         const context = browser.defaultBrowserContext()
+
+        // Set geolocation permissions 
+        await context.overridePermissions("https://www.google.com", ["geolocation"])
+
+        // Create new page
+        const page = await browser.newPage()
+
+        // Disable timeout
+        page.setDefaultTimeout(0)
 
         console.log(`Attack No ${this.id} has ben started`)
     }

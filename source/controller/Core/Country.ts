@@ -98,6 +98,38 @@ export default class Country {
         // Initialize cities
         return primitiveCities.map(primitiveCity => new City(primitiveCity))
     }
+
+    /**
+     * Random city method
+     * 
+     * @return
+     */
+    public async randomCity() {
+
+        // City query builder
+        const cityQueryBuilder = CityEntity.createQueryBuilder()
+
+        // City entity
+        const cityEntity = await cityQueryBuilder.select().orderBy("RAND()").getOneOrFail()
+
+        return new City(cityEntity)
+    }
+
+    /**
+     * Random method
+     * 
+     * @return
+     */
+    public static async random() {
+
+        // Country query builder
+        const countryQueryBuilder = CountryEntity.createQueryBuilder()
+
+        // Country entity
+        const countryEntity = await countryQueryBuilder.select().orderBy("RAND()").getOneOrFail()
+
+        return new this(countryEntity)
+    }
 }
 
 /*
