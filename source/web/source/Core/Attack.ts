@@ -1,4 +1,6 @@
+import { PromiseWithDependencies } from "@/Tools/Promise"
 import request from "@/Models/Server/Request"
+import { createContext } from "react"
 import zod from "zod"
 
 /*
@@ -9,6 +11,12 @@ import zod from "zod"
 | 
 */
 export default class Attack {
+
+    /**
+     * Running controller
+     * 
+     */
+    public static readonly runningController = createContext<PromiseWithDependencies<Attack[]> | undefined>(undefined)
 
     /**
      * Id
@@ -53,6 +61,20 @@ export default class Attack {
         })
 
         return new this(primitiveAttack)
+    }
+
+    /**
+     * Running method
+     * 
+     * @returns
+     */
+    public static async running() {
+
+        // Ask primitive attacks
+        const primitiveAttacks = await request<PrimitiveAttack[]>({ url: "/main/attack/running" })
+
+        // Initialize attacks
+        return primitiveAttacks.map(primitiveAttack => new this(primitiveAttack))
     }
 }
 

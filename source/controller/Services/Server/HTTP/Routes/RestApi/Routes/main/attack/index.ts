@@ -21,6 +21,15 @@ export default Router.create<Environment>(function (attack) {
 
         return context.json(await context.var.user.createAttack(data))
     })
+
+    /**
+     * Running
+     * 
+     */
+    attack.get("/running", async function (context) {
+
+        return context.json(await context.var.user.runningAttacks())
+    })
 })
 
 /*
