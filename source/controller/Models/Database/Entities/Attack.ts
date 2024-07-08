@@ -61,7 +61,7 @@ export default class Attack extends BaseEntity {
      * 
      */
     @Column({ type: "varchar", nullable: true })
-    declare public device: "DESKTOP" | "MOBILE" | null
+    declare public device: string | null
 
     /**
      * Searches

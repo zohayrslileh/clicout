@@ -1,5 +1,6 @@
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
+import UserAgent from "./UserAgent"
 import puppeteer from "puppeteer"
 
 /*
@@ -36,6 +37,12 @@ export default class Attack {
     public readonly city: City | undefined
 
     /**
+     * Device
+     * 
+     */
+    public readonly device: string | undefined
+
+    /**
      * Constructor methodd
      * 
      */
@@ -48,10 +55,13 @@ export default class Attack {
         this.keywords = primitiveAttack.keywords
 
         // Set country
-        this.country = new Country(primitiveAttack.country)
+        this.country = primitiveAttack.country ? new Country(primitiveAttack.country) : undefined
 
         // Set city
-        this.city = new City(primitiveAttack.city)
+        this.city = primitiveAttack.city ? new City(primitiveAttack.city) : undefined
+
+        // Set device
+        this.device = primitiveAttack.device || undefined
     }
 
     /**
@@ -65,17 +75,24 @@ export default class Attack {
     }
 
     /**
+     * Generate user agent method
+     * 
+     * @returns
+     */
+    private async generateUserAgent() {
+
+        return await UserAgent.random(this.device)
+    }
+
+    /**
      * Start method
      * 
      * @returns
      */
     private async start() {
 
-        // Generate location
-        const city = await this.generateLocation()
-
         // Create browser
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({ headless: false })
 
         // Create context
         const context = browser.defaultBrowserContext()
@@ -89,7 +106,21 @@ export default class Attack {
         // Disable timeout
         page.setDefaultTimeout(0)
 
-        console.log(`Attack No ${this.id} has ben started`)
+        // Generate user agent
+        const userAgent = await this.generateUserAgent()
+
+        // Set user agent
+        await page.setUserAgent(userAgent.getUA())
+
+        // Generate location
+        const city = await this.generateLocation()
+
+        // Set geolocation
+        await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
+
+        await page.goto("https://www.google.com/search?q=apple")
+
+        await page.goto("https://www.google.com/")
     }
 
     /**
@@ -112,6 +143,7 @@ export default class Attack {
 export interface PrimitiveAttack {
     id: number
     keywords: string[]
-    country: PrimitiveCountry
-    city: PrimitiveCity
+    country: PrimitiveCountry | null
+    city: PrimitiveCity | null
+    device: string | null
 }
