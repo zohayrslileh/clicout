@@ -4,6 +4,7 @@ import { Button, Checkbox } from "@nextui-org/react"
 import TagsInput from "@/View/Components/TagsInput"
 import { IoRocketOutline } from "react-icons/io5"
 import { Link, Navigate } from "react-router-dom"
+import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
 import { PiDevicesThin } from "react-icons/pi"
 import { useCallback, useState } from "react"
@@ -133,16 +134,42 @@ export default function () {
      * Attack promise
      * 
      */
-    const attackPromise = usePromise(async () => await Attack.create({
-        keywords,
-        domains,
-        domainsAction,
-        countryId: country ? country.id : undefined,
-        cityId: city ? city.id : undefined,
-        withProxies,
-        device,
-        searches
-    }))
+    const attackPromise = usePromise(async function () {
+
+        // Country id
+        const countryId = country ? country.id : undefined
+
+        // City id
+        const cityId = city ? city.id : undefined
+
+        // Ask create
+        await Attack.create({ keywords, domains, domainsAction, countryId, cityId, withProxies, device, searches })
+    })
+
+    /**
+     * Launch attack method
+     * 
+     * @returns
+     */
+    const launchAttack = useCallback(async function () {
+
+
+        try {
+
+            // Execute attack promise
+            await attackPromise.execute()
+
+            // Toast success
+            toast.success(lang("Attack has been created successfully"))
+        }
+
+        catch (exception) {
+
+            // Toast error
+            toast.error(compiler(exception).message)
+        }
+
+    }, [attackPromise.execute])
 
     // Solve status
     if (attackPromise.solve) return <Navigate to=".." />
@@ -198,8 +225,7 @@ export default function () {
             </div>
         </div>
 
-        <Button onClick={attackPromise.safeExecute} isLoading={attackPromise.pending} startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
+        <Button onClick={launchAttack} isLoading={attackPromise.pending} startContent={<IoRocketOutline />} color="primary" className="justify-self-end"><Lang>Launch Attack</Lang></Button>
 
-        <Button onClick={() => toast("Here is your toast.")}>Toast</Button>
     </Card>
 }
