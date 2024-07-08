@@ -35,4 +35,6 @@ module.exports = async function () {
     |
     */
     await application.execute(Routes)
+
+    console.log("Done.") // Done
 }
