@@ -6,6 +6,7 @@ import { Lang } from "@/Tools/Language"
 import { Link } from "react-router-dom"
 import Attack from "@/Core/Attack"
 import Plan from "@/Core/Plan"
+import Row from "./Row"
 
 /**
  * Record
@@ -33,6 +34,8 @@ export default function () {
     if (runningAttacks.exception) return <Throw exception={runningAttacks.exception.current} />
 
     return <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+        {/** Create */}
         <Link to="create" className="contents">
             <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid place-content-center place-items-center gap-5">
                 <CiFlag1 className="text-3xl text-foreground-500" />
@@ -43,5 +46,9 @@ export default function () {
                 </div>
             </Card>
         </Link>
+
+        {/** Attacks */}
+        {runningAttacks.solve.map(attack => <Row key={attack.id} attack={attack} />)}
+
     </div>
 }
