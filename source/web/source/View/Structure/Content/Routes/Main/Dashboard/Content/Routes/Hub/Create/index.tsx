@@ -159,7 +159,6 @@ export default function () {
      */
     const launchAttack = useCallback(async function () {
 
-
         try {
 
             // Execute attack promise

@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom"
-import { Toaster } from "react-hot-toast"
 import Content from "./Content"
+import Toaster from "./Toaster"
 import Footer from "./Footer"
 
 /**
