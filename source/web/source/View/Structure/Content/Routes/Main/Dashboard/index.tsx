@@ -21,6 +21,18 @@ export default function () {
     const user = User.useContext()
 
     /**
+     * Namespace
+     * 
+     */
+    const namespace = User.useNamespace()
+
+    /**
+     * Connected
+     * 
+     */
+    const connected = namespace.useConnected()
+
+    /**
      * Plan promise
      * 
      */
@@ -33,7 +45,7 @@ export default function () {
     const runningAttacks = usePromise(async () => await Attack.running(), [])
 
     // Pending status
-    if (plan.pending) return <Throw exception={new PendingException} />
+    if (plan.pending || !connected) return <Throw exception={new PendingException} />
 
     // Exception status
     if (plan.exception) return <Throw exception={plan.exception.current} />

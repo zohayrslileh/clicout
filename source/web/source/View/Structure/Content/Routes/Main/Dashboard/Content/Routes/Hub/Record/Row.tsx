@@ -7,6 +7,7 @@ import usePromise from "@/Tools/Promise"
 import { useCallback } from "react"
 import toast from "react-hot-toast"
 import Attack from "@/Core/Attack"
+import User from "@/Core/User"
 
 /**
  * Row
@@ -20,6 +21,18 @@ export default function ({ attack }: Props) {
      * 
      */
     const lang = useLang()
+
+    /**
+     * Namespace
+     * 
+     */
+    const namespace = User.useNamespace()
+
+    /**
+     * Status
+     * 
+     */
+    const status = namespace.useState<string>("status")
 
     /**
      * Running attacks promise
@@ -62,7 +75,7 @@ export default function ({ attack }: Props) {
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
-        <div></div>
+        <div>Last status: {status}</div>
 
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>

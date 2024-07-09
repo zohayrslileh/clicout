@@ -4,6 +4,7 @@ import Authorization from "@/Models/Authorization"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
 import Plan, { PrimitivePlan } from "./Plan"
+import manager from "@/Models/Server/Socket"
 import zod from "zod"
 
 /*
@@ -220,6 +221,16 @@ export default class User {
         })
 
         return typeof primitiveSubscription === "string" ? primitiveSubscription : new Subscription(primitiveSubscription)
+    }
+
+    /**
+     * Namespace hook
+     * 
+     * @returns
+     */
+    public static useNamespace() {
+
+        return manager.useNamespace("/main")
     }
 }
 
