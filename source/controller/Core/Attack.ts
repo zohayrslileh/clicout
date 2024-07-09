@@ -45,6 +45,12 @@ export default class Attack {
     public readonly device: string | undefined
 
     /**
+     * Searches
+     * 
+     */
+    public readonly searches: number
+
+    /**
      * Constructor methodd
      * 
      */
@@ -64,6 +70,9 @@ export default class Attack {
 
         // Set device
         this.device = primitiveAttack.device || undefined
+
+        // Set searches
+        this.searches = primitiveAttack.searches
     }
 
     /**
@@ -168,4 +177,5 @@ export interface PrimitiveAttack {
     country: PrimitiveCountry | null
     city: PrimitiveCity | null
     device: string | null
+    searches: number
 }

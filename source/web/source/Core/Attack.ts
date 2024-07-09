@@ -25,6 +25,12 @@ export default class Attack {
     public readonly id: number
 
     /**
+     * Searches
+     * 
+     */
+    public readonly searches: number
+
+    /**
      * Constructor methodd
      * 
      */
@@ -32,6 +38,9 @@ export default class Attack {
 
         // Set id
         this.id = primitiveAttack.id
+
+        // Set searches
+        this.searches = primitiveAttack.searches
     }
 
     /**
@@ -117,4 +126,5 @@ export default class Attack {
 */
 export interface PrimitiveAttack {
     id: number
+    searches: number
 }
