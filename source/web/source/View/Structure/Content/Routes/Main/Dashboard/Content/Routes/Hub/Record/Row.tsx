@@ -29,10 +29,13 @@ export default function ({ attack }: Props) {
     const namespace = User.useNamespace()
 
     /**
-     * Status
+     * Record chunk
      * 
      */
-    const status = namespace.useState<string>("status")
+    namespace.useOn(`${attack.id}:record-chunk`, function (chunk) {
+
+        console.log(chunk)
+    })
 
     /**
      * Running attacks promise
