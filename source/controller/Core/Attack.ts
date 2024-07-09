@@ -141,7 +141,7 @@ export default class Attack {
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On data
-        recorder.on("data", chalk => Broadcast.emit("/attack/record-chalk", chalk))
+        recorder.on("data", chalk => Broadcast.emit("record-chalk", chalk))
 
         await page.goto("https://www.google.com/search?q=apple")
 
