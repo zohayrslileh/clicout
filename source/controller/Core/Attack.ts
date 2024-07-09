@@ -1,7 +1,6 @@
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
-import { Namespace } from "socket.io"
 import UserAgent from "./UserAgent"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
@@ -101,7 +100,7 @@ export default class Attack {
      * 
      * @returns
      */
-    private async start(broadcast: Namespace) {
+    private async start() {
 
         // Create browser
         const browser = await puppeteer.launch({ headless: false })
@@ -145,9 +144,9 @@ export default class Attack {
      * 
      * @returns
      */
-    public safeStart(broadcast: Namespace) {
+    public safeStart() {
 
-        this.start(broadcast).catch(_ => undefined)
+        this.start().catch(_ => undefined)
     }
 
     /**
