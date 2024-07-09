@@ -110,7 +110,7 @@ export default class Country {
         const cityQueryBuilder = CityEntity.createQueryBuilder().where({ country: { id: this.id } })
 
         // City entity
-        const cityEntity = await cityQueryBuilder.select().orderBy("RAND()").getOneOrFail()
+        const cityEntity = await cityQueryBuilder.select().orderBy("RANDOM()").getOneOrFail()
 
         return new City(cityEntity)
     }
@@ -126,7 +126,7 @@ export default class Country {
         const countryQueryBuilder = CountryEntity.createQueryBuilder()
 
         // Country entity
-        const countryEntity = await countryQueryBuilder.select().orderBy("RAND()").getOneOrFail()
+        const countryEntity = await countryQueryBuilder.select().orderBy("RANDOM()").getOneOrFail()
 
         return new this(countryEntity)
     }

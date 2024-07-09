@@ -68,7 +68,7 @@ export default class UserAgent extends UAParser {
         const userAgentQueryBuilder = UserAgentEntity.createQueryBuilder().where({ device })
 
         // UserAgent entity
-        const userAgentEntity = await userAgentQueryBuilder.select().orderBy("RAND()").getOneOrFail()
+        const userAgentEntity = await userAgentQueryBuilder.select().orderBy("RANDOM()").getOneOrFail()
 
         return new this(userAgentEntity)
     }

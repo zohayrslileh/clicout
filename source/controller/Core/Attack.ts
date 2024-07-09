@@ -160,7 +160,7 @@ export default class Attack extends EventEmitter {
      */
     public safeStart() {
 
-        this.start().catch(_ => undefined)
+        this.start().catch(_ => console.log(_))
     }
 
     /**
