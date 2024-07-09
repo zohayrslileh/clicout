@@ -143,9 +143,6 @@ export default class Attack extends EventEmitter {
         // Create recorder
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
-        // Pause recorder
-        recorder.pause()
-
         // On data
         recorder.on("data", chunk => this.emit("record-chunk", chunk))
 
@@ -154,9 +151,6 @@ export default class Attack extends EventEmitter {
         await sleep(1000)
 
         await page.goto("https://www.google.com/")
-
-        // Resume recorder
-        recorder.resume()
     }
 
     /**

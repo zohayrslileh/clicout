@@ -7,7 +7,7 @@ import usePromise from "@/Tools/Promise"
 import { useCallback } from "react"
 import toast from "react-hot-toast"
 import Attack from "@/Core/Attack"
-import User from "@/Core/User"
+import Video from "./Video"
 
 /**
  * Row
@@ -21,18 +21,6 @@ export default function ({ attack }: Props) {
      * 
      */
     const lang = useLang()
-
-    /**
-     * Namespace
-     * 
-     */
-    const namespace = User.useNamespace()
-
-    /**
-     * Chunks
-     * 
-     */
-    const chunks = namespace.useStore(`${attack.id}:record-chunk`, 100)
 
     /**
      * Running attacks promise
@@ -75,7 +63,9 @@ export default function ({ attack }: Props) {
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
-        <div>Chunks: {chunks.length}</div>
+        <div>
+            <Video attack={attack} />
+        </div>
 
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
