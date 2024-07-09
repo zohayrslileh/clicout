@@ -139,9 +139,11 @@ export default class Attack extends EventEmitter {
 
         await page.goto("https://www.google.com/search?q=apple")
 
-        await sleep(500)
+        await sleep(1000)
 
         await page.goto("https://www.google.com/")
+
+        await sleep(1000)
 
         // Create recorder
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
