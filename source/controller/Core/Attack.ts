@@ -3,6 +3,7 @@ import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
 import { randomUUID } from "crypto"
+import Broadcast from "./Broadcast"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
 
@@ -52,7 +53,7 @@ export default class Attack {
     public readonly searches: number
 
     /**
-     * Constructor methodd
+     * Constructor method
      * 
      */
     public constructor(primitiveAttack: PrimitiveAttack) {
@@ -140,7 +141,7 @@ export default class Attack {
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On data
-        recorder.on("data", _ => undefined)
+        recorder.on("data", chalk => Broadcast.emit("/attack/record-chalk", chalk))
 
         await page.goto("https://www.google.com/search?q=apple")
 
