@@ -4,6 +4,7 @@ import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
+import EventEmitter from "events"
 
 /*
 |-----------------------------
@@ -12,7 +13,7 @@ import puppeteer from "puppeteer"
 |
 | 
 */
-export default class Attack {
+export default class Attack extends EventEmitter {
 
     /**
      * Id
@@ -55,6 +56,9 @@ export default class Attack {
      * 
      */
     public constructor(primitiveAttack: PrimitiveAttack) {
+
+        // Call parent constructor
+        super()
 
         // Set id
         this.id = primitiveAttack.id
