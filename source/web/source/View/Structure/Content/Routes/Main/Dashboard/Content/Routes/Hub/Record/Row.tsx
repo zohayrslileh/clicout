@@ -29,13 +29,10 @@ export default function ({ attack }: Props) {
     const namespace = User.useNamespace()
 
     /**
-     * Record chunk
+     * Chunks
      * 
      */
-    namespace.useOn(`${attack.id}:record-chunk`, function (chunk) {
-
-        console.log(chunk)
-    })
+    const chunks = namespace.useStore(`${attack.id}:record-chunk`, 100)
 
     /**
      * Running attacks promise
@@ -78,7 +75,7 @@ export default function ({ attack }: Props) {
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
-        <div>Last status: {status}</div>
+        <div>Chunks: {chunks.length}</div>
 
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
