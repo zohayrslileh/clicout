@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useRef } from "react"
 import Attack from "@/Core/Attack"
 import User from "@/Core/User"
 
@@ -16,22 +16,16 @@ export default function ({ attack }: Props) {
     const namespace = User.useNamespace()
 
     /**
-     * Video
+     * Container
      * 
      */
-    const video = useRef<HTMLVideoElement>(undefined!)
+    const container = useRef<HTMLDivElement>(undefined!)
 
     /**
      * Chunks
      * 
      */
     const chunks = useRef<ArrayBuffer[]>([])
-
-    /**
-     * Current time 
-     * 
-     */
-    const currentTime = useRef<number>(0)
 
     /**
      * On record chunk
@@ -42,8 +36,8 @@ export default function ({ attack }: Props) {
         // Push new chunk
         chunks.current.push(chunk)
 
-        // Play if not played
-        if (video.current.paused || video.current.ended) await play()
+        // Play
+        await play()
     })
 
     /**
@@ -52,40 +46,36 @@ export default function ({ attack }: Props) {
      */
     const play = useCallback(async function () {
 
+        // Create video
+        const video = document.createElement("video")
+
         // Create blob
         const blob = new Blob(chunks.current, { type: "video/webm" })
 
         // Set video source
-        video.current.src = URL.createObjectURL(blob)
+        video.src = URL.createObjectURL(blob)
 
         // Set current time
-        video.current.currentTime = currentTime.current + 5
+        video.currentTime = 999999999999
+
+        // Set position
+        video.style.position = "absolute"
 
         // Play
-        await video.current.play()
+        await video.play()
+
+        // Append to child
+        container.current.appendChild(video)
+
+        // Get videos
+        const videos = container.current.querySelectorAll("video")
+
+        // Remove first one
+        if (videos.length >= 3) videos[0].remove()
 
     }, [])
 
-    /**
-     * Effect
-     * 
-     */
-    useEffect(function () {
-
-        // On ended
-        video.current.onended = function () {
-
-            // Revoke source
-            URL.revokeObjectURL(video.current.src)
-
-            // Set current time
-            currentTime.current = video.current.currentTime
-        }
-
-    }, [])
-
-    return <div>
-        <video ref={video} />
+    return <div ref={container} className="relative">
     </div>
 }
 
