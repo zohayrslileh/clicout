@@ -49,7 +49,7 @@ export default function ({ attack }: Props) {
             toast.success(lang("Attack has been stopped successfully"))
 
             // Running attacks refetch
-            runningAttacks.safeExecute()
+            runningAttacks.dispatch(attacks => attacks.filter(attack => attack !== attack))
         }
 
         catch (exception) {
@@ -58,7 +58,7 @@ export default function ({ attack }: Props) {
             toast.error(compiler(exception).message)
         }
 
-    }, [stopPromise.execute])
+    }, [stopPromise.execute, attack])
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid place-content-center place-items-center gap-5">
 

@@ -149,7 +149,7 @@ export default function () {
         const cityId = city ? city.id : undefined
 
         // Ask create
-        await Attack.create({ keywords, domains, domainsAction, countryId, cityId, withProxies, device, searches })
+        return await Attack.create({ keywords, domains, domainsAction, countryId, cityId, withProxies, device, searches })
     })
 
     /**
@@ -162,13 +162,13 @@ export default function () {
         try {
 
             // Execute attack promise
-            await attackPromise.execute()
+            const attack = await attackPromise.execute()
 
             // Toast success
             toast.success(lang("Attack has been created successfully"))
 
             // Running attacks refetch
-            runningAttacks.safeExecute()
+            runningAttacks.dispatch(attacks => [...attacks, attack])
         }
 
         catch (exception) {
