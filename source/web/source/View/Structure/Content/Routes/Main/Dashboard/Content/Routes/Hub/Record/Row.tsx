@@ -68,7 +68,7 @@ export default function ({ attack }: Props) {
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
                 <p className="text-xl leading-none font-medium">1</p>
-                <p className="text-[12px]">/ ${attack.searches || lang("Infinity")} <Lang>Searches</Lang></p>
+                <p className="text-[12px]">/ {attack.searches || lang("Infinity")} <Lang>Searches</Lang></p>
             </div>
         </div>
 
