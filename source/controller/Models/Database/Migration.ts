@@ -121,6 +121,12 @@ export default async function () {
             // Set device
             userAgent.device = device.type ? device.type.toUpperCase() : "DESKTOP"
 
+            // Set width
+            userAgent.width = userAgent.device === "DESKTOP" ? 1536 : 375
+
+            // Set height
+            userAgent.height = userAgent.device === "DESKTOP" ? 730 : 812
+
             // Save
             await userAgent.save()
 
