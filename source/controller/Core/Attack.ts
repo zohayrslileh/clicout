@@ -108,7 +108,10 @@ export default class Attack extends EventEmitter {
     private async start() {
 
         // Create browser
-        const browser = await puppeteer.launch({ headless: false })
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        })
 
         // Create context
         const context = browser.defaultBrowserContext()
@@ -140,10 +143,11 @@ export default class Attack extends EventEmitter {
         // Create recorder
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
+        // Pause recorder
+        recorder.pause()
+
         // On data
         recorder.on("data", chunk => this.emit("record-chunk", chunk))
-
-        recorder.pause()
 
         await page.goto("https://www.google.com/search?q=apple")
 
@@ -151,9 +155,8 @@ export default class Attack extends EventEmitter {
 
         await page.goto("https://www.google.com/")
 
+        // Resume recorder
         recorder.resume()
-
-        await sleep(1000)
     }
 
     /**
