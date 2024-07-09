@@ -137,19 +137,23 @@ export default class Attack extends EventEmitter {
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
+        // Create recorder
+        const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
+
+        // On data
+        recorder.on("data", chunk => this.emit("record-chunk", chunk))
+
+        recorder.pause()
+
         await page.goto("https://www.google.com/search?q=apple")
 
         await sleep(1000)
 
         await page.goto("https://www.google.com/")
 
+        recorder.resume()
+
         await sleep(1000)
-
-        // Create recorder
-        const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
-
-        // On data
-        recorder.on("data", chunk => this.emit("record-chunk", chunk))
     }
 
     /**
