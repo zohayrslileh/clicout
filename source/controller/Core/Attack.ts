@@ -147,7 +147,7 @@ export default class Attack extends EventEmitter {
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On data
-        recorder.once("data", chunk => this.emit("record-chunk", chunk))
+        recorder.on("data", chunk => this.emit("record-chunk", chunk))
     }
 
     /**
