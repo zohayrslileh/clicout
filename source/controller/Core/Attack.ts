@@ -123,6 +123,9 @@ export default class Attack {
         // Set user agent
         await page.setUserAgent(userAgent.getUA())
 
+        // Set view port
+        await page.setViewport({ width: userAgent.width, height: userAgent.height })
+
         // Generate location
         const city = await this.generateLocation()
 

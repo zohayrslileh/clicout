@@ -24,4 +24,18 @@ export default class UserAgent extends BaseEntity {
      */
     @Column({ type: "varchar", nullable: false })
     declare public device: string
+
+    /**
+     * Width
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public width: number
+
+    /**
+     * Height
+     * 
+     */
+    @Column({ type: "float", nullable: false })
+    declare public height: number
 }

@@ -24,6 +24,18 @@ export default class UserAgent extends UAParser {
     public readonly device: string
 
     /**
+     * Width
+     * 
+     */
+    public readonly width: number
+
+    /**
+     * Height
+     * 
+     */
+    public readonly height: number
+
+    /**
      * Constructor methodd
      * 
      */
@@ -37,6 +49,12 @@ export default class UserAgent extends UAParser {
 
         // Set device
         this.device = primitiveUserAgent.device
+
+        // Set width
+        this.width = primitiveUserAgent.width
+
+        // Set height
+        this.height = primitiveUserAgent.height
     }
 
     /**
@@ -67,4 +85,6 @@ export interface PrimitiveUserAgent {
     id: number
     value: string
     device: string
+    width: number
+    height: number
 }
