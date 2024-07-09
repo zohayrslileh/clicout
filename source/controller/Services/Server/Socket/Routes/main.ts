@@ -10,9 +10,6 @@ import User from "@/Core/User"
 */
 export default new Router(async function (main) {
 
-    // Set namespace
-    User.namespace = main.namespace
-
     // On connection
     main.onConnection(async function (client) {
 
