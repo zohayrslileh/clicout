@@ -1,7 +1,7 @@
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react"
 import { Lang, useLang } from "@/Tools/Language"
 import compiler from "@/View/Exception/compiler"
-import { CiMenuKebab } from "react-icons/ci"
+import { CiStopwatch } from "react-icons/ci"
+import { Button } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import { useCallback } from "react"
@@ -49,7 +49,7 @@ export default function ({ attack }: Props) {
             toast.success(lang("Attack has been stopped successfully"))
 
             // Running attacks refetch
-            runningAttacks.dispatch(attacks => attacks.filter(attack => attack !== attack))
+            runningAttacks.dispatch(attacks => attacks.filter(item => item !== attack))
         }
 
         catch (exception) {
@@ -60,25 +60,18 @@ export default function ({ attack }: Props) {
 
     }, [stopPromise.execute, attack])
 
-    return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid place-content-center place-items-center gap-5">
+    return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
-        <div className="absolute right-5 top-5">
-            <Dropdown>
-                <DropdownTrigger>
-                    <Button variant="light" isIconOnly className="rounded-full"><CiMenuKebab /></Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Static Actions">
-                    <DropdownItem onClick={stopAttack} className="text-danger" color="danger">
-                        <Lang>Stop attack</Lang>
-                    </DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
+        <div></div>
+
+        <div className="flex justify-between">
+            <Button onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
+            <div className="flex items-end gap-1 text-success-400">
+                <p className="text-xl leading-none font-medium">1</p>
+                <p className="text-[12px]">/ 5 <Lang>Searches</Lang></p>
+            </div>
         </div>
 
-        <div className="absolute right-5 bottom-5 flex items-end gap-1 text-success-400">
-            <p className="text-xl leading-none font-medium">1</p>
-            <p className="text-[12px]">/ 5 <Lang>Searches</Lang></p>
-        </div>
     </Card>
 }
 
