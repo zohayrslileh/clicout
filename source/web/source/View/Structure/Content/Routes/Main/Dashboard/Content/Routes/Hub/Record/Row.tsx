@@ -63,7 +63,8 @@ export default function ({ attack }: Props) {
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
-        <div>
+        <div className="grid gap-5">
+            <Video attack={attack} />
             <Video attack={attack} />
         </div>
 

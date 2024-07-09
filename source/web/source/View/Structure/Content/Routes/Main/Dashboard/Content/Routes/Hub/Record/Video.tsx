@@ -1,6 +1,7 @@
 import { useCallback, useRef } from "react"
 import Attack from "@/Core/Attack"
 import User from "@/Core/User"
+import styled from "@emotion/styled"
 
 /**
  * Video
@@ -58,9 +59,6 @@ export default function ({ attack }: Props) {
         // Set current time
         video.currentTime = 999999999999
 
-        // Set position
-        video.style.position = "absolute"
-
         // Play
         await video.play()
 
@@ -75,7 +73,8 @@ export default function ({ attack }: Props) {
 
     }, [])
 
-    return <div ref={container} className="relative">
+    return <div className="p-5 bg-green-500">
+        <Container ref={container} />
     </div>
 }
 
@@ -86,3 +85,19 @@ export default function ({ attack }: Props) {
 interface Props {
     attack: Attack
 }
+
+/**
+ * Container
+ * 
+ */
+const Container = styled.div`
+    position: relative;
+
+    > video {
+        position: absolute;
+
+        &:last-child {
+            position: relative;
+        }
+    }
+`
