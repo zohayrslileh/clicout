@@ -65,7 +65,7 @@ export default function ({ attack }: Props) {
         <div></div>
 
         <div className="flex justify-between">
-            <Button onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
+            <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
                 <p className="text-xl leading-none font-medium">1</p>
                 <p className="text-[12px]">/ 5 <Lang>Searches</Lang></p>
