@@ -10,6 +10,6 @@ import Router from "@/Tools/Socket/Router"
 export default new Router(async function (main) {
 
     // On connection
-    main.onConnection(async function (client) {
+    main.onConnection(async function (_) {
     })
 })
