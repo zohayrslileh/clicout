@@ -141,6 +141,8 @@ export default class Attack extends EventEmitter {
         await sleep(500)
 
         await page.goto("https://www.google.com/")
+
+        this.emit("status", "Done")
     }
 
     /**
