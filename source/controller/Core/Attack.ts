@@ -5,7 +5,6 @@ import UserAgent from "./UserAgent"
 import { randomUUID } from "crypto"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
-import EventEmitter from "events"
 
 /*
 |-----------------------------
@@ -14,7 +13,7 @@ import EventEmitter from "events"
 |
 | 
 */
-export default class Attack extends EventEmitter {
+export default class Attack {
 
     /**
      * Id
@@ -57,9 +56,6 @@ export default class Attack extends EventEmitter {
      * 
      */
     public constructor(primitiveAttack: PrimitiveAttack) {
-
-        // Call parent constructor
-        super()
 
         // Set id
         this.id = primitiveAttack.id
@@ -144,7 +140,7 @@ export default class Attack extends EventEmitter {
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On data
-        recorder.on("data", chunk => this.emit("record-chunk", chunk))
+        recorder.on("data", _ => undefined)
 
         await page.goto("https://www.google.com/search?q=apple")
 

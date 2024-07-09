@@ -7,7 +7,6 @@ import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
 import CoreException from "./Exception"
-import { Namespace } from "socket.io"
 import { IsNull } from "typeorm"
 import Invoice from "./Invoice"
 import Attack from "./Attack"
@@ -22,12 +21,6 @@ import zod from "zod"
 | 
 */
 export default class User {
-
-    /**
-     * Namespace
-     * 
-     */
-    public static namespace: Namespace | undefined
 
     /**
      * Id
@@ -61,16 +54,6 @@ export default class User {
 
         // Set email
         this.email = primitiveUser.email
-    }
-
-    /**
-     * Get broadcast
-     * 
-     * @returns
-     */
-    public get broadcast() {
-
-        return User.namespace ? User.namespace.to(this.id.toString()) : undefined
     }
 
     /**
@@ -315,9 +298,6 @@ export default class User {
 
         // Attck
         const attack = new Attack(attackEntity)
-
-        // On record chunk
-        attack.on("record-chunk", chunk => this.broadcast?.emit(`${attack.id}:record-chunk`, chunk))
 
         // Start
         attack.safeStart()
