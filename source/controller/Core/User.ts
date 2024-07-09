@@ -316,8 +316,8 @@ export default class User {
         // Attck
         const attack = new Attack(attackEntity)
 
-        // On status
-        attack.once("status", status => this.broadcast?.emit("status", attack.id, status))
+        // On record chunk
+        attack.once("record-chunk", chunk => this.broadcast?.emit(`${attack.id}:record-chunk`, chunk))
 
         // Start
         attack.safeStart()
