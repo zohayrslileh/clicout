@@ -65,7 +65,6 @@ export default function ({ attack }: Props) {
 
         <div className="grid gap-5">
             <Video attack={attack} />
-            <Video attack={attack} />
         </div>
 
         <div className="flex justify-between">

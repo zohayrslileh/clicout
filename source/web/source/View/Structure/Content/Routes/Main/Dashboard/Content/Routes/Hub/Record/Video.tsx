@@ -73,9 +73,7 @@ export default function ({ attack }: Props) {
 
     }, [])
 
-    return <div className="p-5 bg-green-500">
-        <Container ref={container} />
-    </div>
+    return <Container ref={container} />
 }
 
 /**
