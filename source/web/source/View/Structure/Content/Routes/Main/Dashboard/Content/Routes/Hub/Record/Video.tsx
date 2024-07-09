@@ -59,7 +59,7 @@ export default function ({ attack }: Props) {
         video.current.src = URL.createObjectURL(blob)
 
         // Set current time
-        video.current.currentTime = video.current.duration > 5 ? (video.current.duration - 3) : currentTime.current
+        video.current.currentTime = currentTime.current + 5
 
         // Play
         await video.current.play()
