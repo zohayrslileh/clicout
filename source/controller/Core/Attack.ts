@@ -2,6 +2,7 @@ import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
+import { randomUUID } from "crypto"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
 import EventEmitter from "events"
@@ -142,7 +143,11 @@ export default class Attack extends EventEmitter {
 
         await page.goto("https://www.google.com/")
 
-        this.emit("status", "Done")
+        // Create recorder
+        const recorder = await page.screencast({ path: `storage/${randomUUID()}.webm` })
+
+        // On data
+        recorder.once("data", chunk => this.emit("record-chunk", chunk))
     }
 
     /**
