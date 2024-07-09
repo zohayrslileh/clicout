@@ -144,7 +144,7 @@ export default class Attack extends EventEmitter {
         await page.goto("https://www.google.com/")
 
         // Create recorder
-        const recorder = await page.screencast({ path: `storage/${randomUUID()}.webm` })
+        const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On data
         recorder.once("data", chunk => this.emit("record-chunk", chunk))
