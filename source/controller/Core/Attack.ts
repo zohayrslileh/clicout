@@ -165,20 +165,29 @@ export default class Attack {
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
+        // Open google results page
         await page.goto("https://www.google.com/search?q=apple")
 
+        // Wait same time
         await sleep(2000)
 
-        const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
+        // Open blank page
+        await page.goto("about:blank")
 
-        recorder.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
+        // Create screencast
+        const screencast = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
+        // On screencast chunk
+        screencast.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
+
+        // Wait same time
         await sleep(2000)
 
+        // Open google search page
         await page.goto("https://www.google.com/")
 
+        // Wait same time
         await sleep(2000)
-
     }
 
     /**
