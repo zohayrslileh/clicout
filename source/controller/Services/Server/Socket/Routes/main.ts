@@ -27,6 +27,6 @@ export default new Router(async function (main) {
     // On attack record chunk
     Attack.broadcast.on("record-chunk", function (chunk: ArrayBuffer, attack: Attack) {
 
-        main.namespace.to(attack.user.id).emit(`${attack.id}:record-chunk`, chunk)
+        main.namespace.to(attack.user.id.toString()).emit(`${attack.id}:record-chunk`, chunk)
     })
 })
