@@ -58,7 +58,7 @@ export default function ({ attack }: Props) {
         const video = document.createElement("video")
 
         // Create blob
-        const blob = new Blob([base64ToArrayBuffer(webmHeader), ...chunks.current], { type: "video/webm" })
+        const blob = new Blob([webmHeaderBuffer, ...chunks.current], { type: "video/webm" })
 
         // Set video source
         video.src = URL.createObjectURL(blob)
@@ -112,3 +112,5 @@ function base64ToArrayBuffer(base64: string) {
     }
     return bytes.buffer;
 }
+
+const webmHeaderBuffer = base64ToArrayBuffer(webmHeader)
