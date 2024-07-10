@@ -18,5 +18,8 @@ export default new Router(async function (main) {
 
         // User
         const user = await User.authentication(authorization)
+
+        // Join
+        client.socket.join(user.id.toString())
     })
 })
