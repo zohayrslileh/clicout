@@ -47,6 +47,12 @@ export default function ({ attack }: Props) {
      */
     const play = useCallback(async function () {
 
+        // Get videos
+        const videos = container.current.querySelectorAll("video")
+
+        // Revoke prev videos
+        for (const video of videos) URL.revokeObjectURL(video.src)
+
         // Create video
         const video = document.createElement("video")
 
@@ -65,11 +71,8 @@ export default function ({ attack }: Props) {
         // Append to child
         container.current.appendChild(video)
 
-        // Get videos
-        const videos = container.current.querySelectorAll("video")
-
         // Remove first one
-        if (videos.length >= 3) videos[0].remove()
+        if (videos.length >= 2) videos[0].remove()
 
     }, [])
 
