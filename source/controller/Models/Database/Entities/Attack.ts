@@ -81,6 +81,6 @@ export default class Attack extends BaseEntity {
      * User
      * 
      */
-    @ManyToOne(() => User, user => user.attacks, { nullable: false })
+    @ManyToOne(() => User, user => user.attacks, { nullable: false, eager: true })
     declare public user: User
 }
