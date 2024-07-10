@@ -183,10 +183,10 @@ export default class Attack {
         // Open google search page
         await page.goto("https://www.google.com/")
 
-        do {
+        // Wait same time
+        await sleep(1500)
 
-            // Wait same time
-            await sleep(1500)
+        do {
 
             // Open custom page
             await page.goto("https://www.w3schools.com/")
@@ -196,6 +196,9 @@ export default class Attack {
 
             // Open custom page
             await page.goto("https://bun.sh/guides/binary/typedarray-to-blob")
+
+            // Wait same time
+            await sleep(10000)
 
         } while (true)
     }

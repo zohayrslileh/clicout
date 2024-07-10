@@ -36,7 +36,7 @@ export default function ({ attack }: Props) {
     namespace.useOn(`${attack.id}:record-chunk`, async function (chunk: ArrayBuffer) {
 
         // Push new chunk
-        chunks.current = [...chunks.current.slice(-20), chunk]
+        chunks.current = [...chunks.current.slice(-10), chunk]
 
         // Play
         await play()
@@ -51,7 +51,7 @@ export default function ({ attack }: Props) {
         // Get videos
         const videos = container.current.querySelectorAll("video")
 
-        // Last videio
+        // Last video
         const lastVideo = videos[videos.length - 1]
 
         // Check last video has end
@@ -68,9 +68,6 @@ export default function ({ attack }: Props) {
 
         // Set video source
         video.src = URL.createObjectURL(blob)
-
-        // Set current time
-        video.currentTime = 999999999
 
         // Play
         await video.play()
