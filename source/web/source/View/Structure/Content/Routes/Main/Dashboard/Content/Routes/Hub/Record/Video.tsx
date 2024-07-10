@@ -71,8 +71,8 @@ export default function ({ attack }: Props) {
         // Append to child
         container.current.appendChild(video)
 
-        // Remove first one
-        if (videos.length >= 2) videos[0].remove()
+        // Remove all and keep one
+        for (const video of [...videos].slice(0, -1)) video.remove()
 
     }, [])
 
