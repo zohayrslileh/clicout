@@ -2,6 +2,7 @@ import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import User, { PrimitiveUser } from "./User"
 import City, { PrimitiveCity } from "./City"
+import { DEV_MODE } from "@/Models/Config"
 import UserAgent from "./UserAgent"
 import { randomUUID } from "crypto"
 import sleep from "@/Tools/Sleep"
@@ -122,7 +123,7 @@ export default class Attack {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: !DEV_MODE,
             args: [
                 '--no-sandbox', // Disable sandboxing
                 '--disable-setuid-sandbox', // Disable setuid sandbox
@@ -164,17 +165,20 @@ export default class Attack {
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
-        // Create recorder
-        const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
-
-        // On data
-        recorder.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
-
         await page.goto("https://www.google.com/search?q=apple")
 
-        await sleep(1000)
+        await sleep(2000)
+
+        const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
+
+        recorder.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
+
+        await sleep(2000)
 
         await page.goto("https://www.google.com/")
+
+        await sleep(2000)
+
     }
 
     /**
