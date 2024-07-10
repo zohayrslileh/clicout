@@ -191,6 +191,9 @@ export default class Attack {
 
         // Wait same time
         await sleep(1500)
+        
+        // Open custom page
+        await page.goto("https://www.w3schools.com/")
     }
 
     /**
