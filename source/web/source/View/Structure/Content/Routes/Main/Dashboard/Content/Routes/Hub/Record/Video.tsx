@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react"
+import styled from "@emotion/styled"
 import Attack from "@/Core/Attack"
 import User from "@/Core/User"
-import styled from "@emotion/styled"
 
 /**
  * Video
