@@ -1,3 +1,4 @@
+import webmHeader from "@/View/Media/webm-header.txt?raw"
 import { useCallback, useRef } from "react"
 import styled from "@emotion/styled"
 import Attack from "@/Core/Attack"
@@ -35,7 +36,7 @@ export default function ({ attack }: Props) {
     namespace.useOn(`${attack.id}:record-chunk`, async function (chunk: ArrayBuffer) {
 
         // Push new chunk
-        chunks.current.push(chunk)
+        chunks.current = [...chunks.current.slice(-7), chunk]
 
         // Play
         await play()
@@ -57,13 +58,13 @@ export default function ({ attack }: Props) {
         const video = document.createElement("video")
 
         // Create blob
-        const blob = new Blob(chunks.current, { type: "video/webm" })
+        const blob = new Blob([base64ToArrayBuffer(webmHeader), ...chunks.current], { type: "video/webm" })
 
         // Set video source
         video.src = URL.createObjectURL(blob)
 
         // Set current time
-        video.currentTime = 9999999999999
+        video.currentTime = 999999999
 
         // Play
         await video.play()
@@ -102,3 +103,12 @@ const Container = styled.div`
         }
     }
 `
+
+function base64ToArrayBuffer(base64: string) {
+    var binaryString = atob(base64);
+    var bytes = new Uint8Array(binaryString.length);
+    for (var i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
