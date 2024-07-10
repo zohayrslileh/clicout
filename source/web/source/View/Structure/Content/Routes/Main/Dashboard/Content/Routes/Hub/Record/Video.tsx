@@ -36,7 +36,7 @@ export default function ({ attack }: Props) {
     namespace.useOn(`${attack.id}:record-chunk`, async function (chunk: ArrayBuffer) {
 
         // Push new chunk
-        chunks.current = [...chunks.current.slice(-10), chunk]
+        chunks.current = [...chunks.current.slice(-25), chunk]
 
         // Play
         await play()
@@ -68,6 +68,9 @@ export default function ({ attack }: Props) {
 
         // Set video source
         video.src = URL.createObjectURL(blob)
+
+        // Set current time
+        video.currentTime = 25
 
         // Play
         await video.play()

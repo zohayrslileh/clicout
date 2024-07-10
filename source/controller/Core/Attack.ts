@@ -192,13 +192,13 @@ export default class Attack {
             await page.goto("https://www.w3schools.com/")
 
             // Wait same time
-            await sleep(10000)
+            await sleep(20000)
 
             // Open custom page
             await page.goto("https://bun.sh/guides/binary/typedarray-to-blob")
 
             // Wait same time
-            await sleep(10000)
+            await sleep(20000)
 
         } while (true)
     }
