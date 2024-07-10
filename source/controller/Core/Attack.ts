@@ -100,7 +100,7 @@ export default class Attack {
      */
     private async generateLocation() {
 
-        return this.city || (this.country ? await this.country.randomCity() : await (await Country.random()).randomCity())
+        return this.city || (this.country ? await this.country.randomCity() : await City.random())
     }
 
     /**

@@ -1,3 +1,4 @@
+import CityEntity from "@/Models/Database/Entities/City"
 
 /*
 |-----------------------------
@@ -49,6 +50,22 @@ export default class City {
 
         // Set longitude
         this.longitude = primitiveCity.longitude
+    }
+
+    /**
+     * Random method
+     * 
+     * @return
+     */
+    public static async random() {
+
+        // City query builder
+        const cityQueryBuilder = CityEntity.createQueryBuilder()
+
+        // City entity
+        const cityEntity = await cityQueryBuilder.select().orderBy("RANDOM()").getOneOrFail()
+
+        return new this(cityEntity)
     }
 }
 
