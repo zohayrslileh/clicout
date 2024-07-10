@@ -169,7 +169,7 @@ export default class Attack {
         await page.goto("https://www.google.com/search?q=apple")
 
         // Wait same time
-        await sleep(2000)
+        await sleep(1500)
 
         // Open blank page
         await page.goto("about:blank")
@@ -180,14 +180,17 @@ export default class Attack {
         // On screencast chunk
         screencast.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
 
-        // Wait same time
-        await sleep(2000)
-
         // Open google search page
         await page.goto("https://www.google.com/")
 
         // Wait same time
-        await sleep(2000)
+        await sleep(1500)
+
+        // Open custom page
+        await page.goto("https://www.w3schools.com/")
+
+        // Wait same time
+        await sleep(1500)
     }
 
     /**
