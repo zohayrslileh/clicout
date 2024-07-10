@@ -128,7 +128,6 @@ export default class Attack {
                 '--disable-setuid-sandbox', // Disable setuid sandbox
                 '--disable-dev-shm-usage', // Use /tmp instead of /dev/shm
                 '--disable-gpu', // Disable GPU hardware acceleration
-                '--single-process', // Run renderer and browser in single process
                 '--no-zygote', // Disable zygote process
                 '--disable-extensions', // Disable all extensions
                 '--disable-background-networking', // Disable some background networking tasks
@@ -171,11 +170,11 @@ export default class Attack {
         // On data
         recorder.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
 
-        await page.goto("https://www.google.com/search?q=apple", { waitUntil: "networkidle2" })
+        await page.goto("https://www.google.com/search?q=apple")
 
         await sleep(1000)
 
-        await page.goto("https://www.google.com/", { waitUntil: "networkidle2" })
+        await page.goto("https://www.google.com/")
     }
 
     /**
