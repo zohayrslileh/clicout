@@ -1,5 +1,4 @@
 import Router from "@/Tools/Socket/Router"
-import Attack from "@/Core/Attack"
 import User from "@/Core/User"
 
 /*
@@ -19,11 +18,5 @@ export default new Router(async function (main) {
 
         // User
         const user = await User.authentication(authorization)
-
-        // On record chunk
-        user.on("record-chunk", function (attack: Attack, chunk: ArrayBuffer) {
-
-            client.socket.emit(`record-chunk:${attack.id}`, chunk)
-        })
     })
 })

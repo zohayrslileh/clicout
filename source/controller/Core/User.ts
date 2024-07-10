@@ -7,7 +7,6 @@ import UserEntity from "@/Models/Database/Entities/User"
 import PlanEntity from "@/Models/Database/Entities/Plan"
 import { Signer } from "@/Models/Encryptor"
 import CoreException from "./Exception"
-import EventEmitter from "events"
 import { IsNull } from "typeorm"
 import Invoice from "./Invoice"
 import Attack from "./Attack"
@@ -21,7 +20,7 @@ import zod from "zod"
 |
 | 
 */
-export default class User extends EventEmitter {
+export default class User {
 
     /**
      * Id
@@ -47,9 +46,6 @@ export default class User extends EventEmitter {
      */
     public constructor(primitiveUser: PrimitiveUser) {
 
-        // Call parent constructor
-        super()
-
         // Set id
         this.id = primitiveUser.id
 
@@ -58,13 +54,6 @@ export default class User extends EventEmitter {
 
         // Set email
         this.email = primitiveUser.email
-
-        // On record chunk
-        Attack.broadcast.on("record-chunk", async (attack: Attack, chunk: ArrayBuffer) => {
-
-            // Attack entity
-            const attackEntity = await AttackEntity.findOneBy({ user: { id: this.id }, id: attack.id })
-        })
     }
 
     /**
