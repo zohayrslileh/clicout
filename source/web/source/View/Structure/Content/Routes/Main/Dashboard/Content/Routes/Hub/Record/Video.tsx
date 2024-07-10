@@ -39,14 +39,14 @@ export default function ({ attack }: Props) {
         chunks.current = [...chunks.current.slice(-25), chunk]
 
         // Play
-        await play()
+        await play(chunks.current)
     })
 
     /**
      * Play method
      * 
      */
-    const play = useCallback(async function () {
+    const play = useCallback(async function (items: ArrayBuffer[]) {
 
         // Get videos
         const videos = container.current.querySelectorAll("video")
@@ -64,13 +64,13 @@ export default function ({ attack }: Props) {
         const video = document.createElement("video")
 
         // Create blob
-        const blob = new Blob([webmHeaderBuffer, ...chunks.current], { type: "video/webm" })
+        const blob = new Blob([webmHeaderBuffer, ...items], { type: "video/webm" })
 
         // Set video source
         video.src = URL.createObjectURL(blob)
 
         // Set current time
-        video.currentTime = 25
+        video.currentTime = 9999999
 
         // Play
         await video.play()
