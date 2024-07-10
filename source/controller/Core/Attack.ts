@@ -189,10 +189,10 @@ export default class Attack {
             await sleep(1500)
 
             // Open custom page
-            await page.goto("https://absr-services.fr/serrurerie/serrurier-antibes/")
+            await page.goto("https://www.w3schools.com/")
 
             // Wait same time
-            await sleep(1500)
+            await sleep(10000)
 
             // Open custom page
             await page.goto("https://bun.sh/guides/binary/typedarray-to-blob")
