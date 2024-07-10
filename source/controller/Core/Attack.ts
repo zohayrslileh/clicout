@@ -189,13 +189,13 @@ export default class Attack {
         do {
 
             // Open custom page
-            await page.goto("https://www.w3schools.com/")
+            await page.goto("https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_count2")
 
             // Wait same time
-            await sleep(20000)
+            await sleep(10000)
 
             // Open custom page
-            await page.goto("https://bun.sh/guides/binary/typedarray-to-blob")
+            await page.goto("https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_speed")
 
             // Wait same time
             await sleep(20000)
