@@ -3,9 +3,9 @@ import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
 import { randomUUID } from "crypto"
-import Broadcast from "./Broadcast"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
+import EventEmitter from "events"
 
 /*
 |-----------------------------
@@ -15,6 +15,12 @@ import puppeteer from "puppeteer"
 | 
 */
 export default class Attack {
+
+    /**
+     * Broadcast
+     * 
+     */
+    public static readonly broadcast = new EventEmitter
 
     /**
      * Id
@@ -141,7 +147,7 @@ export default class Attack {
         const recorder = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On data
-        recorder.on("data", chalk => Broadcast.emit("record-chalk", chalk))
+        recorder.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk))
 
         await page.goto("https://www.google.com/search?q=apple")
 
