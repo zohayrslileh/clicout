@@ -34,7 +34,7 @@ export default async function (context: Context) {
          * Write header
          * 
          */
-        if (false) await stream.write(await readFile("assets/header.webm"))
+        await stream.write(await readFile("assets/header.webm"))
 
         /**
          * Create promise
