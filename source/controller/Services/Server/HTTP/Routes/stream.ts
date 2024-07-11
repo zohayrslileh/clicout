@@ -1,5 +1,4 @@
 import { stream } from "hono/streaming"
-import { readFile } from "fs/promises"
 import Attack from "@/Core/Attack"
 import { Context } from "hono"
 
@@ -29,12 +28,6 @@ export default async function (context: Context) {
      * 
      */
     return stream(context, async function (stream) {
-
-        /**
-         * Write header
-         * 
-         */
-        await stream.write(await readFile("assets/header.webm"))
 
         /**
          * Create promise
