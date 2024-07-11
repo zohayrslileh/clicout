@@ -35,11 +35,14 @@ export default function ({ attack }: Props) {
      */
     namespace.useOn(`${attack.id}:record-chunk`, async function (chunk: ArrayBuffer) {
 
+        // Clear
+        if (chunks.current.length > 10) chunks.current = []
+
         // Push new chunk
-        chunks.current = [...chunks.current.slice(-25), chunk]
+        chunks.current.push(chunk)
 
         // Play
-        await play(chunks.current)
+        if (chunks.current.length >= 10) await play(chunks.current)
     })
 
     /**
