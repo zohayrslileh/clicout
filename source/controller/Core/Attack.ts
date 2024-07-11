@@ -123,7 +123,7 @@ export default class Attack {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: !DEV_MODE,
+            headless: DEV_MODE,
             args: [
                 '--no-sandbox', // Disable sandboxing
                 '--disable-setuid-sandbox', // Disable setuid sandbox

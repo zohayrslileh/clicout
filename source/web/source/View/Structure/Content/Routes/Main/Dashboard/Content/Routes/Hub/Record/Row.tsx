@@ -7,8 +7,7 @@ import usePromise from "@/Tools/Promise"
 import { useCallback } from "react"
 import toast from "react-hot-toast"
 import Attack from "@/Core/Attack"
-// import Video from "./Video"
-import config from "@/config"
+import Video from "./Video"
 
 /**
  * Row
@@ -65,7 +64,7 @@ export default function ({ attack }: Props) {
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
         <div className="grid gap-5">
-            <video src={`${config.DEV_SERVER}stream/${attack.id}`} controls autoPlay></video>
+            <Video attack={attack} />
         </div>
 
         <div className="flex justify-between">
