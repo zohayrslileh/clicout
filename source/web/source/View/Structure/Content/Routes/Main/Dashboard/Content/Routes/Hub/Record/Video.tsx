@@ -8,7 +8,7 @@ import config from "@/config"
  */
 export default function ({ attack }: Props) {
 
-    return <video autoPlay>
+    return <video controls autoPlay>
         <source src={`${import.meta.env.DEV ? config.DEV_SERVER : "/"}stream/${attack.id}`} />
         Your browser does not support HTML video.
     </video>

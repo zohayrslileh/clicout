@@ -18,10 +18,22 @@ export default async function (context: Context) {
     context.header("Content-Type", "video/webm")
 
     /**
-     * AttackId
+     * Attack id
      * 
      */
-    const AttackId = context.req.param("id")
+    const attackId = +context.req.param("id")
+
+    /**
+     * Attack
+     * 
+     */
+    const [_, page] = Attack.running.find(([attack]) => attack.id === attackId) || []
+
+    /**
+     * Check page
+     * 
+     */
+    if (!page) throw new Error
 
     /**
      * Stream
@@ -33,20 +45,25 @@ export default async function (context: Context) {
          * Create promise
          * 
          */
-        await new Promise(function () {
+        await new Promise(async function () {
 
             /**
-             * On record chunk
+             * Create screencast
              * 
              */
-            Attack.broadcast.on(`${AttackId}:record-chunk`, async function (chunk: Buffer) {
+            const screencast = await page.screencast()
 
-                /**
-                 * Write chunk
-                 * 
-                 */
-                await stream.write(chunk)
-            })
+            /**
+             * On screencast data
+             * 
+             */
+            screencast.on("data", async (chunk: Buffer) => await stream.write(chunk))
+
+            /**
+             * On stream abort
+             * 
+             */
+            stream.onAbort(async () => await screencast.stop())
         })
     })
 }

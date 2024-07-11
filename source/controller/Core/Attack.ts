@@ -2,11 +2,9 @@ import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import User, { PrimitiveUser } from "./User"
 import City, { PrimitiveCity } from "./City"
+import puppeteer, { Page } from "puppeteer"
 import { DEV_MODE } from "@/Models/Config"
 import UserAgent from "./UserAgent"
-import { randomUUID } from "crypto"
-import puppeteer from "puppeteer"
-import EventEmitter from "events"
 import sleep from "@/Tools/Sleep"
 
 /*
@@ -19,10 +17,10 @@ import sleep from "@/Tools/Sleep"
 export default class Attack {
 
     /**
-     * Broadcast
+     * Running
      * 
      */
-    public static readonly broadcast = new EventEmitter
+    public static readonly running: [Attack, Page][] = []
 
     /**
      * Id
@@ -171,14 +169,8 @@ export default class Attack {
         // Wait same time
         await sleep(1500)
 
-        // Open blank page
-        await page.goto("about:blank")
-
-        // Create screencast
-        const screencast = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
-
-        // On screencast chunk
-        screencast.on("data", chunk => Attack.broadcast.emit(`${this.id}:record-chunk`, chunk))
+        // Push to running
+        Attack.running.push([this, page])
 
         // Open google search page
         await page.goto("https://www.google.com/")
