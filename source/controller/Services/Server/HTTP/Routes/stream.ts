@@ -21,7 +21,7 @@ export default async function (context: Context) {
      * Content Disposition
      * 
      */
-    context.header("Content-Disposition", "attachment;filename=video.mp4;");
+    context.header("Content-Disposition", "attachment;filename=stream.webm;");
 
     /**
      * AttackId
@@ -35,6 +35,8 @@ export default async function (context: Context) {
      */
     return stream(context, async function (stream) {
 
+        for (const chunk of chunks) await stream.write(chunk)
+
         /**
          * Create promise
          * 
@@ -45,14 +47,18 @@ export default async function (context: Context) {
              * On record chunk
              * 
              */
-            Attack.broadcast.on(`${AttackId}:record-chunk`, async function (chunk: Uint8Array) {
+            Attack.broadcast.on(`${AttackId}:record-chunk`, async function (chunk: Buffer) {
+
+                chunks.push(chunk)
 
                 /**
                  * Write chunk
                  * 
                  */
-                await stream.write(chunk)
+                await stream.write(new Uint8Array(chunk))
             })
         })
     })
 }
+
+const chunks: Uint8Array[] = []

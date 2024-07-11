@@ -8,10 +8,7 @@ import config from "@/config"
  */
 export default function ({ attack }: Props) {
 
-    return <video autoPlay>
-        <source src={`${config.DEV_SERVER}stream/${attack.id}`} type="video/webm" />
-        Your browser does not support the video tag.
-    </video>
+    return <video src={`${config.DEV_SERVER}stream/${attack.id}`} controls autoPlay />
 }
 
 /**
