@@ -1,4 +1,5 @@
 import Attack from "@/Core/Attack"
+import { useRef } from "react"
 import config from "@/config"
 
 /**
@@ -8,7 +9,9 @@ import config from "@/config"
  */
 export default function ({ attack }: Props) {
 
-    return <video src={`${config.DEV_SERVER}stream/${attack.id}`} controls autoPlay />
+    const video = useRef<HTMLVideoElement>(undefined!)
+
+    return <video ref={video} src={`${config.DEV_SERVER}stream/${attack.id}`} controls autoPlay />
 }
 
 /**
