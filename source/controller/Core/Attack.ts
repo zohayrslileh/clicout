@@ -5,9 +5,9 @@ import City, { PrimitiveCity } from "./City"
 import { DEV_MODE } from "@/Models/Config"
 import UserAgent from "./UserAgent"
 import { randomUUID } from "crypto"
-import sleep from "@/Tools/Sleep"
-import puppeteer from "puppeteer"
 import EventEmitter from "events"
+import puppeteer from "puppeteer"
+import sleep from "@/Tools/Sleep"
 
 /*
 |-----------------------------
