@@ -1,4 +1,5 @@
 import { stream } from "hono/streaming"
+import { readFile } from "fs/promises"
 import Attack from "@/Core/Attack"
 import { Context } from "hono"
 
@@ -18,12 +19,6 @@ export default async function (context: Context) {
     context.header("Content-Type", "video/webm")
 
     /**
-     * Content Disposition
-     * 
-     */
-    context.header("Content-Disposition", "attachment;filename=stream.webm;");
-
-    /**
      * AttackId
      * 
      */
@@ -35,7 +30,11 @@ export default async function (context: Context) {
      */
     return stream(context, async function (stream) {
 
-        for (const chunk of chunks) await stream.write(chunk)
+        /**
+         * Write header
+         * 
+         */
+        if (false) await stream.write(await readFile("assets/header.webm"))
 
         /**
          * Create promise
@@ -49,16 +48,12 @@ export default async function (context: Context) {
              */
             Attack.broadcast.on(`${AttackId}:record-chunk`, async function (chunk: Buffer) {
 
-                chunks.push(chunk)
-
                 /**
                  * Write chunk
                  * 
                  */
-                await stream.write(new Uint8Array(chunk))
+                await stream.write(chunk)
             })
         })
     })
 }
-
-const chunks: Uint8Array[] = []
