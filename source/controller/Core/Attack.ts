@@ -178,7 +178,7 @@ export default class Attack {
         const screencast = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
 
         // On screencast chunk
-        screencast.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
+        screencast.on("data", chunk => Attack.broadcast.emit(`${this.id}:record-chunk`, chunk))
 
         // Open google search page
         await page.goto("https://www.google.com/")
