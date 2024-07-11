@@ -1,5 +1,4 @@
 import Attack from "@/Core/Attack"
-import { useRef } from "react"
 import config from "@/config"
 
 /**
@@ -9,9 +8,10 @@ import config from "@/config"
  */
 export default function ({ attack }: Props) {
 
-    const video = useRef<HTMLVideoElement>(undefined!)
-
-    return <video ref={video} src={`${config.DEV_SERVER}stream/${attack.id}`} controls autoPlay />
+    return <video autoPlay>
+        <source src={`${config.DEV_SERVER}stream/${attack.id}`} type="video/webm" />
+        Your browser does not support HTML video.
+    </video>
 }
 
 /**
