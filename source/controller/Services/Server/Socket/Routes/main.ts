@@ -1,4 +1,5 @@
 import Router from "@/Tools/Socket/Router"
+import Attack from "@/Core/Attack"
 import User from "@/Core/User"
 
 /*
@@ -21,5 +22,11 @@ export default new Router(async function (main) {
 
         // Join
         client.socket.join(user.id.toString())
+    })
+
+    // On attack record chunk
+    Attack.broadcast.on("record-chunk", function (chunk: ArrayBuffer, attack: Attack) {
+
+        main.namespace.to(attack.user.id.toString()).emit(`${attack.id}:record-chunk`, chunk)
     })
 })
