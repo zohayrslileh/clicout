@@ -284,8 +284,8 @@ export default class User {
         // Set device
         attackEntity.device = device || null
 
-        // Set searches
-        attackEntity.searches = searches
+        // Set total searches
+        attackEntity.totalSearches = searches
 
         // Set status
         attackEntity.status = "RUNNING"

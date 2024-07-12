@@ -44,10 +44,10 @@ export default class Attack {
     public readonly device: string | undefined
 
     /**
-     * Searches
+     * Total searches
      * 
      */
-    public readonly searches: number
+    public readonly totalSearches: number
 
     /**
      * Constructor method
@@ -70,8 +70,8 @@ export default class Attack {
         // Set device
         this.device = primitiveAttack.device || undefined
 
-        // Set searches
-        this.searches = primitiveAttack.searches
+        // Set total searches
+        this.totalSearches = primitiveAttack.totalSearches
     }
 
     /**
@@ -148,5 +148,5 @@ export interface PrimitiveAttack {
     country: PrimitiveCountry | null
     city: PrimitiveCity | null
     device: string | null
-    searches: number
+    totalSearches: number
 }
