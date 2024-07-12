@@ -4,10 +4,8 @@ import User, { PrimitiveUser } from "./User"
 import City, { PrimitiveCity } from "./City"
 import { DEV_MODE } from "@/Models/Config"
 import UserAgent from "./UserAgent"
-import { randomUUID } from "crypto"
 import sleep from "@/Tools/Sleep"
 import puppeteer from "puppeteer"
-import EventEmitter from "events"
 
 /*
 |-----------------------------
@@ -17,12 +15,6 @@ import EventEmitter from "events"
 | 
 */
 export default class Attack {
-
-    /**
-     * Broadcast
-     * 
-     */
-    public static readonly broadcast = new EventEmitter
 
     /**
      * Id
@@ -171,36 +163,8 @@ export default class Attack {
         // Wait same time
         await sleep(1500)
 
-        // Open blank page
-        await page.goto("about:blank")
-
-        // Create screencast
-        const screencast = await page.screencast({ path: `storage/records/${randomUUID()}.webm` })
-
-        // On screencast chunk
-        screencast.on("data", chunk => Attack.broadcast.emit("record-chunk", chunk, this))
-
         // Open google search page
         await page.goto("https://www.google.com/")
-
-        // Wait same time
-        await sleep(1500)
-
-        do {
-
-            // Open custom page
-            await page.goto("https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_count2")
-
-            // Wait same time
-            await sleep(10000)
-
-            // Open custom page
-            await page.goto("https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_speed")
-
-            // Wait same time
-            await sleep(20000)
-
-        } while (true)
     }
 
     /**
