@@ -30,8 +30,8 @@ export async function synchronize() {
     // Make storage
     navigator.make("storage")
 
-    // Make records
-    navigator.make("records").back()
+    // Make searches
+    navigator.make("searches").back()
 
     // Database synchronize
     await database.synchronize()
