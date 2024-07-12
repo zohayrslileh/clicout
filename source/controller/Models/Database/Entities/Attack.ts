@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from "typeorm"
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Country from "./Country"
+import Search from "./Search"
 import City from "./City"
 import User from "./User"
 
@@ -83,4 +84,11 @@ export default class Attack extends BaseEntity {
      */
     @ManyToOne(() => User, user => user.attacks, { nullable: false })
     declare public user: User
+
+    /**
+     * Searches
+     * 
+     */
+    @OneToMany(() => Search, search => search.attack)
+    declare public searches: Search[]
 }

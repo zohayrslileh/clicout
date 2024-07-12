@@ -1,10 +1,8 @@
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
-import { DEV_MODE } from "@/Models/Config"
 import UserAgent from "./UserAgent"
-import sleep from "@/Tools/Sleep"
-import puppeteer from "puppeteer"
+import Search from "./Search"
 
 /*
 |-----------------------------
@@ -81,7 +79,7 @@ export default class Attack {
      * 
      * @returns
      */
-    private async generateLocation() {
+    public async generateLocation() {
 
         return this.city || (this.country ? await this.country.randomCity() : await City.random())
     }
@@ -91,7 +89,7 @@ export default class Attack {
      * 
      * @returns
      */
-    private async generateUserAgent() {
+    public async generateUserAgent() {
 
         return await UserAgent.random(this.device)
     }
@@ -103,58 +101,10 @@ export default class Attack {
      */
     private async start() {
 
-        // Create browser
-        const browser = await puppeteer.launch({
-            headless: !DEV_MODE,
-            args: [
-                '--no-sandbox', // Disable sandboxing
-                '--disable-setuid-sandbox', // Disable setuid sandbox
-                '--disable-dev-shm-usage', // Use /tmp instead of /dev/shm
-                '--disable-gpu', // Disable GPU hardware acceleration
-                '--no-zygote', // Disable zygote process
-                '--disable-extensions', // Disable all extensions
-                '--disable-background-networking', // Disable some background networking tasks
-                '--disable-background-timer-throttling', // Disable throttling of background timers
-                '--disable-renderer-backgrounding', // Prevent putting tabs in background mode
-                '--disable-device-discovery-notifications' // Disable device discovery notifications
-            ]
-        })
+        // Create search
+        const search = await Search.create(this)
 
-        // Create context
-        const context = browser.defaultBrowserContext()
-
-        // Set geolocation permissions 
-        await context.overridePermissions("https://www.google.com", ["geolocation"])
-
-        // Create new page
-        const page = await browser.newPage()
-
-        // Disable timeout
-        page.setDefaultTimeout(0)
-
-        // Generate user agent
-        const userAgent = await this.generateUserAgent()
-
-        // Set user agent
-        await page.setUserAgent(userAgent.getUA())
-
-        // Set view port
-        await page.setViewport({ width: userAgent.width, height: userAgent.height })
-
-        // Generate location
-        const city = await this.generateLocation()
-
-        // Set geolocation
-        await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
-
-        // Open google results page
-        await page.goto("https://www.google.com/search?q=apple")
-
-        // Wait same time
-        await sleep(1500)
-
-        // Open google search page
-        await page.goto("https://www.google.com/")
+        return search
     }
 
     /**
