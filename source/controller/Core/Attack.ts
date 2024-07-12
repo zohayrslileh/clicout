@@ -1,6 +1,5 @@
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
-import User, { PrimitiveUser } from "./User"
 import City, { PrimitiveCity } from "./City"
 import { DEV_MODE } from "@/Models/Config"
 import UserAgent from "./UserAgent"
@@ -53,12 +52,6 @@ export default class Attack {
     public readonly searches: number
 
     /**
-     * User
-     * 
-     */
-    public readonly user: User
-
-    /**
      * Constructor method
      * 
      */
@@ -81,9 +74,6 @@ export default class Attack {
 
         // Set searches
         this.searches = primitiveAttack.searches
-
-        // Set user
-        this.user = new User(primitiveAttack.user)
     }
 
     /**
@@ -209,5 +199,4 @@ export interface PrimitiveAttack {
     city: PrimitiveCity | null
     device: string | null
     searches: number
-    user: PrimitiveUser
 }
