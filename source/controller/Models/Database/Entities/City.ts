@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Country from "./Country"
 import Attack from "./Attack"
+import Search from "./Search"
 
 /*
 |-----------------------------
@@ -47,4 +48,11 @@ export default class City extends BaseEntity {
      */
     @OneToMany(() => Attack, attack => attack.city)
     declare public attacks: Attack[]
+
+    /**
+     * Searchs
+     * 
+     */
+    @OneToMany(() => Search, search => search.city)
+    declare public searchs: Search[]
 }

@@ -1,5 +1,6 @@
+import { Column, Entity, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
-import { Column, Entity } from "typeorm"
+import Search from "./Search"
 
 /*
 |-----------------------------
@@ -38,4 +39,11 @@ export default class UserAgent extends BaseEntity {
      */
     @Column({ type: "float", nullable: false })
     declare public height: number
+
+    /**
+     * Searchs
+     * 
+     */
+    @OneToMany(() => Search, search => search.userAgent)
+    declare public searchs: Search[]
 }
