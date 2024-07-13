@@ -15,11 +15,11 @@ import City from "./City"
 export default class Search extends BaseEntity {
 
     /**
-     * Name
+     * Keyword
      * 
      */
     @Column({ type: "varchar", nullable: false })
-    declare public name: string
+    declare public keyword: string
 
     /**
      * Attack
