@@ -21,7 +21,7 @@ export default function ({ value, onChange }: Props) {
     const infinity = value === 0
 
     return <div className="relative">
-        <Input isDisabled={infinity} value={value.toString()} onValueChange={value => onChange(+value)} variant="bordered" label={lang("Number of searches")} type="number" />
+        <Input value={value.toString()} onValueChange={value => onChange(+value)} variant="bordered" label={lang("Number of searches")} type="number" />
         <Checkbox isSelected={infinity} onValueChange={infinity => onChange(infinity ? 0 : 1)} className="absolute right-5 top-0 bottom-0 m-auto" size="sm"><Lang>Infinity</Lang></Checkbox>
     </div>
 }
