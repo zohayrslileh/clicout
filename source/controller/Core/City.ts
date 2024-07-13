@@ -53,6 +53,16 @@ export default class City {
     }
 
     /**
+     * Entity
+     * 
+     * @returns
+     */
+    public async entity() {
+
+        return await CityEntity.findOneByOrFail({ id: this.id })
+    }
+
+    /**
      * Random method
      * 
      * @return

@@ -58,6 +58,16 @@ export default class UserAgent extends UAParser {
     }
 
     /**
+     * Entity
+     * 
+     * @returns
+     */
+    public async entity() {
+
+        return await UserAgentEntity.findOneByOrFail({ id: this.id })
+    }
+
+    /**
      * Random method
      * 
      * @return

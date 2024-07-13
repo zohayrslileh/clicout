@@ -76,6 +76,16 @@ export default class Attack {
     }
 
     /**
+     * Entity
+     * 
+     * @returns
+     */
+    public async entity() {
+
+        return await AttackEntity.findOneByOrFail({ id: this.id })
+    }
+
+    /**
      * Generate keyword method
      * 
      * @returns

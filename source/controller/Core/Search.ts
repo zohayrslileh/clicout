@@ -1,4 +1,3 @@
-import AttackEntity from "@/Models/Database/Entities/Attack"
 import SearchEntity from "@/Models/Database/Entities/Search"
 import Attack from "./Attack"
 
@@ -37,8 +36,17 @@ export default class Search {
         // Initialize search entity
         const searchEntity = new SearchEntity
 
+        // Set keyword
+        searchEntity.keyword = attack.generateKeyword()
+
         // Set attack
-        searchEntity.attack = await AttackEntity.findOneByOrFail({ id: attack.id })
+        searchEntity.attack = await attack.entity()
+
+        // Set city
+        searchEntity.city = await (await attack.generateLocation()).entity()
+
+        // Set user agent
+        searchEntity.userAgent = await (await attack.generateUserAgent()).entity()
 
         // Save
         await searchEntity.save()
