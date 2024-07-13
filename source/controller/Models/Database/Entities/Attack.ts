@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from "typeorm"
+import { Column, ManyToOne, OneToMany, ViewEntity } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import Country from "./Country"
 import Search from "./Search"
@@ -12,7 +12,7 @@ import User from "./User"
 |
 | 
 */
-@Entity()
+@ViewEntity()
 export default class Attack extends BaseEntity {
 
     /**
