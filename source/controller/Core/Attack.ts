@@ -2,6 +2,7 @@ import AttackEntity from "@/Models/Database/Entities/Attack"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
+import List from "@/Tools/List"
 import Search from "./Search"
 
 /*
@@ -23,7 +24,7 @@ export default class Attack {
      * Keywords
      * 
      */
-    public readonly keywords: string[]
+    public readonly keywords: List<string>
 
     /**
      * Country
@@ -59,7 +60,7 @@ export default class Attack {
         this.id = primitiveAttack.id
 
         // Set keywords
-        this.keywords = primitiveAttack.keywords
+        this.keywords = new List(primitiveAttack.keywords)
 
         // Set country
         this.country = primitiveAttack.country ? new Country(primitiveAttack.country) : undefined
@@ -72,6 +73,16 @@ export default class Attack {
 
         // Set total searches
         this.totalSearches = primitiveAttack.totalSearches
+    }
+
+    /**
+     * Generate keyword method
+     * 
+     * @returns
+     */
+    public generateKeyword() {
+
+        return this.keywords.next()
     }
 
     /**

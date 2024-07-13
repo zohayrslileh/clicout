@@ -47,6 +47,8 @@ export default class List<Item> {
      */
     public next(): Item {
 
+        if (!this.thereIsMore) this.index = 0
+
         const item = this.items[this.index]
 
         this.index++
