@@ -68,7 +68,7 @@ export default function ({ attack }: Props) {
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
-                <p className="text-xl leading-none font-medium">{attack.searchesCount}</p>
+                <p className="text-xl leading-none font-medium">0</p>
                 <p className="text-[12px]">/ {attack.searchesTotal || "♾️"} <Lang>Searches</Lang></p>
             </div>
         </div>

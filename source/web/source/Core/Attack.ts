@@ -31,12 +31,6 @@ export default class Attack {
     public readonly searchesTotal: number
 
     /**
-     * Searches count
-     * 
-     */
-    public readonly searchesCount: number
-
-    /**
      * Constructor methodd
      * 
      */
@@ -47,9 +41,6 @@ export default class Attack {
 
         // Set searches total
         this.searchesTotal = primitiveAttack.searchesTotal
-
-        // Set searches count
-        this.searchesCount = primitiveAttack.searchesCount
     }
 
     /**
@@ -136,5 +127,4 @@ export default class Attack {
 export interface PrimitiveAttack {
     id: number
     searchesTotal: number
-    searchesCount: number
 }

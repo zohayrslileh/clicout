@@ -1,5 +1,4 @@
 import SubscriptionEntity from "@/Models/Database/Entities/Subscription"
-import AttackView from "@/Models/Database/Entities/AttackView"
 import CountryEntity from "@/Models/Database/Entities/Country"
 import UnauthorizedException from "./Exception/Unauthorized"
 import AttackEntity from "@/Models/Database/Entities/Attack"
@@ -298,7 +297,7 @@ export default class User {
         await attackEntity.save()
 
         // Attck
-        const attack = new Attack(await AttackView.findOneByOrFail({ id: attackEntity.id }))
+        const attack = new Attack(attackEntity)
 
         // Start
         attack.safeStart()
@@ -313,11 +312,11 @@ export default class User {
      */
     public async runningAttacks() {
 
-        // Attack views
-        const attackViews = await AttackView.findBy({ user: { id: this.id }, status: "RUNNING" })
+        // Attack entities
+        const attackEntities = await AttackEntity.findBy({ user: { id: this.id }, status: "RUNNING" })
 
         // Initialize attacks
-        return attackViews.map(attackView => new Attack(attackView))
+        return attackEntities.map(attackEntity => new Attack(attackEntity))
     }
 
     /**
@@ -327,11 +326,11 @@ export default class User {
      */
     public async findAttack(id: unknown) {
 
-        // Attack view
-        const attackView = await AttackView.findOneByOrFail({ user: { id: this.id }, id: zod.number().parse(id) })
+        // Attack entity
+        const attackEntity = await AttackEntity.findOneByOrFail({ user: { id: this.id }, id: zod.number().parse(id) })
 
         // Initialize attack
-        return new Attack(attackView)
+        return new Attack(attackEntity)
     }
 }
 
