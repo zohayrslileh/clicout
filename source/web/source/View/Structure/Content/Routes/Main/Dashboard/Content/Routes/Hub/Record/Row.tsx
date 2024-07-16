@@ -1,12 +1,13 @@
-import { Lang, useLang } from "@/Tools/Language"
+import { Button, Spinner } from "@nextui-org/react"
 import compiler from "@/View/Exception/compiler"
+import { Lang, useLang } from "@/Tools/Language"
+import { useCallback, useEffect } from "react"
 import { CiStopwatch } from "react-icons/ci"
-import { Button } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
-import { useCallback } from "react"
 import toast from "react-hot-toast"
 import Attack from "@/Core/Attack"
+import User from "@/Core/User"
 
 /**
  * Row
@@ -22,6 +23,12 @@ export default function ({ attack }: Props) {
     const lang = useLang()
 
     /**
+     * Namespace
+     * 
+     */
+    const namespace = User.useNamespace()
+
+    /**
      * Running attacks promise
      * 
      */
@@ -32,6 +39,12 @@ export default function ({ attack }: Props) {
      * 
      */
     const stopPromise = usePromise(async () => await attack.stop())
+
+    /**
+     * Searches total
+     * 
+     */
+    const searchesTotal = namespace.useState<number>(`${attack.id}:searches-total`)
 
     /**
      * Stop attack method
@@ -60,6 +73,16 @@ export default function ({ attack }: Props) {
 
     }, [stopPromise.execute, attack])
 
+    /**
+     * Effect
+     * 
+     */
+    useEffect(function () {
+
+        namespace.socket.emit("searches-total", attack.id)
+
+    }, [])
+
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
         <div className="grid gap-5">
@@ -68,7 +91,7 @@ export default function ({ attack }: Props) {
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
-                <p className="text-xl leading-none font-medium">0</p>
+                <p className="text-xl leading-none font-medium">{searchesTotal || <Spinner size="sm" />}</p>
                 <p className="text-[12px]">/ {attack.searchesTotal || "∞"} <Lang>searches</Lang></p>
             </div>
         </div>
