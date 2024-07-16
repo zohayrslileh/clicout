@@ -18,5 +18,15 @@ export default new Router(async function (main) {
 
         // Join
         client.socket.join(user.id.toString())
+
+        // On searches total
+        client.on("searches-total", async function (_, attackId: unknown) {
+
+            // Attack find
+            const attack = await user.findAttack(attackId)
+
+            // Emit
+            client.socket.emit(`${attackId}:searches-total`, await attack.searchesCount())
+        })
     })
 })

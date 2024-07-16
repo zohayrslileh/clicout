@@ -45,7 +45,7 @@ export default function ({ attack }: Props) {
      * 
      */
     const searchesTotal = namespace.useState<number>(`${attack.id}:searches-total`)
-
+console.log(searchesTotal)
     /**
      * Stop attack method
      * 
@@ -91,7 +91,7 @@ export default function ({ attack }: Props) {
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
-                <p className="text-xl leading-none font-medium">{searchesTotal || <Spinner size="sm" />}</p>
+                <p className="text-xl leading-none font-medium">{searchesTotal === undefined ? <Spinner size="sm" color="success" /> : searchesTotal}</p>
                 <p className="text-[12px]">/ {attack.searchesTotal || "∞"} <Lang>searches</Lang></p>
             </div>
         </div>

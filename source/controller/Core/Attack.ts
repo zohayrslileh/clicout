@@ -1,4 +1,5 @@
 import AttackEntity from "@/Models/Database/Entities/Attack"
+import SearchEntity from "@/Models/Database/Entities/Search"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
@@ -153,6 +154,16 @@ export default class Attack {
 
         // Save
         await attackEntity.save()
+    }
+
+    /**
+     * Searches count
+     * 
+     * @returns
+     */
+    public async searchesCount() {
+
+        return await SearchEntity.countBy({ attack: { id: this.id } })
     }
 }
 
