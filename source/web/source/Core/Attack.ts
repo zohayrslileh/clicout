@@ -25,10 +25,16 @@ export default class Attack {
     public readonly id: number
 
     /**
-     * Searches
+     * Searches total
      * 
      */
-    public readonly searches: number
+    public readonly searchesTotal: number
+
+    /**
+     * Searches count
+     * 
+     */
+    public readonly searchesCount: number
 
     /**
      * Constructor methodd
@@ -39,8 +45,11 @@ export default class Attack {
         // Set id
         this.id = primitiveAttack.id
 
-        // Set searches
-        this.searches = primitiveAttack.searches
+        // Set searches total
+        this.searchesTotal = primitiveAttack.searchesTotal
+
+        // Set searches count
+        this.searchesCount = primitiveAttack.searchesCount
     }
 
     /**
@@ -126,5 +135,6 @@ export default class Attack {
 */
 export interface PrimitiveAttack {
     id: number
-    searches: number
+    searchesTotal: number
+    searchesCount: number
 }
