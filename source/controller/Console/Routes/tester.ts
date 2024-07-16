@@ -1,4 +1,4 @@
-import Attack from "@/Models/Database/Entities/Attack"
+import AttackView from "@/Models/Database/Entities/AttackView"
 
 /*
 |-----------------------------
@@ -9,7 +9,7 @@ import Attack from "@/Models/Database/Entities/Attack"
 */
 export default async function () {
 
-    const attacks = await Attack.find()
+    const attacks = await AttackView.find()
     
     console.log(attacks)
 
