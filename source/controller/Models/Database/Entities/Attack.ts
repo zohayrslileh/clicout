@@ -4,6 +4,7 @@ import Country from "./Country"
 import Search from "./Search"
 import City from "./City"
 import User from "./User"
+import AttackView from "./AttackView"
 
 /*
 |-----------------------------
@@ -91,4 +92,14 @@ export default class Attack extends BaseEntity {
      */
     @OneToMany(() => Search, search => search.attack)
     declare public searches: Search[]
+
+    /**
+     * View
+     * 
+     * @returns
+     */
+    public async view() {
+
+        return await AttackView.findOneByOrFail({ id: this.id })
+    }
 }
