@@ -11,7 +11,7 @@ export default async function () {
 
     const attacks = await AttackView.find()
     
-    console.log(attacks)
+    console.log(attacks.length)
 
     console.log("The test completed successfully 🧪 ");
 }
