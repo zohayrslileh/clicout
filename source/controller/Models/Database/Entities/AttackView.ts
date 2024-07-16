@@ -1,4 +1,4 @@
-import { ViewEntity } from "typeorm"
+import { ViewColumn, ViewEntity } from "typeorm"
 import Attack from "./Attack"
 
 /*
@@ -9,7 +9,21 @@ import Attack from "./Attack"
 | 
 */
 @ViewEntity({
-    expression: `SELECT * FROM attack AS Attack`
+    expression: `
+    SELECT
+        Attack.*,
+        COUNT(Search.id) AS searchesCount
+    FROM attack AS Attack
+        LEFT JOIN search AS Search ON Search.attackId = Attack.id
+    GROUP BY Attack.id
+    `
 })
 export default class AttackView extends Attack {
+
+    /**
+     * Searches count
+     * 
+     */
+    @ViewColumn()
+    declare public searchesCount: number
 }
