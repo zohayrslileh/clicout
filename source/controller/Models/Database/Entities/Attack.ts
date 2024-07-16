@@ -65,11 +65,11 @@ export default class Attack extends BaseEntity {
     declare public device: string | null
 
     /**
-     * Total searches
+     * Searches total
      * 
      */
     @Column({ type: "int", nullable: false })
-    declare public totalSearches: number
+    declare public searchesTotal: number
 
     /**
      * Status
