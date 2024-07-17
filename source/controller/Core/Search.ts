@@ -1,4 +1,5 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
+import EventEmitter from "events"
 import Attack from "./Attack"
 
 /*
@@ -9,6 +10,12 @@ import Attack from "./Attack"
 | 
 */
 export default class Search {
+
+    /**
+     * Broadcast
+     * 
+     */
+    public static readonly broadcast = new EventEmitter
 
     /**
      * Id
@@ -51,8 +58,13 @@ export default class Search {
         // Save
         await searchEntity.save()
 
-        // Initialize search
-        return new this(searchEntity)
+        // Initialize
+        const search = new this(searchEntity)
+
+        // Emit to broadcast
+        Search.broadcast.emit("create", search)
+
+        return search
     }
 }
 
