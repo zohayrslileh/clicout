@@ -3,7 +3,6 @@ import SearchEntity from "@/Models/Database/Entities/Search"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
-import EventEmitter from "events"
 import List from "@/Tools/List"
 import Search from "./Search"
 
@@ -15,12 +14,6 @@ import Search from "./Search"
 | 
 */
 export default class Attack {
-
-    /**
-     * Broadcast
-     * 
-     */
-    public static readonly broadcast = EventEmitter
 
     /**
      * Id

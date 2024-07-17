@@ -17,8 +17,8 @@ export default new Router(async function (main) {
         // User
         const user = await User.authentication(client.socket.handshake.auth.authorization)
 
-        // On new search
-        user.on("new-search", async function (attack: Attack) {
+        // On attack new search
+        user.on("attack-new-search", async function (attack: Attack) {
 
             // Emit
             client.socket.emit(`${attack.id}:searches-total`, await attack.searchesCount())
