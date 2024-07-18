@@ -28,7 +28,7 @@ export default async function () {
 
     const screencast = await page.screencast()
 
-    await page.goto("https://www.convertstring.com/")
+    await page.goto("https://ip.oxylabs.io/")
 
     var i = 0
 
