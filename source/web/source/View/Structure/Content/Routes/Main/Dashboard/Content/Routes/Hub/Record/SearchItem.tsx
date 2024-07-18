@@ -1,5 +1,6 @@
 import { BASE_SERVER_URL } from "@/Models/Server/Request"
 import Search from "@/Core/Search"
+import { useEffect, useRef } from "react"
 
 /**
  * Search item
@@ -8,7 +9,21 @@ import Search from "@/Core/Search"
  */
 export default function ({ search }: Props) {
 
-    return <video src={`${BASE_SERVER_URL}stream/${search.recordId}`} autoPlay />
+    const vid = useRef<HTMLVideoElement>(undefined!)
+
+    useEffect(function () {
+
+        vid.current.src = `${BASE_SERVER_URL}stream/${search.recordId}`
+
+        vid.current.currentTime = 999999999
+
+        vid.current.play()
+
+        vid.current.preload
+
+    }, [])
+
+    return <video ref={vid} controls preload="a" />
 }
 
 /**
