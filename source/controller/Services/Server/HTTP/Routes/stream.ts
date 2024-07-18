@@ -12,7 +12,7 @@ import { UUID } from "crypto"
 */
 export default async function (context: Context) {
 
-    var sendFirst = false
+    var firstSend = false
 
     // Record id
     const recordId = context.req.param("record_id")
@@ -23,21 +23,16 @@ export default async function (context: Context) {
     // Create stream
     return stream(context, async function (stream) {
 
+        if (!firstSend) {
+            firstSend = true
+            await stream.write(Buffer.from("1A45DFA39F4286810142F7810142F2810442F381084282847765626D42878102428581021853806701FFFFFFFFFFFFFF114D9B74AB4DBB8B53AB841549A96653AC81A14DBB8B53AB841654AE6B53AC81CB4DBB8C53AB841254C36753AC82011EEC010000000000006800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001549A966A52AD7B1830F42404D808C4C61766636312E332E31303457418C4C61766636312E332E3130341654AE6BCEAE0100000000000045D7810173C588", "hex"))
+        }
+
         // Create promise
         await new Promise<void>(async function (resolve) {
 
             // Set chunk method
-            const setChunk = async (chunk: Buffer) => {
-
-                var hexChunk = chunk.toString("hex").toUpperCase()
-
-                if (!sendFirst) {
-                    console.log(hexChunk.slice(0, 100))
-                    sendFirst = true
-                }
-
-                await stream.write(Buffer.from(hexChunk, "hex"))
-            }
+            const setChunk = async (chunk: Buffer) => await stream.write(chunk)
 
             // On chunk
             Search.broadcast.on(`${search.id}/chunk`, setChunk)
