@@ -169,6 +169,19 @@ export default class Attack {
     }
 
     /**
+     * Current search
+     * 
+     * @returns
+     */
+    public async currentSearch() {
+
+        return await SearchEntity.findOne({
+            where: { attack: { id: this.id } },
+            order: { id: "DESC" }
+        }) || undefined
+    }
+
+    /**
      * User
      * 
      * @returns

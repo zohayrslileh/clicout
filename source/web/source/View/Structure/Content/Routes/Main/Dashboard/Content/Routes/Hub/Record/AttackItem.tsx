@@ -43,10 +43,10 @@ export default function ({ attack }: Props) {
     const [searchesCount, setSearchesCount] = useState<number>(0)
 
     /**
-     * Search
+     * Current search
      * 
      */
-    const [search, setSearch] = useState<Search | undefined>(undefined)
+    const [currentSearch, setCurrentSearch] = useState<Search | undefined>(undefined)
 
     /**
      * Stop promise
@@ -55,10 +55,13 @@ export default function ({ attack }: Props) {
     const stopPromise = usePromise(async () => await attack.stop())
 
     /**
-     * On searches count
+     * On info
      * 
      */
-    namespace.useOn(`attack/${attack.id}/search/count`, function (searchesCount: number) {
+    namespace.useOn(`attack/${attack.id}/info`, function (searchesCount: number, currentSearch: PrimitiveSearch | undefined) {
+
+        // Set current search
+        if (currentSearch) setCurrentSearch(new Search(currentSearch))
 
         // Set searches count
         setSearchesCount(searchesCount)
@@ -68,10 +71,10 @@ export default function ({ attack }: Props) {
      * On new search
      * 
      */
-    namespace.useOn(`attack/${attack.id}/search/create`, function (primitiveSearch: PrimitiveSearch) {
+    namespace.useOn(`attack/${attack.id}/search/create`, function (currentSearch: PrimitiveSearch) {
 
-        // Set search
-        setSearch(new Search(primitiveSearch))
+        // Set current search
+        setCurrentSearch(new Search(currentSearch))
 
         // Set searches count
         setSearchesCount(searchesCount => searchesCount + 1)
@@ -110,14 +113,15 @@ export default function ({ attack }: Props) {
      */
     useEffect(function () {
 
-        namespace.socket.emit("attack", attack.id)
+        // Ask attack info
+        namespace.socket.emit("attack/info", attack.id)
 
     }, [])
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
         <div className="grid gap-5">
-            {search ? <SearchItem search={search} /> : <Spinner />}
+            {currentSearch ? <SearchItem search={currentSearch} /> : <Spinner />}
         </div>
 
         <div className="flex justify-between">
