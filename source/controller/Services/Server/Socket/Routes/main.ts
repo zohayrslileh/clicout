@@ -40,7 +40,7 @@ export default new Router(async function (main) {
             const attack = await user.findAttack(attackId)
 
             // Emit
-            client.socket.emit(`${attack.id}:searches-total`, await attack.searchesCount())
+            client.socket.emit(`${attack.id}/search/total`, await attack.searchesCount())
         })
     })
 })

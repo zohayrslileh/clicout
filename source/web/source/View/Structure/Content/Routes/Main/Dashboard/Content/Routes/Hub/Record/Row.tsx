@@ -44,8 +44,16 @@ export default function ({ attack }: Props) {
      * Searches total
      * 
      */
-    const searchesTotal = namespace.useState<number>(`${attack.id}:searches-total`)
-console.log(searchesTotal)
+    const searchesTotal = namespace.useState<number>(`${attack.id}/search/total`)
+
+    /**
+     * On new search
+     * 
+     */
+    namespace.useOn(`attack/${attack.id}/search/create`, function(search: unknown) {
+        console.log(search)
+    })
+
     /**
      * Stop attack method
      * 
