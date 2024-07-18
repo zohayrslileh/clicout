@@ -15,6 +15,12 @@ export default class Search {
     public readonly id: number
 
     /**
+     * Record id
+     * 
+     */
+    public readonly recordId: string
+
+    /**
      * Constructor methodd
      * 
      */
@@ -22,6 +28,9 @@ export default class Search {
 
         // Set id
         this.id = primitiveSearch.id
+
+        // Set record id
+        this.recordId = primitiveSearch.recordId
     }
 }
 
@@ -34,4 +43,5 @@ export default class Search {
 */
 export interface PrimitiveSearch {
     id: number
+    recordId: string
 }

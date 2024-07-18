@@ -2,6 +2,7 @@ import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import EventEmitter from "events"
 import Attack from "./Attack"
+import { UUID } from "crypto"
 
 /*
 |-----------------------------
@@ -25,6 +26,12 @@ export default class Search {
     public readonly id: number
 
     /**
+     * Record id
+     * 
+     */
+    public readonly recordId: UUID
+
+    /**
      * Constructor method
      * 
      */
@@ -32,6 +39,9 @@ export default class Search {
 
         // Set id
         this.id = primitiveSearch.id
+
+        // Set record id
+        this.recordId = primitiveSearch.recordId
     }
 
     /**
@@ -91,4 +101,5 @@ export default class Search {
 */
 export interface PrimitiveSearch {
     id: number
+    recordId: UUID
 }
