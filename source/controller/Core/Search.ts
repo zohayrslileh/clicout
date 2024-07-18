@@ -1,6 +1,7 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import EventEmitter from "events"
+import { Page } from "puppeteer"
 import Attack from "./Attack"
 import { UUID } from "crypto"
 
@@ -18,6 +19,12 @@ export default class Search {
      * 
      */
     public static readonly broadcast = new EventEmitter
+
+    /**
+     * Streams
+     * 
+     */
+    public static readonly streams: Record<string, Page | undefined> = {}
 
     /**
      * Id
@@ -73,7 +80,10 @@ export default class Search {
         const search = new this(searchEntity)
 
         // Emit to broadcast
-        Search.broadcast.emit("create", search)
+        this.broadcast.emit("create", search)
+
+        // Launch
+        await search.launch()
 
         return search
     }
@@ -89,6 +99,15 @@ export default class Search {
         const attackEntity = await AttackEntity.findOneByOrFail({ searches: [{ id: this.id }] })
 
         return new Attack(attackEntity)
+    }
+
+    /**
+     * Launch
+     * 
+     * @returns
+     */
+    public async launch() {
+        
     }
 }
 
