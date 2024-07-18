@@ -1,6 +1,6 @@
+import { useCallback, useEffect, useState } from "react"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
-import { useCallback, useEffect } from "react"
 import { CiStopwatch } from "react-icons/ci"
 import { Button } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
@@ -35,23 +35,35 @@ export default function ({ attack }: Props) {
     const runningAttacks = Attack.useRunningController()
 
     /**
+     * Searches count
+     * 
+     */
+    const [searchesCount, setSearchesCount] = useState<number>(0)
+
+    /**
      * Stop promise
      * 
      */
     const stopPromise = usePromise(async () => await attack.stop())
 
     /**
-     * Searches total
+     * On searches count
      * 
      */
-    const searchesTotal = namespace.useState<number>(`${attack.id}/search/total`)
+    namespace.useOn(`attack/${attack.id}/search/count`, function (searchesCount: number) {
+
+        // Set searches count
+        setSearchesCount(searchesCount)
+    })
 
     /**
      * On new search
      * 
      */
-    namespace.useOn(`attack/${attack.id}/search/create`, function (search: unknown) {
-        console.log(search)
+    namespace.useOn(`attack/${attack.id}/search/create`, function (_: unknown) {
+
+        // Set searches count
+        setSearchesCount(searchesCount => searchesCount + 1)
     })
 
     /**
@@ -87,7 +99,7 @@ export default function ({ attack }: Props) {
      */
     useEffect(function () {
 
-        namespace.socket.emit("searches-total", attack.id)
+        namespace.socket.emit("attack", attack.id)
 
     }, [])
 
@@ -99,7 +111,7 @@ export default function ({ attack }: Props) {
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
-                <p className="text-xl leading-none font-medium">{searchesTotal === undefined ? "..." : searchesTotal}</p>
+                <p className="text-xl leading-none font-medium">{searchesCount}</p>
                 <p className="text-[12px]">/ {attack.searchesTotal || "∞"} <Lang>searches</Lang></p>
             </div>
         </div>
