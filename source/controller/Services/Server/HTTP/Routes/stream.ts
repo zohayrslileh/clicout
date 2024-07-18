@@ -33,6 +33,9 @@ export default async function (context: Context) {
             // Set chunk method
             const setChunk = async (chunk: Buffer) => stream.write(chunk)
 
+            // Write head chunk
+            if (Search.headChunk) await stream.write(Search.headChunk)
+
             // On chunk
             Search.broadcast.on(`${search.id}/chunk`, setChunk)
 
@@ -40,7 +43,7 @@ export default async function (context: Context) {
             stream.onAbort(function () {
 
                 // Off chunk
-                Search.broadcast.on(`${search.id}/chunk`, setChunk)
+                Search.broadcast.off(`${search.id}/chunk`, setChunk)
 
                 // Resolve
                 resolve()

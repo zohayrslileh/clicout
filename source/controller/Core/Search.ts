@@ -1,8 +1,8 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
-import puppeteer, { Page } from "puppeteer"
 import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
+import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
 import Attack from "./Attack"
 import { UUID } from "crypto"
@@ -23,10 +23,10 @@ export default class Search {
     public static readonly broadcast = new EventEmitter
 
     /**
-     * Pages
+     * Head chunk
      * 
      */
-    public static readonly pages: Record<string, Page | undefined> = {}
+    public static headChunk: Buffer | undefined
 
     /**
      * Id
@@ -131,16 +131,8 @@ export default class Search {
         const browser = await puppeteer.launch({
             headless: !DEV_MODE,
             args: [
-                '--no-sandbox', // Disable sandboxing
-                '--disable-setuid-sandbox', // Disable setuid sandbox
-                '--disable-dev-shm-usage', // Use /tmp instead of /dev/shm
-                '--disable-gpu', // Disable GPU hardware acceleration
-                '--no-zygote', // Disable zygote process
-                '--disable-extensions', // Disable all extensions
-                '--disable-background-networking', // Disable some background networking tasks
-                '--disable-background-timer-throttling', // Disable throttling of background timers
-                '--disable-renderer-backgrounding', // Prevent putting tabs in background mode
-                '--disable-device-discovery-notifications' // Disable device discovery notifications
+                "--no-sandbox",
+                "--disable-setuid-sandbox"
             ]
         })
 
@@ -181,10 +173,14 @@ export default class Search {
         const screencast = await page.screencast()
 
         // On data
-        screencast.on("data", chunk => Search.broadcast.emit(`${this.id}/chunk`, chunk))
+        screencast.on("data", (chunk: Buffer) => {
 
-        // Set page
-        Search.pages[this.recordId] = page
+            // Set head chunk
+            if (!Search.headChunk) Search.headChunk = chunk
+
+            // Emit to broadcast
+            Search.broadcast.emit(`${this.id}/chunk`, chunk)
+        })
     }
 }
 
