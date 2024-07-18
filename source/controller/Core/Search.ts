@@ -91,6 +91,20 @@ export default class Search {
     }
 
     /**
+     * Find by record id
+     * 
+     * @returns
+     */
+    public static async findByRecordId(recordId: UUID) {
+
+        // Initialize search entity
+        const searchEntity = await SearchEntity.findOneByOrFail({ recordId })
+
+        // Initialize search
+        return new this(searchEntity)
+    }
+
+    /**
      * Attack
      * 
      * @returns
@@ -162,6 +176,12 @@ export default class Search {
 
         // Wait same time
         await sleep(1500)
+
+        // Create screencast
+        const screencast = await page.screencast()
+
+        // On data
+        screencast.on("data", chunk => Search.broadcast.emit(`${this.id}/chunk`, chunk))
 
         // Set page
         Search.pages[this.recordId] = page

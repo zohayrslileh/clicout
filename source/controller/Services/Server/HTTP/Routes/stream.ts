@@ -1,7 +1,7 @@
-import HttpException from "@/Services/Server/HTTP/Exception/Exceptions"
 import { stream } from "hono/streaming"
 import Search from "@/Core/Search"
 import { Context } from "hono"
+import { UUID } from "crypto"
 
 /*
 |-----------------------------
@@ -15,11 +15,8 @@ export default async function (context: Context) {
     // Record id
     const recordId = context.req.param("record_id")
 
-    // Search page
-    const page = Search.pages[recordId]
-
-    // Check page
-    if (!page) throw new HttpException("Not found this stream")
+    // Search
+    const search = await Search.findByRecordId(recordId as UUID)
 
     // Set Content-Type
     context.header("Content-Type", "video/webm")
@@ -33,24 +30,11 @@ export default async function (context: Context) {
         // Create promise
         await new Promise<void>(async function (resolve) {
 
-            // Create screencast
-            const screencast = await page.screencast()
+            // On chunk
+            Search.broadcast.on(`${search.id}/chunk`, async (chunk: Buffer) => stream.write(chunk))
 
-            // On stream abort
-            stream.onAbort(function () {
-
-                // End screencast
-                screencast.stop()
-
-                resolve()
-            })
-
-            // On screencast data
-            screencast.on("data", function (data: Buffer) {
-
-                // Write to stream
-                stream.write(data)
-            })
+            // On abort
+            stream.onAbort(resolve)
         })
     })
 }
