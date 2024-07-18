@@ -21,10 +21,10 @@ export default class Search {
     public static readonly broadcast = new EventEmitter
 
     /**
-     * Streams
+     * Pages
      * 
      */
-    public static readonly streams: Record<string, Page | undefined> = {}
+    public static readonly pages: Record<string, Page | undefined> = {}
 
     /**
      * Id
