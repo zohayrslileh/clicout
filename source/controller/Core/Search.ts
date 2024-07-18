@@ -1,4 +1,5 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
+import AttackEntity from "@/Models/Database/Entities/Attack"
 import EventEmitter from "events"
 import Attack from "./Attack"
 
@@ -65,6 +66,19 @@ export default class Search {
         Search.broadcast.emit("create", search)
 
         return search
+    }
+
+    /**
+     * Attack
+     * 
+     * @returns
+     */
+    public async attack() {
+
+        // Attack entity
+        const attackEntity = await AttackEntity.findOneByOrFail({ searches: [{ id: this.id }] })
+
+        return new Attack(attackEntity)
     }
 }
 

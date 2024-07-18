@@ -1,10 +1,12 @@
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import SearchEntity from "@/Models/Database/Entities/Search"
+import UserEntity from "@/Models/Database/Entities/User"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
 import List from "@/Tools/List"
 import Search from "./Search"
+import User from "./User"
 
 /*
 |-----------------------------
@@ -164,6 +166,19 @@ export default class Attack {
     public async searchesCount() {
 
         return await SearchEntity.countBy({ attack: { id: this.id } })
+    }
+
+    /**
+     * User
+     * 
+     * @returns
+     */
+    public async user() {
+
+        // User entity
+        const userEntity = await UserEntity.findOneByOrFail({ attacks: [{ id: this.id }] })
+
+        return new User(userEntity)
     }
 }
 

@@ -1,5 +1,5 @@
 import Router from "@/Tools/Socket/Router"
-import Attack from "@/Core/Attack"
+import Search from "@/Core/Search"
 import User from "@/Core/User"
 
 /*
@@ -11,18 +11,27 @@ import User from "@/Core/User"
 */
 export default new Router(async function (main) {
 
+    // On new search
+    Search.broadcast.on("create", async function (search: Search) {
+
+        // Attack
+        const attack = await search.attack()
+
+        // User
+        const user = await attack.user()
+
+        // Emit
+        main.namespace.to(user.id.toString()).emit(`attack/${attack.id}/search/create`, search)
+    })
+
     // On connection
     main.onConnection(async function (client) {
 
         // User
         const user = await User.authentication(client.socket.handshake.auth.authorization)
 
-        // On attack new search
-        user.on("attack-new-search", async function (attack: Attack) {
-
-            // Emit
-            client.socket.emit(`${attack.id}:searches-total`, await attack.searchesCount())
-        })
+        // Join
+        client.socket.join(user.id.toString())
 
         // On searches total
         client.on("searches-total", async function (_, attackId: unknown) {
