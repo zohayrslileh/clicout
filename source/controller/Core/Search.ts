@@ -157,9 +157,6 @@ export default class Search {
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
-        // Set page
-        Search.pages[this.recordId] = page
-
         // Open google results page
         await page.goto("https://www.google.com/search?q=apple")
 
@@ -168,6 +165,15 @@ export default class Search {
 
         // Open google search page
         await page.goto("https://www.google.com/")
+
+        // Wait same time
+        await sleep(1500)
+
+        // Open blank
+        await page.goto("about:blank")
+
+        // Set page
+        Search.pages[this.recordId] = page
     }
 }
 
