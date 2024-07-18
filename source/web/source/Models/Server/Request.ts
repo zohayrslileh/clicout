@@ -4,13 +4,22 @@ import config from "@/config"
 
 /*
 |-----------------------------
+|  BASE_SERVER_URL
+|-----------------------------
+|
+|
+*/
+export const BASE_SERVER_URL = import.meta.env.DEV ? config.DEV_SERVER : "/"
+
+/*
+|-----------------------------
 |  Create instance
 |-----------------------------
 |
 |
 */
 export const createInstance = () => axios.create({
-    baseURL: (import.meta.env.DEV ? config.DEV_SERVER : "/") + "api",
+    baseURL: BASE_SERVER_URL + "api",
     timeout: 30000,
     headers: {
         "Authorization": Authorization.value
