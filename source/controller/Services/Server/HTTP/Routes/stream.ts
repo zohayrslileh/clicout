@@ -1,6 +1,6 @@
-import HttpException from "@/Services/Server/HTTP/Exception/Exceptions"
 import { stream } from "hono/streaming"
 import Search from "@/Core/Search"
+import sleep from "@/Tools/Sleep"
 import { Context } from "hono"
 
 /*
@@ -15,12 +15,6 @@ export default async function (context: Context) {
     // Record id
     const recordId = context.req.param("record_id")
 
-    // Search page
-    const page = Search.pages[recordId]
-
-    // Check page
-    if (!page) throw new HttpException("Not found this stream")
-
     // Set Content-Type
     context.header("Content-Type", "video/webm")
 
@@ -32,6 +26,17 @@ export default async function (context: Context) {
 
         // Create promise
         await new Promise(async function () {
+
+            // Wait generate page
+            do {
+
+                // Search page
+                var page = Search.pages[recordId]
+
+                // Wait same time
+                await sleep(2000)
+
+            } while (!page)
 
             // Create screencast
             const screencast = await page.screencast()
