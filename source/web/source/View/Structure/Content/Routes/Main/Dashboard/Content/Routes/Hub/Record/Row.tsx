@@ -1,8 +1,8 @@
-import { Button, Spinner } from "@nextui-org/react"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
 import { useCallback, useEffect } from "react"
 import { CiStopwatch } from "react-icons/ci"
+import { Button } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import toast from "react-hot-toast"
@@ -50,7 +50,7 @@ export default function ({ attack }: Props) {
      * On new search
      * 
      */
-    namespace.useOn(`attack/${attack.id}/search/create`, function(search: unknown) {
+    namespace.useOn(`attack/${attack.id}/search/create`, function (search: unknown) {
         console.log(search)
     })
 
@@ -99,7 +99,7 @@ export default function ({ attack }: Props) {
         <div className="flex justify-between">
             <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
             <div className="flex items-end gap-1 text-success-400">
-                <p className="text-xl leading-none font-medium">{searchesTotal === undefined ? <Spinner size="sm" color="success" /> : searchesTotal}</p>
+                <p className="text-xl leading-none font-medium">{searchesTotal === undefined ? "..." : searchesTotal}</p>
                 <p className="text-[12px]">/ {attack.searchesTotal || "∞"} <Lang>searches</Lang></p>
             </div>
         </div>
