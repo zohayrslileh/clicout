@@ -23,12 +23,6 @@ export default class Search {
     public static readonly broadcast = new EventEmitter
 
     /**
-     * Head chunk
-     * 
-     */
-    public static headChunk: Buffer | undefined
-
-    /**
      * Id
      * 
      */
@@ -164,7 +158,7 @@ export default class Search {
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
         // Open google search page
-        await page.goto("http://localhost:3000/api")
+        await page.goto("https://www.google.com")
 
         // Wait same time
         await sleep(1500)
@@ -174,9 +168,6 @@ export default class Search {
 
         // On data
         screencast.on("data", (chunk: Buffer) => {
-
-            // Set head chunk
-            if (!Search.headChunk) Search.headChunk = chunk
 
             // Emit to broadcast
             Search.broadcast.emit(`${this.id}/chunk`, chunk)
