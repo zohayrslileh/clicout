@@ -28,7 +28,7 @@ export default async function () {
 
     const screencast = await page.screencast()
 
-    await page.goto("https://www.google.com/")
+    await page.goto("https://www.convertstring.com/")
 
     var i = 0
 
