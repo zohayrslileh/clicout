@@ -37,12 +37,11 @@ export default async function (context: Context) {
             const screencast = await page.screencast()
 
             // On stream abort
-            stream.onAbort(async function () {
+            stream.onAbort(function () {
 
-                // Stop screencast
-                await screencast.stop()
+                // End screencast
+                screencast.stop()
 
-                // Resolve
                 resolve()
             })
 

@@ -157,14 +157,8 @@ export default class Search {
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
-        // Open google results page
-        await page.goto("https://www.google.com/search?q=apple")
-
-        // Wait same time
-        await sleep(1500)
-
         // Open google search page
-        await page.goto("https://www.google.com/")
+        await page.goto("http://localhost:3000/api")
 
         // Wait same time
         await sleep(1500)
