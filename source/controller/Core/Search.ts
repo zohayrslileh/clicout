@@ -1,9 +1,10 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
-import puppeteer, { Page } from "puppeteer"
 import { DEV_MODE } from "@/Models/Config"
+import puppeteer from "puppeteer-extra"
 import EventEmitter from "events"
 import sleep from "@/Tools/Sleep"
+import { Page } from "puppeteer"
 import Attack from "./Attack"
 import { UUID } from "crypto"
 
