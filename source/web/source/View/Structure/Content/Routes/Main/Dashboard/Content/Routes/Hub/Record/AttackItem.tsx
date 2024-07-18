@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useState } from "react"
+import Search, { PrimitiveSearch } from "@/Core/Search"
+import { Button, Spinner } from "@nextui-org/react"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
 import { CiStopwatch } from "react-icons/ci"
-import { Button } from "@nextui-org/react"
 import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
+import SearchItem from "./SearchItem"
 import toast from "react-hot-toast"
 import Attack from "@/Core/Attack"
 import User from "@/Core/User"
 
 /**
- * Row
+ * Attack item
  * 
  * @returns
  */
@@ -41,6 +43,12 @@ export default function ({ attack }: Props) {
     const [searchesCount, setSearchesCount] = useState<number>(0)
 
     /**
+     * Search
+     * 
+     */
+    const [search, setSearch] = useState<Search | undefined>(undefined)
+
+    /**
      * Stop promise
      * 
      */
@@ -60,7 +68,10 @@ export default function ({ attack }: Props) {
      * On new search
      * 
      */
-    namespace.useOn(`attack/${attack.id}/search/create`, function (_: unknown) {
+    namespace.useOn(`attack/${attack.id}/search/create`, function (primitiveSearch: PrimitiveSearch) {
+
+        // Set search
+        setSearch(new Search(primitiveSearch))
 
         // Set searches count
         setSearchesCount(searchesCount => searchesCount + 1)
@@ -106,6 +117,7 @@ export default function ({ attack }: Props) {
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
         <div className="grid gap-5">
+            {search ? <SearchItem search={search} /> : <Spinner />}
         </div>
 
         <div className="flex justify-between">

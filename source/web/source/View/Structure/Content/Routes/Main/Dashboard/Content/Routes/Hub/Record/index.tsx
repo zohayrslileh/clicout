@@ -4,9 +4,9 @@ import Card from "@/View/Components/Card"
 import { CiFlag1 } from "react-icons/ci"
 import { Lang } from "@/Tools/Language"
 import { Link } from "react-router-dom"
+import AttackItem from "./AttackItem"
 import Attack from "@/Core/Attack"
 import Plan from "@/Core/Plan"
-import Row from "./Row"
 
 /**
  * Record
@@ -48,7 +48,7 @@ export default function () {
         </Link>
 
         {/** Attacks */}
-        {runningAttacks.solve.map(attack => <Row key={attack.id} attack={attack} />)}
+        {runningAttacks.solve.map(attack => <AttackItem key={attack.id} attack={attack} />)}
 
     </div>
 }
