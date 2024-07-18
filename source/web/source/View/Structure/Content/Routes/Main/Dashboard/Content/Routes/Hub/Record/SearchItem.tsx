@@ -8,7 +8,7 @@ import Search from "@/Core/Search"
  */
 export default function ({ search }: Props) {
 
-    return <div>{BASE_SERVER_URL}${search.recordId}</div>
+    return <div>{BASE_SERVER_URL}stream/{search.recordId}</div>
 }
 
 /**

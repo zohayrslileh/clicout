@@ -4,6 +4,7 @@ import UserEntity from "@/Models/Database/Entities/User"
 import Country, { PrimitiveCountry } from "./Country"
 import City, { PrimitiveCity } from "./City"
 import UserAgent from "./UserAgent"
+import sleep from "@/Tools/Sleep"
 import List from "@/Tools/List"
 import Search from "./Search"
 import User from "./User"
@@ -124,6 +125,9 @@ export default class Attack {
      * @returns
      */
     private async start() {
+
+        // Wait same time
+        await sleep(1000)
 
         // Create search
         const search = await Search.create(this)
