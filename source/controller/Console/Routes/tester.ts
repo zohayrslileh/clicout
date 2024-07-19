@@ -35,9 +35,9 @@ export default async function () {
 
     const screencast = await page.screencast({ path: "storage/record.webm" })
 
-    const chunks: Buffer[] = []
+    const chunks: string[] = []
 
-    screencast.on("data", (chunk: Buffer) => chunks.push(chunk))
+    screencast.on("data", (chunk: Buffer) => chunks.push(chunk.toString("hex")))
 
     await page.goto("https://www.google.com/search?q=apple")
 
@@ -67,7 +67,7 @@ export default async function () {
 
     await browser.close()
 
-    new Json<Buffer[]>("storage/record.json").update(chunks)
+    new Json<string[]>("storage/record.json").update(chunks)
 
     console.log("The test completed successfully 🧪 ")
 }
