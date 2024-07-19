@@ -1,4 +1,5 @@
-import Json from "@/Tools/Json"
+import { writeFile } from "fs/promises"
+import sleep from "@/Tools/Sleep"
 import axios from "axios"
 
 interface Product {
@@ -27,7 +28,7 @@ interface Supermarket {
     categories: Category[]
 }
 
-const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTg1NzUsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTk3NzUsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiY2E4M2E0ZmYtMzg2My00ZGNiLTk4ZDAtNTM0MjE4NjFlYzcwIn0.RCaIq42H0im2Bzev_BsNcGgD3RFxBTQR6NBGjqpl5oE8IkcCKvaWvM3d-7qMT3_HBF9ewfOrVmTwWAKUJ3q2XLTAsNvICSBqxgWCimvBDwXtOkQUgdR6cOR_jIgai3iwAG2LEIEE5gVjB52QVe7o8VHb7nu2PDOEsrWpBVCVQZL_4KqlkArq5uiD5DmM0t178rRSx5kC4vMEaarpBNgcLQXpU_iofeybswoTU2lkTeBVesKqEBhZodqCM8M-vzv2f2_je_EM_tBvN-selLP475LLfFpPFaF_5woH7SOAfdAPvwZkjm3DRM2ZfNbYJuN5KNskVFQeuASjFVyn1I7p_g"
+const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MjI2MjgsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MjM4MjgsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiMjRmMjY3NTYtYjJkZS00NThkLWFhOWUtYWVhZjhiM2M2ZTA0In0.AFyzKxmtUNDv5b7e4t02ZTchrFXBcIHMmKVFaJpA9YQKOEtRgIFyI18DyAqScAYdhyXMz61_O479FDZG2-BhkrezcS_BIQ0hnT73Zfoce5qS-77A5MXqmqna47eJkmKuSaGWh9H1TphmFG_3k7BWJDK3Ye3OYvY512t2LZrOTeOK7WuoOq3EUI2wkJ34g0BIPRQoac-qNjCeGnOnZDX3aGVQIgJ45jL4tTINHX3CmMWGUMSq6yI4M3vA9P713yiPnAFTOQCDf3_r_fZENfyj5vRjuSw9RncWFcRx7NeffUZou-OwBl2dK_XtmaD75H86cIStFKey0Ir070RpcqDoow"
 
 const instance = axios.create({
     baseURL: "https://api.glovoapp.com/",
@@ -43,26 +44,46 @@ async function fetchProducts(path: string, categoryName: string) {
 
     const products: Product[] = []
 
-    const response = await instance.get(`/v3/${path}`)
+    do {
 
-    console.log(`${categoryName}:Fetch:Products ${new Date}`)
+        try {
 
-    for (const grid of response.data.data.body) {
+            const response = await instance.get(`/v3/${path}`)
 
-        for (const primativeProduct of grid.data.elements) {
+            console.log(`${categoryName}:Fetch:Products ${new Date}`)
 
-            const data = primativeProduct.data
+            for (const grid of response.data.data.body) {
 
-            const product: Product = {
-                title: data.name,
-                description: data.description,
-                price: data.price,
-                imageURL: data.imageUrl
+                for (const primativeProduct of grid.data.elements) {
+
+                    const data = primativeProduct.data
+
+                    const product: Product = {
+                        title: data.name,
+                        description: data.description,
+                        price: data.price,
+                        imageURL: data.imageUrl
+                    }
+
+                    products.push(product)
+                }
             }
 
-            products.push(product)
+            break
         }
-    }
+
+        catch (exception: any) {
+
+            console.error(exception.message)
+
+            await sleep(1 * 1000)
+
+            if (exception.response.status === 429) continue
+
+            else break
+        }
+
+    } while (true)
 
     return products
 }
@@ -97,47 +118,83 @@ async function handleCategories(primativeCategories: any[]) {
 
 async function fetchCategories(storeId: number, addressId: number) {
 
-    const response = await instance.get(`/v3/stores/${storeId}/addresses/${addressId}/node/store_menu`)
+    do {
 
-    console.log(`${storeId}:Fetch:Categories ${new Date}`)
+        try {
 
-    return await handleCategories(response.data.data.elements)
+            const response = await instance.get(`/v3/stores/${storeId}/addresses/${addressId}/node/store_menu`)
+
+            console.log(`${storeId}:Fetch:Categories ${new Date}`)
+
+            return await handleCategories(response.data.data.elements)
+
+            break
+        }
+
+        catch (exception: any) {
+
+            console.error(exception.message)
+
+            await sleep(1 * 1000)
+
+            continue
+        }
+
+    } while (true)
 }
 
 async function fetchSupermarkets() {
 
     const supermarkets: Supermarket[] = []
 
-    const response = await instance.get("/v3/feeds/categories/4")
+    do {
 
-    console.log(`Fetch:Supermarkets ${new Date}`)
+        try {
 
-    for (const primativeSupermarket of response.data.elements) {
+            const response = await instance.get("/v3/feeds/categories/4")
 
-        const singleData = primativeSupermarket.singleData
+            console.log(`Fetch:Supermarkets ${new Date}`)
 
-        if (!singleData) continue
+            for (const primativeSupermarket of response.data.elements) {
 
-        const storeData = singleData.storeData
+                const singleData = primativeSupermarket.singleData
 
-        if (!storeData) continue
+                if (!singleData) continue
 
-        const store = storeData.store
+                const storeData = singleData.storeData
 
-        const supermarket: Supermarket = {
-            name: store.name,
-            address: store.address,
-            phoneNumber: store.phoneNumber,
-            categories: await fetchCategories(store.id, store.addressId)
+                if (!storeData) continue
+
+                const store = storeData.store
+
+                const supermarket: Supermarket = {
+                    name: store.name,
+                    address: store.address,
+                    phoneNumber: store.phoneNumber,
+                    categories: await fetchCategories(store.id, store.addressId)
+                }
+
+                supermarkets.push(supermarket)
+            }
+
+            break
         }
 
-        supermarkets.push(supermarket)
-    }
+        catch (exception: any) {
+
+            console.error(exception.message)
+
+            await sleep(1 * 1000)
+
+            continue
+        }
+
+    } while (true)
 
     return supermarkets
 }
 
 export default async function () {
 
-    new Json("storage/supermarkets.json").update(await fetchSupermarkets())
+    await writeFile(`storage/supermarkets.json`, JSON.stringify(await fetchSupermarkets()))
 }
