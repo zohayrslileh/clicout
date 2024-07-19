@@ -8,14 +8,10 @@ interface Product {
     imageURL: string
 }
 
-interface Subcategory {
-    name: string
-    products: Product[]
-}
-
 interface Category {
     name: string
-    subcategories: Subcategory[]
+    subcategories?: Category[]
+    products?: Product[]
 }
 
 interface Supermarket {
@@ -25,7 +21,7 @@ interface Supermarket {
     categories: Category[]
 }
 
-const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTQzNDIsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTU1NDIsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiOTEzNGI1NGUtNTk0ZS00YTAzLThmOGEtZTQ4M2RiNzIyNmU3In0.Uio4_wISBVoXON1_U0N3G25DceG2KrOxyCmTjLBaqdSgr6vgUMbtTjeOWr04WNudVjDhmdO1UzZMETPTVHLQ7MBqwPFmxukxe5rbLbzZ8ZWQLfALjf-rKq6k8Ol0OBtkmrXvZFcqXPDDxiWiHtY3CnFYUyYTVrVdz878Pq2XMBe5A6ooy8bEXJ_a3o3aYZpSA-0bRpYt2CIWe7sKNBnToZwFU2KvaEOsUxpi_zNu3VaqaSSUC0hmYHuaU4rYzJUH46MYhFXehDvtPqSECceKIhM06i9tgxFNuNJkWwmSgIPkaY1Za898xFeJEkAUIWEXWneWW9Tn3ID0atgz5iMqGQ"
+const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTcxMjgsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTgzMjgsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiNGQ4YmNiMmUtNGI2ZC00ODQ2LTg1MTMtZDNmNmJiNTFiYWZhIn0.ji0C_LVCDrKzuYo24X5aeE4NclH2fi9s51X1ec8oSmULbY2S56ADM-eGPBwi73hVtTTKf5FJJU0-07kFQMMGM1BxpeVBbUPqk5oBJMCVkimf-BqV0xAGEtZZSNhzQx4sSQJrYs3wiRdJt5eKUNvSjixXX0KnRIazbNqbCsuomTvAAvHDF1dSfn5pYNGPsjmIgf4qdv61_Pp28S3tYISf6fb3QfdTdy4BdgBL34xMf9jFNDOn5gCMmyOZmRTLR2JAS_Y2_rXc4LMDwG5qRF6VFG0Hzjzr--IPMhqW7zXYj3ZY7k9pXy9B1lMkMVGT2juNaMBON-fBhN9oA1dQtvzzLA"
 
 const instance = axios.create({
     baseURL: "https://api.glovoapp.com/",
@@ -36,11 +32,37 @@ const instance = axios.create({
     }
 })
 
+async function fetchCategories(storeId: number, addressId: number) {
+
+    const categories: Category[] = []
+
+    const response = await instance.get(`/v3/stores/${storeId}/addresses/${addressId}/node/store_menu`)
+
+    console.log(`${storeId}:Fetch:Categories ${new Date}`)
+
+    for (const primativeCategory of response.data.data.elements) {
+
+        const tracking = primativeCategory.tracking
+
+        if (!tracking.collectionGroupId) continue
+
+        const category: Category = {
+            name: primativeCategory.name,
+            subcategories: [],
+            products: []
+        }
+
+        categories.push(category)
+    }
+
+    return categories
+}
+
 async function fetchSupermarkets() {
 
     const supermarkets: Supermarket[] = []
 
-    const response = await instance.get("/v3/feeds/categories/4?cacheId=MAR_EhxSdWUgRsOocywgTWFycmFrZXNoLCBNb3JvY2NvIi4qLAoUChIJD_FTAjbprw0RY5yeVA9AJeoSFAoSCVGeF5aN7q8NEbith09TtlBZ&limit=48&offset=0")
+    const response = await instance.get("/v3/feeds/categories/4")
 
     console.log(`Fetch:Supermarkets ${new Date}`)
 
@@ -60,10 +82,12 @@ async function fetchSupermarkets() {
             name: store.name,
             address: store.address,
             phoneNumber: store.phoneNumber,
-            categories: []
+            categories: await fetchCategories(store.id, store.addressId)
         }
 
         supermarkets.push(supermarket)
+
+        break
     }
 
     return supermarkets
