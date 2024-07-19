@@ -1,3 +1,4 @@
+import Json from "@/Tools/Json"
 import axios from "axios"
 
 interface Product {
@@ -24,7 +25,7 @@ interface Supermarket {
     categories: Category[]
 }
 
-const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTE3NTMsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTI5NTMsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiNDU1NzAzOWQtYzk4OS00ZjFmLThlOWYtZTMzYzdlNzY1OTNkIn0.loh-_59BKb7VlXgqZUe6gLeKFQc9aC5jBIy2_20pVashAAN9oN3OjiT3CJTsdSbtpi_DhnIwMdVpxOgx5Gz5-HDaiAOb-fTMx250Z6UDLIV3HAQ4ROh7QteHCrQNeQV2QlliFRFi7qu1wfwapmKmziRSGuDuPeXCxpF3rMGEK3OgnLHeKWYaZuMdbzBeba_UTzlOUzNfEsDa3J4iMNglmuSxLnRlBkEBaiIbz_XC125wWbIk6KeiiiyQsNADaPp44w3JLdU8gMeI2Qs9soi-egMAFr-8FBGTtNiOzIwVCbMnro6Rz9Cde3RPDY_rjnmj5N-b1usuPwFjh17mlze_kw"
+const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTI5NzMsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTQxNzMsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiZjM3M2I3YWYtZTMyOS00MjFjLTlmODUtMDVhODAyMzc0ZjI0In0.NpB0SOerZW77OiWcTXuFplc-61Wci8JLWbEGxICCzVlf03AckqzxCLgGK_UF26eqVfliY4305g9UuVkoM3-6eLJDCSy5ccAweXa0-e52eGucwH_QO6vRa45BcQxrULukokqMYhL4ZlYNWBy_enLtHCd31Yu0IyDQ4wOiZat4TceRoJ_YyHGJygyi-lZJPbSnD5qPVFfK2ftWZ9dSITc4JVCTmFGsAzSEraJyN6jjFDngZUvWsep9rMa9FdsLj6aY0_8R2-yDVVefEIVX6g96ORYc1sNstyB8VHTaTCqE3Jppr8Qe0W6jMl7OwPM752ehuQB9fniub06BNDzBxvhgYg"
 
 const instance = axios.create({
     baseURL: "https://api.glovoapp.com/",
@@ -34,9 +35,21 @@ const instance = axios.create({
     }
 })
 
+async function fetchSupermarkets() {
+
+    const supermarkets: Supermarket[] = []
+
+    const response = await instance.get("v3/feeds/categories/4")
+
+    for (const primativeSupermarket of response.data.elements) {
+
+        supermarkets.push(primativeSupermarket)
+    }
+
+    return supermarkets
+}
+
 export default async function () {
 
-    const response = await instance.get<Supermarket[]>("v3/feeds/categories/4")
-
-    return response.data
+    new Json("storage/supermarkets.json").update(await fetchSupermarkets())
 }

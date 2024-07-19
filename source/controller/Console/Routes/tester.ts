@@ -9,7 +9,7 @@ import Glovo from "@/Core/Glovo"
 */
 export default async function () {
 
-    console.log(await Glovo())
+    await Glovo()
 
     console.log("The test completed successfully 🧪 ")
 }
