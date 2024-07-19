@@ -1,4 +1,4 @@
-import Json from "@/Tools/Json"
+import Glovo from "@/Core/Glovo"
 
 /*
 |-----------------------------
@@ -9,9 +9,7 @@ import Json from "@/Tools/Json"
 */
 export default async function () {
 
-    const [chunk] = new Json<string[]>("storage/record.json").value
-
-    console.log(chunk)
+    console.log(await Glovo())
 
     console.log("The test completed successfully 🧪 ")
 }
