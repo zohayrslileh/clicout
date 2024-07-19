@@ -86,8 +86,6 @@ async function fetchSupermarkets() {
         }
 
         supermarkets.push(supermarket)
-
-        break
     }
 
     return supermarkets
