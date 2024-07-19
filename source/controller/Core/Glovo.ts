@@ -25,13 +25,14 @@ interface Supermarket {
     categories: Category[]
 }
 
-const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTI5NzMsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTQxNzMsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiZjM3M2I3YWYtZTMyOS00MjFjLTlmODUtMDVhODAyMzc0ZjI0In0.NpB0SOerZW77OiWcTXuFplc-61Wci8JLWbEGxICCzVlf03AckqzxCLgGK_UF26eqVfliY4305g9UuVkoM3-6eLJDCSy5ccAweXa0-e52eGucwH_QO6vRa45BcQxrULukokqMYhL4ZlYNWBy_enLtHCd31Yu0IyDQ4wOiZat4TceRoJ_YyHGJygyi-lZJPbSnD5qPVFfK2ftWZ9dSITc4JVCTmFGsAzSEraJyN6jjFDngZUvWsep9rMa9FdsLj6aY0_8R2-yDVVefEIVX6g96ORYc1sNstyB8VHTaTCqE3Jppr8Qe0W6jMl7OwPM752ehuQB9fniub06BNDzBxvhgYg"
+const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTQzNDIsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTU1NDIsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiOTEzNGI1NGUtNTk0ZS00YTAzLThmOGEtZTQ4M2RiNzIyNmU3In0.Uio4_wISBVoXON1_U0N3G25DceG2KrOxyCmTjLBaqdSgr6vgUMbtTjeOWr04WNudVjDhmdO1UzZMETPTVHLQ7MBqwPFmxukxe5rbLbzZ8ZWQLfALjf-rKq6k8Ol0OBtkmrXvZFcqXPDDxiWiHtY3CnFYUyYTVrVdz878Pq2XMBe5A6ooy8bEXJ_a3o3aYZpSA-0bRpYt2CIWe7sKNBnToZwFU2KvaEOsUxpi_zNu3VaqaSSUC0hmYHuaU4rYzJUH46MYhFXehDvtPqSECceKIhM06i9tgxFNuNJkWwmSgIPkaY1Za898xFeJEkAUIWEXWneWW9Tn3ID0atgz5iMqGQ"
 
 const instance = axios.create({
     baseURL: "https://api.glovoapp.com/",
     headers: {
         "Authorization": Authorization,
-        "Glovo-Location-City-Code": "MAR"
+        "Glovo-Location-City-Code": "MAR",
+        "Glovo-App-Platform": "web"
     }
 })
 
@@ -39,11 +40,28 @@ async function fetchSupermarkets() {
 
     const supermarkets: Supermarket[] = []
 
-    const response = await instance.get("v3/feeds/categories/4")
+    const response = await instance.get("/v3/feeds/categories/4?cacheId=MAR_EhxSdWUgRsOocywgTWFycmFrZXNoLCBNb3JvY2NvIi4qLAoUChIJD_FTAjbprw0RY5yeVA9AJeoSFAoSCVGeF5aN7q8NEbith09TtlBZ&limit=48&offset=0")
 
     for (const primativeSupermarket of response.data.elements) {
 
-        supermarkets.push(primativeSupermarket)
+        const singleData = primativeSupermarket.singleData
+
+        if (!singleData) continue
+
+        const storeData = singleData.storeData
+
+        if (!storeData) continue
+
+        const store = storeData.store
+
+        const supermarket: Supermarket = {
+            name: store.name,
+            address: store.address,
+            phoneNumber: store.phoneNumber,
+            categories: []
+        }
+
+        supermarkets.push(supermarket)
     }
 
     return supermarkets
