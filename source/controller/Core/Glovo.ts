@@ -42,6 +42,8 @@ async function fetchSupermarkets() {
 
     const response = await instance.get("/v3/feeds/categories/4?cacheId=MAR_EhxSdWUgRsOocywgTWFycmFrZXNoLCBNb3JvY2NvIi4qLAoUChIJD_FTAjbprw0RY5yeVA9AJeoSFAoSCVGeF5aN7q8NEbith09TtlBZ&limit=48&offset=0")
 
+    console.log(`Fetch:Supermarkets ${new Date}`)
+
     for (const primativeSupermarket of response.data.elements) {
 
         const singleData = primativeSupermarket.singleData
