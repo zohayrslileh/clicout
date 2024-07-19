@@ -10,8 +10,8 @@ interface Product {
 
 interface Category {
     name: string
-    subcategories?: Category[]
-    products?: Product[]
+    subcategories: Category[]
+    products: Product[]
 }
 
 interface Supermarket {
@@ -32,23 +32,19 @@ const instance = axios.create({
     }
 })
 
-async function fetchCategories(storeId: number, addressId: number) {
+async function handleCategories(primativeCategories: any[]) {
 
     const categories: Category[] = []
 
-    const response = await instance.get(`/v3/stores/${storeId}/addresses/${addressId}/node/store_menu`)
-
-    console.log(`${storeId}:Fetch:Categories ${new Date}`)
-
-    for (const primativeCategory of response.data.data.elements) {
+    for (const primativeCategory of primativeCategories) {
 
         const tracking = primativeCategory.tracking
 
-        if (!tracking.collectionGroupId) continue
+        if (tracking.collectionType === "TOP_SELLERS") continue
 
         const category: Category = {
             name: primativeCategory.name,
-            subcategories: [],
+            subcategories: await handleCategories(primativeCategory.elements),
             products: []
         }
 
@@ -56,6 +52,15 @@ async function fetchCategories(storeId: number, addressId: number) {
     }
 
     return categories
+}
+
+async function fetchCategories(storeId: number, addressId: number) {
+
+    const response = await instance.get(`/v3/stores/${storeId}/addresses/${addressId}/node/store_menu`)
+
+    console.log(`${storeId}:Fetch:Categories ${new Date}`)
+
+    return await handleCategories(response.data.data.elements)
 }
 
 async function fetchSupermarkets() {
