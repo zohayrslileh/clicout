@@ -8,11 +8,17 @@ interface Product {
     imageURL: string
 }
 
-interface Category {
+interface ParentCategory {
     name: string
     subcategories: Category[]
+}
+
+interface SubCategory {
+    name: string
     products: Product[]
 }
+
+type Category = ParentCategory | SubCategory
 
 interface Supermarket {
     name: string
@@ -21,16 +27,45 @@ interface Supermarket {
     categories: Category[]
 }
 
-const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTcxMjgsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTgzMjgsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiNGQ4YmNiMmUtNGI2ZC00ODQ2LTg1MTMtZDNmNmJiNTFiYWZhIn0.ji0C_LVCDrKzuYo24X5aeE4NclH2fi9s51X1ec8oSmULbY2S56ADM-eGPBwi73hVtTTKf5FJJU0-07kFQMMGM1BxpeVBbUPqk5oBJMCVkimf-BqV0xAGEtZZSNhzQx4sSQJrYs3wiRdJt5eKUNvSjixXX0KnRIazbNqbCsuomTvAAvHDF1dSfn5pYNGPsjmIgf4qdv61_Pp28S3tYISf6fb3QfdTdy4BdgBL34xMf9jFNDOn5gCMmyOZmRTLR2JAS_Y2_rXc4LMDwG5qRF6VFG0Hzjzr--IPMhqW7zXYj3ZY7k9pXy9B1lMkMVGT2juNaMBON-fBhN9oA1dQtvzzLA"
+const Authorization = "eyJraWQiOiJvbGQiLCJhbGciOiJSUzUxMiJ9.eyJpYXQiOjE3MjE0MTg1NzUsImlzcyI6ImF1dGgiLCJleHAiOjE3MjE0MTk3NzUsInJvbGUiOiJBQ0NFU1MiLCJwYXlsb2FkIjoie1widXNlclJvbGVcIjpcIkNVU1RPTUVSXCIsXCJpc1N0YWZmXCI6ZmFsc2UsXCJwZXJtaXNzaW9uR3JvdXBzXCI6W10sXCJjaXR5R3JvdXBzXCI6W10sXCJ1c2VySWRcIjoxNzM1Mzc4NjcsXCJkZXZpY2VJZFwiOjIxMDgxODQwNjEsXCJncmFudFR5cGVcIjpcIlBBU1NXT1JEXCJ9IiwidmVyc2lvbiI6IlYyIiwianRpIjoiY2E4M2E0ZmYtMzg2My00ZGNiLTk4ZDAtNTM0MjE4NjFlYzcwIn0.RCaIq42H0im2Bzev_BsNcGgD3RFxBTQR6NBGjqpl5oE8IkcCKvaWvM3d-7qMT3_HBF9ewfOrVmTwWAKUJ3q2XLTAsNvICSBqxgWCimvBDwXtOkQUgdR6cOR_jIgai3iwAG2LEIEE5gVjB52QVe7o8VHb7nu2PDOEsrWpBVCVQZL_4KqlkArq5uiD5DmM0t178rRSx5kC4vMEaarpBNgcLQXpU_iofeybswoTU2lkTeBVesKqEBhZodqCM8M-vzv2f2_je_EM_tBvN-selLP475LLfFpPFaF_5woH7SOAfdAPvwZkjm3DRM2ZfNbYJuN5KNskVFQeuASjFVyn1I7p_g"
 
 const instance = axios.create({
     baseURL: "https://api.glovoapp.com/",
     headers: {
         "Authorization": Authorization,
         "Glovo-Location-City-Code": "MAR",
-        "Glovo-App-Platform": "web"
+        "Glovo-App-Platform": "web",
+        "Glovo-Language-Code": "fr"
     }
 })
+
+async function fetchProducts(path: string, categoryName: string) {
+
+    const products: Product[] = []
+
+    const response = await instance.get(`/v3/${path}`)
+
+    console.log(`${categoryName}:Fetch:Products ${new Date}`)
+
+    for (const grid of response.data.data.body) {
+
+        for (const primativeProduct of grid.data.elements) {
+
+            const data = primativeProduct.data
+
+            const product: Product = {
+                title: data.name,
+                description: data.description,
+                price: data.price,
+                imageURL: data.imageUrl
+            }
+
+            products.push(product)
+        }
+    }
+
+    return products
+}
 
 async function handleCategories(primativeCategories: any[]) {
 
@@ -42,10 +77,16 @@ async function handleCategories(primativeCategories: any[]) {
 
         if (tracking.collectionType === "TOP_SELLERS") continue
 
-        const category: Category = {
+        const elements = primativeCategory.elements
+
+        const action = primativeCategory.action
+
+        const category: Category = elements.length ? {
             name: primativeCategory.name,
-            subcategories: await handleCategories(primativeCategory.elements),
-            products: []
+            subcategories: await handleCategories(elements),
+        } : {
+            name: primativeCategory.name,
+            products: await fetchProducts(action.data.path, primativeCategory.name)
         }
 
         categories.push(category)
@@ -91,6 +132,8 @@ async function fetchSupermarkets() {
         }
 
         supermarkets.push(supermarket)
+
+        break
     }
 
     return supermarkets
