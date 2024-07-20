@@ -1,6 +1,5 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
-import { DEV_MODE } from "@/Models/Config"
 import SearchLog from "./SearchLog"
 import EventEmitter from "events"
 import puppeteer from "puppeteer"
@@ -145,7 +144,7 @@ export default class Search {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: DEV_MODE,
+            headless: true,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox"
@@ -217,7 +216,7 @@ export default class Search {
         await page.goto("https://24timezones.com/Morocco/time")
 
         // Wait same time
-        await sleep(10 * 1000)
+        await sleep(25 * 1000)
 
         // Stop screencast
         await screencast.stop()
