@@ -23,6 +23,9 @@ export default async function (context: Context) {
     // Check page
     if (!page) throw new HttpException("This record was not found")
 
+    // Set Content-Type
+    context.header("Content-Type", "video/")
+
     // Create stream
     return stream(context, async function (stream) {
 
