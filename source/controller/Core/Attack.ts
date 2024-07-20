@@ -76,7 +76,7 @@ export default class Attack {
         this.device = primitiveAttack.device || undefined
 
         // Set searches total
-        this.searchesTotal = primitiveAttack.searchesTotal
+        this.searchesTotal = primitiveAttack.searchesTotal || Infinity
     }
 
     /**
@@ -233,7 +233,7 @@ export default class Attack {
      */
     public async searchesLeft() {
 
-        return this.searchesTotal > 0 ? (this.searchesTotal - await this.searchesCount()) : Infinity
+        return this.searchesTotal - await this.searchesCount()
     }
 }
 

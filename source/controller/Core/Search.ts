@@ -58,6 +58,12 @@ export default class Search {
      */
     public static async create(attack: Attack) {
 
+        // Generate city
+        const city = await attack.generateLocation()
+
+        // Generate user agent
+        const userAgent = await attack.generateUserAgent()
+
         // Initialize search entity
         const searchEntity = new SearchEntity
 
@@ -68,10 +74,10 @@ export default class Search {
         searchEntity.attack = await attack.entity()
 
         // Set city
-        searchEntity.city = await (await attack.generateLocation()).entity()
+        searchEntity.city = await city.entity()
 
         // Set user agent
-        searchEntity.userAgent = await (await attack.generateUserAgent()).entity()
+        searchEntity.userAgent = await userAgent.entity()
 
         // Save
         await searchEntity.save()
