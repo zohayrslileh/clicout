@@ -30,7 +30,13 @@ export default async function (context: Context) {
         await new Promise(async function () {
 
             // Create recorder
-            const recorder = new PuppeteerScreenRecorder(page)
+            const recorder = new PuppeteerScreenRecorder(page, {
+                fps: 25,
+                videoCrf: 18,
+                videoCodec: "libx264",
+                videoPreset: "ultrafast",
+                videoBitrate: 1000
+            })
 
             // Through
             const through = new PassThrough

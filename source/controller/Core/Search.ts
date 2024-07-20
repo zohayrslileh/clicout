@@ -1,7 +1,6 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import puppeteer, { Page } from "puppeteer"
-import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
 import sleep from "@/Tools/Sleep"
 import Attack from "./Attack"
@@ -129,7 +128,7 @@ export default class Search {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: !DEV_MODE,
+            headless: true,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox"
@@ -163,14 +162,24 @@ export default class Search {
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
 
-        // Open google search page
-        await page.goto("https://www.google.com")
-
-        // Wait same time
-        await sleep(1500)
-
         // Push to pages
         Search.pages[this.recordId] = page
+
+        do {
+
+            // Go to
+            await page.goto("https://cdpn.io/mdd/fullembedgrid/MWoypg")
+
+            // Wait same time
+            await sleep(10 * 1000)
+
+            // Go to
+            await page.goto("https://cdpn.io/pawelqcm/fullembedgrid/dMqrqd")
+
+            // Wait same time
+            await sleep(10 * 1000)
+
+        } while (true)
     }
 }
 
