@@ -120,17 +120,21 @@ export default function ({ attack }: Props) {
 
     return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
 
-        <div className="grid gap-5">
-            {currentSearch ? <SearchItem search={currentSearch} /> : <Spinner />}
-        </div>
+        <Attack.context.Provider value={attack}>
 
-        <div className="flex justify-between">
-            <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
-            <div className="flex items-end gap-1 text-success-400">
-                <p className="text-xl leading-none font-medium">{searchesCount}</p>
-                <p className="text-[12px]">/ {attack.searchesTotal || "∞"} <Lang>searches</Lang></p>
+            <div className="grid gap-5">
+                {currentSearch ? <SearchItem search={currentSearch} /> : <Spinner />}
             </div>
-        </div>
+
+            <div className="flex justify-between">
+                <Button isLoading={stopPromise.pending} onClick={stopAttack} color="danger" startContent={<CiStopwatch />} size="sm"><Lang>Stop</Lang></Button>
+                <div className="flex items-end gap-1 text-success-400">
+                    <p className="text-xl leading-none font-medium">{searchesCount}</p>
+                    <p className="text-[12px]">/ {attack.searchesTotal || "∞"} <Lang>searches</Lang></p>
+                </div>
+            </div>
+
+        </Attack.context.Provider>
 
     </Card>
 }

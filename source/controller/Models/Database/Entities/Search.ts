@@ -1,5 +1,6 @@
-import { Column, Entity, Generated, ManyToOne } from "typeorm"
+import { Column, Entity, Generated, ManyToOne, OneToMany } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
+import SearchLog from "./SearchLog"
 import UserAgent from "./UserAgent"
 import Attack from "./Attack"
 import City from "./City"
@@ -49,4 +50,11 @@ export default class Search extends BaseEntity {
     @Column({ type: "uuid", unique: true, nullable: false })
     @Generated("uuid")
     declare public readonly recordId: string
+
+    /**
+     * Logs
+     * 
+     */
+    @OneToMany(() => SearchLog, searchLog => searchLog.search)
+    declare public logs: SearchLog[]
 }

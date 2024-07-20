@@ -13,6 +13,12 @@ import zod from "zod"
 export default class Attack {
 
     /**
+     * Context
+     * 
+     */
+    public static readonly context = createContext<Attack | undefined>(undefined)
+
+    /**
      * Running controller
      * 
      */
@@ -114,6 +120,25 @@ export default class Attack {
 
         // Stop
         await request<void>({ method: "POST", url: `/main/attack/${this.id}/stop` })
+    }
+
+    /**
+     * Context hook
+     * 
+     * @returns
+     */
+    public static useContext() {
+
+        /**
+         * Context
+         * 
+         */
+        const context = useContext(this.context)
+
+        // Check context
+        if (!context) throw new Error("The context was not provided.")
+
+        return context
     }
 }
 

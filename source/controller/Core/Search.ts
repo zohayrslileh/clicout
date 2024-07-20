@@ -1,10 +1,11 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import { DEV_MODE } from "@/Models/Config"
+import SearchLog from "./SearchLog"
 import EventEmitter from "events"
 import puppeteer from "puppeteer"
-import Attack from "./Attack"
 import sleep from "@/Tools/Sleep"
+import Attack from "./Attack"
 
 /*
 |-----------------------------
@@ -50,6 +51,16 @@ export default class Search {
 
         // Set record id
         this.recordId = primitiveSearch.recordId
+    }
+
+    /**
+     * Entity
+     * 
+     * @returns
+     */
+    public async entity() {
+
+        return await SearchEntity.findOneByOrFail({ id: this.id })
     }
 
     /**
@@ -233,10 +244,9 @@ export default class Search {
      * 
      * @returns
      */
-    public async createLog(log: string) {
+    public async createLog(title: string) {
 
-        // Emit to broadcast
-        Search.broadcast.emit(`${this.id}/log`, log)
+        return await SearchLog.create(this, title)
     }
 }
 

@@ -1,4 +1,5 @@
 import Router from "@/Tools/Socket/Router"
+import SearchLog from "@/Core/SearchLog"
 import Search from "@/Core/Search"
 import User from "@/Core/User"
 
@@ -11,7 +12,7 @@ import User from "@/Core/User"
 */
 export default new Router(async function (main) {
 
-    // On new search
+    // On create search
     Search.broadcast.on("create", async function (search: Search) {
 
         // Attack
@@ -22,6 +23,22 @@ export default new Router(async function (main) {
 
         // Emit
         main.namespace.to(user.id.toString()).emit(`attack/${attack.id}/search/create`, search)
+    })
+
+    // On create search log
+    SearchLog.broadcast.on("create", async function (searchLog: SearchLog) {
+
+        // Search
+        const search = await searchLog.search()
+
+        // Attack
+        const attack = await search.attack()
+
+        // User
+        const user = await attack.user()
+
+        // Emit
+        main.namespace.to(user.id.toString()).emit(`attack/${attack.id}/search/${search.id}/log/create`, searchLog)
     })
 
     // On connection
