@@ -1,10 +1,9 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import { DEV_MODE } from "@/Models/Config"
-import puppeteer from "puppeteer"
 import EventEmitter from "events"
+import puppeteer from "puppeteer"
 import Attack from "./Attack"
-import { UUID } from "crypto"
 
 /*
 |-----------------------------
@@ -22,10 +21,10 @@ export default class Search {
     public static readonly broadcast = new EventEmitter
 
     /**
-     * Runnings
+     * Records chunks
      * 
      */
-    private static readonly runnings: Search[] = []
+    public static readonly recordsChunks: Record<string, Buffer[] | undefined> = {}
 
     /**
      * Id
@@ -37,7 +36,7 @@ export default class Search {
      * Record id
      * 
      */
-    public readonly recordId: UUID
+    public readonly recordId: string
 
     /**
      * Constructor method
@@ -94,23 +93,13 @@ export default class Search {
      * 
      * @returns
      */
-    public static async findByRecordId(recordId: UUID) {
+    public static async findByRecordId(recordId: string) {
 
         // Initialize search entity
         const searchEntity = await SearchEntity.findOneByOrFail({ recordId })
 
         // Initialize search
         return new this(searchEntity)
-    }
-
-    /**
-     * Find running
-     * 
-     * @returns
-     */
-    public static findRunning(search: Search) {
-
-        Search.runnings.find(runningSearch => runningSearch.id === search.id)
     }
 
     /**
@@ -171,6 +160,32 @@ export default class Search {
 
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
+
+        // Create screencast
+        const screencast = await page.screencast()
+
+        // Chunks
+        const chunks: Buffer[] = Search.recordsChunks[this.recordId] = []
+
+        // On data
+        screencast.on("data", (chunk: Buffer) => {
+
+            // Set to chunks
+            chunks.push(chunk)
+
+            // Emit to broadcast
+            Search.broadcast.emit(`${this.id}/chunk`)
+        })
+    }
+
+    /**
+     * Recorded chunks
+     * 
+     * @returns
+     */
+    public recorderChunks() {
+
+        return Search.recordsChunks[this.recordId] || []
     }
 }
 
@@ -183,5 +198,5 @@ export default class Search {
 */
 export interface PrimitiveSearch {
     id: number
-    recordId: UUID
+    recordId: string
 }

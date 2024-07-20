@@ -2,7 +2,6 @@ import { Column, Entity, Generated, ManyToOne } from "typeorm"
 import BaseEntity from "@/Tools/Database/Entity"
 import UserAgent from "./UserAgent"
 import Attack from "./Attack"
-import { UUID } from "crypto"
 import City from "./City"
 
 /*
@@ -49,5 +48,5 @@ export default class Search extends BaseEntity {
      */
     @Column({ type: "uuid", unique: true, nullable: false })
     @Generated("uuid")
-    declare public readonly recordId: UUID
+    declare public readonly recordId: string
 }
