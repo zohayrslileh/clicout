@@ -1,8 +1,8 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
+import puppeteer, { Page } from "puppeteer"
 import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
-import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
 import Attack from "./Attack"
 import { UUID } from "crypto"
@@ -21,6 +21,12 @@ export default class Search {
      * 
      */
     public static readonly broadcast = new EventEmitter
+
+    /**
+     * Pages
+     * 
+     */
+    public static readonly pages: [number, Page][] = []
 
     /**
      * Id
@@ -163,15 +169,8 @@ export default class Search {
         // Wait same time
         await sleep(1500)
 
-        // Create screencast
-        const screencast = await page.screencast()
-
-        // On data
-        screencast.on("data", (chunk: Buffer) => {
-
-            // Emit to broadcast
-            Search.broadcast.emit(`${this.id}/chunk`, chunk)
-        })
+        // Set page
+        
     }
 }
 
