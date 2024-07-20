@@ -44,7 +44,6 @@ export default async function ({ params }: Arguments) {
         else child.kill()
 
         // Create new child command
-        child = spawn("ts-node index.js", params, { stdio: "inherit", shell: true })
-
+        child = spawn("ts-node --transpile-only index.js", params, { stdio: "inherit", shell: true })
     })
 }
