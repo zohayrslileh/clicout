@@ -43,6 +43,8 @@ export default async function () {
 
     await page.goto("https://www.google.com/")
 
+    recorder.start("storage/video2.mp4")
+
     const textarea = await page.$("textarea")
 
     if (!textarea) throw new Error
