@@ -1,7 +1,9 @@
+import HttpException from "@/Services/Server/HTTP/Exception/Exceptions"
+import { PuppeteerScreenRecorder } from "puppeteer-screen-recorder"
 import { stream } from "hono/streaming"
+import { PassThrough } from "stream"
 import Search from "@/Core/Search"
 import { Context } from "hono"
-import { UUID } from "crypto"
 
 /*
 |-----------------------------
@@ -15,29 +17,35 @@ export default async function (context: Context) {
     // Record id
     const recordId = context.req.param("record_id")
 
-    // Search
-    const search = await Search.findByRecordId(recordId as UUID)
+    // Page
+    const page = Search.pages[recordId]
+
+    // Check page
+    if (!page) throw new HttpException("This record was not found")
 
     // Create stream
     return stream(context, async function (stream) {
 
         // Create promise
-        await new Promise<void>(async function (resolve) {
+        await new Promise(async function () {
 
-            // Set chunk method
-            const setChunk = async (chunk: Buffer) => await stream.write(chunk)
+            // Create recorder
+            const recorder = new PuppeteerScreenRecorder(page)
 
-            // On chunk
-            Search.broadcast.on(`${search.id}/chunk`, setChunk)
+            // Through
+            const through = new PassThrough
+
+            // Start stream
+            recorder.startStream(through)
+
+            // On data
+            through.on("data", async chunk => await stream.write(chunk))
 
             // On abort
-            stream.onAbort(function () {
+            stream.onAbort(async function () {
 
-                // Off chunk
-                Search.broadcast.off(`${search.id}/chunk`, setChunk)
-
-                // Resolve
-                resolve()
+                // Stop recorder
+                await recorder.stop()
             })
         })
     })
