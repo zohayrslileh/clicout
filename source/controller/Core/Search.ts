@@ -226,6 +226,9 @@ export default class Search {
 
         // Close browser
         await browser.close()
+
+        // Done
+        await this.done()
     }
 
     /**
@@ -246,6 +249,23 @@ export default class Search {
     public async createLog(title: string) {
 
         return await SearchLog.create(this, title)
+    }
+
+    /**
+     * Done method
+     * 
+     * @returns
+     */
+    public async done() {
+
+        // CREATE LOG
+        await this.createLog("Done")
+
+        // Emit to broadcast
+        Search.broadcast.emit("done", this)
+
+        // Emit to broadcast
+        Search.broadcast.emit(`${this.id}/done`)
     }
 }
 

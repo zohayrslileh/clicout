@@ -81,6 +81,16 @@ export default function ({ attack }: Props) {
     })
 
     /**
+     * On current search done
+     * 
+     */
+    namespace.useOn(`attack/${attack.id}/currentSearch/done`, function () {
+
+        // Set current search
+        setCurrentSearch(undefined)
+    })
+
+    /**
      * Stop attack method
      * 
      * @returns

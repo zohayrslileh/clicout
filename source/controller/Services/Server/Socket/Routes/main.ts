@@ -41,6 +41,19 @@ export default new Router(async function (main) {
         main.namespace.to(user.id.toString()).emit(`search/${search.id}/log/create`, searchLog)
     })
 
+    // On search done
+    Search.broadcast.on("done", async function (search: Search) {
+
+        // Attack
+        const attack = await search.attack()
+
+        // User
+        const user = await attack.user()
+
+        // Emit
+        main.namespace.to(user.id.toString()).emit(`attack/${attack.id}/currentSearch/done`)
+    })
+
     // On connection
     main.onConnection(async function (client) {
 
