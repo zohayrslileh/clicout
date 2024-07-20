@@ -8,7 +8,7 @@ import Search from "@/Core/Search"
  */
 export default function ({ search }: Props) {
 
-    return <video src={`${BASE_SERVER_URL}stream/${search.recordId}`} autoPlay controls />
+    return <video src={`${BASE_SERVER_URL}stream/${search.recordId}`} autoPlay />
 }
 
 /**
