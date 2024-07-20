@@ -188,7 +188,7 @@ export default class Search {
      */
     public recorderChunks() {
 
-        return Search.recordsChunks[this.id] || []
+        return Search.recordsChunks[this.id]
     }
 }
 

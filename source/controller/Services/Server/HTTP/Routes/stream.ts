@@ -17,6 +17,12 @@ export default async function (context: Context) {
     // Search
     const search = await Search.findByRecordId(recordId)
 
+    // Recorder chunks
+    const recorderChunks = search.recorderChunks()
+
+    // Check recorder chunks
+    if (!recorderChunks) throw new Error("this search is done")
+
     // Create stream
     return stream(context, async function (stream) {
 
@@ -27,7 +33,7 @@ export default async function (context: Context) {
             const writeChunk = async (chunk: Buffer) => await stream.write(chunk)
 
             // Write recorder chunks
-            for (const chunk of search.recorderChunks()) await stream.write(chunk)
+            for (const chunk of recorderChunks) await stream.write(chunk)
 
             // On chunk
             Search.broadcast.on(`${search.id}/chunk`, writeChunk)
