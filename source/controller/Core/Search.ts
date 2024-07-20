@@ -1,6 +1,6 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
-// import { DEV_MODE } from "@/Models/Config"
+import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
 import puppeteer from "puppeteer"
 import Attack from "./Attack"
@@ -127,7 +127,7 @@ export default class Search {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: true,
+            headless: !DEV_MODE,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox"
@@ -188,7 +188,7 @@ export default class Search {
      */
     public recorderChunks() {
 
-        return Search.recordsChunks[this.id]
+        return Search.recordsChunks[this.id] || []
     }
 }
 
