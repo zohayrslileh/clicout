@@ -32,10 +32,10 @@ export default async function (context: Context) {
             // Create recorder
             const recorder = new PuppeteerScreenRecorder(page, {
                 fps: 25,
-                videoCrf: 18,
+                videoCrf: 51,
                 videoCodec: "libx264",
                 videoPreset: "ultrafast",
-                videoBitrate: 1000
+                videoBitrate: null
             })
 
             // Through

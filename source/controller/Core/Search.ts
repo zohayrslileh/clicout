@@ -2,7 +2,6 @@ import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import puppeteer, { Page } from "puppeteer"
 import EventEmitter from "events"
-import sleep from "@/Tools/Sleep"
 import Attack from "./Attack"
 import { UUID } from "crypto"
 
@@ -165,21 +164,8 @@ export default class Search {
         // Push to pages
         Search.pages[this.recordId] = page
 
-        do {
-
-            // Go to
-            await page.goto("https://cdpn.io/mdd/fullembedgrid/MWoypg")
-
-            // Wait same time
-            await sleep(10 * 1000)
-
-            // Go to
-            await page.goto("https://cdpn.io/pawelqcm/fullembedgrid/dMqrqd")
-
-            // Wait same time
-            await sleep(10 * 1000)
-
-        } while (true)
+        // Go to datetime
+        await page.goto("https://www.timeanddate.com/worldclock/morocco")
     }
 }
 
