@@ -26,7 +26,7 @@ export default class Search {
      * Pages
      * 
      */
-    public static readonly pages: [number, Page][] = []
+    public static readonly pages: Record<string, Page | undefined> = {}
 
     /**
      * Id
@@ -169,8 +169,8 @@ export default class Search {
         // Wait same time
         await sleep(1500)
 
-        // Set page
-        
+        // Push to pages
+        Search.pages[this.recordId] = page
     }
 }
 

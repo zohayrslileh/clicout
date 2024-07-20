@@ -1,6 +1,8 @@
 import { PuppeteerScreenRecorder } from "puppeteer-screen-recorder"
+import { PassThrough } from "stream"
 import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
+import { createWriteStream } from "fs"
 
 /*
 |-----------------------------
@@ -35,15 +37,19 @@ export default async function () {
 
     const recorder = new PuppeteerScreenRecorder(page)
 
-    recorder.start("storage/video.mp4")
+    const through = new PassThrough()
+
+    const output = createWriteStream("storage/record.mp4")
+
+    through.pipe(output)
+
+    recorder.startStream(through)
 
     await page.goto("https://www.google.com/search?q=apple")
 
     await sleep(1000)
 
     await page.goto("https://www.google.com/")
-
-    recorder.start("storage/video2.mp4")
 
     const textarea = await page.$("textarea")
 
