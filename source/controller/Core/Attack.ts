@@ -129,10 +129,22 @@ export default class Attack {
         // Wait same time
         await sleep(1000)
 
-        // Create search
-        const search = await Search.create(this)
+        // Open attack loop
+        do {
 
-        return search
+            // Create search
+            const search = await Search.create(this)
+
+            // Launch search
+            await search.launch()
+
+            // Check is done
+            if (this.searchesTotal > 0 && await this.searchesCount() >= this.searchesTotal) break
+
+            // Check if is stoped
+            if (await this.isStoped()) break
+
+        } while (true)
     }
 
     /**
@@ -196,6 +208,19 @@ export default class Attack {
         const userEntity = await UserEntity.findOneByOrFail({ attacks: [{ id: this.id }] })
 
         return new User(userEntity)
+    }
+
+    /**
+     * Is stoped
+     * 
+     * @returns
+     */
+    public async isStoped() {
+
+        // Entity
+        const entity = await this.entity()
+
+        return entity.status === "STOPPED"
     }
 }
 

@@ -82,9 +82,6 @@ export default class Search {
         // Emit to broadcast
         this.broadcast.emit("create", search)
 
-        // Launch
-        await search.launch()
-
         return search
     }
 
