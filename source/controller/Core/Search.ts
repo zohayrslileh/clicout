@@ -134,7 +134,7 @@ export default class Search {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: !DEV_MODE,
+            headless: DEV_MODE,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox"
@@ -201,6 +201,9 @@ export default class Search {
 
         // CREATE LOG
         await this.createLog("Start search")
+
+        // Go to timeanddate
+        await page.goto("https://24timezones.com/Morocco/time")
 
         // Wait same time
         await sleep(10 * 1000)
