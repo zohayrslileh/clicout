@@ -32,6 +32,9 @@ export default async function (context: Context) {
             // On chunk
             Search.broadcast.on(`${search.id}/chunk`, writeChunk)
 
+            // On end
+            Search.broadcast.on(`${search.id}/end`, resolve)
+
             // On abort
             stream.onAbort(function () {
 

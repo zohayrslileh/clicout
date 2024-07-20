@@ -4,6 +4,7 @@ import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
 import puppeteer from "puppeteer"
 import Attack from "./Attack"
+import sleep from "@/Tools/Sleep"
 
 /*
 |-----------------------------
@@ -92,7 +93,7 @@ export default class Search {
     }
 
     /**
-     * Find by record id
+     * Find by record id method
      * 
      * @returns
      */
@@ -124,6 +125,9 @@ export default class Search {
      * @returns
      */
     public async launch() {
+
+        // CREATE LOG
+        await this.createLog("Prepare device")
 
         // Attack
         const attack = await this.attack()
@@ -158,11 +162,26 @@ export default class Search {
         // Set view port
         await page.setViewport({ width: userAgent.width, height: userAgent.height })
 
+        // CREATE LOG
+        await this.createLog("Prepare location")
+
         // Generate location
         const city = await attack.generateLocation()
 
         // Set geolocation
         await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
+
+        // Go to sample search page
+        await page.goto("https://www.google.com/search?q=apple")
+
+        // Wait same time
+        await sleep(1000)
+
+        // Go to google
+        await page.goto("https://www.google.com/")
+
+        // Wait same time
+        await sleep(1000)
 
         // Create screencast
         const screencast = await page.screencast()
@@ -180,8 +199,20 @@ export default class Search {
             Search.broadcast.emit(`${this.id}/chunk`, chunk)
         })
 
-        // Go to datetime
-        await page.goto("https://www.timeanddate.com/worldclock/morocco")
+        // CREATE LOG
+        await this.createLog("Start search")
+
+        // Wait same time
+        await sleep(10 * 1000)
+
+        // Stop screencast
+        await screencast.stop()
+
+        // Close page
+        await page.close()
+
+        // Close browser
+        await browser.close()
     }
 
     /**
@@ -192,6 +223,17 @@ export default class Search {
     public recorderChunks() {
 
         return Search.recordsChunks[this.id] || []
+    }
+
+    /**
+     * Create log method
+     * 
+     * @returns
+     */
+    public async createLog(log: string) {
+
+        // Emit to broadcast
+        Search.broadcast.emit(`${this.id}/log`, log)
     }
 }
 
