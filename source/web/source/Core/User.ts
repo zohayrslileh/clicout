@@ -1,6 +1,7 @@
 import usePromise, { PromiseWithDependencies } from "@/Tools/Promise"
 import Subscription, { PrimitiveSubscription } from "./Subscription"
 import Authorization from "@/Models/Authorization"
+import Attack, { PrimitiveAttack } from "./Attack"
 import { createContext, useContext } from "react"
 import request from "@/Models/Server/Request"
 import Plan, { PrimitivePlan } from "./Plan"
@@ -231,6 +232,20 @@ export default class User {
     public static useNamespace() {
 
         return manager.useNamespace("/main")
+    }
+
+    /**
+     * Find attack method
+     * 
+     * @returns
+     */
+    public async findAttack(id: unknown) {
+
+        // Ask primitive attack
+        const primitiveAttack = await request<PrimitiveAttack>({ url: `/main/attack/${id}` })
+
+        // Initialize attack
+        return new Attack(primitiveAttack)
     }
 }
 
