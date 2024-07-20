@@ -1,6 +1,6 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
-import { DEV_MODE } from "@/Models/Config"
+// import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
 import puppeteer from "puppeteer"
 import Attack from "./Attack"
@@ -127,7 +127,7 @@ export default class Search {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: !DEV_MODE,
+            headless: true,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox"
@@ -176,6 +176,9 @@ export default class Search {
             // Emit to broadcast
             Search.broadcast.emit(`${this.id}/chunk`)
         })
+
+        // Go to datetime
+        await page.goto("https://www.timeanddate.com/worldclock/morocco")
     }
 
     /**
