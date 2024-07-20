@@ -266,6 +266,9 @@ export default class Search {
 
         // Emit to broadcast
         Search.broadcast.emit(`${this.id}/done`)
+
+        // Remove records chunks
+        Search.recordsChunks[this.id] = undefined
     }
 }
 
