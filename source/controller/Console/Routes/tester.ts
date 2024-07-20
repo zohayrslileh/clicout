@@ -2,7 +2,6 @@ import { PuppeteerScreenRecorder } from "puppeteer-screen-recorder"
 import { PassThrough } from "stream"
 import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
-import { createWriteStream } from "fs"
 
 /*
 |-----------------------------
@@ -35,13 +34,11 @@ export default async function () {
 
     await page.setGeolocation({ latitude: -13.067464, longitude: -55.930092 })
 
-    const recorder = new PuppeteerScreenRecorder(page)
-
     const through = new PassThrough()
 
-    const output = createWriteStream("storage/record.mp4")
+    through.on("data", data => console.log(data))
 
-    through.pipe(output)
+    const recorder = new PuppeteerScreenRecorder(page)
 
     recorder.startStream(through)
 
@@ -62,6 +59,14 @@ export default async function () {
     await textarea.type("Free vps")
 
     await textarea.press("Enter")
+
+    await sleep(3000)
+
+    await page.goto("https://whatismyipaddress.com/ip-lookup")
+
+    await sleep(3000)
+
+    await page.goto("https://whatismyipaddress.com/")
 
     await sleep(3000)
 
