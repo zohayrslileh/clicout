@@ -22,6 +22,12 @@ export default class Search {
     public static readonly broadcast = new EventEmitter
 
     /**
+     * Runnings
+     * 
+     */
+    private static readonly runnings: Search[] = []
+
+    /**
      * Id
      * 
      */
@@ -95,6 +101,16 @@ export default class Search {
 
         // Initialize search
         return new this(searchEntity)
+    }
+
+    /**
+     * Find running
+     * 
+     * @returns
+     */
+    public static findRunning(search: Search) {
+
+        Search.runnings.find(runningSearch => runningSearch.id === search.id)
     }
 
     /**
