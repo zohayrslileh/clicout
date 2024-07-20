@@ -132,17 +132,23 @@ export default class Attack {
         // Open attack loop
         do {
 
+            // Check if is stoped
+            if (await this.isStoped()) break
+
+            // Check is done
+            if (await this.searchesLeft() < 1) {
+
+                // Stop
+                await this.stop()
+
+                break
+            }
+
             // Create search
             const search = await Search.create(this)
 
             // Launch search
             await search.launch()
-
-            // Check is done
-            if (this.searchesTotal > 0 && await this.searchesCount() >= this.searchesTotal) break
-
-            // Check if is stoped
-            if (await this.isStoped()) break
 
         } while (true)
     }
@@ -221,6 +227,16 @@ export default class Attack {
         const entity = await this.entity()
 
         return entity.status === "STOPPED"
+    }
+
+    /**
+     * Searches left
+     * 
+     * @returns
+     */
+    public async searchesLeft() {
+
+        return this.searchesTotal > 0 ? (this.searchesTotal - await this.searchesCount()) : Infinity
     }
 }
 
