@@ -38,7 +38,7 @@ export default new Router(async function (main) {
         const user = await attack.user()
 
         // Emit
-        main.namespace.to(user.id.toString()).emit(`attack/${attack.id}/search/${search.id}/log/create`, searchLog)
+        main.namespace.to(user.id.toString()).emit(`search/${search.id}/log/create`, searchLog)
     })
 
     // On connection
