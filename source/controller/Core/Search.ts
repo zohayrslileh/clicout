@@ -216,7 +216,7 @@ export default class Search {
         await page.goto("https://24timezones.com/Morocco/time")
 
         // Wait same time
-        await sleep(25 * 1000)
+        await sleep(10 * 1000)
 
         // Stop screencast
         await screencast.stop()

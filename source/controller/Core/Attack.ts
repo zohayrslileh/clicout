@@ -126,9 +126,6 @@ export default class Attack {
      */
     private async start() {
 
-        // Wait same time
-        await sleep(1000)
-
         // Open attack loop
         do {
 
@@ -137,6 +134,9 @@ export default class Attack {
 
             // Check is done
             if (await this.searchesLeft() < 1) break
+
+            // Wait same time
+            await sleep(1000)
 
             // Create search
             const search = await Search.create(this)

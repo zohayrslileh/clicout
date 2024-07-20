@@ -73,9 +73,6 @@ export default function ({ attack }: Props) {
      */
     namespace.useOn(`attack/${attack.id}/search/create`, function (currentSearch: PrimitiveSearch) {
 
-        // Set empty search
-        setCurrentSearch(undefined)
-
         // Set current search
         setCurrentSearch(new Search(currentSearch))
 
