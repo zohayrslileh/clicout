@@ -24,7 +24,7 @@ export default class Search {
      * Records chunks
      * 
      */
-    public static readonly recordsChunks: Record<string, Buffer[] | undefined> = {}
+    public static readonly recordsChunks: Record<number, Buffer[] | undefined> = {}
 
     /**
      * Id
@@ -165,7 +165,7 @@ export default class Search {
         const screencast = await page.screencast()
 
         // Chunks
-        const chunks: Buffer[] = Search.recordsChunks[this.recordId] = []
+        const chunks: Buffer[] = Search.recordsChunks[this.id] = []
 
         // On data
         screencast.on("data", (chunk: Buffer) => {
@@ -188,7 +188,7 @@ export default class Search {
      */
     public recorderChunks() {
 
-        return Search.recordsChunks[this.recordId] || []
+        return Search.recordsChunks[this.id] || []
     }
 }
 
