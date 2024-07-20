@@ -23,19 +23,22 @@ export default async function (context: Context) {
         // Create promise
         await new Promise<void>(async function (resolve) {
 
-            // Set chunk method
-            const setChunk = async (chunk: Buffer) => await stream.write(chunk)
+            // Write chunk method
+            const writeChunk = async (chunk: Buffer) => await stream.write(chunk)
+
+            // Write recorder chunks
+            for (const chunk of search.recorderChunks()) await stream.write(chunk)
 
             // On chunk
-            Search.broadcast.on(`${search.id}/chunk`, setChunk)
+            Search.broadcast.on(`${search.id}/chunk`, writeChunk)
 
             // On abort
             stream.onAbort(function () {
 
                 // Off chunk
-                Search.broadcast.off(`${search.id}/chunk`, setChunk)
+                Search.broadcast.off(`${search.id}/chunk`, writeChunk)
 
-                // Resolve
+                // Solve promise
                 resolve()
             })
         })

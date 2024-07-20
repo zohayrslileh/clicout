@@ -174,7 +174,7 @@ export default class Search {
             chunks.push(chunk)
 
             // Emit to broadcast
-            Search.broadcast.emit(`${this.id}/chunk`)
+            Search.broadcast.emit(`${this.id}/chunk`, chunk)
         })
 
         // Go to datetime
