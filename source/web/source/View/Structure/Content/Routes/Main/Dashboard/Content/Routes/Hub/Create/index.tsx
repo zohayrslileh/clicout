@@ -180,7 +180,7 @@ export default function () {
     }, [attackPromise.execute])
 
     // Solve status
-    if (attackPromise.solve) return <Navigate to=".." />
+    if (attackPromise.solve) return <Navigate to={`../${attackPromise.solve.current.id}`} />
 
     return <Card className="grid smooth gap-6 p-5 mt-5 max-w-[700px] w-full h-fit mx-auto text-sm bg-background">
 
