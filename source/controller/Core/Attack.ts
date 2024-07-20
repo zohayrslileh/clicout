@@ -133,16 +133,10 @@ export default class Attack {
         do {
 
             // Check if is stoped
-            if (await this.isStoped()) break
+            if (await this.isStoped()) return
 
             // Check is done
-            if (await this.searchesLeft() < 1) {
-
-                // Stop
-                await this.stop()
-
-                break
-            }
+            if (await this.searchesLeft() < 1) return await this.stop()
 
             // Create search
             const search = await Search.create(this)
