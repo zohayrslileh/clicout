@@ -1,11 +1,13 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
-import puppeteer, { Page } from "puppeteer"
 import { DEV_MODE } from "@/Models/Config"
 import EventEmitter from "events"
+import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
 import Attack from "./Attack"
 import { UUID } from "crypto"
+import { PassThrough } from "stream"
+import { PuppeteerScreenRecorder } from "puppeteer-screen-recorder"
 
 /*
 |-----------------------------
@@ -21,12 +23,6 @@ export default class Search {
      * 
      */
     public static readonly broadcast = new EventEmitter
-
-    /**
-     * Pages
-     * 
-     */
-    public static readonly pages: Record<string, Page | undefined> = {}
 
     /**
      * Id
@@ -169,8 +165,31 @@ export default class Search {
         // Wait same time
         await sleep(1500)
 
-        // Push to pages
-        Search.pages[this.recordId] = page
+        // Create recorder
+        const recorder = new PuppeteerScreenRecorder(page, {
+            fps: 25,
+            videoCrf: 18,
+            videoCodec: "libx264",
+            videoPreset: "ultrafast",
+            videoBitrate: 1000,
+            autopad: {
+                color: "black"
+            },
+            aspectRatio: "4:3"
+        })
+
+        // Through
+        const through = new PassThrough
+
+        // Start stream
+        recorder.startStream(through)
+
+        // On data
+        through.on("data", (chunk: Buffer) => {
+
+            // Emit to broadcast
+            Search.broadcast.emit(`${this.id}/chunk`, chunk)
+        })
     }
 }
 
