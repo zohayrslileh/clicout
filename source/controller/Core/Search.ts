@@ -1,5 +1,6 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
+import { DEV_MODE } from "@/Models/Config"
 import puppeteer from "puppeteer"
 import EventEmitter from "events"
 import Attack from "./Attack"
@@ -121,7 +122,7 @@ export default class Search {
 
         // Create browser
         const browser = await puppeteer.launch({
-            headless: true,
+            headless: !DEV_MODE,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox"

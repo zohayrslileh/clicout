@@ -1,4 +1,3 @@
-import { BASE_SERVER_URL } from "@/Models/Server/Request"
 import Search from "@/Core/Search"
 
 /**
@@ -8,7 +7,7 @@ import Search from "@/Core/Search"
  */
 export default function ({ search }: Props) {
 
-    return <video src={`${BASE_SERVER_URL}stream/${search.recordId}`} autoPlay />
+    return <p>{search.recordId}</p>
 }
 
 /**
