@@ -1,5 +1,7 @@
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
+import UserAgent, { PrimitiveUserAgent } from "./UserAgent"
+import City, { PrimitiveCity } from "./City"
 import SearchLog from "./SearchLog"
 import EventEmitter from "events"
 import puppeteer from "puppeteer"
@@ -40,6 +42,24 @@ export default class Search {
     public readonly recordId: string
 
     /**
+     * Keyword
+     * 
+     */
+    public readonly keyword: string
+
+    /**
+     * City
+     * 
+     */
+    public readonly city: City
+
+    /**
+     * User agent
+     * 
+     */
+    public readonly userAgent: UserAgent
+
+    /**
      * Constructor method
      * 
      */
@@ -50,6 +70,15 @@ export default class Search {
 
         // Set record id
         this.recordId = primitiveSearch.recordId
+
+        // Set keyword
+        this.keyword = primitiveSearch.keyword
+
+        // Set city
+        this.city = new City(primitiveSearch.city)
+
+        // Set user agent
+        this.userAgent = new UserAgent(primitiveSearch.userAgent)
     }
 
     /**
@@ -142,9 +171,6 @@ export default class Search {
         // CREATE LOG
         await this.createLog("Prepare device")
 
-        // Attack
-        const attack = await this.attack()
-
         // Create browser
         const browser = await puppeteer.launch({
             headless: true,
@@ -166,23 +192,17 @@ export default class Search {
         // Disable timeout
         page.setDefaultTimeout(0)
 
-        // Generate user agent
-        const userAgent = await attack.generateUserAgent()
-
         // Set user agent
-        await page.setUserAgent(userAgent.getUA())
+        await page.setUserAgent(this.userAgent.getUA())
 
         // Set view port
-        await page.setViewport({ width: userAgent.width, height: userAgent.height })
+        await page.setViewport({ width: this.userAgent.width, height: this.userAgent.height })
 
         // CREATE LOG
         await this.createLog("Prepare location")
 
-        // Generate location
-        const city = await attack.generateLocation()
-
         // Set geolocation
-        await page.setGeolocation({ latitude: city.latitude, longitude: city.longitude })
+        await page.setGeolocation({ latitude: this.city.latitude, longitude: this.city.longitude })
 
         // Go to sample search page
         await page.goto("https://www.google.com/search?q=apple")
@@ -224,7 +244,22 @@ export default class Search {
         // CREATE LOG
         await this.createLog("Start search")
 
-        // Go to timeanddate
+        // Wait same time
+        await sleep(5000)
+
+        // Search zone
+        const SEARCH_ZONE = await page.$("textarea")
+
+        // Check search zone
+        if(!SEARCH_ZONE) throw new Error
+
+        // Type search keyword
+        await SEARCH_ZONE.type(this.keyword)
+
+        // Wait same time
+        await sleep(2000)
+
+        // Type keyword
         await page.goto("https://24timezones.com/Morocco/time")
 
         // Wait same time
@@ -294,4 +329,7 @@ export default class Search {
 export interface PrimitiveSearch {
     id: number
     recordId: string
+    keyword: string
+    city: PrimitiveCity
+    userAgent: PrimitiveUserAgent
 }
