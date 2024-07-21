@@ -245,7 +245,7 @@ export default class Search {
         await this.createLog("Start search")
 
         // Wait same time
-        await sleep(5000)
+        await sleep(3000)
 
         // Search zone
         const SEARCH_ZONE = await page.$("textarea")
@@ -259,8 +259,8 @@ export default class Search {
         // Wait same time
         await sleep(2000)
 
-        // Type keyword
-        await page.goto("https://24timezones.com/Morocco/time")
+        // Press enter
+        await SEARCH_ZONE.press("Enter")
 
         // Wait same time
         await sleep(10 * 1000)

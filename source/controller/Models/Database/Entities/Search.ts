@@ -33,14 +33,14 @@ export default class Search extends BaseEntity {
      * City
      * 
      */
-    @ManyToOne(() => City, city => city.searchs, { nullable: false })
+    @ManyToOne(() => City, city => city.searchs, { nullable: false, eager: true })
     declare public city: City
 
     /**
      * User agent
      * 
      */
-    @ManyToOne(() => UserAgent, userAgent => userAgent.searchs, { nullable: false })
+    @ManyToOne(() => UserAgent, userAgent => userAgent.searchs, { nullable: false, eager: true })
     declare public userAgent: UserAgent
 
     /**
