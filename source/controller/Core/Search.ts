@@ -124,7 +124,10 @@ export default class Search {
     public async attack() {
 
         // Attack entity
-        const attackEntity = await AttackEntity.findOneByOrFail({ searches: [{ id: this.id }] })
+        const attackEntity = await AttackEntity.findOneOrFail({
+            where: { searches: [{ id: this.id }] },
+            relations: { country: true, city: true }
+        })
 
         return new Attack(attackEntity)
     }

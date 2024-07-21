@@ -41,6 +41,9 @@ export default async function (context: Context) {
                 // Off chunk
                 Search.broadcast.off(`${search.id}/chunk`, writeChunk)
 
+                // Off done
+                Search.broadcast.off(`${search.id}/done`, resolve)
+
                 // Solve promise
                 resolve()
             })
