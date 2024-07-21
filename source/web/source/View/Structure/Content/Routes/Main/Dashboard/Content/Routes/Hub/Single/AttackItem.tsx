@@ -111,7 +111,7 @@ export default function () {
             toast.success(lang("Attack has been stopped successfully"))
 
             // Running attacks refetch
-            runningAttacks.dispatch(attacks => attacks.filter(item => item !== attack))
+            runningAttacks.dispatch(attacks => attacks.filter(item => item.id !== attack.id))
         }
 
         catch (exception) {
