@@ -3,6 +3,7 @@ import Search, { PrimitiveSearch } from "@/Core/Search"
 import { Button, Spinner } from "@nextui-org/react"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
+import { useNavigate } from "react-router-dom"
 import { CiStopwatch } from "react-icons/ci"
 import usePromise from "@/Tools/Promise"
 import SearchItem from "./SearchItem"
@@ -22,6 +23,12 @@ export default function () {
      * 
      */
     const lang = useLang()
+
+    /**
+     * Navigate
+     * 
+     */
+    const navigate = useNavigate()
 
     /**
      * Attack
@@ -112,6 +119,9 @@ export default function () {
 
             // Running attacks refetch
             runningAttacks.dispatch(attacks => attacks.filter(item => item.id !== attack.id))
+
+            // Go back
+            navigate("..")
         }
 
         catch (exception) {
