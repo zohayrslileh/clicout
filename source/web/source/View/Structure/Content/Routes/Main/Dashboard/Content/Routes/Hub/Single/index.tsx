@@ -2,9 +2,9 @@ import PendingException from "@/View/Exception/Exceptions/Pending"
 import { useParams } from "react-router-dom"
 import { Throw } from "@/Tools/Exception"
 import usePromise from "@/Tools/Promise"
+import AttackItem from "./AttackItem"
 import Attack from "@/Core/Attack"
 import User from "@/Core/User"
-import Video from "./Video"
 
 /**
  * Single
@@ -39,9 +39,7 @@ export default function () {
 
     return <Attack.context.Provider value={attackPromise.solve}>
 
-        <div className="">
-            <Video />
-        </div>
+        <AttackItem />
 
     </Attack.context.Provider>
 }
