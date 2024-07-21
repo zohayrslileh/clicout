@@ -188,7 +188,16 @@ export default class Search {
         await page.goto("https://www.google.com/search?q=apple")
 
         // Wait same time
-        await sleep(3000)
+        await sleep(1000)
+
+        // Accepte cookies privacy button
+        const GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON = await page.$(process.env.GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON_SELECTOR!)
+
+        // Accepte cookies privacy
+        if (GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON) await GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON.click()
+
+        // Wait same time
+        await sleep(2000)
 
         // Go to google
         await page.goto("https://www.google.com/")
