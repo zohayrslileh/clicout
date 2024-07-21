@@ -4,7 +4,6 @@ import { Button, Spinner } from "@nextui-org/react"
 import compiler from "@/View/Exception/compiler"
 import { Lang, useLang } from "@/Tools/Language"
 import { CiStopwatch } from "react-icons/ci"
-import Card from "@/View/Components/Card"
 import usePromise from "@/Tools/Promise"
 import SearchItem from "./SearchItem"
 import toast from "react-hot-toast"
@@ -134,7 +133,7 @@ export default function () {
 
     }, [])
 
-    return <Card circleStyle={false} className="relative active:scale-95 transition-all h-[300px] smooth grid grid-rows-[1fr_auto] gap-4 p-4">
+    return <div>
 
         <div className="grid gap-5">
             {currentSearch ? <SearchItem search={currentSearch} /> : <Spinner />}
@@ -148,5 +147,5 @@ export default function () {
             </div>
         </div>
 
-    </Card>
+    </div>
 }
