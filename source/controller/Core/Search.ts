@@ -185,7 +185,7 @@ export default class Search {
         await page.goto("https://www.google.com/search?q=apple")
 
         // Wait same time
-        await sleep(1000)
+        await sleep(3000)
 
         // Go to google
         await page.goto("https://www.google.com/")
