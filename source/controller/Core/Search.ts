@@ -1,10 +1,10 @@
+import puppeteer, { Browser, Page, ScreenRecorder } from "puppeteer"
 import SearchEntity from "@/Models/Database/Entities/Search"
 import AttackEntity from "@/Models/Database/Entities/Attack"
 import UserAgent, { PrimitiveUserAgent } from "./UserAgent"
 import City, { PrimitiveCity } from "./City"
 import SearchLog from "./SearchLog"
 import EventEmitter from "events"
-import puppeteer from "puppeteer"
 import sleep from "@/Tools/Sleep"
 import Attack from "./Attack"
 
@@ -168,114 +168,138 @@ export default class Search {
      */
     public async launch() {
 
-        // CREATE LOG
-        await this.createLog("Prepare device")
-
         // Create browser
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: [
-                "--no-sandbox",
-                "--disable-setuid-sandbox"
-            ]
-        })
+        var browser: Browser | undefined
 
-        // Create context
-        const context = browser.defaultBrowserContext()
-
-        // Set geolocation permissions 
-        await context.overridePermissions("https://www.google.com", ["geolocation"])
-
-        // Create new page
-        const page = await browser.newPage()
-
-        // Disable timeout
-        page.setDefaultTimeout(0)
-
-        // Set user agent
-        await page.setUserAgent(this.userAgent.getUA())
-
-        // Set view port
-        await page.setViewport({ width: this.userAgent.width, height: this.userAgent.height })
-
-        // CREATE LOG
-        await this.createLog("Prepare location")
-
-        // Set geolocation
-        await page.setGeolocation({ latitude: this.city.latitude, longitude: this.city.longitude })
-
-        // Go to sample search page
-        await page.goto("https://www.google.com/search?q=apple")
-
-        // Wait same time
-        await sleep(1000)
-
-        // Accepte cookies privacy button
-        const GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON = await page.$(process.env.GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON_SELECTOR!)
-
-        // Accepte cookies privacy
-        if (GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON) await GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON.click()
-
-        // Wait same time
-        await sleep(2000)
-
-        // Go to google
-        await page.goto("https://www.google.com/")
-
-        // Wait same time
-        await sleep(1000)
+        // Create page
+        var page: Page | undefined
 
         // Create screencast
-        const screencast = await page.screencast()
+        var screencast: ScreenRecorder | undefined
 
-        // Chunks
-        const chunks: Buffer[] = Search.recordsChunks[this.id] = []
+        // Create chunks
+        var chunks: Buffer[] = Search.recordsChunks[this.id] = []
 
-        // On data
-        screencast.on("data", (chunk: Buffer) => {
+        // Try launch
+        try {
 
-            // Set to chunks
-            chunks.push(chunk)
+            // CREATE LOG
+            await this.createLog("Prepare device")
 
-            // Emit to broadcast
-            Search.broadcast.emit(`${this.id}/chunk`, chunk)
-        })
+            // Create browser
+            browser = await puppeteer.launch({
+                headless: true,
+                args: [
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox"
+                ]
+            })
 
-        // CREATE LOG
-        await this.createLog("Start search")
+            // Create context
+            const context = browser.defaultBrowserContext()
 
-        // Wait same time
-        await sleep(3000)
+            // Set geolocation permissions 
+            await context.overridePermissions("https://www.google.com", ["geolocation"])
 
-        // Search zone
-        const SEARCH_ZONE = await page.$("textarea")
+            // Create new page
+            page = await browser.newPage()
 
-        // Check search zone
-        if(!SEARCH_ZONE) throw new Error
+            // Disable timeout
+            page.setDefaultTimeout(0)
 
-        // Type search keyword
-        await SEARCH_ZONE.type(this.keyword)
+            // Set user agent
+            await page.setUserAgent(this.userAgent.getUA())
 
-        // Wait same time
-        await sleep(2000)
+            // Set view port
+            await page.setViewport({ width: this.userAgent.width, height: this.userAgent.height })
 
-        // Press enter
-        await SEARCH_ZONE.press("Enter")
+            // CREATE LOG
+            await this.createLog("Prepare location")
 
-        // Wait same time
-        await sleep(10 * 1000)
+            // Set geolocation
+            await page.setGeolocation({ latitude: this.city.latitude, longitude: this.city.longitude })
 
-        // Stop screencast
-        await screencast.stop()
+            // Go to sample search page
+            await page.goto("https://www.google.com/search?q=apple")
 
-        // Close page
-        await page.close()
+            // Wait same time
+            await sleep(1000)
 
-        // Close browser
-        await browser.close()
+            // Accepte cookies privacy button
+            const GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON = await page.$(process.env.GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON_SELECTOR!)
 
-        // Done
-        await this.done()
+            // Accepte cookies privacy
+            if (GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON) await GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON.click()
+
+            // Wait same time
+            await sleep(2000)
+
+            // Go to google
+            await page.goto("https://www.google.com/")
+
+            // Wait same time
+            await sleep(1000)
+
+            // Create screencast
+            screencast = await page.screencast()
+
+            // On data
+            screencast.on("data", (chunk: Buffer) => {
+
+                // Set to chunks
+                chunks.push(chunk)
+
+                // Emit to broadcast
+                Search.broadcast.emit(`${this.id}/chunk`, chunk)
+            })
+
+            // CREATE LOG
+            await this.createLog("Start search")
+
+            // Wait same time
+            await sleep(3000)
+
+            // Search zone
+            const SEARCH_ZONE = await page.$("textarea")
+
+            // Check search zone
+            if (!SEARCH_ZONE) throw new Error
+
+            // Type search keyword
+            await SEARCH_ZONE.type(this.keyword)
+
+            // Wait same time
+            await sleep(2000)
+
+            // Press enter
+            await SEARCH_ZONE.press("Enter")
+
+            // Wait same time
+            await sleep(10 * 1000)
+        }
+
+        // On exception
+        catch (exception) {
+
+            // CREATE LOG
+            await this.createLog("Exception")
+        }
+
+        // Finally
+        finally {
+
+            // Done
+            await this.done()
+
+            // Stop screencast
+            if (screencast) await screencast.stop()
+
+            // Close page
+            if (page) await page.close()
+
+            // Close browser
+            if (browser) await browser.close()
+        }
     }
 
     /**
