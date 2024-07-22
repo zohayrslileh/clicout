@@ -275,6 +275,18 @@ export default class Search {
             await SEARCH_ZONE.press("Enter")
 
             // Wait same time
+            await sleep(2000)
+
+            const response = await page.evaluate(async function () {
+
+                await new Promise(resolve => setTimeout(resolve, 2000))
+
+                return document.body.innerHTML
+            })
+
+            console.log(response)
+
+            // Wait same time
             await sleep(10 * 1000)
         }
 
