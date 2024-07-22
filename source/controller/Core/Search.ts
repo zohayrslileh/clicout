@@ -277,17 +277,8 @@ export default class Search {
             // Wait same time
             await sleep(2000)
 
-            const response = await page.evaluate(async function () {
-
-                await new Promise(resolve => setTimeout(resolve, 2000))
-
-                return document.body.innerHTML
-            })
-
-            console.log(response)
-
             // Wait same time
-            await sleep(10 * 1000)
+            await sleep(15 * 1000)
         }
 
         // On exception
