@@ -284,6 +284,8 @@ export default class Search {
         // On exception
         catch (exception) {
 
+            console.error(exception)
+
             // CREATE LOG
             await this.createLog("Unknown search error")
         }
