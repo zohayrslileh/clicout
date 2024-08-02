@@ -274,8 +274,25 @@ export default class Search {
             // Press enter
             await SEARCH_ZONE.press("Enter")
 
-            // Wait same time a[data-rw]
+            // Wait same time
             await sleep(2000)
+
+            // Advertising elements
+            const advertisingElements = await page.$$("a[data-rw][class]")
+
+            // Fetch advertising elements
+            for (const advertisingElement of advertisingElements) {
+
+                // Href property
+                const hrefProperty = await advertisingElement.getProperty("href")
+
+                // Url
+                const url = await hrefProperty.jsonValue()
+
+                await page.goto(url)
+
+                await sleep(3000)
+            }
 
             // Wait same time
             await sleep(15 * 1000)
