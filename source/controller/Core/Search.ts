@@ -274,7 +274,7 @@ export default class Search {
             // Press enter
             await SEARCH_ZONE.press("Enter")
 
-            // Wait same time
+            // Wait same time a[data-rw]
             await sleep(2000)
 
             // Wait same time
