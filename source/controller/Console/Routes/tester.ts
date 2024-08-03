@@ -8,7 +8,9 @@
 */
 export default async function () {
 
-   console.log(process.env.GOOGLE_COOKIES_PRIVACY_ACCEPTE_BUTTON_SELECTOR)
+    const url = new URL("https://www.google.com/drive")
+
+    console.log(url.hostname)
 
     console.log("The test completed successfully 🧪 ")
 }

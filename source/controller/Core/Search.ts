@@ -287,9 +287,9 @@ export default class Search {
                 const hrefProperty = await advertisingElement.getProperty("href")
 
                 // Url
-                const url = await hrefProperty.jsonValue()
+                const url = new URL(await hrefProperty.jsonValue())
 
-                console.log(url)
+                console.log(url.hostname)
 
                 await sleep(3000)
             }
