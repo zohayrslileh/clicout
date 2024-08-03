@@ -3,6 +3,7 @@ import BaseEntity from "@/Tools/Database/Entity"
 import SearchLog from "./SearchLog"
 import UserAgent from "./UserAgent"
 import Attack from "./Attack"
+import Click from "./Click"
 import City from "./City"
 
 /*
@@ -57,4 +58,11 @@ export default class Search extends BaseEntity {
      */
     @OneToMany(() => SearchLog, searchLog => searchLog.search)
     declare public logs: SearchLog[]
+
+    /**
+     * Clicks
+     * 
+     */
+    @OneToMany(() => Click, click => click.search)
+    declare public clicks: Click[]
 }
