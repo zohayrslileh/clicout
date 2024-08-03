@@ -289,7 +289,7 @@ export default class Search {
                 // Url
                 const url = await hrefProperty.jsonValue()
 
-                await page.goto(url)
+                console.log(url)
 
                 await sleep(3000)
             }
